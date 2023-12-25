@@ -2057,6 +2057,7 @@ pub(crate) enum SubtypeIntern {
     Wasm,
     Watcherinfo,
     Webm,
+    Webp,
     WebpushOptions,
     WhoisppQuery,
     WhoisppResponse,
@@ -4359,6 +4360,7 @@ impl SubtypeIntern {
             SubtypeIntern::Wasm => "wasm",
             SubtypeIntern::Watcherinfo => "watcherinfo",
             SubtypeIntern::Webm => "webm",
+            SubtypeIntern::Webp => "webp",
             SubtypeIntern::WebpushOptions => "webpush-options",
             SubtypeIntern::WhoisppQuery => "whoispp-query",
             SubtypeIntern::WhoisppResponse => "whoispp-response",
@@ -34569,7 +34571,7 @@ impl SubtypeIntern {
             &[
                 (intern_str::CaseInsensitive(&[117, 115, 104, 45, 111, 112, 116, 105, 111, 110, 115]), 3747),
             ],
-            None,
+            Some(SubtypeIntern::Webp),
             0,
             11,
         ),
@@ -51162,6 +51164,8 @@ fn subtype_intern_from_str() {
     );
     assert_eq!("webm".parse::<SubtypeIntern>(), Ok(SubtypeIntern::Webm));
     assert_eq!("WEbM".parse::<SubtypeIntern>(), Ok(SubtypeIntern::Webm));
+    assert_eq!("webp".parse::<SubtypeIntern>(), Ok(SubtypeIntern::Webp));
+    assert_eq!("weBP".parse::<SubtypeIntern>(), Ok(SubtypeIntern::Webp));
     assert_eq!(
         "webpush-options".parse::<SubtypeIntern>(),
         Ok(SubtypeIntern::WebpushOptions)
@@ -60858,6 +60862,10 @@ pub mod constants {
         pub const VND_ZBRUSH_PCX: crate::Subtype<'static> =
             crate::Subtype(crate::Name::Interned(crate::SubtypeIntern::VndZbrushPcx));
 
+        /// The `webp` MIME subtype.
+        pub const WEBP: crate::Subtype<'static> =
+            crate::Subtype(crate::Name::Interned(crate::SubtypeIntern::Webp));
+
         /// The `wmf` MIME subtype.
         pub const WMF: crate::Subtype<'static> =
             crate::Subtype(crate::Name::Interned(crate::SubtypeIntern::Wmf));
@@ -62017,7 +62025,7 @@ pub mod constants {
             Ok(APPLICATION_ACE_CBOR)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICATion/ACE+cBOr"),
+            crate::Mime::parse("APPLicaTION/aCE+cbOr"),
             Ok(APPLICATION_ACE_CBOR)
         );
     }
@@ -62037,7 +62045,7 @@ pub mod constants {
             Ok(APPLICATION_ACTIVEMESSAGE)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICatiOn/ACTIVEMESsAGe"),
+            crate::Mime::parse("APpliCaTION/ACTIVeMEssAGe"),
             Ok(APPLICATION_ACTIVEMESSAGE)
         );
     }
@@ -62059,7 +62067,7 @@ pub mod constants {
             Ok(APPLICATION_ACTIVITY_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcATion/aCTivItY+JsOn"),
+            crate::Mime::parse("ApPLicaTiON/aCtIvItY+JSoN"),
             Ok(APPLICATION_ACTIVITY_JSON)
         );
     }
@@ -62081,7 +62089,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_CDNI_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicaTIOn/ALTO-CdNI+JsOn"),
+            crate::Mime::parse("appLICatION/ALtO-CDnI+json"),
             Ok(APPLICATION_ALTO_CDNI_JSON)
         );
     }
@@ -62103,7 +62111,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_CDNIFILTER_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("applICatIon/alTo-cdniFiltEr+JSOn"),
+            crate::Mime::parse("APplIcatioN/Alto-CdniFilTER+jsoN"),
             Ok(APPLICATION_ALTO_CDNIFILTER_JSON)
         );
     }
@@ -62125,7 +62133,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_COSTMAP_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLicATioN/aLTO-CoStmap+JsON"),
+            crate::Mime::parse("apPLicATiON/aLtO-cosTMaP+JsoN"),
             Ok(APPLICATION_ALTO_COSTMAP_JSON)
         );
     }
@@ -62149,7 +62157,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_COSTMAPFILTER_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICATIon/ALTo-COSTMaPFILTer+jSoN"),
+            crate::Mime::parse("APPLIcatION/ALTO-CoSTMAPfiltEr+JSoN"),
             Ok(APPLICATION_ALTO_COSTMAPFILTER_JSON)
         );
     }
@@ -62171,7 +62179,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_DIRECTORY_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicAtion/ALTO-dIReCtOry+json"),
+            crate::Mime::parse("apPlicatION/AlTO-DiRectory+JsON"),
             Ok(APPLICATION_ALTO_DIRECTORY_JSON)
         );
     }
@@ -62195,7 +62203,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_ENDPOINTCOST_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicaTion/ALto-EndPoiNtcOST+JSoN"),
+            crate::Mime::parse("appLicaTIOn/aLto-enDpoINTCOSt+JsON"),
             Ok(APPLICATION_ALTO_ENDPOINTCOST_JSON)
         );
     }
@@ -62219,7 +62227,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_ENDPOINTCOSTPARAMS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICatIoN/aLto-eNDPOIntcostPaRAMs+JSon"),
+            crate::Mime::parse("APplIcATiOn/AlTO-ENdpointCoSTPaRAMs+JsoN"),
             Ok(APPLICATION_ALTO_ENDPOINTCOSTPARAMS_JSON)
         );
     }
@@ -62243,7 +62251,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_ENDPOINTPROP_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCaTiOn/AltO-ENDPOINTPROp+JSON"),
+            crate::Mime::parse("aPpLiCaTIon/ALTO-ENDPOINtpROP+jSON"),
             Ok(APPLICATION_ALTO_ENDPOINTPROP_JSON)
         );
     }
@@ -62267,7 +62275,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_ENDPOINTPROPPARAMS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtION/AlTO-ENDpointPropPArAMs+jSon"),
+            crate::Mime::parse("aPPlICATIoN/ALTO-endpOintPRoPParaMs+jSON"),
             Ok(APPLICATION_ALTO_ENDPOINTPROPPARAMS_JSON)
         );
     }
@@ -62289,7 +62297,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_ERROR_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICATiON/ALTO-error+jSON"),
+            crate::Mime::parse("APPLiCATION/Alto-errOR+jSon"),
             Ok(APPLICATION_ALTO_ERROR_JSON)
         );
     }
@@ -62311,7 +62319,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_NETWORKMAP_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCaTION/ALTO-neTwORKmap+jsON"),
+            crate::Mime::parse("aPpLICAtION/AltO-NETworkmaP+Json"),
             Ok(APPLICATION_ALTO_NETWORKMAP_JSON)
         );
     }
@@ -62335,7 +62343,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_NETWORKMAPFILTER_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcaTiON/ALto-netWORKmapfilTEr+jSon"),
+            crate::Mime::parse("AppLiCAtIOn/Alto-NETworkmaPFiLtEr+JsoN"),
             Ok(APPLICATION_ALTO_NETWORKMAPFILTER_JSON)
         );
     }
@@ -62357,7 +62365,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_PROPMAP_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtIoN/altO-proPmap+json"),
+            crate::Mime::parse("APPlIcAtion/Alto-proPmap+JsoN"),
             Ok(APPLICATION_ALTO_PROPMAP_JSON)
         );
     }
@@ -62381,7 +62389,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_PROPMAPPARAMS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCaTion/AltO-prOpmApparaMs+Json"),
+            crate::Mime::parse("aPpLicaTIon/altO-pRopmapParAms+JsoN"),
             Ok(APPLICATION_ALTO_PROPMAPPARAMS_JSON)
         );
     }
@@ -62405,7 +62413,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_UPDATESTREAMCONTROL_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICATioN/AlTO-updatEsTREAmCONtrol+JSON"),
+            crate::Mime::parse("APPLicAtIoN/alto-uPdATEStREAmcontROL+JSoN"),
             Ok(APPLICATION_ALTO_UPDATESTREAMCONTROL_JSON)
         );
     }
@@ -62429,7 +62437,7 @@ pub mod constants {
             Ok(APPLICATION_ALTO_UPDATESTREAMPARAMS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCaTIOn/AlTO-UpdaTeSTReaMPaRAMs+JsON"),
+            crate::Mime::parse("aPpLICaTIoN/ALto-UpDATesTReAMPaRAmS+jSOn"),
             Ok(APPLICATION_ALTO_UPDATESTREAMPARAMS_JSON)
         );
     }
@@ -62445,7 +62453,7 @@ pub mod constants {
     #[test]
     fn application_aml_parse() {
         assert_eq!(crate::Mime::parse("application/AML"), Ok(APPLICATION_AML));
-        assert_eq!(crate::Mime::parse("aPPliCatiON/AMl"), Ok(APPLICATION_AML));
+        assert_eq!(crate::Mime::parse("aPpliCATIOn/AMl"), Ok(APPLICATION_AML));
     }
 
     /// `application/andrew-inset`
@@ -62463,7 +62471,7 @@ pub mod constants {
             Ok(APPLICATION_ANDREW_INSET)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICatiON/ANdreW-InSeT"),
+            crate::Mime::parse("APpliCATIOn/aNdReW-INSEt"),
             Ok(APPLICATION_ANDREW_INSET)
         );
     }
@@ -62483,7 +62491,7 @@ pub mod constants {
             Ok(APPLICATION_ANNODEX)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicAtiON/ANnOdEX"),
+            crate::Mime::parse("apPliCATIOn/aNNoDEX"),
             Ok(APPLICATION_ANNODEX)
         );
     }
@@ -62503,7 +62511,7 @@ pub mod constants {
             Ok(APPLICATION_APPLEFILE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicAtIoN/aPPlefilE"),
+            crate::Mime::parse("apPlIcATiON/applEfile"),
             Ok(APPLICATION_APPLEFILE)
         );
     }
@@ -62525,7 +62533,7 @@ pub mod constants {
             Ok(APPLICATION_AT_JWT)
         );
         assert_eq!(
-            crate::Mime::parse("applicaTioN/AT+JWt"),
+            crate::Mime::parse("appLicAtIOn/At+Jwt"),
             Ok(APPLICATION_AT_JWT)
         );
     }
@@ -62541,7 +62549,7 @@ pub mod constants {
     #[test]
     fn application_atf_parse() {
         assert_eq!(crate::Mime::parse("application/ATF"), Ok(APPLICATION_ATF));
-        assert_eq!(crate::Mime::parse("aPplIcATiON/AtF"), Ok(APPLICATION_ATF));
+        assert_eq!(crate::Mime::parse("ApPLiCAtIoN/AtF"), Ok(APPLICATION_ATF));
     }
 
     /// `application/ATFX`
@@ -62555,7 +62563,7 @@ pub mod constants {
     #[test]
     fn application_atfx_parse() {
         assert_eq!(crate::Mime::parse("application/ATFX"), Ok(APPLICATION_ATFX));
-        assert_eq!(crate::Mime::parse("APpLICation/ATFX"), Ok(APPLICATION_ATFX));
+        assert_eq!(crate::Mime::parse("APplicaTION/ATFX"), Ok(APPLICATION_ATFX));
     }
 
     /// `application/atom+xml`
@@ -62575,7 +62583,7 @@ pub mod constants {
             Ok(APPLICATION_ATOM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICatIon/atoM+Xml"),
+            crate::Mime::parse("APplIcaTion/aTom+xMl"),
             Ok(APPLICATION_ATOM_XML)
         );
     }
@@ -62597,7 +62605,7 @@ pub mod constants {
             Ok(APPLICATION_ATOMCAT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicaTION/atoMCaT+Xml"),
+            crate::Mime::parse("appLICATion/AtOMCat+xML"),
             Ok(APPLICATION_ATOMCAT_XML)
         );
     }
@@ -62619,7 +62627,7 @@ pub mod constants {
             Ok(APPLICATION_ATOMDELETED_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicaTION/atomdelEtED+xMl"),
+            crate::Mime::parse("appLICAtion/atoMdELEtEd+xmL"),
             Ok(APPLICATION_ATOMDELETED_XML)
         );
     }
@@ -62639,7 +62647,7 @@ pub mod constants {
             Ok(APPLICATION_ATOMICMAIL)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCATioN/ATOmicmAIl"),
+            crate::Mime::parse("aPPLicAtION/atoMIcMail"),
             Ok(APPLICATION_ATOMICMAIL)
         );
     }
@@ -62661,7 +62669,7 @@ pub mod constants {
             Ok(APPLICATION_ATOMSERV_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcAtIOn/ATOmSErv+Xml"),
+            crate::Mime::parse("ApPlICatION/ATomsErv+xml"),
             Ok(APPLICATION_ATOMSERV_XML)
         );
     }
@@ -62683,7 +62691,7 @@ pub mod constants {
             Ok(APPLICATION_ATOMSVC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applicatioN/AtoMsvc+xML"),
+            crate::Mime::parse("applicATIon/atomsVC+XmL"),
             Ok(APPLICATION_ATOMSVC_XML)
         );
     }
@@ -62705,7 +62713,7 @@ pub mod constants {
             Ok(APPLICATION_ATSC_DWD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTIOn/aTsC-DWd+xMl"),
+            crate::Mime::parse("AppLICaTiOn/ATSc-dWd+xml"),
             Ok(APPLICATION_ATSC_DWD_XML)
         );
     }
@@ -62727,7 +62735,7 @@ pub mod constants {
             Ok(APPLICATION_ATSC_DYNAMIC_EVENT_MESSAGE)
         );
         assert_eq!(
-            crate::Mime::parse("appliCATioN/AtSC-dynaMIC-EVENt-mesSAgE"),
+            crate::Mime::parse("aPPLicATIoN/Atsc-DYNAMIC-eVent-MeSSaGe"),
             Ok(APPLICATION_ATSC_DYNAMIC_EVENT_MESSAGE)
         );
     }
@@ -62749,7 +62757,7 @@ pub mod constants {
             Ok(APPLICATION_ATSC_HELD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcatION/AtSC-HeLD+xml"),
+            crate::Mime::parse("ApplICATIoN/ATsC-Held+XML"),
             Ok(APPLICATION_ATSC_HELD_XML)
         );
     }
@@ -62771,7 +62779,7 @@ pub mod constants {
             Ok(APPLICATION_ATSC_RDT_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCAtION/aTsC-Rdt+json"),
+            crate::Mime::parse("aPPlICAtiOn/ATsc-rdt+jSon"),
             Ok(APPLICATION_ATSC_RDT_JSON)
         );
     }
@@ -62793,7 +62801,7 @@ pub mod constants {
             Ok(APPLICATION_ATSC_RSAT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcatiOn/atSC-rSaT+XML"),
+            crate::Mime::parse("AppliCaTioN/atSc-rSAT+XMl"),
             Ok(APPLICATION_ATSC_RSAT_XML)
         );
     }
@@ -62813,7 +62821,7 @@ pub mod constants {
             Ok(APPLICATION_ATXML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICATion/AtXmL"),
+            crate::Mime::parse("APPLicaTIoN/AtxML"),
             Ok(APPLICATION_ATXML)
         );
     }
@@ -62835,7 +62843,7 @@ pub mod constants {
             Ok(APPLICATION_AUTH_POLICY_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICaTiON/AuTH-PoLICY+xML"),
+            crate::Mime::parse("APpLiCATIoN/AUtH-POLiCY+xmL"),
             Ok(APPLICATION_AUTH_POLICY_XML)
         );
     }
@@ -62857,7 +62865,7 @@ pub mod constants {
             Ok(APPLICATION_BACNET_XDD_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcATioN/BACnET-XDd+zIp"),
+            crate::Mime::parse("ApPLicATION/BACNEt-xDd+zIP"),
             Ok(APPLICATION_BACNET_XDD_ZIP)
         );
     }
@@ -62877,7 +62885,7 @@ pub mod constants {
             Ok(APPLICATION_BATCH_SMTP)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcATion/BatcH-SmTP"),
+            crate::Mime::parse("ApPLicatIon/BaTcH-sMtP"),
             Ok(APPLICATION_BATCH_SMTP)
         );
     }
@@ -62897,7 +62905,7 @@ pub mod constants {
             Ok(APPLICATION_BBOLIN)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicaTIon/bbolin"),
+            crate::Mime::parse("appLIcaTion/bbOLIN"),
             Ok(APPLICATION_BBOLIN)
         );
     }
@@ -62919,7 +62927,7 @@ pub mod constants {
             Ok(APPLICATION_BEEP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCAtion/bEEp+XML"),
+            crate::Mime::parse("aPPlicaTiON/bEEP+XML"),
             Ok(APPLICATION_BEEP_XML)
         );
     }
@@ -62941,7 +62949,7 @@ pub mod constants {
             Ok(APPLICATION_CALENDAR_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICaTiOn/CaLeNDar+JSon"),
+            crate::Mime::parse("APpLiCatIoN/CAlenDAr+jsOn"),
             Ok(APPLICATION_CALENDAR_JSON)
         );
     }
@@ -62963,7 +62971,7 @@ pub mod constants {
             Ok(APPLICATION_CALENDAR_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicATIOn/cALENdAR+xmL"),
+            crate::Mime::parse("apPLICaTiON/CaLEndaR+xmL"),
             Ok(APPLICATION_CALENDAR_XML)
         );
     }
@@ -62983,7 +62991,7 @@ pub mod constants {
             Ok(APPLICATION_CALL_COMPLETION)
         );
         assert_eq!(
-            crate::Mime::parse("appLicaTION/CalL-coMPlEtiON"),
+            crate::Mime::parse("appLICATIon/calL-cOmpLETiOn"),
             Ok(APPLICATION_CALL_COMPLETION)
         );
     }
@@ -63003,7 +63011,7 @@ pub mod constants {
             Ok(APPLICATION_CALS_1840)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcaTIoN/CALs-1840"),
+            crate::Mime::parse("AppLIcATION/cALS-1840"),
             Ok(APPLICATION_CALS_1840)
         );
     }
@@ -63025,7 +63033,7 @@ pub mod constants {
             Ok(APPLICATION_CAPTIVE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcAtiON/cApTivE+jSon"),
+            crate::Mime::parse("ApPliCATiOn/caPtiVe+JsON"),
             Ok(APPLICATION_CAPTIVE_JSON)
         );
     }
@@ -63041,7 +63049,7 @@ pub mod constants {
     #[test]
     fn application_cbor_parse() {
         assert_eq!(crate::Mime::parse("application/cbor"), Ok(APPLICATION_CBOR));
-        assert_eq!(crate::Mime::parse("ApPLIcaTioN/cbOR"), Ok(APPLICATION_CBOR));
+        assert_eq!(crate::Mime::parse("AppLicAtioN/CBOr"), Ok(APPLICATION_CBOR));
     }
 
     /// `application/cbor-seq`
@@ -63059,7 +63067,7 @@ pub mod constants {
             Ok(APPLICATION_CBOR_SEQ)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICatION/cBoR-Seq"),
+            crate::Mime::parse("APplICATiOn/CBor-Seq"),
             Ok(APPLICATION_CBOR_SEQ)
         );
     }
@@ -63079,7 +63087,7 @@ pub mod constants {
             Ok(APPLICATION_CCCEX)
         );
         assert_eq!(
-            crate::Mime::parse("APplicatiOn/CcCeX"),
+            crate::Mime::parse("appliCaTIoN/CcCEX"),
             Ok(APPLICATION_CCCEX)
         );
     }
@@ -63101,7 +63109,7 @@ pub mod constants {
             Ok(APPLICATION_CCMP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcaTiON/Ccmp+XML"),
+            crate::Mime::parse("AppLiCATIon/CCMP+XmL"),
             Ok(APPLICATION_CCMP_XML)
         );
     }
@@ -63123,7 +63131,7 @@ pub mod constants {
             Ok(APPLICATION_CCXML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICaTIoN/cCxmL+xml"),
+            crate::Mime::parse("APpLIcAtiOn/Ccxml+XML"),
             Ok(APPLICATION_CCXML_XML)
         );
     }
@@ -63145,7 +63153,7 @@ pub mod constants {
             Ok(APPLICATION_CDFX_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicatION/CDFx+xml"),
+            crate::Mime::parse("applICATION/Cdfx+xmL"),
             Ok(APPLICATION_CDFX_XML)
         );
     }
@@ -63165,7 +63173,7 @@ pub mod constants {
             Ok(APPLICATION_CDMI_CAPABILITY)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcATIon/CDmI-capaBILITY"),
+            crate::Mime::parse("ApPLIcaTIOn/cdmi-CAPABILITy"),
             Ok(APPLICATION_CDMI_CAPABILITY)
         );
     }
@@ -63185,7 +63193,7 @@ pub mod constants {
             Ok(APPLICATION_CDMI_CONTAINER)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicaTiOn/cdMi-contAinER"),
+            crate::Mime::parse("appLiCatioN/Cdmi-ConTAiNER"),
             Ok(APPLICATION_CDMI_CONTAINER)
         );
     }
@@ -63205,7 +63213,7 @@ pub mod constants {
             Ok(APPLICATION_CDMI_DOMAIN)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcation/Cdmi-doMaiN"),
+            crate::Mime::parse("ApplicatIon/CdmI-dOmAin"),
             Ok(APPLICATION_CDMI_DOMAIN)
         );
     }
@@ -63225,7 +63233,7 @@ pub mod constants {
             Ok(APPLICATION_CDMI_OBJECT)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICatIOn/cdMi-obJect"),
+            crate::Mime::parse("APplICatioN/CdmI-obJect"),
             Ok(APPLICATION_CDMI_OBJECT)
         );
     }
@@ -63245,7 +63253,7 @@ pub mod constants {
             Ok(APPLICATION_CDMI_QUEUE)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICATion/CDmI-qUeue"),
+            crate::Mime::parse("APPLicaTIOn/cdMi-qUeUE"),
             Ok(APPLICATION_CDMI_QUEUE)
         );
     }
@@ -63261,7 +63269,7 @@ pub mod constants {
     #[test]
     fn application_cdni_parse() {
         assert_eq!(crate::Mime::parse("application/cdni"), Ok(APPLICATION_CDNI));
-        assert_eq!(crate::Mime::parse("ApPLiCaTiOn/cdNi"), Ok(APPLICATION_CDNI));
+        assert_eq!(crate::Mime::parse("aPpLiCaTioN/cDNI"), Ok(APPLICATION_CDNI));
     }
 
     /// `application/CEA`
@@ -63275,7 +63283,7 @@ pub mod constants {
     #[test]
     fn application_cea_parse() {
         assert_eq!(crate::Mime::parse("application/CEA"), Ok(APPLICATION_CEA));
-        assert_eq!(crate::Mime::parse("aPPLICatiOn/cEA"), Ok(APPLICATION_CEA));
+        assert_eq!(crate::Mime::parse("APpliCaTiON/ceA"), Ok(APPLICATION_CEA));
     }
 
     /// `application/cea-2018+xml`
@@ -63295,7 +63303,7 @@ pub mod constants {
             Ok(APPLICATION_CEA_2018_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicAtiOn/CEa-2018+xmL"),
+            crate::Mime::parse("apPliCatIOn/Cea-2018+XMl"),
             Ok(APPLICATION_CEA_2018_XML)
         );
     }
@@ -63317,7 +63325,7 @@ pub mod constants {
             Ok(APPLICATION_CELLML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcatIOn/cELlML+xml"),
+            crate::Mime::parse("ApplICatiON/CEllml+xML"),
             Ok(APPLICATION_CELLML_XML)
         );
     }
@@ -63333,7 +63341,7 @@ pub mod constants {
     #[test]
     fn application_cfw_parse() {
         assert_eq!(crate::Mime::parse("application/cfw"), Ok(APPLICATION_CFW));
-        assert_eq!(crate::Mime::parse("ApPLICatioN/CFW"), Ok(APPLICATION_CFW));
+        assert_eq!(crate::Mime::parse("APplicAtION/CFw"), Ok(APPLICATION_CFW));
     }
 
     /// `application/city+json`
@@ -63353,7 +63361,7 @@ pub mod constants {
             Ok(APPLICATION_CITY_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicATION/CIty+jSoN"),
+            crate::Mime::parse("apPLICAtIOn/ciTy+jsOn"),
             Ok(APPLICATION_CITY_JSON)
         );
     }
@@ -63369,7 +63377,7 @@ pub mod constants {
     #[test]
     fn application_clr_parse() {
         assert_eq!(crate::Mime::parse("application/clr"), Ok(APPLICATION_CLR));
-        assert_eq!(crate::Mime::parse("apPliCAtiOn/cLr"), Ok(APPLICATION_CLR));
+        assert_eq!(crate::Mime::parse("aPPliCaTiOn/clr"), Ok(APPLICATION_CLR));
     }
 
     /// `application/clue+xml`
@@ -63389,7 +63397,7 @@ pub mod constants {
             Ok(APPLICATION_CLUE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCatioN/CluE+XmL"),
+            crate::Mime::parse("aPplicATIon/cLuE+XML"),
             Ok(APPLICATION_CLUE_XML)
         );
     }
@@ -63411,7 +63419,7 @@ pub mod constants {
             Ok(APPLICATION_CLUE_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcAtIOn/CLUE_INFO+XMl"),
+            crate::Mime::parse("ApPlICaTION/CLUE_INFo+XMl"),
             Ok(APPLICATION_CLUE_INFO_XML)
         );
     }
@@ -63427,7 +63435,7 @@ pub mod constants {
     #[test]
     fn application_cms_parse() {
         assert_eq!(crate::Mime::parse("application/cms"), Ok(APPLICATION_CMS));
-        assert_eq!(crate::Mime::parse("aPPlIcaTIon/CmS"), Ok(APPLICATION_CMS));
+        assert_eq!(crate::Mime::parse("AppLIcaTIoN/cMS"), Ok(APPLICATION_CMS));
     }
 
     /// `application/cnrp+xml`
@@ -63447,7 +63455,7 @@ pub mod constants {
             Ok(APPLICATION_CNRP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCaTION/CnRP+xmL"),
+            crate::Mime::parse("aPpLICAtIoN/cnrP+xMl"),
             Ok(APPLICATION_CNRP_XML)
         );
     }
@@ -63469,7 +63477,7 @@ pub mod constants {
             Ok(APPLICATION_COAP_GROUP_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICAtiOn/cOAp-grouP+Json"),
+            crate::Mime::parse("APPliCatiON/coap-GROup+jSOn"),
             Ok(APPLICATION_COAP_GROUP_JSON)
         );
     }
@@ -63489,7 +63497,7 @@ pub mod constants {
             Ok(APPLICATION_COAP_PAYLOAD)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicaTIon/cOap-pAYloaD"),
+            crate::Mime::parse("appLIcatiOn/CoAP-paYLoAD"),
             Ok(APPLICATION_COAP_PAYLOAD)
         );
     }
@@ -63509,7 +63517,7 @@ pub mod constants {
             Ok(APPLICATION_COMMONGROUND)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcAtiOn/coMmoNGrouND"),
+            crate::Mime::parse("ApPliCaTioN/cOMmonGROUNd"),
             Ok(APPLICATION_COMMONGROUND)
         );
     }
@@ -63531,7 +63539,7 @@ pub mod constants {
             Ok(APPLICATION_CONFERENCE_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcAtION/CoNfeReNcE-INfo+xML"),
+            crate::Mime::parse("ApPlICAtIoN/cOnFeRENCe-InFO+xmL"),
             Ok(APPLICATION_CONFERENCE_INFO_XML)
         );
     }
@@ -63547,7 +63555,7 @@ pub mod constants {
     #[test]
     fn application_cose_parse() {
         assert_eq!(crate::Mime::parse("application/cose"), Ok(APPLICATION_COSE));
-        assert_eq!(crate::Mime::parse("AppLICATiOn/COSe"), Ok(APPLICATION_COSE));
+        assert_eq!(crate::Mime::parse("APPLiCatION/cose"), Ok(APPLICATION_COSE));
     }
 
     /// `application/cose-key`
@@ -63565,7 +63573,7 @@ pub mod constants {
             Ok(APPLICATION_COSE_KEY)
         );
         assert_eq!(
-            crate::Mime::parse("appliCatIon/COSe-KEY"),
+            crate::Mime::parse("aPplIcatION/COSE-Key"),
             Ok(APPLICATION_COSE_KEY)
         );
     }
@@ -63585,7 +63593,7 @@ pub mod constants {
             Ok(APPLICATION_COSE_KEY_SET)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcATION/cOSe-Key-set"),
+            crate::Mime::parse("ApPLICAtiON/cOse-key-SEt"),
             Ok(APPLICATION_COSE_KEY_SET)
         );
     }
@@ -63607,7 +63615,7 @@ pub mod constants {
             Ok(APPLICATION_CPL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcatIon/CpL+xML"),
+            crate::Mime::parse("ApplIcatIoN/cPL+Xml"),
             Ok(APPLICATION_CPL_XML)
         );
     }
@@ -63627,7 +63635,7 @@ pub mod constants {
             Ok(APPLICATION_CSRATTRS)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCaTIoN/CSRAtTrS"),
+            crate::Mime::parse("aPpLIcAtION/cSrAttrS"),
             Ok(APPLICATION_CSRATTRS)
         );
     }
@@ -63649,7 +63657,7 @@ pub mod constants {
             Ok(APPLICATION_CSTA_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLicatIon/cSTa+Xml"),
+            crate::Mime::parse("applIcatiON/CSta+xmL"),
             Ok(APPLICATION_CSTA_XML)
         );
     }
@@ -63671,7 +63679,7 @@ pub mod constants {
             Ok(APPLICATION_CST_ADATA_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatIon/cStaDATA+Xml"),
+            crate::Mime::parse("APplIcaTiOn/CSTADAta+XML"),
             Ok(APPLICATION_CST_ADATA_XML)
         );
     }
@@ -63693,7 +63701,7 @@ pub mod constants {
             Ok(APPLICATION_CSVM_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicATiOn/CsvM+jsOn"),
+            crate::Mime::parse("apPLiCatIon/csvM+JsOn"),
             Ok(APPLICATION_CSVM_JSON)
         );
     }
@@ -63713,7 +63721,7 @@ pub mod constants {
             Ok(APPLICATION_CU_SEEME)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICAtiON/Cu-SEeME"),
+            crate::Mime::parse("APPliCAtIon/Cu-SeEmE"),
             Ok(APPLICATION_CU_SEEME)
         );
     }
@@ -63729,7 +63737,7 @@ pub mod constants {
     #[test]
     fn application_cwt_parse() {
         assert_eq!(crate::Mime::parse("application/cwt"), Ok(APPLICATION_CWT));
-        assert_eq!(crate::Mime::parse("aPpLication/cwt"), Ok(APPLICATION_CWT));
+        assert_eq!(crate::Mime::parse("application/CWt"), Ok(APPLICATION_CWT));
     }
 
     /// `application/cybercash`
@@ -63747,7 +63755,7 @@ pub mod constants {
             Ok(APPLICATION_CYBERCASH)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCatIon/CyberCash"),
+            crate::Mime::parse("aPplIcaTIon/cYberCASh"),
             Ok(APPLICATION_CYBERCASH)
         );
     }
@@ -63769,7 +63777,7 @@ pub mod constants {
             Ok(APPLICATION_DASH_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCaTIOn/dash+xMl"),
+            crate::Mime::parse("aPpLICaTion/DaSh+xml"),
             Ok(APPLICATION_DASH_XML)
         );
     }
@@ -63791,7 +63799,7 @@ pub mod constants {
             Ok(APPLICATION_DASH_PATCH_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcatION/dasH-PaTcH+XmL"),
+            crate::Mime::parse("ApplICAtion/dAsH-PaTcH+XmL"),
             Ok(APPLICATION_DASH_PATCH_XML)
         );
     }
@@ -63811,7 +63819,7 @@ pub mod constants {
             Ok(APPLICATION_DASHDELTA)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICAtIOn/DAshDeLTA"),
+            crate::Mime::parse("APPlICaTIOn/DaSHDElta"),
             Ok(APPLICATION_DASHDELTA)
         );
     }
@@ -63833,7 +63841,7 @@ pub mod constants {
             Ok(APPLICATION_DAVMOUNT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICAtIOn/davMoUnt+XMl"),
+            crate::Mime::parse("APPlICation/dAvmoUNt+Xml"),
             Ok(APPLICATION_DAVMOUNT_XML)
         );
     }
@@ -63853,7 +63861,7 @@ pub mod constants {
             Ok(APPLICATION_DCA_RFT)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcATIon/Dca-rfT"),
+            crate::Mime::parse("ApPLIcatIon/dcA-rFt"),
             Ok(APPLICATION_DCA_RFT)
         );
     }
@@ -63869,7 +63877,7 @@ pub mod constants {
     #[test]
     fn application_dcd_parse() {
         assert_eq!(crate::Mime::parse("application/DCD"), Ok(APPLICATION_DCD));
-        assert_eq!(crate::Mime::parse("apPlIcatiON/DCd"), Ok(APPLICATION_DCD));
+        assert_eq!(crate::Mime::parse("AppliCATIOn/dcd"), Ok(APPLICATION_DCD));
     }
 
     /// `application/dec-dx`
@@ -63887,7 +63895,7 @@ pub mod constants {
             Ok(APPLICATION_DEC_DX)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICatIoN/DeC-Dx"),
+            crate::Mime::parse("APplIcAtIoN/DeC-dX"),
             Ok(APPLICATION_DEC_DX)
         );
     }
@@ -63909,7 +63917,7 @@ pub mod constants {
             Ok(APPLICATION_DIALOG_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicatIon/dialOg-INFO+xMl"),
+            crate::Mime::parse("applIcation/DiaLOG-InFo+xmL"),
             Ok(APPLICATION_DIALOG_INFO_XML)
         );
     }
@@ -63929,7 +63937,7 @@ pub mod constants {
             Ok(APPLICATION_DICOM)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicaTIOn/DiCom"),
+            crate::Mime::parse("appLICatIoN/dIcOM"),
             Ok(APPLICATION_DICOM)
         );
     }
@@ -63951,7 +63959,7 @@ pub mod constants {
             Ok(APPLICATION_DICOM_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcatIon/DicOM+JSOn"),
+            crate::Mime::parse("ApplIcatIon/DICOM+JSoN"),
             Ok(APPLICATION_DICOM_JSON)
         );
     }
@@ -63973,7 +63981,7 @@ pub mod constants {
             Ok(APPLICATION_DICOM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcAtIoN/DICOM+xMl"),
+            crate::Mime::parse("ApPlIcAtION/DIcOm+xML"),
             Ok(APPLICATION_DICOM_XML)
         );
     }
@@ -63989,7 +63997,7 @@ pub mod constants {
     #[test]
     fn application_dii_parse() {
         assert_eq!(crate::Mime::parse("application/DII"), Ok(APPLICATION_DII));
-        assert_eq!(crate::Mime::parse("apPLICAtIoN/DiI"), Ok(APPLICATION_DII));
+        assert_eq!(crate::Mime::parse("APPlIcAtIoN/DIi"), Ok(APPLICATION_DII));
     }
 
     /// `application/DIT`
@@ -64003,7 +64011,7 @@ pub mod constants {
     #[test]
     fn application_dit_parse() {
         assert_eq!(crate::Mime::parse("application/DIT"), Ok(APPLICATION_DIT));
-        assert_eq!(crate::Mime::parse("aPPliCATiON/Dit"), Ok(APPLICATION_DIT));
+        assert_eq!(crate::Mime::parse("aPPLiCATIon/dIT"), Ok(APPLICATION_DIT));
     }
 
     /// `application/dns`
@@ -64017,7 +64025,7 @@ pub mod constants {
     #[test]
     fn application_dns_parse() {
         assert_eq!(crate::Mime::parse("application/dns"), Ok(APPLICATION_DNS));
-        assert_eq!(crate::Mime::parse("apPLIcatIon/Dns"), Ok(APPLICATION_DNS));
+        assert_eq!(crate::Mime::parse("ApplIcatIon/DnS"), Ok(APPLICATION_DNS));
     }
 
     /// `application/dns+json`
@@ -64037,7 +64045,7 @@ pub mod constants {
             Ok(APPLICATION_DNS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcATiON/DNs+jSON"),
+            crate::Mime::parse("ApPLiCATIOn/dNS+jsON"),
             Ok(APPLICATION_DNS_JSON)
         );
     }
@@ -64057,7 +64065,7 @@ pub mod constants {
             Ok(APPLICATION_DNS_MESSAGE)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcatIOn/dNs-mEsSagE"),
+            crate::Mime::parse("ApplICatiOn/dNs-meSSaGE"),
             Ok(APPLICATION_DNS_MESSAGE)
         );
     }
@@ -64079,7 +64087,7 @@ pub mod constants {
             Ok(APPLICATION_DOTS_CBOR)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicAtiOn/DotS+CBoR"),
+            crate::Mime::parse("apPliCaTIon/DOTs+CboR"),
             Ok(APPLICATION_DOTS_CBOR)
         );
     }
@@ -64101,7 +64109,7 @@ pub mod constants {
             Ok(APPLICATION_DSKPP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICatIon/dSKpP+XML"),
+            crate::Mime::parse("APplIcatiON/DsKPP+xmL"),
             Ok(APPLICATION_DSKPP_XML)
         );
     }
@@ -64121,7 +64129,7 @@ pub mod constants {
             Ok(APPLICATION_DSPTYPE)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatioN/dSptyPE"),
+            crate::Mime::parse("APplicATiOn/dSPtYpe"),
             Ok(APPLICATION_DSPTYPE)
         );
     }
@@ -64143,7 +64151,7 @@ pub mod constants {
             Ok(APPLICATION_DSSC_DER)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcATIon/dSsC+der"),
+            crate::Mime::parse("ApPLIcaTiOn/dssc+deR"),
             Ok(APPLICATION_DSSC_DER)
         );
     }
@@ -64165,7 +64173,7 @@ pub mod constants {
             Ok(APPLICATION_DSSC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCATION/dssc+xmL"),
+            crate::Mime::parse("aPPLICATion/dssC+Xml"),
             Ok(APPLICATION_DSSC_XML)
         );
     }
@@ -64181,7 +64189,7 @@ pub mod constants {
     #[test]
     fn application_dvcs_parse() {
         assert_eq!(crate::Mime::parse("application/dvcs"), Ok(APPLICATION_DVCS));
-        assert_eq!(crate::Mime::parse("aPplIcAtiOn/DvCs"), Ok(APPLICATION_DVCS));
+        assert_eq!(crate::Mime::parse("ApPliCaTIoN/DVCS"), Ok(APPLICATION_DVCS));
     }
 
     /// `application/EDI-consent`
@@ -64199,7 +64207,7 @@ pub mod constants {
             Ok(APPLICATION_EDI_CONSENT)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcATION/Edi-CONsEnT"),
+            crate::Mime::parse("ApPLICATIon/EDI-CoNsenT"),
             Ok(APPLICATION_EDI_CONSENT)
         );
     }
@@ -64219,7 +64227,7 @@ pub mod constants {
             Ok(APPLICATION_EDI_X12)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcatiOn/eDi-x12"),
+            crate::Mime::parse("AppliCatiOn/edI-X12"),
             Ok(APPLICATION_EDI_X12)
         );
     }
@@ -64239,7 +64247,7 @@ pub mod constants {
             Ok(APPLICATION_EDIFACT)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICaTioN/edIfAcT"),
+            crate::Mime::parse("APpLicATioN/EdIFAct"),
             Ok(APPLICATION_EDIFACT)
         );
     }
@@ -64255,7 +64263,7 @@ pub mod constants {
     #[test]
     fn application_efi_parse() {
         assert_eq!(crate::Mime::parse("application/efi"), Ok(APPLICATION_EFI));
-        assert_eq!(crate::Mime::parse("APpliCATion/efi"), Ok(APPLICATION_EFI));
+        assert_eq!(crate::Mime::parse("aPPLicaTion/eFI"), Ok(APPLICATION_EFI));
     }
 
     /// `application/elm+json`
@@ -64275,7 +64283,7 @@ pub mod constants {
             Ok(APPLICATION_ELM_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCATiOn/ELM+jSON"),
+            crate::Mime::parse("aPPLiCatION/eLM+json"),
             Ok(APPLICATION_ELM_JSON)
         );
     }
@@ -64297,7 +64305,7 @@ pub mod constants {
             Ok(APPLICATION_ELM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applicaTION/Elm+XML"),
+            crate::Mime::parse("appLICAtIon/ELM+xml"),
             Ok(APPLICATION_ELM_XML)
         );
     }
@@ -64321,7 +64329,7 @@ pub mod constants {
             Ok(APPLICATION_EMERGENCY_CALL_DATA_CAP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applicatION/EMeRgEncycALlDATa.caP+XmL"),
+            crate::Mime::parse("applICAtIOn/eMergeNCyCALldatA.CaP+xMl"),
             Ok(APPLICATION_EMERGENCY_CALL_DATA_CAP_XML)
         );
     }
@@ -64345,7 +64353,7 @@ pub mod constants {
             Ok(APPLICATION_EMERGENCY_CALL_DATA_COMMENT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICatIon/EMerGENcyCaLldAtA.cOmmENt+Xml"),
+            crate::Mime::parse("APplIcatIOn/EMErgEnCycAlLdaTa.COmmEnt+xml"),
             Ok(APPLICATION_EMERGENCY_CALL_DATA_COMMENT_XML)
         );
     }
@@ -64369,7 +64377,7 @@ pub mod constants {
             Ok(APPLICATION_EMERGENCY_CALL_DATA_CONTROL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicatiOn/EMeRGeNCycalLdAta.coNTROL+xml"),
+            crate::Mime::parse("appliCaTIOn/EmERgencYcAllDatA.CONTrol+xML"),
             Ok(APPLICATION_EMERGENCY_CALL_DATA_CONTROL_XML)
         );
     }
@@ -64393,7 +64401,7 @@ pub mod constants {
             Ok(APPLICATION_EMERGENCY_CALL_DATA_DEVICE_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCation/eMerGencYCAllDAtA.DEviceiNFo+xmL"),
+            crate::Mime::parse("aPplicatiOn/EmerGENcyCAlLdATa.devICeInfO+xMl"),
             Ok(APPLICATION_EMERGENCY_CALL_DATA_DEVICE_INFO_XML)
         );
     }
@@ -64415,7 +64423,7 @@ pub mod constants {
             Ok(APPLICATION_EMERGENCY_CALL_DATA_E_CALL_MSD)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicATIOn/eMergENcyCalLdaTa.EcaLL.MSD"),
+            crate::Mime::parse("apPLICatiOn/eMErgEncYcaLlDAta.ECALL.msd"),
             Ok(APPLICATION_EMERGENCY_CALL_DATA_E_CALL_MSD)
         );
     }
@@ -64440,7 +64448,7 @@ pub mod constants {
             Ok(APPLICATION_EMERGENCY_CALL_DATA_PROVIDER_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applICATIOn/eMErGEncYcaLlDATA.PROvIdErinfO+xml"),
+            crate::Mime::parse("APPLICaTiON/EMerGenCyCALLdATA.PrOvideRinfo+xmL"),
             Ok(APPLICATION_EMERGENCY_CALL_DATA_PROVIDER_INFO_XML)
         );
     }
@@ -64465,7 +64473,7 @@ pub mod constants {
             Ok(APPLICATION_EMERGENCY_CALL_DATA_SERVICE_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICaTiON/EmeRgEncycALLdAtA.SERVIceInfo+XmL"),
+            crate::Mime::parse("APpLiCAtIon/eMergeNCYcAlLDATA.SerViceiNfO+xMl"),
             Ok(APPLICATION_EMERGENCY_CALL_DATA_SERVICE_INFO_XML)
         );
     }
@@ -64490,7 +64498,7 @@ pub mod constants {
             Ok(APPLICATION_EMERGENCY_CALL_DATA_SUBSCRIBER_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCation/emerGeNcYCAlldAtA.SUBscrIbeRinFo+Xml"),
+            crate::Mime::parse("aPplication/EmErGENcycAlLDATA.suBscRibEriNfo+XMl"),
             Ok(APPLICATION_EMERGENCY_CALL_DATA_SUBSCRIBER_INFO_XML)
         );
     }
@@ -64514,7 +64522,7 @@ pub mod constants {
             Ok(APPLICATION_EMERGENCY_CALL_DATA_VEDS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICation/EMERGEnCYCaLLData.veds+xmL"),
+            crate::Mime::parse("APplicaTION/EMeRGEnCYCalldata.VedS+xML"),
             Ok(APPLICATION_EMERGENCY_CALL_DATA_VEDS_XML)
         );
     }
@@ -64536,7 +64544,7 @@ pub mod constants {
             Ok(APPLICATION_EMMA_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICatIon/EMMa+xmL"),
+            crate::Mime::parse("APplIcatION/EmmA+xML"),
             Ok(APPLICATION_EMMA_XML)
         );
     }
@@ -64558,7 +64566,7 @@ pub mod constants {
             Ok(APPLICATION_EMOTIONML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicAtIon/EMOTionML+XmL"),
+            crate::Mime::parse("apPlIcaTION/emoTIONmL+xMl"),
             Ok(APPLICATION_EMOTIONML_XML)
         );
     }
@@ -64578,7 +64586,7 @@ pub mod constants {
             Ok(APPLICATION_ENCAPRTP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcaTIoN/EncAprtP"),
+            crate::Mime::parse("AppLIcATIon/encAprTP"),
             Ok(APPLICATION_ENCAPRTP)
         );
     }
@@ -64600,7 +64608,7 @@ pub mod constants {
             Ok(APPLICATION_EPP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICATIOn/Epp+XML"),
+            crate::Mime::parse("APPLICaTIon/EPP+xMl"),
             Ok(APPLICATION_EPP_XML)
         );
     }
@@ -64622,7 +64630,7 @@ pub mod constants {
             Ok(APPLICATION_EPUB_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICaTION/epuB+ZiP"),
+            crate::Mime::parse("APpLICAtion/ePuB+ZIp"),
             Ok(APPLICATION_EPUB_ZIP)
         );
     }
@@ -64642,7 +64650,7 @@ pub mod constants {
             Ok(APPLICATION_ESHOP)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcAtion/eSHOP"),
+            crate::Mime::parse("ApPlicatiON/ESHoP"),
             Ok(APPLICATION_ESHOP)
         );
     }
@@ -64662,7 +64670,7 @@ pub mod constants {
             Ok(APPLICATION_EXAMPLE)
         );
         assert_eq!(
-            crate::Mime::parse("APpLication/exaMplE"),
+            crate::Mime::parse("application/exAmPle"),
             Ok(APPLICATION_EXAMPLE)
         );
     }
@@ -64678,7 +64686,7 @@ pub mod constants {
     #[test]
     fn application_exi_parse() {
         assert_eq!(crate::Mime::parse("application/exi"), Ok(APPLICATION_EXI));
-        assert_eq!(crate::Mime::parse("aPplICATioN/Exi"), Ok(APPLICATION_EXI));
+        assert_eq!(crate::Mime::parse("APPLicAtIon/ExI"), Ok(APPLICATION_EXI));
     }
 
     /// `application/expect-ct-report+json`
@@ -64698,7 +64706,7 @@ pub mod constants {
             Ok(APPLICATION_EXPECT_CT_REPORT_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicatION/eXpEct-ct-reporT+Json"),
+            crate::Mime::parse("applICAtiOn/exPect-ct-rEPOrt+JsON"),
             Ok(APPLICATION_EXPECT_CT_REPORT_JSON)
         );
     }
@@ -64718,7 +64726,7 @@ pub mod constants {
             Ok(APPLICATION_EXPRESS)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicaTiON/expResS"),
+            crate::Mime::parse("appLiCAtion/exPrESs"),
             Ok(APPLICATION_EXPRESS)
         );
     }
@@ -64738,7 +64746,7 @@ pub mod constants {
             Ok(APPLICATION_FASTINFOSET)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcATION/fAsTiNFOseT"),
+            crate::Mime::parse("ApPLICATiOn/fASTinFOsEt"),
             Ok(APPLICATION_FASTINFOSET)
         );
     }
@@ -64758,7 +64766,7 @@ pub mod constants {
             Ok(APPLICATION_FASTSOAP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcaTIon/FAstSoap"),
+            crate::Mime::parse("AppLIcatIOn/FastSOAp"),
             Ok(APPLICATION_FASTSOAP)
         );
     }
@@ -64780,7 +64788,7 @@ pub mod constants {
             Ok(APPLICATION_FDT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcAtIoN/fdt+xMl"),
+            crate::Mime::parse("ApPlIcAtion/fDt+xML"),
             Ok(APPLICATION_FDT_XML)
         );
     }
@@ -64802,7 +64810,7 @@ pub mod constants {
             Ok(APPLICATION_FHIR_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCaTiOn/Fhir+jSoN"),
+            crate::Mime::parse("aPpLiCatIon/fhIr+jsOn"),
             Ok(APPLICATION_FHIR_JSON)
         );
     }
@@ -64824,7 +64832,7 @@ pub mod constants {
             Ok(APPLICATION_FHIR_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcatIon/FHIr+XML"),
+            crate::Mime::parse("ApplIcaTION/FHIR+xMl"),
             Ok(APPLICATION_FHIR_XML)
         );
     }
@@ -64840,7 +64848,7 @@ pub mod constants {
     #[test]
     fn application_fits_parse() {
         assert_eq!(crate::Mime::parse("application/fits"), Ok(APPLICATION_FITS));
-        assert_eq!(crate::Mime::parse("apPlIcaTion/fItS"), Ok(APPLICATION_FITS));
+        assert_eq!(crate::Mime::parse("AppLicaTiOn/FITS"), Ok(APPLICATION_FITS));
     }
 
     /// `application/flexfec`
@@ -64858,7 +64866,7 @@ pub mod constants {
             Ok(APPLICATION_FLEXFEC)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICAtiOn/flExFeC"),
+            crate::Mime::parse("APPliCaTioN/FlEXfEc"),
             Ok(APPLICATION_FLEXFEC)
         );
     }
@@ -64878,7 +64886,7 @@ pub mod constants {
             Ok(APPLICATION_FONT_TDPFR)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCAtIOn/Font-TdPfR"),
+            crate::Mime::parse("aPPlICatIon/FOnT-TdpFr"),
             Ok(APPLICATION_FONT_TDPFR)
         );
     }
@@ -64902,7 +64910,7 @@ pub mod constants {
             Ok(APPLICATION_FRAMEWORK_ATTRIBUTES_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICaTiOn/fRAMEWORK-aTTriBUtes+XMl"),
+            crate::Mime::parse("APpLiCatiON/FRAMEWoRK-aTTribuTEs+xmL"),
             Ok(APPLICATION_FRAMEWORK_ATTRIBUTES_XML)
         );
     }
@@ -64922,7 +64930,7 @@ pub mod constants {
             Ok(APPLICATION_FUTURESPLASH)
         );
         assert_eq!(
-            crate::Mime::parse("appLICATIOn/FUTuReSplASh"),
+            crate::Mime::parse("APPLICaTION/FuTurESplASH"),
             Ok(APPLICATION_FUTURESPLASH)
         );
     }
@@ -64944,7 +64952,7 @@ pub mod constants {
             Ok(APPLICATION_GEO_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicATION/GEo+JSon"),
+            crate::Mime::parse("apPLICATIOn/GEo+json"),
             Ok(APPLICATION_GEO_JSON)
         );
     }
@@ -64966,7 +64974,7 @@ pub mod constants {
             Ok(APPLICATION_GEO_JSON_SEQ)
         );
         assert_eq!(
-            crate::Mime::parse("applIcAtiOn/GeO+json-SEQ"),
+            crate::Mime::parse("ApPliCatIoN/geo+JSON-sEq"),
             Ok(APPLICATION_GEO_JSON_SEQ)
         );
     }
@@ -64988,7 +64996,7 @@ pub mod constants {
             Ok(APPLICATION_GEOPACKAGE_SQLITE3)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICaTION/GEOPackAge+SQLITE3"),
+            crate::Mime::parse("APpLICAtION/geoPackAGE+SQlITE3"),
             Ok(APPLICATION_GEOPACKAGE_SQLITE3)
         );
     }
@@ -65010,7 +65018,7 @@ pub mod constants {
             Ok(APPLICATION_GEOXACML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcAtiON/geOxAcML+xml"),
+            crate::Mime::parse("ApPliCATioN/GeOXAcml+xml"),
             Ok(APPLICATION_GEOXACML_XML)
         );
     }
@@ -65030,7 +65038,7 @@ pub mod constants {
             Ok(APPLICATION_GLTF_BUFFER)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcATioN/glTf-bUffEr"),
+            crate::Mime::parse("ApPLicAtioN/glTf-BufFer"),
             Ok(APPLICATION_GLTF_BUFFER)
         );
     }
@@ -65052,7 +65060,7 @@ pub mod constants {
             Ok(APPLICATION_GML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtion/gmL+XML"),
+            crate::Mime::parse("ApPlicaTioN/GML+xmL"),
             Ok(APPLICATION_GML_XML)
         );
     }
@@ -65068,7 +65076,7 @@ pub mod constants {
     #[test]
     fn application_gzip_parse() {
         assert_eq!(crate::Mime::parse("application/gzip"), Ok(APPLICATION_GZIP));
-        assert_eq!(crate::Mime::parse("AppLicaTIoN/GzIP"), Ok(APPLICATION_GZIP));
+        assert_eq!(crate::Mime::parse("appLIcATIoN/GZiP"), Ok(APPLICATION_GZIP));
     }
 
     /// `application/H224`
@@ -65082,7 +65090,7 @@ pub mod constants {
     #[test]
     fn application_h224_parse() {
         assert_eq!(crate::Mime::parse("application/H224"), Ok(APPLICATION_H224));
-        assert_eq!(crate::Mime::parse("APpLiCaTION/H224"), Ok(APPLICATION_H224));
+        assert_eq!(crate::Mime::parse("aPpLICAtIon/h224"), Ok(APPLICATION_H224));
     }
 
     /// `application/held+xml`
@@ -65102,7 +65110,7 @@ pub mod constants {
             Ok(APPLICATION_HELD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICaTiON/HeLD+XMl"),
+            crate::Mime::parse("APpLiCATIoN/hELd+XML"),
             Ok(APPLICATION_HELD_XML)
         );
     }
@@ -65118,7 +65126,7 @@ pub mod constants {
     #[test]
     fn application_hta_parse() {
         assert_eq!(crate::Mime::parse("application/hta"), Ok(APPLICATION_HTA));
-        assert_eq!(crate::Mime::parse("aPPLicATiON/htA"), Ok(APPLICATION_HTA));
+        assert_eq!(crate::Mime::parse("apPLiCATioN/hTA"), Ok(APPLICATION_HTA));
     }
 
     /// `application/http`
@@ -65132,7 +65140,7 @@ pub mod constants {
     #[test]
     fn application_http_parse() {
         assert_eq!(crate::Mime::parse("application/http"), Ok(APPLICATION_HTTP));
-        assert_eq!(crate::Mime::parse("ApPLiCatION/Http"), Ok(APPLICATION_HTTP));
+        assert_eq!(crate::Mime::parse("aPplICAtIon/hTTP"), Ok(APPLICATION_HTTP));
     }
 
     /// `application/hyperstudio`
@@ -65150,7 +65158,7 @@ pub mod constants {
             Ok(APPLICATION_HYPERSTUDIO)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCaTION/hYpERSTudio"),
+            crate::Mime::parse("aPpLICAtiOn/HYPerstuDiO"),
             Ok(APPLICATION_HYPERSTUDIO)
         );
     }
@@ -65172,7 +65180,7 @@ pub mod constants {
             Ok(APPLICATION_IBE_KEY_REQUEST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcation/Ibe-KEY-REQueSt+XML"),
+            crate::Mime::parse("ApplicaTIon/IBE-KEY-rEqUEST+XmL"),
             Ok(APPLICATION_IBE_KEY_REQUEST_XML)
         );
     }
@@ -65194,7 +65202,7 @@ pub mod constants {
             Ok(APPLICATION_IBE_PKG_REPLY_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICatiOn/IBE-pkg-RePLY+xMl"),
+            crate::Mime::parse("APpliCatION/ibe-PkG-RepLy+xML"),
             Ok(APPLICATION_IBE_PKG_REPLY_XML)
         );
     }
@@ -65214,7 +65222,7 @@ pub mod constants {
             Ok(APPLICATION_IBE_PP_DATA)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICAtIoN/IBe-pP-DAtA"),
+            crate::Mime::parse("APPlIcATIOn/iBE-Pp-datA"),
             Ok(APPLICATION_IBE_PP_DATA)
         );
     }
@@ -65230,7 +65238,7 @@ pub mod constants {
     #[test]
     fn application_iges_parse() {
         assert_eq!(crate::Mime::parse("application/iges"), Ok(APPLICATION_IGES));
-        assert_eq!(crate::Mime::parse("appLIcAtioN/IgES"), Ok(APPLICATION_IGES));
+        assert_eq!(crate::Mime::parse("ApPlicATIoN/iges"), Ok(APPLICATION_IGES));
     }
 
     /// `application/im-iscomposing+xml`
@@ -65250,7 +65258,7 @@ pub mod constants {
             Ok(APPLICATION_IM_ISCOMPOSING_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applIcatiON/Im-IScOmpOSinG+xmL"),
+            crate::Mime::parse("AppliCATIoN/Im-isCOmpOsinG+xml"),
             Ok(APPLICATION_IM_ISCOMPOSING_XML)
         );
     }
@@ -65270,7 +65278,7 @@ pub mod constants {
             Ok(APPLICATION_INDEX)
         );
         assert_eq!(
-            crate::Mime::parse("applicaTion/inDex"),
+            crate::Mime::parse("appLicaTioN/inDex"),
             Ok(APPLICATION_INDEX)
         );
     }
@@ -65290,7 +65298,7 @@ pub mod constants {
             Ok(APPLICATION_INDEX_CMD)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicaTion/inDex.cMD"),
+            crate::Mime::parse("appLicatioN/iNdEX.Cmd"),
             Ok(APPLICATION_INDEX_CMD)
         );
     }
@@ -65310,7 +65318,7 @@ pub mod constants {
             Ok(APPLICATION_INDEX_OBJ)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtIoN/InDex.obj"),
+            crate::Mime::parse("ApPlIcAtIoN/iNdex.obj"),
             Ok(APPLICATION_INDEX_OBJ)
         );
     }
@@ -65330,7 +65338,7 @@ pub mod constants {
             Ok(APPLICATION_INDEX_RESPONSE)
         );
         assert_eq!(
-            crate::Mime::parse("applIcAtIoN/inDeX.ResPoNSe"),
+            crate::Mime::parse("ApPlIcAtioN/INDex.rESpoNsE"),
             Ok(APPLICATION_INDEX_RESPONSE)
         );
     }
@@ -65350,7 +65358,7 @@ pub mod constants {
             Ok(APPLICATION_INDEX_VND)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCation/InDeX.vnd"),
+            crate::Mime::parse("aPplicaTIoN/Index.VNd"),
             Ok(APPLICATION_INDEX_VND)
         );
     }
@@ -65372,7 +65380,7 @@ pub mod constants {
             Ok(APPLICATION_INKML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICATion/iNKmL+xML"),
+            crate::Mime::parse("APPLicaTiON/INkML+XMl"),
             Ok(APPLICATION_INKML_XML)
         );
     }
@@ -65388,7 +65396,7 @@ pub mod constants {
     #[test]
     fn application_iotp_parse() {
         assert_eq!(crate::Mime::parse("application/IOTP"), Ok(APPLICATION_IOTP));
-        assert_eq!(crate::Mime::parse("APPliCAtIoN/iOtp"), Ok(APPLICATION_IOTP));
+        assert_eq!(crate::Mime::parse("aPPlIcATiOn/ioTp"), Ok(APPLICATION_IOTP));
     }
 
     /// `application/ipfix`
@@ -65406,7 +65414,7 @@ pub mod constants {
             Ok(APPLICATION_IPFIX)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcAtIon/iPFIX"),
+            crate::Mime::parse("ApPlIcaTiON/IpFix"),
             Ok(APPLICATION_IPFIX)
         );
     }
@@ -65422,7 +65430,7 @@ pub mod constants {
     #[test]
     fn application_ipp_parse() {
         assert_eq!(crate::Mime::parse("application/ipp"), Ok(APPLICATION_IPP));
-        assert_eq!(crate::Mime::parse("aPpliCATion/ipp"), Ok(APPLICATION_IPP));
+        assert_eq!(crate::Mime::parse("aPPLicaTion/IPP"), Ok(APPLICATION_IPP));
     }
 
     /// `application/ISUP`
@@ -65436,7 +65444,7 @@ pub mod constants {
     #[test]
     fn application_isup_parse() {
         assert_eq!(crate::Mime::parse("application/ISUP"), Ok(APPLICATION_ISUP));
-        assert_eq!(crate::Mime::parse("APPLIcAtion/ISUP"), Ok(APPLICATION_ISUP));
+        assert_eq!(crate::Mime::parse("ApPlicaTION/IsUp"), Ok(APPLICATION_ISUP));
     }
 
     /// `application/its+xml`
@@ -65456,7 +65464,7 @@ pub mod constants {
             Ok(APPLICATION_ITS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCaTIOn/iTs+xMl"),
+            crate::Mime::parse("aPpLICaTiOn/iTs+xMl"),
             Ok(APPLICATION_ITS_XML)
         );
     }
@@ -65476,7 +65484,7 @@ pub mod constants {
             Ok(APPLICATION_JAVA_ARCHIVE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcaTiON/jaVa-arcHIVE"),
+            crate::Mime::parse("AppLiCATioN/Java-ARCHIvE"),
             Ok(APPLICATION_JAVA_ARCHIVE)
         );
     }
@@ -65498,7 +65506,7 @@ pub mod constants {
             Ok(APPLICATION_JAVA_SERIALIZED_OBJECT)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICaTioN/JaVa-SeriALIzeD-OBjECt"),
+            crate::Mime::parse("APpLicAtIoN/jAva-SERiaLIZEd-ObjECT"),
             Ok(APPLICATION_JAVA_SERIALIZED_OBJECT)
         );
     }
@@ -65518,7 +65526,7 @@ pub mod constants {
             Ok(APPLICATION_JAVA_VM)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICATIOn/JaVa-vM"),
+            crate::Mime::parse("APPLICaTIoN/JaVa-Vm"),
             Ok(APPLICATION_JAVA_VM)
         );
     }
@@ -65540,7 +65548,7 @@ pub mod constants {
             Ok(APPLICATION_JF2FEED_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICAtIon/Jf2FeeD+JSon"),
+            crate::Mime::parse("APPlIcatIon/jf2FEEd+JSON"),
             Ok(APPLICATION_JF2FEED_JSON)
         );
     }
@@ -65556,7 +65564,7 @@ pub mod constants {
     #[test]
     fn application_jose_parse() {
         assert_eq!(crate::Mime::parse("application/jose"), Ok(APPLICATION_JOSE));
-        assert_eq!(crate::Mime::parse("APPLICATioN/jOsE"), Ok(APPLICATION_JOSE));
+        assert_eq!(crate::Mime::parse("APPLicAtiOn/JOsE"), Ok(APPLICATION_JOSE));
     }
 
     /// `application/jose+json`
@@ -65576,7 +65584,7 @@ pub mod constants {
             Ok(APPLICATION_JOSE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcaTION/joSe+JsOn"),
+            crate::Mime::parse("AppLICAtioN/jOsE+jsOn"),
             Ok(APPLICATION_JOSE_JSON)
         );
     }
@@ -65598,7 +65606,7 @@ pub mod constants {
             Ok(APPLICATION_JRD_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICaTion/jrd+JSon"),
+            crate::Mime::parse("APpLicaTion/JRd+JSON"),
             Ok(APPLICATION_JRD_JSON)
         );
     }
@@ -65620,7 +65628,7 @@ pub mod constants {
             Ok(APPLICATION_JSCALENDAR_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicaTIoN/JsCALEnDAR+Json"),
+            crate::Mime::parse("appLIcATIoN/JScALENDar+json"),
             Ok(APPLICATION_JSCALENDAR_JSON)
         );
     }
@@ -65636,7 +65644,7 @@ pub mod constants {
     #[test]
     fn application_json_parse() {
         assert_eq!(crate::Mime::parse("application/json"), Ok(APPLICATION_JSON));
-        assert_eq!(crate::Mime::parse("applICaTiOn/JSON"), Ok(APPLICATION_JSON));
+        assert_eq!(crate::Mime::parse("APpLiCaTION/JsON"), Ok(APPLICATION_JSON));
     }
 
     /// `application/json-patch+json`
@@ -65656,7 +65664,7 @@ pub mod constants {
             Ok(APPLICATION_JSON_PATCH_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicaTioN/jSOn-pATCh+jsON"),
+            crate::Mime::parse("appLicATiON/jsON-pAtcH+jSon"),
             Ok(APPLICATION_JSON_PATCH_JSON)
         );
     }
@@ -65676,7 +65684,7 @@ pub mod constants {
             Ok(APPLICATION_JSON_SEQ)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtiOn/jsoN-sEq"),
+            crate::Mime::parse("ApPliCation/JsOn-seQ"),
             Ok(APPLICATION_JSON_SEQ)
         );
     }
@@ -65698,7 +65706,7 @@ pub mod constants {
             Ok(APPLICATION_JWK_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcatION/jwk+jSon"),
+            crate::Mime::parse("ApplICAtion/jWk+jsOn"),
             Ok(APPLICATION_JWK_JSON)
         );
     }
@@ -65720,7 +65728,7 @@ pub mod constants {
             Ok(APPLICATION_JWK_SET_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCatIoN/jWk-set+jSon"),
+            crate::Mime::parse("aPplIcATiOn/jwk-sEt+jSOn"),
             Ok(APPLICATION_JWK_SET_JSON)
         );
     }
@@ -65736,7 +65744,7 @@ pub mod constants {
     #[test]
     fn application_jwt_parse() {
         assert_eq!(crate::Mime::parse("application/jwt"), Ok(APPLICATION_JWT));
-        assert_eq!(crate::Mime::parse("aPPlicatiOn/JwT"), Ok(APPLICATION_JWT));
+        assert_eq!(crate::Mime::parse("appliCatIoN/jwT"), Ok(APPLICATION_JWT));
     }
 
     /// `application/kpml-request+xml`
@@ -65756,7 +65764,7 @@ pub mod constants {
             Ok(APPLICATION_KPML_REQUEST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCAtion/KPmL-rEQUEst+XMl"),
+            crate::Mime::parse("aPPlicatIOn/KpML-RequESt+XML"),
             Ok(APPLICATION_KPML_REQUEST_XML)
         );
     }
@@ -65778,7 +65786,7 @@ pub mod constants {
             Ok(APPLICATION_KPML_RESPONSE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicAtIon/KPmL-rESpONsE+xml"),
+            crate::Mime::parse("apPlIcatIOn/KpML-REsPonse+xml"),
             Ok(APPLICATION_KPML_RESPONSE_XML)
         );
     }
@@ -65800,7 +65808,7 @@ pub mod constants {
             Ok(APPLICATION_LD_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICaTIOn/Ld+JsOn"),
+            crate::Mime::parse("APpLICaTIoN/lD+jSON"),
             Ok(APPLICATION_LD_JSON)
         );
     }
@@ -65822,7 +65830,7 @@ pub mod constants {
             Ok(APPLICATION_LGR_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCATiON/Lgr+XML"),
+            crate::Mime::parse("aPPLiCAtIon/LGR+XmL"),
             Ok(APPLICATION_LGR_XML)
         );
     }
@@ -65842,7 +65850,7 @@ pub mod constants {
             Ok(APPLICATION_LINK_FORMAT)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICatIOn/Link-formAT"),
+            crate::Mime::parse("APplICaTIon/Link-FORmAt"),
             Ok(APPLICATION_LINK_FORMAT)
         );
     }
@@ -65864,7 +65872,7 @@ pub mod constants {
             Ok(APPLICATION_LOAD_CONTROL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicAtion/lOaD-coNTroL+XMl"),
+            crate::Mime::parse("apPlicaTiOn/loaD-coNTROl+xml"),
             Ok(APPLICATION_LOAD_CONTROL_XML)
         );
     }
@@ -65886,7 +65894,7 @@ pub mod constants {
             Ok(APPLICATION_LOST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applICATiOn/lOST+xmL"),
+            crate::Mime::parse("APPLiCaTiON/losT+xml"),
             Ok(APPLICATION_LOST_XML)
         );
     }
@@ -65908,7 +65916,7 @@ pub mod constants {
             Ok(APPLICATION_LOSTSYNC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appliCatIOn/lostSYnc+xml"),
+            crate::Mime::parse("aPplICaTion/LOstsync+XML"),
             Ok(APPLICATION_LOSTSYNC_XML)
         );
     }
@@ -65930,7 +65938,7 @@ pub mod constants {
             Ok(APPLICATION_LPF_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcATIoN/lPF+zIp"),
+            crate::Mime::parse("ApPLIcATiON/lPf+ziP"),
             Ok(APPLICATION_LPF_ZIP)
         );
     }
@@ -65946,7 +65954,7 @@ pub mod constants {
     #[test]
     fn application_lxf_parse() {
         assert_eq!(crate::Mime::parse("application/LXF"), Ok(APPLICATION_LXF));
-        assert_eq!(crate::Mime::parse("appLICatIOn/LxF"), Ok(APPLICATION_LXF));
+        assert_eq!(crate::Mime::parse("APplICatIoN/Lxf"), Ok(APPLICATION_LXF));
     }
 
     /// `application/m3g`
@@ -65960,7 +65968,7 @@ pub mod constants {
     #[test]
     fn application_m3g_parse() {
         assert_eq!(crate::Mime::parse("application/m3g"), Ok(APPLICATION_M3G));
-        assert_eq!(crate::Mime::parse("APplication/m3g"), Ok(APPLICATION_M3G));
+        assert_eq!(crate::Mime::parse("applicatiOn/m3G"), Ok(APPLICATION_M3G));
     }
 
     /// `application/mac-binhex40`
@@ -65978,7 +65986,7 @@ pub mod constants {
             Ok(APPLICATION_MAC_BINHEX40)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICaTION/MAc-binhEx40"),
+            crate::Mime::parse("APpLICAtIOn/mac-BiNHEX40"),
             Ok(APPLICATION_MAC_BINHEX40)
         );
     }
@@ -65998,7 +66006,7 @@ pub mod constants {
             Ok(APPLICATION_MAC_COMPACTPRO)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcaTION/MAC-compacTPRo"),
+            crate::Mime::parse("AppLICAtION/mac-coMPActPrO"),
             Ok(APPLICATION_MAC_COMPACTPRO)
         );
     }
@@ -66018,7 +66026,7 @@ pub mod constants {
             Ok(APPLICATION_MACWRITEII)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicatIon/mACWRiTeIi"),
+            crate::Mime::parse("applIcatiON/MaCwRiteii"),
             Ok(APPLICATION_MACWRITEII)
         );
     }
@@ -66040,7 +66048,7 @@ pub mod constants {
             Ok(APPLICATION_MADS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applicAtioN/madS+XMl"),
+            crate::Mime::parse("apPlicATion/mADs+XML"),
             Ok(APPLICATION_MADS_XML)
         );
     }
@@ -66062,7 +66070,7 @@ pub mod constants {
             Ok(APPLICATION_MANIFEST_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCaTion/MANifest+jSOn"),
+            crate::Mime::parse("aPpLicatION/manifeST+JSOn"),
             Ok(APPLICATION_MANIFEST_JSON)
         );
     }
@@ -66078,7 +66086,7 @@ pub mod constants {
     #[test]
     fn application_marc_parse() {
         assert_eq!(crate::Mime::parse("application/marc"), Ok(APPLICATION_MARC));
-        assert_eq!(crate::Mime::parse("APPlICATioN/maRc"), Ok(APPLICATION_MARC));
+        assert_eq!(crate::Mime::parse("APPLicATioN/marc"), Ok(APPLICATION_MARC));
     }
 
     /// `application/marcxml+xml`
@@ -66098,7 +66106,7 @@ pub mod constants {
             Ok(APPLICATION_MARCXML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applIcaTIOn/mARCXmL+xML"),
+            crate::Mime::parse("AppLICatiON/MaRcxML+XmL"),
             Ok(APPLICATION_MARCXML_XML)
         );
     }
@@ -66118,7 +66126,7 @@ pub mod constants {
             Ok(APPLICATION_MATHEMATICA)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICaTIoN/mATHEmatiCA"),
+            crate::Mime::parse("APpLIcAtiON/MatheMAtICA"),
             Ok(APPLICATION_MATHEMATICA)
         );
     }
@@ -66140,7 +66148,7 @@ pub mod constants {
             Ok(APPLICATION_MATHML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicatiOn/MathML+xML"),
+            crate::Mime::parse("appliCatIon/MAthML+XmL"),
             Ok(APPLICATION_MATHML_XML)
         );
     }
@@ -66162,7 +66170,7 @@ pub mod constants {
             Ok(APPLICATION_MATHML_CONTENT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTIoN/MATHmL-ConTent+xml"),
+            crate::Mime::parse("AppLIcAtION/mATHml-conTent+Xml"),
             Ok(APPLICATION_MATHML_CONTENT_XML)
         );
     }
@@ -66186,7 +66194,7 @@ pub mod constants {
             Ok(APPLICATION_MATHML_PRESENTATION_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICAtiON/matHML-PrEsenTatioN+XMl"),
+            crate::Mime::parse("APPliCAtion/MAtHmL-prEsentAtIOn+Xml"),
             Ok(APPLICATION_MATHML_PRESENTATION_XML)
         );
     }
@@ -66211,7 +66219,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_ASSOCIATED_PROCEDURE_DESCRIPTION_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcation/MBmS-aSsociateD-PROCeDuRE-desCripTION+XMl"),
+            crate::Mime::parse("ApplicaTIOn/MbMs-assocIaTED-pRoCEdure-desCRIPTIOn+Xml"),
             Ok(APPLICATION_MBMS_ASSOCIATED_PROCEDURE_DESCRIPTION_XML)
         );
     }
@@ -66233,7 +66241,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_DEREGISTER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCaTiOn/MbMS-DERegistER+Xml"),
+            crate::Mime::parse("aPpLiCaTIoN/MBMS-dereGISTer+xML"),
             Ok(APPLICATION_MBMS_DEREGISTER_XML)
         );
     }
@@ -66255,7 +66263,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_ENVELOPE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCatioN/MBMS-envELOpE+xmL"),
+            crate::Mime::parse("aPplicAtION/mbms-ENvElopE+XmL"),
             Ok(APPLICATION_MBMS_ENVELOPE_XML)
         );
     }
@@ -66277,7 +66285,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_MSK_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcatIOn/mBmS-mSK+XmL"),
+            crate::Mime::parse("ApplICatiOn/mbMS-MsK+XmL"),
             Ok(APPLICATION_MBMS_MSK_XML)
         );
     }
@@ -66299,7 +66307,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_MSK_RESPONSE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicaTIoN/mbMS-msk-resPoNse+xMl"),
+            crate::Mime::parse("appLIcATioN/mbms-msk-rEsponSe+XmL"),
             Ok(APPLICATION_MBMS_MSK_RESPONSE_XML)
         );
     }
@@ -66323,7 +66331,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_PROTECTION_DESCRIPTION_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCation/mbmS-protecTIOn-descrIPTION+xML"),
+            crate::Mime::parse("aPplication/Mbms-prOTEcTion-dESCRIPtiON+xML"),
             Ok(APPLICATION_MBMS_PROTECTION_DESCRIPTION_XML)
         );
     }
@@ -66347,7 +66355,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_RECEPTION_REPORT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicAtION/Mbms-rECEpTion-repoRt+xMl"),
+            crate::Mime::parse("apPlICAtIon/MbMS-rEception-RepoRt+xML"),
             Ok(APPLICATION_MBMS_RECEPTION_REPORT_XML)
         );
     }
@@ -66369,7 +66377,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_REGISTER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCAtiON/Mbms-RegIsTER+xml"),
+            crate::Mime::parse("aPPliCAtIon/MBms-rEGISter+xML"),
             Ok(APPLICATION_MBMS_REGISTER_XML)
         );
     }
@@ -66393,7 +66401,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_REGISTER_RESPONSE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicAtIon/mbmS-REGiSTer-ReSponSe+XMl"),
+            crate::Mime::parse("apPlIcaTion/mBMS-REgiSTeR-reSpONSe+xMl"),
             Ok(APPLICATION_MBMS_REGISTER_RESPONSE_XML)
         );
     }
@@ -66415,7 +66423,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_SCHEDULE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCATIOn/mBMs-ScHEDUle+xmL"),
+            crate::Mime::parse("aPPLICatiON/mBmS-SCheDulE+xMl"),
             Ok(APPLICATION_MBMS_SCHEDULE_XML)
         );
     }
@@ -66439,7 +66447,7 @@ pub mod constants {
             Ok(APPLICATION_MBMS_USER_SERVICE_DESCRIPTION_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcaTION/MBMs-uSeR-sERvIcE-DescRipTIon+xmL"),
+            crate::Mime::parse("AppLICATION/mbMs-usER-SeRvIce-DesCRipTioN+xMl"),
             Ok(APPLICATION_MBMS_USER_SERVICE_DESCRIPTION_XML)
         );
     }
@@ -66455,7 +66463,7 @@ pub mod constants {
     #[test]
     fn application_mbox_parse() {
         assert_eq!(crate::Mime::parse("application/mbox"), Ok(APPLICATION_MBOX));
-        assert_eq!(crate::Mime::parse("apPlicatIon/mboX"), Ok(APPLICATION_MBOX));
+        assert_eq!(crate::Mime::parse("applIcaTion/MBoX"), Ok(APPLICATION_MBOX));
     }
 
     /// `application/media-policy-dataset+xml`
@@ -66477,7 +66485,7 @@ pub mod constants {
             Ok(APPLICATION_MEDIA_POLICY_DATASET_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcATIOn/MEdIA-PoLicy-dATAsET+XML"),
+            crate::Mime::parse("ApPLICatIOn/MeDiA-poliCY-dATaSET+XmL"),
             Ok(APPLICATION_MEDIA_POLICY_DATASET_XML)
         );
     }
@@ -66501,7 +66509,7 @@ pub mod constants {
             Ok(APPLICATION_MEDIASERVERCONTROL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicatiON/MEDiaSErvErCoNTRol+XmL"),
+            crate::Mime::parse("appliCATION/mEDiaSeRvERConTRoL+xML"),
             Ok(APPLICATION_MEDIASERVERCONTROL_XML)
         );
     }
@@ -66523,7 +66531,7 @@ pub mod constants {
             Ok(APPLICATION_MEDIA_CONTROL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicATION/medIA_CONTrol+xMl"),
+            crate::Mime::parse("apPLICAtion/MeDIA_contrOl+XML"),
             Ok(APPLICATION_MEDIA_CONTROL_XML)
         );
     }
@@ -66545,7 +66553,7 @@ pub mod constants {
             Ok(APPLICATION_MERGE_PATCH_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICaTiOn/Merge-pAtch+JsoN"),
+            crate::Mime::parse("APpLiCatIon/merGe-paTch+JsOn"),
             Ok(APPLICATION_MERGE_PATCH_JSON)
         );
     }
@@ -66567,7 +66575,7 @@ pub mod constants {
             Ok(APPLICATION_METALINK4_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCATiOn/METAlInk4+Xml"),
+            crate::Mime::parse("aPPLiCaTION/mEtalINk4+xMl"),
             Ok(APPLICATION_METALINK4_XML)
         );
     }
@@ -66589,7 +66597,7 @@ pub mod constants {
             Ok(APPLICATION_METS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCatioN/MetS+xml"),
+            crate::Mime::parse("aPplicATIon/Mets+XMl"),
             Ok(APPLICATION_METS_XML)
         );
     }
@@ -66605,7 +66613,7 @@ pub mod constants {
     #[test]
     fn application_mf4_parse() {
         assert_eq!(crate::Mime::parse("application/MF4"), Ok(APPLICATION_MF4));
-        assert_eq!(crate::Mime::parse("aPPlIcAtiON/mF4"), Ok(APPLICATION_MF4));
+        assert_eq!(crate::Mime::parse("ApPliCATiON/MF4"), Ok(APPLICATION_MF4));
     }
 
     /// `application/mikey`
@@ -66623,7 +66631,7 @@ pub mod constants {
             Ok(APPLICATION_MIKEY)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcaTioN/miKeY"),
+            crate::Mime::parse("AppLicATioN/MikEy"),
             Ok(APPLICATION_MIKEY)
         );
     }
@@ -66639,7 +66647,7 @@ pub mod constants {
     #[test]
     fn application_mipc_parse() {
         assert_eq!(crate::Mime::parse("application/mipc"), Ok(APPLICATION_MIPC));
-        assert_eq!(crate::Mime::parse("apPlicatiON/MipC"), Ok(APPLICATION_MIPC));
+        assert_eq!(crate::Mime::parse("appliCATIon/MIPC"), Ok(APPLICATION_MIPC));
     }
 
     /// `application/missing-blocks+cbor-seq`
@@ -66659,7 +66667,7 @@ pub mod constants {
             Ok(APPLICATION_MISSING_BLOCKS_CBOR_SEQ)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcATIoN/MISsIng-BlOckS+cBOr-sEQ"),
+            crate::Mime::parse("ApPLIcATION/MisSInG-bLocKS+cbOR-SEQ"),
             Ok(APPLICATION_MISSING_BLOCKS_CBOR_SEQ)
         );
     }
@@ -66681,7 +66689,7 @@ pub mod constants {
             Ok(APPLICATION_MMT_AEI_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcaTIon/mMt-AeI+xml"),
+            crate::Mime::parse("AppLIcatiOn/MmT-aei+XmL"),
             Ok(APPLICATION_MMT_AEI_XML)
         );
     }
@@ -66703,7 +66711,7 @@ pub mod constants {
             Ok(APPLICATION_MMT_USD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicaTion/MMT-usd+xMl"),
+            crate::Mime::parse("appLicaTION/mmt-uSd+Xml"),
             Ok(APPLICATION_MMT_USD_XML)
         );
     }
@@ -66725,7 +66733,7 @@ pub mod constants {
             Ok(APPLICATION_MODS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICaTiOn/ModS+xML"),
+            crate::Mime::parse("APpLiCatIon/moDS+XMl"),
             Ok(APPLICATION_MODS_XML)
         );
     }
@@ -66745,7 +66753,7 @@ pub mod constants {
             Ok(APPLICATION_MOSS_KEYS)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICatIoN/moss-KEYS"),
+            crate::Mime::parse("APplIcATion/MOSS-keys"),
             Ok(APPLICATION_MOSS_KEYS)
         );
     }
@@ -66765,7 +66773,7 @@ pub mod constants {
             Ok(APPLICATION_MOSS_SIGNATURE)
         );
         assert_eq!(
-            crate::Mime::parse("applICATIon/mOss-sIgnATurE"),
+            crate::Mime::parse("APPLIcaTiOn/moSs-SIgnAturE"),
             Ok(APPLICATION_MOSS_SIGNATURE)
         );
     }
@@ -66785,7 +66793,7 @@ pub mod constants {
             Ok(APPLICATION_MOSSKEY_DATA)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcaTioN/MOSSKEY-DAta"),
+            crate::Mime::parse("AppLicAtION/MOSsKEy-DATA"),
             Ok(APPLICATION_MOSSKEY_DATA)
         );
     }
@@ -66805,7 +66813,7 @@ pub mod constants {
             Ok(APPLICATION_MOSSKEY_REQUEST)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicaTioN/MOSskEY-REQUesT"),
+            crate::Mime::parse("appLicATION/mOSsKEY-reQuESt"),
             Ok(APPLICATION_MOSSKEY_REQUEST)
         );
     }
@@ -66821,7 +66829,7 @@ pub mod constants {
     #[test]
     fn application_mp21_parse() {
         assert_eq!(crate::Mime::parse("application/mp21"), Ok(APPLICATION_MP21));
-        assert_eq!(crate::Mime::parse("aPPlIcAtioN/Mp21"), Ok(APPLICATION_MP21));
+        assert_eq!(crate::Mime::parse("ApPlicAtIon/mP21"), Ok(APPLICATION_MP21));
     }
 
     /// `application/mp4`
@@ -66835,7 +66843,7 @@ pub mod constants {
     #[test]
     fn application_mp4_parse() {
         assert_eq!(crate::Mime::parse("application/mp4"), Ok(APPLICATION_MP4));
-        assert_eq!(crate::Mime::parse("aPpliCaTiOn/Mp4"), Ok(APPLICATION_MP4));
+        assert_eq!(crate::Mime::parse("aPpLiCaTIon/Mp4"), Ok(APPLICATION_MP4));
     }
 
     /// `application/mpeg4-generic`
@@ -66853,7 +66861,7 @@ pub mod constants {
             Ok(APPLICATION_MPEG4_GENERIC)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICATIOn/mPeG4-GENERic"),
+            crate::Mime::parse("APPLICatiOn/mpEG4-Generic"),
             Ok(APPLICATION_MPEG4_GENERIC)
         );
     }
@@ -66873,7 +66881,7 @@ pub mod constants {
             Ok(APPLICATION_MPEG4_IOD)
         );
         assert_eq!(
-            crate::Mime::parse("applICatIon/MpEG4-iOD"),
+            crate::Mime::parse("APplIcaTIoN/MPeG4-ioD"),
             Ok(APPLICATION_MPEG4_IOD)
         );
     }
@@ -66893,7 +66901,7 @@ pub mod constants {
             Ok(APPLICATION_MPEG4_IOD_XMT)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCatioN/mPEg4-IOd-xmT"),
+            crate::Mime::parse("aPplicAtiON/MpEG4-ioD-XMt"),
             Ok(APPLICATION_MPEG4_IOD_XMT)
         );
     }
@@ -66915,7 +66923,7 @@ pub mod constants {
             Ok(APPLICATION_MRB_CONSUMER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicAtion/mrb-cONsUmer+XMl"),
+            crate::Mime::parse("apPlicaTion/mRB-ConsuMEr+xmL"),
             Ok(APPLICATION_MRB_CONSUMER_XML)
         );
     }
@@ -66937,7 +66945,7 @@ pub mod constants {
             Ok(APPLICATION_MRB_PUBLISH_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCatiON/mrB-PubLIsH+xmL"),
+            crate::Mime::parse("aPpliCAtioN/Mrb-PuBlisH+XML"),
             Ok(APPLICATION_MRB_PUBLISH_XML)
         );
     }
@@ -66957,7 +66965,7 @@ pub mod constants {
             Ok(APPLICATION_MSACCESS)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICATIOn/MsACcesS"),
+            crate::Mime::parse("APPLICaTIoN/msaCcEsS"),
             Ok(APPLICATION_MSACCESS)
         );
     }
@@ -66979,7 +66987,7 @@ pub mod constants {
             Ok(APPLICATION_MSC_IVR_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcAtioN/msC-IVr+XmL"),
+            crate::Mime::parse("ApPlicAtioN/MSc-IvR+XMl"),
             Ok(APPLICATION_MSC_IVR_XML)
         );
     }
@@ -67001,7 +67009,7 @@ pub mod constants {
             Ok(APPLICATION_MSC_MIXER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCatiOn/Msc-miXER+XmL"),
+            crate::Mime::parse("aPpliCatIon/msC-MiXeR+XmL"),
             Ok(APPLICATION_MSC_MIXER_XML)
         );
     }
@@ -67021,7 +67029,7 @@ pub mod constants {
             Ok(APPLICATION_MSWORD)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICatiOn/MSwORd"),
+            crate::Mime::parse("APpliCatIOn/MsWorD"),
             Ok(APPLICATION_MSWORD)
         );
     }
@@ -67043,7 +67051,7 @@ pub mod constants {
             Ok(APPLICATION_MUD_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICation/mud+json"),
+            crate::Mime::parse("APplicaTion/mud+JsoN"),
             Ok(APPLICATION_MUD_JSON)
         );
     }
@@ -67063,7 +67071,7 @@ pub mod constants {
             Ok(APPLICATION_MULTIPART_CORE)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICATIoN/mulTipaRt-coRe"),
+            crate::Mime::parse("APPLIcAtion/mulTiParT-CoRE"),
             Ok(APPLICATION_MULTIPART_CORE)
         );
     }
@@ -67079,7 +67087,7 @@ pub mod constants {
     #[test]
     fn application_mxf_parse() {
         assert_eq!(crate::Mime::parse("application/mxf"), Ok(APPLICATION_MXF));
-        assert_eq!(crate::Mime::parse("ApPLICAtIoN/MxF"), Ok(APPLICATION_MXF));
+        assert_eq!(crate::Mime::parse("APPlIcAtIoN/mxF"), Ok(APPLICATION_MXF));
     }
 
     /// `application/n-quads`
@@ -67097,7 +67105,7 @@ pub mod constants {
             Ok(APPLICATION_N_QUADS)
         );
         assert_eq!(
-            crate::Mime::parse("appLicaTioN/n-QUaDS"),
+            crate::Mime::parse("appLicATioN/n-QUads"),
             Ok(APPLICATION_N_QUADS)
         );
     }
@@ -67117,7 +67125,7 @@ pub mod constants {
             Ok(APPLICATION_N_TRIPLES)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICATIon/n-TrIPLeS"),
+            crate::Mime::parse("APPLIcatiON/N-TrIpleS"),
             Ok(APPLICATION_N_TRIPLES)
         );
     }
@@ -67137,7 +67145,7 @@ pub mod constants {
             Ok(APPLICATION_NASDATA)
         );
         assert_eq!(
-            crate::Mime::parse("appLICaTiON/nAsDATA"),
+            crate::Mime::parse("APpLiCATiOn/NASdATa"),
             Ok(APPLICATION_NASDATA)
         );
     }
@@ -67157,7 +67165,7 @@ pub mod constants {
             Ok(APPLICATION_NEWS_CHECKGROUPS)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicAtIoN/neWs-CHEckgRouPs"),
+            crate::Mime::parse("apPlIcAtioN/NEWS-chEckGrOupS"),
             Ok(APPLICATION_NEWS_CHECKGROUPS)
         );
     }
@@ -67177,7 +67185,7 @@ pub mod constants {
             Ok(APPLICATION_NEWS_GROUPINFO)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICATIOn/nEws-gRoUPinfO"),
+            crate::Mime::parse("APPLICaTiOn/neWs-GrouPINFo"),
             Ok(APPLICATION_NEWS_GROUPINFO)
         );
     }
@@ -67199,7 +67207,7 @@ pub mod constants {
             Ok(APPLICATION_NEWS_TRANSMISSION)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicAtiON/NeWs-traNsMIsSiOn"),
+            crate::Mime::parse("apPliCATIoN/news-tRAnSmIssIon"),
             Ok(APPLICATION_NEWS_TRANSMISSION)
         );
     }
@@ -67221,7 +67229,7 @@ pub mod constants {
             Ok(APPLICATION_NLSML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicATioN/nLsml+XML"),
+            crate::Mime::parse("apPLicAtiOn/nLSML+Xml"),
             Ok(APPLICATION_NLSML_XML)
         );
     }
@@ -67237,7 +67245,7 @@ pub mod constants {
     #[test]
     fn application_node_parse() {
         assert_eq!(crate::Mime::parse("application/node"), Ok(APPLICATION_NODE));
-        assert_eq!(crate::Mime::parse("APplIcation/node"), Ok(APPLICATION_NODE));
+        assert_eq!(crate::Mime::parse("Application/NoDe"), Ok(APPLICATION_NODE));
     }
 
     /// `application/nss`
@@ -67251,7 +67259,7 @@ pub mod constants {
     #[test]
     fn application_nss_parse() {
         assert_eq!(crate::Mime::parse("application/nss"), Ok(APPLICATION_NSS));
-        assert_eq!(crate::Mime::parse("ApPliCaTION/NSs"), Ok(APPLICATION_NSS));
+        assert_eq!(crate::Mime::parse("aPpLICATIOn/NSS"), Ok(APPLICATION_NSS));
     }
 
     /// `application/oauth-authz-req+jwt`
@@ -67271,7 +67279,7 @@ pub mod constants {
             Ok(APPLICATION_OAUTH_AUTHZ_REQ_JWT)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCatiON/oauth-AuTHZ-reQ+JWt"),
+            crate::Mime::parse("aPpliCAtion/oAUtH-AUthZ-REq+jWT"),
             Ok(APPLICATION_OAUTH_AUTHZ_REQ_JWT)
         );
     }
@@ -67293,7 +67301,7 @@ pub mod constants {
             Ok(APPLICATION_OBLIVIOUS_DNS_MESSAGE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICatiON/ObLiViOUs-DnS-MESsAGe"),
+            crate::Mime::parse("APpliCAtIoN/ObLIviOuS-DNS-MEssAGE"),
             Ok(APPLICATION_OBLIVIOUS_DNS_MESSAGE)
         );
     }
@@ -67313,7 +67321,7 @@ pub mod constants {
             Ok(APPLICATION_OCSP_REQUEST)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICAtiOn/OcsP-ReQueST"),
+            crate::Mime::parse("APPliCatIon/oCsP-rEQUEsT"),
             Ok(APPLICATION_OCSP_REQUEST)
         );
     }
@@ -67333,7 +67341,7 @@ pub mod constants {
             Ok(APPLICATION_OCSP_RESPONSE)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCAtioN/OCsp-rEspONSe"),
+            crate::Mime::parse("aPPlicAtIOn/OcSp-RESpOnSe"),
             Ok(APPLICATION_OCSP_RESPONSE)
         );
     }
@@ -67353,7 +67361,7 @@ pub mod constants {
             Ok(APPLICATION_OCTET_STREAM)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicAtIOn/octet-stREaM"),
+            crate::Mime::parse("apPlICaTion/octeT-sTrEam"),
             Ok(APPLICATION_OCTET_STREAM)
         );
     }
@@ -67369,7 +67377,7 @@ pub mod constants {
     #[test]
     fn application_oda_parse() {
         assert_eq!(crate::Mime::parse("application/ODA"), Ok(APPLICATION_ODA));
-        assert_eq!(crate::Mime::parse("aPplicAtIon/oda"), Ok(APPLICATION_ODA));
+        assert_eq!(crate::Mime::parse("apPlIcaTion/oDA"), Ok(APPLICATION_ODA));
     }
 
     /// `application/odm+xml`
@@ -67389,7 +67397,7 @@ pub mod constants {
             Ok(APPLICATION_ODM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCatioN/ODM+xML"),
+            crate::Mime::parse("aPplicAtION/oDM+XML"),
             Ok(APPLICATION_ODM_XML)
         );
     }
@@ -67405,7 +67413,7 @@ pub mod constants {
     #[test]
     fn application_odx_parse() {
         assert_eq!(crate::Mime::parse("application/ODX"), Ok(APPLICATION_ODX));
-        assert_eq!(crate::Mime::parse("APPLiCation/odX"), Ok(APPLICATION_ODX));
+        assert_eq!(crate::Mime::parse("aPplicaTioN/Odx"), Ok(APPLICATION_ODX));
     }
 
     /// `application/oebps-package+xml`
@@ -67425,7 +67433,7 @@ pub mod constants {
             Ok(APPLICATION_OEBPS_PACKAGE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcation/OEbps-PACKAgE+XML"),
+            crate::Mime::parse("ApplicaTIOn/oeBPS-PaCkAGE+XmL"),
             Ok(APPLICATION_OEBPS_PACKAGE_XML)
         );
     }
@@ -67441,7 +67449,7 @@ pub mod constants {
     #[test]
     fn application_ogg_parse() {
         assert_eq!(crate::Mime::parse("application/ogg"), Ok(APPLICATION_OGG));
-        assert_eq!(crate::Mime::parse("APpLicAtioN/oGg"), Ok(APPLICATION_OGG));
+        assert_eq!(crate::Mime::parse("apPlicAtiOn/ogg"), Ok(APPLICATION_OGG));
     }
 
     /// `application/onenote`
@@ -67459,7 +67467,7 @@ pub mod constants {
             Ok(APPLICATION_ONENOTE)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcaTiON/OnenoTE"),
+            crate::Mime::parse("AppLiCAtIon/oNENOte"),
             Ok(APPLICATION_ONENOTE)
         );
     }
@@ -67481,7 +67489,7 @@ pub mod constants {
             Ok(APPLICATION_OPC_NODESET_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcatION/opC-noDESet+xML"),
+            crate::Mime::parse("ApplICATioN/opC-NodEsET+xML"),
             Ok(APPLICATION_OPC_NODESET_XML)
         );
     }
@@ -67501,7 +67509,7 @@ pub mod constants {
             Ok(APPLICATION_OSCORE)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcaTIon/oScorE"),
+            crate::Mime::parse("AppLIcaTiOn/oSCOrE"),
             Ok(APPLICATION_OSCORE)
         );
     }
@@ -67517,7 +67525,7 @@ pub mod constants {
     #[test]
     fn application_oxps_parse() {
         assert_eq!(crate::Mime::parse("application/oxps"), Ok(APPLICATION_OXPS));
-        assert_eq!(crate::Mime::parse("APpLIcATion/oXpS"), Ok(APPLICATION_OXPS));
+        assert_eq!(crate::Mime::parse("ApPLicatiOn/oxpS"), Ok(APPLICATION_OXPS));
     }
 
     /// `application/p21`
@@ -67531,7 +67539,7 @@ pub mod constants {
     #[test]
     fn application_p21_parse() {
         assert_eq!(crate::Mime::parse("application/p21"), Ok(APPLICATION_P21));
-        assert_eq!(crate::Mime::parse("appLIcatIOn/P21"), Ok(APPLICATION_P21));
+        assert_eq!(crate::Mime::parse("ApplICaTION/P21"), Ok(APPLICATION_P21));
     }
 
     /// `application/p21+zip`
@@ -67551,7 +67559,7 @@ pub mod constants {
             Ok(APPLICATION_P21_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICatIOn/p21+Zip"),
+            crate::Mime::parse("APplICaTion/P21+Zip"),
             Ok(APPLICATION_P21_ZIP)
         );
     }
@@ -67573,7 +67581,7 @@ pub mod constants {
             Ok(APPLICATION_P2P_OVERLAY_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCATIOn/p2P-OVerlay+XmL"),
+            crate::Mime::parse("aPPLICaTiON/P2p-oveRLaY+xml"),
             Ok(APPLICATION_P2P_OVERLAY_XML)
         );
     }
@@ -67593,7 +67601,7 @@ pub mod constants {
             Ok(APPLICATION_PARITYFEC)
         );
         assert_eq!(
-            crate::Mime::parse("applicATioN/PARItYfec"),
+            crate::Mime::parse("apPLicAtION/pAritYFEc"),
             Ok(APPLICATION_PARITYFEC)
         );
     }
@@ -67613,7 +67621,7 @@ pub mod constants {
             Ok(APPLICATION_PASSPORT)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCATIon/paSsPOrt"),
+            crate::Mime::parse("aPPLIcaTioN/PAssPOrT"),
             Ok(APPLICATION_PASSPORT)
         );
     }
@@ -67635,7 +67643,7 @@ pub mod constants {
             Ok(APPLICATION_PATCH_OPS_ERROR_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICAtIoN/PatCh-OpS-ErROR+xml"),
+            crate::Mime::parse("APPlIcAtIon/paTcH-OpS-Error+XML"),
             Ok(APPLICATION_PATCH_OPS_ERROR_XML)
         );
     }
@@ -67651,7 +67659,7 @@ pub mod constants {
     #[test]
     fn application_pdf_parse() {
         assert_eq!(crate::Mime::parse("application/pdf"), Ok(APPLICATION_PDF));
-        assert_eq!(crate::Mime::parse("aPPLIcatioN/pDF"), Ok(APPLICATION_PDF));
+        assert_eq!(crate::Mime::parse("ApplicAtiON/pDF"), Ok(APPLICATION_PDF));
     }
 
     /// `application/PDX`
@@ -67665,7 +67673,7 @@ pub mod constants {
     #[test]
     fn application_pdx_parse() {
         assert_eq!(crate::Mime::parse("application/PDX"), Ok(APPLICATION_PDX));
-        assert_eq!(crate::Mime::parse("ApPLIcATIoN/pdX"), Ok(APPLICATION_PDX));
+        assert_eq!(crate::Mime::parse("ApPLIcAtioN/pdX"), Ok(APPLICATION_PDX));
     }
 
     /// `application/pem-certificate-chain`
@@ -67685,7 +67693,7 @@ pub mod constants {
             Ok(APPLICATION_PEM_CERTIFICATE_CHAIN)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcAtIoN/PEM-cERtIfiCAtE-ChAIn"),
+            crate::Mime::parse("ApPlIcATION/pEM-CerTIfIcAtE-cHAin"),
             Ok(APPLICATION_PEM_CERTIFICATE_CHAIN)
         );
     }
@@ -67705,7 +67713,7 @@ pub mod constants {
             Ok(APPLICATION_PGP_ENCRYPTED)
         );
         assert_eq!(
-            crate::Mime::parse("APplicaTiON/pGp-encryptEd"),
+            crate::Mime::parse("appLiCATiOn/pgp-encRyPTED"),
             Ok(APPLICATION_PGP_ENCRYPTED)
         );
     }
@@ -67725,7 +67733,7 @@ pub mod constants {
             Ok(APPLICATION_PGP_KEYS)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcaTiON/PGp-keYS"),
+            crate::Mime::parse("AppLiCATIOn/pgP-keys"),
             Ok(APPLICATION_PGP_KEYS)
         );
     }
@@ -67745,7 +67753,7 @@ pub mod constants {
             Ok(APPLICATION_PGP_SIGNATURE)
         );
         assert_eq!(
-            crate::Mime::parse("applIcATiOn/Pgp-SigNature"),
+            crate::Mime::parse("ApPLiCaTIon/Pgp-signatURe"),
             Ok(APPLICATION_PGP_SIGNATURE)
         );
     }
@@ -67765,7 +67773,7 @@ pub mod constants {
             Ok(APPLICATION_PICS_RULES)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcAtIoN/PIcs-rulEs"),
+            crate::Mime::parse("ApPlIcATIOn/Pics-rULEs"),
             Ok(APPLICATION_PICS_RULES)
         );
     }
@@ -67787,7 +67795,7 @@ pub mod constants {
             Ok(APPLICATION_PIDF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICatION/PIdf+xML"),
+            crate::Mime::parse("APplICATIOn/PiDF+xmL"),
             Ok(APPLICATION_PIDF_XML)
         );
     }
@@ -67809,7 +67817,7 @@ pub mod constants {
             Ok(APPLICATION_PIDF_DIFF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCAtION/pidF-dIff+xml"),
+            crate::Mime::parse("aPPlICATion/piDf-Diff+Xml"),
             Ok(APPLICATION_PIDF_DIFF_XML)
         );
     }
@@ -67829,7 +67837,7 @@ pub mod constants {
             Ok(APPLICATION_PKCS10)
         );
         assert_eq!(
-            crate::Mime::parse("APplICAtIon/pkcs10"),
+            crate::Mime::parse("APPlIcaTion/pkCS10"),
             Ok(APPLICATION_PKCS10)
         );
     }
@@ -67849,7 +67857,7 @@ pub mod constants {
             Ok(APPLICATION_PKCS12)
         );
         assert_eq!(
-            crate::Mime::parse("APplicAtIOn/Pkcs12"),
+            crate::Mime::parse("apPlICaTIon/pKCS12"),
             Ok(APPLICATION_PKCS12)
         );
     }
@@ -67869,7 +67877,7 @@ pub mod constants {
             Ok(APPLICATION_PKCS7_MIME)
         );
         assert_eq!(
-            crate::Mime::parse("APplicaTiON/pKcS7-mImE"),
+            crate::Mime::parse("appLiCATiOn/pKcS7-MiMe"),
             Ok(APPLICATION_PKCS7_MIME)
         );
     }
@@ -67889,7 +67897,7 @@ pub mod constants {
             Ok(APPLICATION_PKCS7_SIGNATURE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCAtIoN/PKcS7-SIGnatUrE"),
+            crate::Mime::parse("aPPlIcAtIOn/pKCS7-siGnAturE"),
             Ok(APPLICATION_PKCS7_SIGNATURE)
         );
     }
@@ -67909,7 +67917,7 @@ pub mod constants {
             Ok(APPLICATION_PKCS8)
         );
         assert_eq!(
-            crate::Mime::parse("appLICAtioN/PKcs8"),
+            crate::Mime::parse("APPlicAtIOn/PkCs8"),
             Ok(APPLICATION_PKCS8)
         );
     }
@@ -67929,7 +67937,7 @@ pub mod constants {
             Ok(APPLICATION_PKCS8_ENCRYPTED)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicaTIoN/PkcS8-eNcRypted"),
+            crate::Mime::parse("appLIcAtIon/PkcS8-encrypteD"),
             Ok(APPLICATION_PKCS8_ENCRYPTED)
         );
     }
@@ -67949,7 +67957,7 @@ pub mod constants {
             Ok(APPLICATION_PKIX_ATTR_CERT)
         );
         assert_eq!(
-            crate::Mime::parse("appLicatIoN/Pkix-AttR-CErt"),
+            crate::Mime::parse("applIcATIon/PKix-aTTr-cErT"),
             Ok(APPLICATION_PKIX_ATTR_CERT)
         );
     }
@@ -67969,7 +67977,7 @@ pub mod constants {
             Ok(APPLICATION_PKIX_CERT)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicAtioN/PkiX-cErT"),
+            crate::Mime::parse("apPlicAtIon/PkIx-cERT"),
             Ok(APPLICATION_PKIX_CERT)
         );
     }
@@ -67989,7 +67997,7 @@ pub mod constants {
             Ok(APPLICATION_PKIX_CRL)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcaTIon/pkiX-CRL"),
+            crate::Mime::parse("AppLIcaTion/pKIX-Crl"),
             Ok(APPLICATION_PKIX_CRL)
         );
     }
@@ -68009,7 +68017,7 @@ pub mod constants {
             Ok(APPLICATION_PKIX_PKIPATH)
         );
         assert_eq!(
-            crate::Mime::parse("APplicaTION/pkIX-PKiPath"),
+            crate::Mime::parse("appLICAtioN/pKIx-pkipAth"),
             Ok(APPLICATION_PKIX_PKIPATH)
         );
     }
@@ -68029,7 +68037,7 @@ pub mod constants {
             Ok(APPLICATION_PKIXCMP)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCaTION/PKiXCmp"),
+            crate::Mime::parse("aPpLICAtIOn/PkixcmP"),
             Ok(APPLICATION_PKIXCMP)
         );
     }
@@ -68051,7 +68059,7 @@ pub mod constants {
             Ok(APPLICATION_PLS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcaTioN/PLs+XmL"),
+            crate::Mime::parse("AppLicAtIOn/PlS+XML"),
             Ok(APPLICATION_PLS_XML)
         );
     }
@@ -68073,7 +68081,7 @@ pub mod constants {
             Ok(APPLICATION_POC_SETTINGS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcATION/Poc-sETTInGs+xmL"),
+            crate::Mime::parse("ApPLICAtIon/pOC-SeTtingS+xml"),
             Ok(APPLICATION_POC_SETTINGS_XML)
         );
     }
@@ -68093,7 +68101,7 @@ pub mod constants {
             Ok(APPLICATION_POSTSCRIPT)
         );
         assert_eq!(
-            crate::Mime::parse("appliCatIOn/poSTScripT"),
+            crate::Mime::parse("aPplICatioN/PostsCRIPT"),
             Ok(APPLICATION_POSTSCRIPT)
         );
     }
@@ -68115,7 +68123,7 @@ pub mod constants {
             Ok(APPLICATION_PPSP_TRACKER_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCaTioN/pPsp-traCker+JSon"),
+            crate::Mime::parse("aPpLicATiOn/ppsp-tracKEr+JSON"),
             Ok(APPLICATION_PPSP_TRACKER_JSON)
         );
     }
@@ -68137,7 +68145,7 @@ pub mod constants {
             Ok(APPLICATION_PROBLEM_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcatIon/prOblem+JsoN"),
+            crate::Mime::parse("ApplIcatioN/proBLem+JSon"),
             Ok(APPLICATION_PROBLEM_JSON)
         );
     }
@@ -68159,7 +68167,7 @@ pub mod constants {
             Ok(APPLICATION_PROBLEM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCAtIOn/PRoBLEM+xml"),
+            crate::Mime::parse("aPPlICatIOn/PROblem+xML"),
             Ok(APPLICATION_PROBLEM_XML)
         );
     }
@@ -68181,7 +68189,7 @@ pub mod constants {
             Ok(APPLICATION_PROVENANCE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcAtION/PrOvENaNCE+XmL"),
+            crate::Mime::parse("ApPlICAtIoN/PRoVENaNcE+XMl"),
             Ok(APPLICATION_PROVENANCE_XML)
         );
     }
@@ -68203,7 +68211,7 @@ pub mod constants {
             Ok(APPLICATION_PRS_ALVESTRAND_TITRAX_SHEET)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICatIon/prs.ALVEstRANd.TItRAx-shEEt"),
+            crate::Mime::parse("APplIcaTion/PRS.alVEStrANd.TiTraX-sHeEt"),
             Ok(APPLICATION_PRS_ALVESTRAND_TITRAX_SHEET)
         );
     }
@@ -68223,7 +68231,7 @@ pub mod constants {
             Ok(APPLICATION_PRS_CWW)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcAtIon/PRS.CwW"),
+            crate::Mime::parse("ApPlIcatION/PrS.Cww"),
             Ok(APPLICATION_PRS_CWW)
         );
     }
@@ -68243,7 +68251,7 @@ pub mod constants {
             Ok(APPLICATION_PRS_CYN)
         );
         assert_eq!(
-            crate::Mime::parse("APplicatIOn/pRS.cyn"),
+            crate::Mime::parse("applICaTiON/prs.cYn"),
             Ok(APPLICATION_PRS_CYN)
         );
     }
@@ -68265,7 +68273,7 @@ pub mod constants {
             Ok(APPLICATION_PRS_HPUB_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicatioN/Prs.hpUB+Zip"),
+            crate::Mime::parse("applicAtIon/prS.HPub+ziP"),
             Ok(APPLICATION_PRS_HPUB_ZIP)
         );
     }
@@ -68285,7 +68293,7 @@ pub mod constants {
             Ok(APPLICATION_PRS_NPREND)
         );
         assert_eq!(
-            crate::Mime::parse("appLICAtION/prS.NpreNd"),
+            crate::Mime::parse("APPlICATioN/Prs.NpreND"),
             Ok(APPLICATION_PRS_NPREND)
         );
     }
@@ -68305,7 +68313,7 @@ pub mod constants {
             Ok(APPLICATION_PRS_PLUCKER)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcAtioN/Prs.PLucker"),
+            crate::Mime::parse("ApPlicAtIon/PRs.plucKeR"),
             Ok(APPLICATION_PRS_PLUCKER)
         );
     }
@@ -68325,7 +68333,7 @@ pub mod constants {
             Ok(APPLICATION_PRS_RDF_XML_CRYPT)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicaTiON/PRS.rdF-xMl-cRYPt"),
+            crate::Mime::parse("appLiCAtION/prS.rDf-xML-cRyPT"),
             Ok(APPLICATION_PRS_RDF_XML_CRYPT)
         );
     }
@@ -68347,7 +68355,7 @@ pub mod constants {
             Ok(APPLICATION_PRS_XSF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICAtIoN/PRs.xSF+XML"),
+            crate::Mime::parse("APPlIcATIOn/pRS.XSF+xmL"),
             Ok(APPLICATION_PRS_XSF_XML)
         );
     }
@@ -68369,7 +68377,7 @@ pub mod constants {
             Ok(APPLICATION_PSKC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLICaTIon/pSKC+XmL"),
+            crate::Mime::parse("APpLIcaTiON/PSkC+Xml"),
             Ok(APPLICATION_PSKC_XML)
         );
     }
@@ -68391,7 +68399,7 @@ pub mod constants {
             Ok(APPLICATION_PVD_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCATIon/pvD+JSON"),
+            crate::Mime::parse("aPPLIcaTioN/PVD+Json"),
             Ok(APPLICATION_PVD_JSON)
         );
     }
@@ -68407,7 +68415,7 @@ pub mod constants {
     #[test]
     fn application_qsig_parse() {
         assert_eq!(crate::Mime::parse("application/QSIG"), Ok(APPLICATION_QSIG));
-        assert_eq!(crate::Mime::parse("ApplIcATioN/QsIG"), Ok(APPLICATION_QSIG));
+        assert_eq!(crate::Mime::parse("ApPLicAtIoN/qsIG"), Ok(APPLICATION_QSIG));
     }
 
     /// `application/raptorfec`
@@ -68425,7 +68433,7 @@ pub mod constants {
             Ok(APPLICATION_RAPTORFEC)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicaTION/RAPtOrFec"),
+            crate::Mime::parse("appLICAtION/RaPtoRFEc"),
             Ok(APPLICATION_RAPTORFEC)
         );
     }
@@ -68447,7 +68455,7 @@ pub mod constants {
             Ok(APPLICATION_RDAP_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcAtion/rDAp+JSon"),
+            crate::Mime::parse("ApPlicaTiON/rDAp+json"),
             Ok(APPLICATION_RDAP_JSON)
         );
     }
@@ -68469,7 +68477,7 @@ pub mod constants {
             Ok(APPLICATION_RDF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applicAtiON/RDf+xMl"),
+            crate::Mime::parse("apPliCATIOn/rDf+xML"),
             Ok(APPLICATION_RDF_XML)
         );
     }
@@ -68491,7 +68499,7 @@ pub mod constants {
             Ok(APPLICATION_REGINFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcaTIOn/REgiNFO+XMl"),
+            crate::Mime::parse("AppLICaTIOn/REGiNFo+XmL"),
             Ok(APPLICATION_REGINFO_XML)
         );
     }
@@ -68513,7 +68521,7 @@ pub mod constants {
             Ok(APPLICATION_RELAX_NG_COMPACT_SYNTAX)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICATioN/RELAX-ng-cOmPaCt-SYntAX"),
+            crate::Mime::parse("APPLicAtION/RElaX-Ng-cOmpACt-SYNtaX"),
             Ok(APPLICATION_RELAX_NG_COMPACT_SYNTAX)
         );
     }
@@ -68533,7 +68541,7 @@ pub mod constants {
             Ok(APPLICATION_REMOTE_PRINTING)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCAtION/REmOte-PrinTinG"),
+            crate::Mime::parse("aPPlICATIOn/reMOte-PriNtiNG"),
             Ok(APPLICATION_REMOTE_PRINTING)
         );
     }
@@ -68555,7 +68563,7 @@ pub mod constants {
             Ok(APPLICATION_REPUTON_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcaTIOn/rEputOn+JSoN"),
+            crate::Mime::parse("AppLICaTiOn/rEpUTOn+JSON"),
             Ok(APPLICATION_REPUTON_JSON)
         );
     }
@@ -68577,7 +68585,7 @@ pub mod constants {
             Ok(APPLICATION_RESOURCE_LISTS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICaTIoN/resoURce-liSts+xMl"),
+            crate::Mime::parse("APpLIcATion/REsourcE-lisTs+xml"),
             Ok(APPLICATION_RESOURCE_LISTS_XML)
         );
     }
@@ -68601,7 +68609,7 @@ pub mod constants {
             Ok(APPLICATION_RESOURCE_LISTS_DIFF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applIcatION/REsOurCe-LISts-Diff+XML"),
+            crate::Mime::parse("ApplICAtIOn/reSouRCE-liSts-DIFF+xML"),
             Ok(APPLICATION_RESOURCE_LISTS_DIFF_XML)
         );
     }
@@ -68623,7 +68631,7 @@ pub mod constants {
             Ok(APPLICATION_RFC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcAtIoN/RFC+XMl"),
+            crate::Mime::parse("ApPlIcAtION/RFc+XML"),
             Ok(APPLICATION_RFC_XML)
         );
     }
@@ -68643,7 +68651,7 @@ pub mod constants {
             Ok(APPLICATION_RISCOS)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicATIOn/rIsCOs"),
+            crate::Mime::parse("apPLICaTiOn/Riscos"),
             Ok(APPLICATION_RISCOS)
         );
     }
@@ -68665,7 +68673,7 @@ pub mod constants {
             Ok(APPLICATION_RLMI_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appliCATiOn/rlMi+xml"),
+            crate::Mime::parse("aPPLiCaTioN/Rlmi+xml"),
             Ok(APPLICATION_RLMI_XML)
         );
     }
@@ -68687,7 +68695,7 @@ pub mod constants {
             Ok(APPLICATION_RLS_SERVICES_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applicATION/RLs-SErViCes+XML"),
+            crate::Mime::parse("apPLICAtIOn/RLs-sErviCES+xmL"),
             Ok(APPLICATION_RLS_SERVICES_XML)
         );
     }
@@ -68709,7 +68717,7 @@ pub mod constants {
             Ok(APPLICATION_ROUTE_APD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcatioN/roUtE-apD+XMl"),
+            crate::Mime::parse("ApplicATioN/ROutE-APd+XML"),
             Ok(APPLICATION_ROUTE_APD_XML)
         );
     }
@@ -68731,7 +68739,7 @@ pub mod constants {
             Ok(APPLICATION_ROUTE_S_TSID_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICATion/rOutE-s-tsId+xml"),
+            crate::Mime::parse("APPLicatiOn/RouTe-S-Tsid+xmL"),
             Ok(APPLICATION_ROUTE_S_TSID_XML)
         );
     }
@@ -68753,7 +68761,7 @@ pub mod constants {
             Ok(APPLICATION_ROUTE_USD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLicATIOn/rOuTE-USD+XMl"),
+            crate::Mime::parse("apPLICatiOn/RoUTE-USd+XmL"),
             Ok(APPLICATION_ROUTE_USD_XML)
         );
     }
@@ -68775,7 +68783,7 @@ pub mod constants {
             Ok(APPLICATION_RPKI_GHOSTBUSTERS)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicatioN/RpkI-ghOSTBuSTErs"),
+            crate::Mime::parse("applicAtIon/RpkI-GHoSTBusTerS"),
             Ok(APPLICATION_RPKI_GHOSTBUSTERS)
         );
     }
@@ -68795,7 +68803,7 @@ pub mod constants {
             Ok(APPLICATION_RPKI_MANIFEST)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcaTION/RpKI-Manifest"),
+            crate::Mime::parse("AppLICAtIoN/RPki-maniFeSt"),
             Ok(APPLICATION_RPKI_MANIFEST)
         );
     }
@@ -68815,7 +68823,7 @@ pub mod constants {
             Ok(APPLICATION_RPKI_PUBLICATION)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcatIon/rpki-puBlicaTIOn"),
+            crate::Mime::parse("ApplIcation/rpkI-pubLICatIOn"),
             Ok(APPLICATION_RPKI_PUBLICATION)
         );
     }
@@ -68835,7 +68843,7 @@ pub mod constants {
             Ok(APPLICATION_RPKI_ROA)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicAtIoN/Rpki-rOa"),
+            crate::Mime::parse("apPlIcATIon/rpKi-roa"),
             Ok(APPLICATION_RPKI_ROA)
         );
     }
@@ -68855,7 +68863,7 @@ pub mod constants {
             Ok(APPLICATION_RPKI_UPDOWN)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicAtioN/rPkI-upDOwN"),
+            crate::Mime::parse("apPlicAtiOn/RpkI-uPdowN"),
             Ok(APPLICATION_RPKI_UPDOWN)
         );
     }
@@ -68871,7 +68879,7 @@ pub mod constants {
     #[test]
     fn application_rtf_parse() {
         assert_eq!(crate::Mime::parse("application/rtf"), Ok(APPLICATION_RTF));
-        assert_eq!(crate::Mime::parse("appLiCAtiOn/RTf"), Ok(APPLICATION_RTF));
+        assert_eq!(crate::Mime::parse("aPPliCatIOn/RTF"), Ok(APPLICATION_RTF));
     }
 
     /// `application/rtploopback`
@@ -68889,7 +68897,7 @@ pub mod constants {
             Ok(APPLICATION_RTPLOOPBACK)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicATION/RTpLOopbACk"),
+            crate::Mime::parse("apPLICATIOn/RtplOOpbaCk"),
             Ok(APPLICATION_RTPLOOPBACK)
         );
     }
@@ -68905,7 +68913,7 @@ pub mod constants {
     #[test]
     fn application_rtx_parse() {
         assert_eq!(crate::Mime::parse("application/rtx"), Ok(APPLICATION_RTX));
-        assert_eq!(crate::Mime::parse("apPlICAtiON/rtx"), Ok(APPLICATION_RTX));
+        assert_eq!(crate::Mime::parse("APPliCATion/rtx"), Ok(APPLICATION_RTX));
     }
 
     /// `application/samlassertion+xml`
@@ -68925,7 +68933,7 @@ pub mod constants {
             Ok(APPLICATION_SAMLASSERTION_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appliCatION/sAMLaSseRtIoN+xml"),
+            crate::Mime::parse("aPplICAtiON/sAmlAsSeRTion+xML"),
             Ok(APPLICATION_SAMLASSERTION_XML)
         );
     }
@@ -68947,7 +68955,7 @@ pub mod constants {
             Ok(APPLICATION_SAMLMETADATA_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicaTION/SaMlmETaDaTA+XMl"),
+            crate::Mime::parse("appLICATIoN/sAMlMeTADATa+xMl"),
             Ok(APPLICATION_SAMLMETADATA_XML)
         );
     }
@@ -68969,7 +68977,7 @@ pub mod constants {
             Ok(APPLICATION_SARIF_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCAtION/saRIf+JsoN"),
+            crate::Mime::parse("aPPlICAtioN/saRif+jSOn"),
             Ok(APPLICATION_SARIF_JSON)
         );
     }
@@ -68993,7 +69001,7 @@ pub mod constants {
             Ok(APPLICATION_SARIF_EXTERNAL_PROPERTIES_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCaTIOn/SaRiF-EXteRnal-prOpERTies+jsON"),
+            crate::Mime::parse("aPpLICaTIoN/SaRIf-ExteRnaL-PROperTieS+JsOn"),
             Ok(APPLICATION_SARIF_EXTERNAL_PROPERTIES_JSON)
         );
     }
@@ -69009,7 +69017,7 @@ pub mod constants {
     #[test]
     fn application_sbe_parse() {
         assert_eq!(crate::Mime::parse("application/sbe"), Ok(APPLICATION_SBE));
-        assert_eq!(crate::Mime::parse("ApPlicaTioN/Sbe"), Ok(APPLICATION_SBE));
+        assert_eq!(crate::Mime::parse("appLicATIon/sBe"), Ok(APPLICATION_SBE));
     }
 
     /// `application/sbml+xml`
@@ -69029,7 +69037,7 @@ pub mod constants {
             Ok(APPLICATION_SBML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicAtION/sbmL+xmL"),
+            crate::Mime::parse("apPlICAtion/SbmL+XMl"),
             Ok(APPLICATION_SBML_XML)
         );
     }
@@ -69051,7 +69059,7 @@ pub mod constants {
             Ok(APPLICATION_SCAIP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICaTiON/SCaip+xmL"),
+            crate::Mime::parse("APpLiCAtIOn/scaiP+Xml"),
             Ok(APPLICATION_SCAIP_XML)
         );
     }
@@ -69073,7 +69081,7 @@ pub mod constants {
             Ok(APPLICATION_SCIM_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCAtIoN/sCiM+jsOn"),
+            crate::Mime::parse("aPPlIcATiOn/SciM+Json"),
             Ok(APPLICATION_SCIM_JSON)
         );
     }
@@ -69093,7 +69101,7 @@ pub mod constants {
             Ok(APPLICATION_SCVP_CV_REQUEST)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCaTIon/SCvP-cV-rEQuEst"),
+            crate::Mime::parse("aPpLIcatIOn/scVp-CV-ReqUest"),
             Ok(APPLICATION_SCVP_CV_REQUEST)
         );
     }
@@ -69113,7 +69121,7 @@ pub mod constants {
             Ok(APPLICATION_SCVP_CV_RESPONSE)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICation/Scvp-cV-ReSpoNsE"),
+            crate::Mime::parse("APplicatIon/scVP-cV-rEsPONSe"),
             Ok(APPLICATION_SCVP_CV_RESPONSE)
         );
     }
@@ -69133,7 +69141,7 @@ pub mod constants {
             Ok(APPLICATION_SCVP_VP_REQUEST)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICAtiON/SCVP-vp-ReqUest"),
+            crate::Mime::parse("APPliCAtION/ScvP-vp-requEsT"),
             Ok(APPLICATION_SCVP_VP_REQUEST)
         );
     }
@@ -69153,7 +69161,7 @@ pub mod constants {
             Ok(APPLICATION_SCVP_VP_RESPONSE)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicAtIon/scvp-vP-resPONSe"),
+            crate::Mime::parse("apPlIcaTion/ScVP-vp-RESpONSE"),
             Ok(APPLICATION_SCVP_VP_RESPONSE)
         );
     }
@@ -69169,7 +69177,7 @@ pub mod constants {
     #[test]
     fn application_sdp_parse() {
         assert_eq!(crate::Mime::parse("application/sdp"), Ok(APPLICATION_SDP));
-        assert_eq!(crate::Mime::parse("APPLicATIoN/SDp"), Ok(APPLICATION_SDP));
+        assert_eq!(crate::Mime::parse("apPLIcAtIOn/sdp"), Ok(APPLICATION_SDP));
     }
 
     /// `application/secevent+jwt`
@@ -69189,7 +69197,7 @@ pub mod constants {
             Ok(APPLICATION_SECEVENT_JWT)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicaTioN/SECEVENT+JWT"),
+            crate::Mime::parse("appLicATION/SECEvENT+jWt"),
             Ok(APPLICATION_SECEVENT_JWT)
         );
     }
@@ -69211,7 +69219,7 @@ pub mod constants {
             Ok(APPLICATION_SENML_CBOR)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCATion/SENml+CboR"),
+            crate::Mime::parse("aPPLicaTION/sENml+cbor"),
             Ok(APPLICATION_SENML_CBOR)
         );
     }
@@ -69233,7 +69241,7 @@ pub mod constants {
             Ok(APPLICATION_SENML_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("applICATION/SEnML+jsoN"),
+            crate::Mime::parse("APPLICATIOn/Senml+JSon"),
             Ok(APPLICATION_SENML_JSON)
         );
     }
@@ -69255,7 +69263,7 @@ pub mod constants {
             Ok(APPLICATION_SENML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplICaTion/SENMl+xMl"),
+            crate::Mime::parse("APpLicatION/senMl+xMl"),
             Ok(APPLICATION_SENML_XML)
         );
     }
@@ -69277,7 +69285,7 @@ pub mod constants {
             Ok(APPLICATION_SENML_ETCH_CBOR)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCatIoN/SenML-etch+CboR"),
+            crate::Mime::parse("aPplIcATIon/SEnml-eTch+cbOR"),
             Ok(APPLICATION_SENML_ETCH_CBOR)
         );
     }
@@ -69299,7 +69307,7 @@ pub mod constants {
             Ok(APPLICATION_SENML_ETCH_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICAtIoN/sENmL-etch+JSoN"),
+            crate::Mime::parse("APPlIcATiON/SEnml-eTCh+jsON"),
             Ok(APPLICATION_SENML_ETCH_JSON)
         );
     }
@@ -69319,7 +69327,7 @@ pub mod constants {
             Ok(APPLICATION_SENML_EXI)
         );
         assert_eq!(
-            crate::Mime::parse("apPLication/seNMl-EXi"),
+            crate::Mime::parse("applicaTioN/sENMl-eXi"),
             Ok(APPLICATION_SENML_EXI)
         );
     }
@@ -69341,7 +69349,7 @@ pub mod constants {
             Ok(APPLICATION_SENSML_CBOR)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicATiON/SeNSmL+CBor"),
+            crate::Mime::parse("apPLiCAtIoN/sENSMl+CbOR"),
             Ok(APPLICATION_SENSML_CBOR)
         );
     }
@@ -69363,7 +69371,7 @@ pub mod constants {
             Ok(APPLICATION_SENSML_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICATIoN/SENSml+jSoN"),
+            crate::Mime::parse("APPLIcATION/sensMl+jsoN"),
             Ok(APPLICATION_SENSML_JSON)
         );
     }
@@ -69385,7 +69393,7 @@ pub mod constants {
             Ok(APPLICATION_SENSML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcATIOn/senSml+xmL"),
+            crate::Mime::parse("ApPLICaTion/sensmL+xmL"),
             Ok(APPLICATION_SENSML_XML)
         );
     }
@@ -69405,7 +69413,7 @@ pub mod constants {
             Ok(APPLICATION_SENSML_EXI)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcATiOn/seNsMl-eXi"),
+            crate::Mime::parse("ApPLiCaTioN/SensMl-eXi"),
             Ok(APPLICATION_SENSML_EXI)
         );
     }
@@ -69427,7 +69435,7 @@ pub mod constants {
             Ok(APPLICATION_SEP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicaTiON/SEP+XML"),
+            crate::Mime::parse("appLiCAtION/SEP+xmL"),
             Ok(APPLICATION_SEP_XML)
         );
     }
@@ -69447,7 +69455,7 @@ pub mod constants {
             Ok(APPLICATION_SEP_EXI)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCAtIOn/seP-EXi"),
+            crate::Mime::parse("aPPlICatioN/SEp-EXI"),
             Ok(APPLICATION_SEP_EXI)
         );
     }
@@ -69467,7 +69475,7 @@ pub mod constants {
             Ok(APPLICATION_SESSION_INFO)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicaTion/SEssIOn-INFO"),
+            crate::Mime::parse("appLicatIOn/SEssION-infO"),
             Ok(APPLICATION_SESSION_INFO)
         );
     }
@@ -69487,7 +69495,7 @@ pub mod constants {
             Ok(APPLICATION_SET_PAYMENT)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatION/set-pAYMeNT"),
+            crate::Mime::parse("APplICATion/sET-pAYMeNt"),
             Ok(APPLICATION_SET_PAYMENT)
         );
     }
@@ -69509,7 +69517,7 @@ pub mod constants {
             Ok(APPLICATION_SET_PAYMENT_INITIATION)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCAtion/Set-paYmEnt-IniTIaTiOn"),
+            crate::Mime::parse("aPPlicatIon/seT-PayMEnt-InItIaTion"),
             Ok(APPLICATION_SET_PAYMENT_INITIATION)
         );
     }
@@ -69529,7 +69537,7 @@ pub mod constants {
             Ok(APPLICATION_SET_REGISTRATION)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicatION/sET-regIStrATioN"),
+            crate::Mime::parse("applICATiON/set-RegIStrAtIOn"),
             Ok(APPLICATION_SET_REGISTRATION)
         );
     }
@@ -69551,7 +69559,7 @@ pub mod constants {
             Ok(APPLICATION_SET_REGISTRATION_INITIATION)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICatION/SeT-regIStrATioN-INiTiaTIoN"),
+            crate::Mime::parse("APplICAtIoN/set-RegIStrAtIOn-inITiAtIoN"),
             Ok(APPLICATION_SET_REGISTRATION_INITIATION)
         );
     }
@@ -69567,7 +69575,7 @@ pub mod constants {
     #[test]
     fn application_sgml_parse() {
         assert_eq!(crate::Mime::parse("application/SGML"), Ok(APPLICATION_SGML));
-        assert_eq!(crate::Mime::parse("aPpLicAtIon/SGML"), Ok(APPLICATION_SGML));
+        assert_eq!(crate::Mime::parse("apPlIcatION/SgMl"), Ok(APPLICATION_SGML));
     }
 
     /// `application/sgml-open-catalog`
@@ -69585,7 +69593,7 @@ pub mod constants {
             Ok(APPLICATION_SGML_OPEN_CATALOG)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCAtIOn/SGML-opEN-caTaLOg"),
+            crate::Mime::parse("aPPlICatION/SgmL-opeN-CAtALOg"),
             Ok(APPLICATION_SGML_OPEN_CATALOG)
         );
     }
@@ -69607,7 +69615,7 @@ pub mod constants {
             Ok(APPLICATION_SHF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicaTioN/ShF+xml"),
+            crate::Mime::parse("appLicATIoN/shf+XMl"),
             Ok(APPLICATION_SHF_XML)
         );
     }
@@ -69627,7 +69635,7 @@ pub mod constants {
             Ok(APPLICATION_SIEVE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICAtIon/SiEve"),
+            crate::Mime::parse("APPlIcaTIoN/sievE"),
             Ok(APPLICATION_SIEVE)
         );
     }
@@ -69649,7 +69657,7 @@ pub mod constants {
             Ok(APPLICATION_SIMPLE_FILTER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcaTiON/sImpLE-FIlTER+xml"),
+            crate::Mime::parse("AppLiCATiOn/SImPLe-FILter+XMl"),
             Ok(APPLICATION_SIMPLE_FILTER_XML)
         );
     }
@@ -69671,7 +69679,7 @@ pub mod constants {
             Ok(APPLICATION_SIMPLE_MESSAGE_SUMMARY)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCAtIon/SImPlE-mESSAgE-SuMMaRY"),
+            crate::Mime::parse("aPPlIcaTIOn/sImpLE-MeSsAgE-sUMmAry"),
             Ok(APPLICATION_SIMPLE_MESSAGE_SUMMARY)
         );
     }
@@ -69693,7 +69701,7 @@ pub mod constants {
             Ok(APPLICATION_SIMPLE_SYMBOL_CONTAINER)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcaTIOn/SiMplesyMbolcOntaiNER"),
+            crate::Mime::parse("AppLICaTIoN/simpLesymBolcoNTAineR"),
             Ok(APPLICATION_SIMPLE_SYMBOL_CONTAINER)
         );
     }
@@ -69709,7 +69717,7 @@ pub mod constants {
     #[test]
     fn application_sipc_parse() {
         assert_eq!(crate::Mime::parse("application/sipc"), Ok(APPLICATION_SIPC));
-        assert_eq!(crate::Mime::parse("appLicATion/sIpc"), Ok(APPLICATION_SIPC));
+        assert_eq!(crate::Mime::parse("apPLicaTiOn/sipc"), Ok(APPLICATION_SIPC));
     }
 
     /// `application/slate`
@@ -69727,7 +69735,7 @@ pub mod constants {
             Ok(APPLICATION_SLATE)
         );
         assert_eq!(
-            crate::Mime::parse("applIcAtioN/sLATE"),
+            crate::Mime::parse("ApPlicAtiON/SLATe"),
             Ok(APPLICATION_SLATE)
         );
     }
@@ -69749,7 +69757,7 @@ pub mod constants {
             Ok(APPLICATION_SMIL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICAtIon/sMil+xmL"),
+            crate::Mime::parse("APPlIcaTiOn/smiL+XMl"),
             Ok(APPLICATION_SMIL_XML)
         );
     }
@@ -69769,7 +69777,7 @@ pub mod constants {
             Ok(APPLICATION_SMPTE336M)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCATIoN/SMpTE336M"),
+            crate::Mime::parse("aPPLIcATIOn/SMptE336M"),
             Ok(APPLICATION_SMPTE336M)
         );
     }
@@ -69791,7 +69799,7 @@ pub mod constants {
             Ok(APPLICATION_SOAP_FASTINFOSET)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICAtIOn/SOaP+FaSTInfosEt"),
+            crate::Mime::parse("APPlICaTIOn/sOaP+FastiNfOsET"),
             Ok(APPLICATION_SOAP_FASTINFOSET)
         );
     }
@@ -69813,7 +69821,7 @@ pub mod constants {
             Ok(APPLICATION_SOAP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCATiOn/SoaP+xml"),
+            crate::Mime::parse("aPPLiCatIon/soap+xML"),
             Ok(APPLICATION_SOAP_XML)
         );
     }
@@ -69833,7 +69841,7 @@ pub mod constants {
             Ok(APPLICATION_SPARQL_QUERY)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCATioN/SpArQL-QuerY"),
+            crate::Mime::parse("aPPLicATIoN/SPARql-Query"),
             Ok(APPLICATION_SPARQL_QUERY)
         );
     }
@@ -69855,7 +69863,7 @@ pub mod constants {
             Ok(APPLICATION_SPARQL_RESULTS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applICAtIOn/sPArQl-RESUlTS+XMl"),
+            crate::Mime::parse("APPlICaTiON/SpaRQL-rESULTs+XmL"),
             Ok(APPLICATION_SPARQL_RESULTS_XML)
         );
     }
@@ -69877,7 +69885,7 @@ pub mod constants {
             Ok(APPLICATION_SPDX_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCAtIoN/SpDx+JSOn"),
+            crate::Mime::parse("aPPlIcATIoN/SPDX+JSoN"),
             Ok(APPLICATION_SPDX_JSON)
         );
     }
@@ -69899,7 +69907,7 @@ pub mod constants {
             Ok(APPLICATION_SPIRITS_EVENT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcaTion/spiRits-EvEnT+XmL"),
+            crate::Mime::parse("AppLicaTion/spiRItS-EVEnT+xMl"),
             Ok(APPLICATION_SPIRITS_EVENT_XML)
         );
     }
@@ -69915,7 +69923,7 @@ pub mod constants {
     #[test]
     fn application_sql_parse() {
         assert_eq!(crate::Mime::parse("application/sql"), Ok(APPLICATION_SQL));
-        assert_eq!(crate::Mime::parse("ApPliCATION/sqL"), Ok(APPLICATION_SQL));
+        assert_eq!(crate::Mime::parse("aPPLICAtioN/sqL"), Ok(APPLICATION_SQL));
     }
 
     /// `application/srgs`
@@ -69929,7 +69937,7 @@ pub mod constants {
     #[test]
     fn application_srgs_parse() {
         assert_eq!(crate::Mime::parse("application/srgs"), Ok(APPLICATION_SRGS));
-        assert_eq!(crate::Mime::parse("appLIcAtiOn/srGS"), Ok(APPLICATION_SRGS));
+        assert_eq!(crate::Mime::parse("ApPliCatioN/sRGs"), Ok(APPLICATION_SRGS));
     }
 
     /// `application/srgs+xml`
@@ -69949,7 +69957,7 @@ pub mod constants {
             Ok(APPLICATION_SRGS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCATIon/sRGs+XMl"),
+            crate::Mime::parse("aPPLIcatiON/SRGs+XMl"),
             Ok(APPLICATION_SRGS_XML)
         );
     }
@@ -69971,7 +69979,7 @@ pub mod constants {
             Ok(APPLICATION_SRU_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCatiOn/sRU+XMl"),
+            crate::Mime::parse("aPpliCatiON/SRu+xmL"),
             Ok(APPLICATION_SRU_XML)
         );
     }
@@ -69993,7 +70001,7 @@ pub mod constants {
             Ok(APPLICATION_SSML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtIon/SsMl+XML"),
+            crate::Mime::parse("APPlIcaTIoN/sSML+XMl"),
             Ok(APPLICATION_SSML_XML)
         );
     }
@@ -70015,7 +70023,7 @@ pub mod constants {
             Ok(APPLICATION_STIX_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcATion/STix+JSOn"),
+            crate::Mime::parse("ApPLicaTIOn/sTIX+JSOn"),
             Ok(APPLICATION_STIX_JSON)
         );
     }
@@ -70037,7 +70045,7 @@ pub mod constants {
             Ok(APPLICATION_SWID_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcAtion/SWid+XML"),
+            crate::Mime::parse("ApPlicatIOn/SWID+Xml"),
             Ok(APPLICATION_SWID_XML)
         );
     }
@@ -70057,7 +70065,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_APEX_UPDATE)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicAtioN/tAMP-apex-UpDatE"),
+            crate::Mime::parse("apPlicATiON/tamp-aPeX-uPdate"),
             Ok(APPLICATION_TAMP_APEX_UPDATE)
         );
     }
@@ -70079,7 +70087,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_APEX_UPDATE_CONFIRM)
         );
         assert_eq!(
-            crate::Mime::parse("applIcATION/TAmp-aPEX-UPdATE-CONFirM"),
+            crate::Mime::parse("ApPLICATIOn/TaMP-APEx-UPdATE-coNfIRM"),
             Ok(APPLICATION_TAMP_APEX_UPDATE_CONFIRM)
         );
     }
@@ -70101,7 +70109,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_COMMUNITY_UPDATE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICAtIoN/taMp-coMMUnity-UPDaTE"),
+            crate::Mime::parse("APPlIcATioN/tamP-CommunITY-UPDAtE"),
             Ok(APPLICATION_TAMP_COMMUNITY_UPDATE)
         );
     }
@@ -70123,7 +70131,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_COMMUNITY_UPDATE_CONFIRM)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicATion/TAmP-comMUNIty-uPDaTE-CoNfiRM"),
+            crate::Mime::parse("apPLicatIOn/tamp-COMmuNiTY-UPdAtE-cONfiRM"),
             Ok(APPLICATION_TAMP_COMMUNITY_UPDATE_CONFIRM)
         );
     }
@@ -70143,7 +70151,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_ERROR)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCATioN/Tamp-ERroR"),
+            crate::Mime::parse("aPPLicAtIon/tAMp-ErroR"),
             Ok(APPLICATION_TAMP_ERROR)
         );
     }
@@ -70165,7 +70173,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_SEQUENCE_ADJUST)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcatIOn/TAMP-seqUENCe-adJuST"),
+            crate::Mime::parse("ApplICatION/tamp-SEQuencE-ADjUsT"),
             Ok(APPLICATION_TAMP_SEQUENCE_ADJUST)
         );
     }
@@ -70187,7 +70195,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_SEQUENCE_ADJUST_CONFIRM)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTIon/TamP-sEqUence-ADjUSt-COnFIRm"),
+            crate::Mime::parse("AppLIcaTIon/TaMp-sequeNCe-AdJUSt-COnfIrm"),
             Ok(APPLICATION_TAMP_SEQUENCE_ADJUST_CONFIRM)
         );
     }
@@ -70207,7 +70215,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_STATUS_QUERY)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcATIOn/Tamp-STaTUs-qUERY"),
+            crate::Mime::parse("ApPLICatIon/TAMp-StAtUS-QuERy"),
             Ok(APPLICATION_TAMP_STATUS_QUERY)
         );
     }
@@ -70229,7 +70237,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_STATUS_RESPONSE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCaTion/TAMp-STATuS-reSpoNse"),
+            crate::Mime::parse("aPpLicaTION/TAMP-sTatuS-rEsponsE"),
             Ok(APPLICATION_TAMP_STATUS_RESPONSE)
         );
     }
@@ -70249,7 +70257,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_UPDATE)
         );
         assert_eq!(
-            crate::Mime::parse("appLicATIoN/TamP-UpdAte"),
+            crate::Mime::parse("apPLIcATIon/tAmp-updatE"),
             Ok(APPLICATION_TAMP_UPDATE)
         );
     }
@@ -70271,7 +70279,7 @@ pub mod constants {
             Ok(APPLICATION_TAMP_UPDATE_CONFIRM)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcaTION/TaMp-uPdate-ConfiRM"),
+            crate::Mime::parse("AppLICAtIoN/taMp-upDAte-cONfIrM"),
             Ok(APPLICATION_TAMP_UPDATE_CONFIRM)
         );
     }
@@ -70293,7 +70301,7 @@ pub mod constants {
             Ok(APPLICATION_TAXII_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcATiON/taXiI+jSon"),
+            crate::Mime::parse("ApPLiCAtioN/TAxIi+jsON"),
             Ok(APPLICATION_TAXII_JSON)
         );
     }
@@ -70315,7 +70323,7 @@ pub mod constants {
             Ok(APPLICATION_TD_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcatiOn/Td+jSOn"),
+            crate::Mime::parse("AppliCaTIon/TD+JSon"),
             Ok(APPLICATION_TD_JSON)
         );
     }
@@ -70337,7 +70345,7 @@ pub mod constants {
             Ok(APPLICATION_TEI_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplicatIOn/Tei+xML"),
+            crate::Mime::parse("applICatIon/tEI+XML"),
             Ok(APPLICATION_TEI_XML)
         );
     }
@@ -70357,7 +70365,7 @@ pub mod constants {
             Ok(APPLICATION_TETRA_ISI)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcatION/TEtRA_iSI"),
+            crate::Mime::parse("ApplICATIOn/TetRA_IsI"),
             Ok(APPLICATION_TETRA_ISI)
         );
     }
@@ -70379,7 +70387,7 @@ pub mod constants {
             Ok(APPLICATION_THRAUD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTIOn/tHraud+XMl"),
+            crate::Mime::parse("AppLICatiOn/thrAUd+xMl"),
             Ok(APPLICATION_THRAUD_XML)
         );
     }
@@ -70399,7 +70407,7 @@ pub mod constants {
             Ok(APPLICATION_TIMESTAMP_QUERY)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcAtIOn/TImesTamP-quERY"),
+            crate::Mime::parse("ApPlICatIOn/tImeSTamP-QuErY"),
             Ok(APPLICATION_TIMESTAMP_QUERY)
         );
     }
@@ -70419,7 +70427,7 @@ pub mod constants {
             Ok(APPLICATION_TIMESTAMP_REPLY)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcATioN/tImEStAMP-REpLy"),
+            crate::Mime::parse("ApPLicAtiOn/TiMEStAMp-rEPly"),
             Ok(APPLICATION_TIMESTAMP_REPLY)
         );
     }
@@ -70439,7 +70447,7 @@ pub mod constants {
             Ok(APPLICATION_TIMESTAMPED_DATA)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcAtIoN/TImeStamPed-dAta"),
+            crate::Mime::parse("ApPlIcATIOn/TimeStaMpEd-DAta"),
             Ok(APPLICATION_TIMESTAMPED_DATA)
         );
     }
@@ -70461,7 +70469,7 @@ pub mod constants {
             Ok(APPLICATION_TLSRPT_GZIP)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcAtION/tlsRPt+gZip"),
+            crate::Mime::parse("ApPlICAtion/TlSrPt+GziP"),
             Ok(APPLICATION_TLSRPT_GZIP)
         );
     }
@@ -70483,7 +70491,7 @@ pub mod constants {
             Ok(APPLICATION_TLSRPT_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCATIon/tLsrpT+JSON"),
+            crate::Mime::parse("aPPLIcatiOn/tLsRPT+json"),
             Ok(APPLICATION_TLSRPT_JSON)
         );
     }
@@ -70503,7 +70511,7 @@ pub mod constants {
             Ok(APPLICATION_TNAUTHLIST)
         );
         assert_eq!(
-            crate::Mime::parse("applICatION/tNaUthLiST"),
+            crate::Mime::parse("APplICAtiOn/tnAuTHlist"),
             Ok(APPLICATION_TNAUTHLIST)
         );
     }
@@ -70527,7 +70535,7 @@ pub mod constants {
             Ok(APPLICATION_TOKEN_INTROSPECTION_JWT)
         );
         assert_eq!(
-            crate::Mime::parse("appliCATION/TOkeN-INtRospeCTIOn+jwt"),
+            crate::Mime::parse("aPPLICAtIOn/ToKEn-intrOSPEction+jwt"),
             Ok(APPLICATION_TOKEN_INTROSPECTION_JWT)
         );
     }
@@ -70549,7 +70557,7 @@ pub mod constants {
             Ok(APPLICATION_TRICKLE_ICE_SDPFRAG)
         );
         assert_eq!(
-            crate::Mime::parse("applIcatIoN/TrICkLe-Ice-sdPfrAG"),
+            crate::Mime::parse("ApplIcAtIoN/tRicKle-icE-sDPfrag"),
             Ok(APPLICATION_TRICKLE_ICE_SDPFRAG)
         );
     }
@@ -70565,7 +70573,7 @@ pub mod constants {
     #[test]
     fn application_trig_parse() {
         assert_eq!(crate::Mime::parse("application/trig"), Ok(APPLICATION_TRIG));
-        assert_eq!(crate::Mime::parse("applicaTIOn/TrIg"), Ok(APPLICATION_TRIG));
+        assert_eq!(crate::Mime::parse("appLICaTIoN/triG"), Ok(APPLICATION_TRIG));
     }
 
     /// `application/ttml+xml`
@@ -70585,7 +70593,7 @@ pub mod constants {
             Ok(APPLICATION_TTML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCatIoN/tTmL+XML"),
+            crate::Mime::parse("aPplIcATiOn/TTML+XMl"),
             Ok(APPLICATION_TTML_XML)
         );
     }
@@ -70605,7 +70613,7 @@ pub mod constants {
             Ok(APPLICATION_TVE_TRIGGER)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicAtioN/Tve-trigGEr"),
+            crate::Mime::parse("apPlicATIon/tve-TRigGEr"),
             Ok(APPLICATION_TVE_TRIGGER)
         );
     }
@@ -70621,7 +70629,7 @@ pub mod constants {
     #[test]
     fn application_tzif_parse() {
         assert_eq!(crate::Mime::parse("application/tzif"), Ok(APPLICATION_TZIF));
-        assert_eq!(crate::Mime::parse("aPPlICatioN/tZIF"), Ok(APPLICATION_TZIF));
+        assert_eq!(crate::Mime::parse("APplicATiON/tZIF"), Ok(APPLICATION_TZIF));
     }
 
     /// `application/tzif-leap`
@@ -70639,7 +70647,7 @@ pub mod constants {
             Ok(APPLICATION_TZIF_LEAP)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtion/tZiF-LeaP"),
+            crate::Mime::parse("aPPlicaTiOn/TZif-lEap"),
             Ok(APPLICATION_TZIF_LEAP)
         );
     }
@@ -70659,7 +70667,7 @@ pub mod constants {
             Ok(APPLICATION_ULPFEC)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtIon/uLpfec"),
+            crate::Mime::parse("ApPlIcatiOn/ulPFec"),
             Ok(APPLICATION_ULPFEC)
         );
     }
@@ -70681,7 +70689,7 @@ pub mod constants {
             Ok(APPLICATION_URC_GRPSHEET_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplICAtIOn/uRC-grPSHeeT+xmL"),
+            crate::Mime::parse("APPlICatiON/urC-GrpSHeeT+xMl"),
             Ok(APPLICATION_URC_GRPSHEET_XML)
         );
     }
@@ -70703,7 +70711,7 @@ pub mod constants {
             Ok(APPLICATION_URC_RESSHEET_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICatiON/uRC-REsSHeeT+Xml"),
+            crate::Mime::parse("APpliCAtiON/URc-ResShEet+xMl"),
             Ok(APPLICATION_URC_RESSHEET_XML)
         );
     }
@@ -70725,7 +70733,7 @@ pub mod constants {
             Ok(APPLICATION_URC_TARGETDESC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICatIOn/UrC-targeTdEsc+Xml"),
+            crate::Mime::parse("APplICaTIoN/urc-tArGetDEsc+XmL"),
             Ok(APPLICATION_URC_TARGETDESC_XML)
         );
     }
@@ -70747,7 +70755,7 @@ pub mod constants {
             Ok(APPLICATION_URC_UISOCKETDESC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcATIoN/URC-uisocKeTdEsC+xmL"),
+            crate::Mime::parse("ApPLIcATION/urc-uIsOcKeTDesC+XMl"),
             Ok(APPLICATION_URC_UISOCKETDESC_XML)
         );
     }
@@ -70769,7 +70777,7 @@ pub mod constants {
             Ok(APPLICATION_VCARD_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICaTioN/VcaRd+jsoN"),
+            crate::Mime::parse("APpLicAtIon/vcard+jSon"),
             Ok(APPLICATION_VCARD_JSON)
         );
     }
@@ -70791,7 +70799,7 @@ pub mod constants {
             Ok(APPLICATION_VCARD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCATIOn/VCARd+Xml"),
+            crate::Mime::parse("aPPLICatION/vcArd+xML"),
             Ok(APPLICATION_VCARD_XML)
         );
     }
@@ -70811,7 +70819,7 @@ pub mod constants {
             Ok(APPLICATION_VEMMI)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCAtIon/VEMmI"),
+            crate::Mime::parse("aPPlIcatION/VemMi"),
             Ok(APPLICATION_VEMMI)
         );
     }
@@ -70835,7 +70843,7 @@ pub mod constants {
             Ok(APPLICATION_VND_1000MINDS_DECISION_MODEL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICatION/vnD.1000mINds.DECiSIon-MODEl+XMl"),
+            crate::Mime::parse("APplICAtioN/VNd.1000miNDS.DEciSION-moDEl+xmL"),
             Ok(APPLICATION_VND_1000MINDS_DECISION_MODEL_XML)
         );
     }
@@ -70857,7 +70865,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_PROSE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicaTioN/VND.3GPp-PrOse+XML"),
+            crate::Mime::parse("appLicATION/VND.3GpP-prOSE+xMl"),
             Ok(APPLICATION_VND_3GPP_PROSE_XML)
         );
     }
@@ -70881,7 +70889,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_PROSE_PC3CH_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICATION/vNd.3GPP-PRoSE-pC3CH+xmL"),
+            crate::Mime::parse("APPLICATiOn/VND.3GPp-ProSe-Pc3cH+XmL"),
             Ok(APPLICATION_VND_3GPP_PROSE_PC3CH_XML)
         );
     }
@@ -70904,7 +70912,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_V2X_LOCAL_SERVICE_INFORMATION)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCaTIOn/vnd.3gpP-v2x-LoCaL-serVicE-INFORMATion"),
+            crate::Mime::parse("aPpLICation/vnd.3gPp-V2X-LOcal-seRVICE-INFOrmaTion"),
             Ok(APPLICATION_VND_3GPP_V2X_LOCAL_SERVICE_INFORMATION)
         );
     }
@@ -70924,7 +70932,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_5GNAS)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICatIOn/vnD.3gPp.5gnAS"),
+            crate::Mime::parse("APplICaTioN/vnD.3Gpp.5gnas"),
             Ok(APPLICATION_VND_3GPP_5GNAS)
         );
     }
@@ -70948,7 +70956,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_ACCESS_TRANSFER_EVENTS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appliCaTION/Vnd.3Gpp.aCCeSs-trAnsFer-evENtS+xML"),
+            crate::Mime::parse("aPpLICAtIon/vNd.3gPP.AcCesS-tRanSfeR-eVenTS+XML"),
             Ok(APPLICATION_VND_3GPP_ACCESS_TRANSFER_EVENTS_XML)
         );
     }
@@ -70970,7 +70978,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_BSF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcATION/VnD.3gPp.BSF+xML"),
+            crate::Mime::parse("ApPLICATIoN/VnD.3GPP.bSF+Xml"),
             Ok(APPLICATION_VND_3GPP_BSF_XML)
         );
     }
@@ -70992,7 +71000,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_GMOP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCatiOn/VND.3GPP.gMoP+XMl"),
+            crate::Mime::parse("aPpliCatION/VND.3gPp.GMOp+Xml"),
             Ok(APPLICATION_VND_3GPP_GMOP_XML)
         );
     }
@@ -71012,7 +71020,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_GTPC)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcatION/VND.3gPp.gTpc"),
+            crate::Mime::parse("ApplICATION/VnD.3gPp.GTpc"),
             Ok(APPLICATION_VND_3GPP_GTPC)
         );
     }
@@ -71034,7 +71042,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_INTERWORKING_DATA)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcaTiOn/vnd.3GpP.IntErWoRkINg-DATA"),
+            crate::Mime::parse("AppLiCaTion/vNd.3Gpp.iNtErWOrKING-DaTA"),
             Ok(APPLICATION_VND_3GPP_INTERWORKING_DATA)
         );
     }
@@ -71054,7 +71062,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_LPP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICATion/vnD.3gpP.LpP"),
+            crate::Mime::parse("APPLicaTioN/vnd.3GpP.lPP"),
             Ok(APPLICATION_VND_3GPP_LPP)
         );
     }
@@ -71076,7 +71084,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MC_SIGNALLING_EAR)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCATION/VnD.3GpP.MC-SIGnaLLING-eAR"),
+            crate::Mime::parse("aPPLICAtIoN/vNd.3GPp.MC-sIGNALLiNG-Ear"),
             Ok(APPLICATION_VND_3GPP_MC_SIGNALLING_EAR)
         );
     }
@@ -71101,7 +71109,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCDATA_AFFILIATION_COMMAND_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcAtIoN/vnD.3GPP.mcDaTA-afFIliaTIoN-COMmaND+XML"),
+            crate::Mime::parse("ApPlIcATioN/vND.3gpP.MCdatA-affILiAtION-cOMMAND+xmL"),
             Ok(APPLICATION_VND_3GPP_MCDATA_AFFILIATION_COMMAND_XML)
         );
     }
@@ -71125,7 +71133,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCDATA_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCAtion/vnD.3gpP.MCdata-iNfo+XMl"),
+            crate::Mime::parse("aPPlicatioN/vnd.3GPp.mcdaTa-INFo+XmL"),
             Ok(APPLICATION_VND_3GPP_MCDATA_INFO_XML)
         );
     }
@@ -71147,7 +71155,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCDATA_PAYLOAD)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicaTIon/vNd.3gPP.MCDatA-pAylOaD"),
+            crate::Mime::parse("appLIcaTiOn/VnD.3GPP.mCdaTa-PaYLoAD"),
             Ok(APPLICATION_VND_3GPP_MCDATA_PAYLOAD)
         );
     }
@@ -71171,7 +71179,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCDATA_SERVICE_CONFIG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCATiON/VnD.3gpp.McDATa-servIce-coNFig+XMl"),
+            crate::Mime::parse("aPPLiCATIoN/Vnd.3GpP.McData-SerVicE-coNFIg+xmL"),
             Ok(APPLICATION_VND_3GPP_MCDATA_SERVICE_CONFIG_XML)
         );
     }
@@ -71193,7 +71201,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCDATA_SIGNALLING)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicAtioN/Vnd.3gpp.MCdaTa-sIgnalLing"),
+            crate::Mime::parse("apPlicAtIon/vnd.3GPp.McDaTa-siGnallINg"),
             Ok(APPLICATION_VND_3GPP_MCDATA_SIGNALLING)
         );
     }
@@ -71217,7 +71225,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCDATA_UE_CONFIG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICATiON/Vnd.3gpp.MCdAtA-ue-ConFIG+xMl"),
+            crate::Mime::parse("APPLiCAtIon/Vnd.3GPp.mCdata-ue-COnfIg+XmL"),
             Ok(APPLICATION_VND_3GPP_MCDATA_UE_CONFIG_XML)
         );
     }
@@ -71241,7 +71249,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCDATA_USER_PROFILE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCaTIOn/VND.3gPp.McdatA-uSeR-ProfiLE+XML"),
+            crate::Mime::parse("aPpLICaTION/VnD.3Gpp.mCdaTa-uSer-pROfILE+xmL"),
             Ok(APPLICATION_VND_3GPP_MCDATA_USER_PROFILE_XML)
         );
     }
@@ -71266,7 +71274,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCPTT_AFFILIATION_COMMAND_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLicAtIoN/vnD.3GPp.MCPtT-aFfilIATIon-COmMand+xmL"),
+            crate::Mime::parse("apPlIcAtioN/VND.3GPP.McpTt-aFFILiaTIOn-comManD+xMl"),
             Ok(APPLICATION_VND_3GPP_MCPTT_AFFILIATION_COMMAND_XML)
         );
     }
@@ -71290,7 +71298,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCPTT_FLOOR_REQUEST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcatiOn/VnD.3gPp.mCPtt-Floor-ReQuest+Xml"),
+            crate::Mime::parse("AppliCaTIoN/VnD.3gPP.mCPtt-flOoR-reqUEst+xMl"),
             Ok(APPLICATION_VND_3GPP_MCPTT_FLOOR_REQUEST_XML)
         );
     }
@@ -71314,7 +71322,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCPTT_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICATiOn/vnD.3Gpp.mCPTt-inFO+xmL"),
+            crate::Mime::parse("APPLiCaTioN/VNd.3gPP.mCptT-infO+xMl"),
             Ok(APPLICATION_VND_3GPP_MCPTT_INFO_XML)
         );
     }
@@ -71338,7 +71346,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCPTT_LOCATION_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicATIon/VnD.3GPP.mcpTt-lOCation-iNFo+xml"),
+            crate::Mime::parse("apPLIcaTIoN/VND.3gpp.mcpTT-locaTiON-info+Xml"),
             Ok(APPLICATION_VND_3GPP_MCPTT_LOCATION_INFO_XML)
         );
     }
@@ -71362,7 +71370,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCPTT_MBMS_USAGE_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcATIoN/vnD.3GpP.McPtt-mbMs-usaGE-info+XMl"),
+            crate::Mime::parse("ApPLIcATioN/vNd.3GpP.mcptT-mbms-USage-INFo+Xml"),
             Ok(APPLICATION_VND_3GPP_MCPTT_MBMS_USAGE_INFO_XML)
         );
     }
@@ -71386,7 +71394,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCPTT_SERVICE_CONFIG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplICatIOn/vNd.3gpP.MCPtT-SeRVIce-cONFIG+xMl"),
+            crate::Mime::parse("APplICaTiOn/Vnd.3GPP.McPtT-ServiCE-COnfIg+xML"),
             Ok(APPLICATION_VND_3GPP_MCPTT_SERVICE_CONFIG_XML)
         );
     }
@@ -71410,7 +71418,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCPTT_SIGNED_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCAtIOn/vNd.3GPp.mcPtT-sIGnED+xMl"),
+            crate::Mime::parse("aPPlICatiOn/VND.3gpP.MCpTT-SIgnEd+XmL"),
             Ok(APPLICATION_VND_3GPP_MCPTT_SIGNED_XML)
         );
     }
@@ -71434,7 +71442,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCPTT_UE_CONFIG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcATiOn/VnD.3GPP.mcpTt-ue-confIG+xmL"),
+            crate::Mime::parse("ApPLiCatIoN/VND.3gpp.mCptt-ue-CONfiG+xML"),
             Ok(APPLICATION_VND_3GPP_MCPTT_UE_CONFIG_XML)
         );
     }
@@ -71458,7 +71466,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCPTT_UE_INIT_CONFIG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICatIOn/vnD.3GPP.mcPTt-uE-INit-ConFIG+xML"),
+            crate::Mime::parse("APplICaTioN/VND.3gpP.mCpTT-Ue-iNit-COnfIG+xMl"),
             Ok(APPLICATION_VND_3GPP_MCPTT_UE_INIT_CONFIG_XML)
         );
     }
@@ -71482,7 +71490,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCPTT_USER_PROFILE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicaTioN/vnd.3gpp.mCPtT-UsER-PRofILe+Xml"),
+            crate::Mime::parse("appLicAtion/Vnd.3gPP.McPtT-USEr-PRofIle+Xml"),
             Ok(APPLICATION_VND_3GPP_MCPTT_USER_PROFILE_XML)
         );
     }
@@ -71507,7 +71515,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCVIDEO_AFFILIATION_COMMAND_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCaTiOn/VnD.3gpp.MCvIDeo-AfFiLIATioN-cOmmAND+Xml"),
+            crate::Mime::parse("aPpLiCaTIoN/vnd.3GPp.McviDeO-AFFIliATiOn-COMMAnd+xml"),
             Ok(APPLICATION_VND_3GPP_MCVIDEO_AFFILIATION_COMMAND_XML)
         );
     }
@@ -71531,7 +71539,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCVIDEO_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applIcatIoN/vnd.3GpP.MCVIdeO-InFO+XmL"),
+            crate::Mime::parse("ApplIcAtion/VNd.3GPP.mcViDeO-iNfO+XML"),
             Ok(APPLICATION_VND_3GPP_MCVIDEO_INFO_XML)
         );
     }
@@ -71555,7 +71563,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCVIDEO_LOCATION_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtioN/VNd.3gPP.McvideO-lOCatION-InFo+XMl"),
+            crate::Mime::parse("aPPlicATIOn/vnD.3Gpp.mcVIdEO-lOCAtIoN-iNFo+XmL"),
             Ok(APPLICATION_VND_3GPP_MCVIDEO_LOCATION_INFO_XML)
         );
     }
@@ -71580,7 +71588,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCVIDEO_MBMS_USAGE_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCATiOn/vnD.3Gpp.mCvIdEo-mBms-usaGE-infO+XMl"),
+            crate::Mime::parse("aPPLiCatioN/VNd.3gPp.mCvIdEo-mbms-Usage-iNFo+xML"),
             Ok(APPLICATION_VND_3GPP_MCVIDEO_MBMS_USAGE_INFO_XML)
         );
     }
@@ -71604,7 +71612,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCVIDEO_SERVICE_CONFIG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicatIon/Vnd.3Gpp.mcVIDEO-seRVICe-ConfIg+XMl"),
+            crate::Mime::parse("applIcatIon/VNd.3gpP.MCVideO-SErVIce-CoNFIg+xml"),
             Ok(APPLICATION_VND_3GPP_MCVIDEO_SERVICE_CONFIG_XML)
         );
     }
@@ -71629,7 +71637,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCVIDEO_TRANSMISSION_REQUEST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCaTion/VNd.3GPP.mcvideO-tRAnSmIssIOn-REqueST+xMl"),
+            crate::Mime::parse("aPpLicatIOn/vND.3gpp.mcVIdEO-TrAnsMIssIOn-rEQUeSt+XML"),
             Ok(APPLICATION_VND_3GPP_MCVIDEO_TRANSMISSION_REQUEST_XML)
         );
     }
@@ -71653,7 +71661,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCVIDEO_UE_CONFIG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcAtiON/vND.3Gpp.McVIdeo-Ue-cONfig+xmL"),
+            crate::Mime::parse("ApPliCATiON/vNd.3GpP.mcvIDeo-UE-coNfiG+xML"),
             Ok(APPLICATION_VND_3GPP_MCVIDEO_UE_CONFIG_XML)
         );
     }
@@ -71677,7 +71685,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MCVIDEO_USER_PROFILE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICatIon/Vnd.3gpp.mCvideO-USeR-prOfILE+xMl"),
+            crate::Mime::parse("APplIcatIon/Vnd.3gPp.mcVIDEo-UseR-PROFiLe+XMl"),
             Ok(APPLICATION_VND_3GPP_MCVIDEO_USER_PROFILE_XML)
         );
     }
@@ -71699,7 +71707,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_MID_CALL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcAtiOn/vND.3GPp.Mid-CalL+xML"),
+            crate::Mime::parse("ApPliCaTiON/VND.3Gpp.Mid-caLL+xml"),
             Ok(APPLICATION_VND_3GPP_MID_CALL_XML)
         );
     }
@@ -71719,7 +71727,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_NGAP)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCAtioN/vnd.3gpP.NGAP"),
+            crate::Mime::parse("aPPlicAtion/vnd.3GPP.ngAP"),
             Ok(APPLICATION_VND_3GPP_NGAP)
         );
     }
@@ -71739,7 +71747,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_PFCP)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICaTIOn/VnD.3GPP.PFcP"),
+            crate::Mime::parse("APpLICaTIoN/vND.3GPp.pFcp"),
             Ok(APPLICATION_VND_3GPP_PFCP)
         );
     }
@@ -71761,7 +71769,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_PIC_BW_LARGE)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICatiON/vNd.3GpP.pic-bw-LARGE"),
+            crate::Mime::parse("APpliCATiOn/VNd.3gpp.pic-BW-LARgE"),
             Ok(APPLICATION_VND_3GPP_PIC_BW_LARGE)
         );
     }
@@ -71783,7 +71791,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_PIC_BW_SMALL)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCAtIoN/vnd.3gPP.pIC-BW-smaLL"),
+            crate::Mime::parse("aPPlIcAtion/VnD.3gPP.PIc-bw-SmALl"),
             Ok(APPLICATION_VND_3GPP_PIC_BW_SMALL)
         );
     }
@@ -71803,7 +71811,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_PIC_BW_VAR)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCaTIon/vND.3GPP.piC-BW-vAR"),
+            crate::Mime::parse("aPpLIcatiON/vND.3gpP.PIC-BW-VAr"),
             Ok(APPLICATION_VND_3GPP_PIC_BW_VAR)
         );
     }
@@ -71823,7 +71831,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_S1AP)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICAtIOn/vnD.3gpp.S1aP"),
+            crate::Mime::parse("APPlICaTioN/Vnd.3GPp.s1ap"),
             Ok(APPLICATION_VND_3GPP_S1AP)
         );
     }
@@ -71843,7 +71851,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_SMS)
         );
         assert_eq!(
-            crate::Mime::parse("applICAtioN/vND.3gPP.sMS"),
+            crate::Mime::parse("APPlicATiON/vnD.3gPP.Sms"),
             Ok(APPLICATION_VND_3GPP_SMS)
         );
     }
@@ -71865,7 +71873,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_SMS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCAtION/vnD.3Gpp.smS+XmL"),
+            crate::Mime::parse("aPPlICAtioN/vNd.3gpP.SmS+XmL"),
             Ok(APPLICATION_VND_3GPP_SMS_XML)
         );
     }
@@ -71887,7 +71895,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_SRVCC_EXT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicaTIOn/VNd.3GPP.SRVCC-ExT+xML"),
+            crate::Mime::parse("appLICaTIOn/VND.3GPP.SRVcC-eXT+xmL"),
             Ok(APPLICATION_VND_3GPP_SRVCC_EXT_XML)
         );
     }
@@ -71911,7 +71919,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_SRVCC_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatiON/vnd.3GPp.sRVCC-Info+xml"),
+            crate::Mime::parse("APpliCATion/VND.3gPP.SrVcc-info+xMl"),
             Ok(APPLICATION_VND_3GPP_SRVCC_INFO_XML)
         );
     }
@@ -71935,7 +71943,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_STATE_AND_EVENT_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicATiOn/vnd.3GPP.sTate-anD-EVEnt-infO+XMl"),
+            crate::Mime::parse("apPLiCaTion/vND.3gPp.sTatE-AND-eVent-iNFo+Xml"),
             Ok(APPLICATION_VND_3GPP_STATE_AND_EVENT_INFO_XML)
         );
     }
@@ -71957,7 +71965,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP_USSD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCaTiON/VND.3GpP.uSsd+xmL"),
+            crate::Mime::parse("aPpLiCAtION/VNd.3gPp.UssD+Xml"),
             Ok(APPLICATION_VND_3GPP_USSD_XML)
         );
     }
@@ -71981,7 +71989,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP2_BCMCSINFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICATion/vNd.3GPP2.BCMcsINfO+xmL"),
+            crate::Mime::parse("APPLicatiOn/VND.3gPP2.bCMcSInfO+xML"),
             Ok(APPLICATION_VND_3GPP2_BCMCSINFO_XML)
         );
     }
@@ -72001,7 +72009,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP2_SMS)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcaTiON/vNd.3Gpp2.Sms"),
+            crate::Mime::parse("AppLiCATiOn/vNd.3gPp2.smS"),
             Ok(APPLICATION_VND_3GPP2_SMS)
         );
     }
@@ -72021,7 +72029,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3GPP2_TCAP)
         );
         assert_eq!(
-            crate::Mime::parse("appLicaTION/vnd.3gPP2.TcaP"),
+            crate::Mime::parse("appLICATion/vnD.3GPp2.TCAp"),
             Ok(APPLICATION_VND_3GPP2_TCAP)
         );
     }
@@ -72043,7 +72051,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3LIGHTSSOFTWARE_IMAGESCAL)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcatiON/vNd.3LighTsSofTWaRe.imaGESCal"),
+            crate::Mime::parse("AppliCATiOn/VNd.3LiGhtSSoFtware.IMAgeScAL"),
             Ok(APPLICATION_VND_3LIGHTSSOFTWARE_IMAGESCAL)
         );
     }
@@ -72065,7 +72073,7 @@ pub mod constants {
             Ok(APPLICATION_VND_3M_POST_IT_NOTES)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcAtioN/VNd.3m.posT-iT-NOtES"),
+            crate::Mime::parse("ApPlicATIOn/VnD.3m.PoST-It-NoTes"),
             Ok(APPLICATION_VND_3M_POST_IT_NOTES)
         );
     }
@@ -72087,7 +72095,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ACCPAC_SIMPLY_ASO)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtiOn/vNd.acCpac.sIMPLY.aSo"),
+            crate::Mime::parse("ApPliCaTiOn/vnD.accpAC.SImpLy.AsO"),
             Ok(APPLICATION_VND_ACCPAC_SIMPLY_ASO)
         );
     }
@@ -72109,7 +72117,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ACCPAC_SIMPLY_IMP)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTiOn/Vnd.AccpAC.simPlY.imp"),
+            crate::Mime::parse("AppLiCaTIon/Vnd.ACcpac.sIMply.imP"),
             Ok(APPLICATION_VND_ACCPAC_SIMPLY_IMP)
         );
     }
@@ -72129,7 +72137,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ACUCOBOL)
         );
         assert_eq!(
-            crate::Mime::parse("appLicaTIOn/vnD.AcUCOBoL"),
+            crate::Mime::parse("appLICatioN/VnD.ACuCOboL"),
             Ok(APPLICATION_VND_ACUCOBOL)
         );
     }
@@ -72149,7 +72157,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ACUCORP)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicATIOn/VnD.aCucOrP"),
+            crate::Mime::parse("apPLICaTIoN/vNd.AcUCoRP"),
             Ok(APPLICATION_VND_ACUCORP)
         );
     }
@@ -72171,7 +72179,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ADOBE_FLASH_MOVIE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcaTioN/vNd.adobe.flasH.mOVIE"),
+            crate::Mime::parse("AppLicAtiOn/vnd.aDobe.FlaSH.MOVIe"),
             Ok(APPLICATION_VND_ADOBE_FLASH_MOVIE)
         );
     }
@@ -72193,7 +72201,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ADOBE_FORMSCENTRAL_FCDT)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCAtIOn/Vnd.aDobE.ForMSCEnTrAL.FCdT"),
+            crate::Mime::parse("aPPlICaTIon/vNd.ADObe.FORmScENTRAl.fCdT"),
             Ok(APPLICATION_VND_ADOBE_FORMSCENTRAL_FCDT)
         );
     }
@@ -72213,7 +72221,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ADOBE_FXP)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcATIon/vNd.adObe.fxP"),
+            crate::Mime::parse("ApPLIcaTiOn/vnD.aDobE.fxP"),
             Ok(APPLICATION_VND_ADOBE_FXP)
         );
     }
@@ -72235,7 +72243,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ADOBE_PARTIAL_UPLOAD)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcatIOn/vNd.adOBE.pARtIaL-UpLoad"),
+            crate::Mime::parse("ApplICaTiOn/vnD.AdoBE.PaRtIaL-upLoad"),
             Ok(APPLICATION_VND_ADOBE_PARTIAL_UPLOAD)
         );
     }
@@ -72257,7 +72265,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ADOBE_XDP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcaTIon/vnd.adOBe.xDp+xML"),
+            crate::Mime::parse("AppLIcation/vnD.aDoBe.xDP+xml"),
             Ok(APPLICATION_VND_ADOBE_XDP_XML)
         );
     }
@@ -72277,7 +72285,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ADOBE_XFDF)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicATIOn/vnD.aDoBE.XFdF"),
+            crate::Mime::parse("apPLICaTioN/vNd.AdOBe.xFdf"),
             Ok(APPLICATION_VND_ADOBE_XFDF)
         );
     }
@@ -72297,7 +72305,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AETHER_IMP)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicAtION/vnd.AetHeR.Imp"),
+            crate::Mime::parse("apPlICATion/Vnd.aETHer.IMP"),
             Ok(APPLICATION_VND_AETHER_IMP)
         );
     }
@@ -72319,7 +72327,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_AFPLINEDATA)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcATiOn/vnd.AFPC.afPliNEDATA"),
+            crate::Mime::parse("ApPLiCaTion/VND.afpC.aFPLINEData"),
             Ok(APPLICATION_VND_AFPC_AFPLINEDATA)
         );
     }
@@ -72341,7 +72349,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_AFPLINEDATA_PAGEDEF)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicATIon/vNd.afpc.AFpLiNEdaTa-pagEDeF"),
+            crate::Mime::parse("apPLIcatiOn/vnd.aFPc.aFPliNeData-PaGEDEF"),
             Ok(APPLICATION_VND_AFPC_AFPLINEDATA_PAGEDEF)
         );
     }
@@ -72363,7 +72371,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_CMOCA_CMRESOURCE)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCaTIoN/VnD.AFPC.CmOCA-CMRESOUrCe"),
+            crate::Mime::parse("aPpLIcAtIoN/VND.AFpC.CmOCA-CMReSoUrce"),
             Ok(APPLICATION_VND_AFPC_CMOCA_CMRESOURCE)
         );
     }
@@ -72385,7 +72393,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_FOCA_CHARSET)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcaTIoN/VnD.aFpc.focA-cHArsEt"),
+            crate::Mime::parse("AppLIcAtIoN/vNd.Afpc.FoCA-cHaRSEt"),
             Ok(APPLICATION_VND_AFPC_FOCA_CHARSET)
         );
     }
@@ -72407,7 +72415,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_FOCA_CODEDFONT)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICAtIoN/vnd.AfpC.FOCa-CODeDfONt"),
+            crate::Mime::parse("APPlIcATion/Vnd.AFPC.fOCA-CoDEdfonT"),
             Ok(APPLICATION_VND_AFPC_FOCA_CODEDFONT)
         );
     }
@@ -72429,7 +72437,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_FOCA_CODEPAGE)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcATIoN/VNd.afpc.FOca-codepAgE"),
+            crate::Mime::parse("ApPLIcATIOn/vnd.AFPc.Foca-cOdEPAgE"),
             Ok(APPLICATION_VND_AFPC_FOCA_CODEPAGE)
         );
     }
@@ -72449,7 +72457,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_MODCA)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCATiOn/vND.afPc.mOdCA"),
+            crate::Mime::parse("aPPLiCatiON/vnD.AfPc.MOdCa"),
             Ok(APPLICATION_VND_AFPC_MODCA)
         );
     }
@@ -72471,7 +72479,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_MODCA_FORMDEF)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICaTIOn/VNd.AFpC.modca-FoRMdef"),
+            crate::Mime::parse("APpLICatIOn/VNd.Afpc.mODcA-formdef"),
             Ok(APPLICATION_VND_AFPC_MODCA_FORMDEF)
         );
     }
@@ -72493,7 +72501,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_MODCA_MEDIUMMAP)
         );
         assert_eq!(
-            crate::Mime::parse("applIcaTIOn/VNd.afpC.moDca-mEdIuMMAP"),
+            crate::Mime::parse("AppLICaTIOn/vnd.afpC.mOdCa-mEDIUMmAp"),
             Ok(APPLICATION_VND_AFPC_MODCA_MEDIUMMAP)
         );
     }
@@ -72515,7 +72523,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_MODCA_OBJECTCONTAINER)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCAtIOn/vNd.afPc.moDCA-obJectconTaiNeR"),
+            crate::Mime::parse("aPPlICatiOn/vnD.AfpC.MOdcA-objecTcoNtAineR"),
             Ok(APPLICATION_VND_AFPC_MODCA_OBJECTCONTAINER)
         );
     }
@@ -72537,7 +72545,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_MODCA_OVERLAY)
         );
         assert_eq!(
-            crate::Mime::parse("appLICATiON/vND.AFPC.modCA-oVERLay"),
+            crate::Mime::parse("APPLiCAtiON/VND.afpc.ModCA-OveRLaY"),
             Ok(APPLICATION_VND_AFPC_MODCA_OVERLAY)
         );
     }
@@ -72559,7 +72567,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AFPC_MODCA_PAGESEGMENT)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICAtioN/VnD.AFpc.mODCa-pAGeSEGmENt"),
+            crate::Mime::parse("APPlicAtIoN/VNd.afPC.modCA-PAGeSEgMENt"),
             Ok(APPLICATION_VND_AFPC_MODCA_PAGESEGMENT)
         );
     }
@@ -72579,7 +72587,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AGE)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCatION/VnD.AGE"),
+            crate::Mime::parse("aPplICAtIoN/VND.Age"),
             Ok(APPLICATION_VND_AGE)
         );
     }
@@ -72599,7 +72607,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AH_BARCODE)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCATIOn/vnd.Ah-barcode"),
+            crate::Mime::parse("aPPLICaTion/VnD.ah-barCODE"),
             Ok(APPLICATION_VND_AH_BARCODE)
         );
     }
@@ -72619,7 +72627,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AHEAD_SPACE)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicATIoN/vnD.AHeAd.SpaCE"),
+            crate::Mime::parse("apPLIcATioN/VNd.ahEad.SpACe"),
             Ok(APPLICATION_VND_AHEAD_SPACE)
         );
     }
@@ -72641,7 +72649,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AIRZIP_FILESECURE_AZF)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicatIOn/VNd.AIrzip.fIlEsEcUrE.AZF"),
+            crate::Mime::parse("applICatIOn/VNd.aiRzIp.fIlEsEcURE.aZF"),
             Ok(APPLICATION_VND_AIRZIP_FILESECURE_AZF)
         );
     }
@@ -72663,7 +72671,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AIRZIP_FILESECURE_AZS)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICATIon/VND.aIrzIP.FIlEseCURe.azs"),
+            crate::Mime::parse("APPLIcatION/vNd.AIrZIp.fiLESeCure.azS"),
             Ok(APPLICATION_VND_AIRZIP_FILESECURE_AZS)
         );
     }
@@ -72685,7 +72693,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AMADEUS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCatION/vNd.AmADeUs+jsOn"),
+            crate::Mime::parse("aPplICAtiOn/VnD.aMadeuS+JSOn"),
             Ok(APPLICATION_VND_AMADEUS_JSON)
         );
     }
@@ -72707,7 +72715,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AMAZON_MOBI8_EBOOK)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCaTION/VNd.amAZOn.moBI8-eBOoK"),
+            crate::Mime::parse("aPpLICAtIOn/vnD.AmAzoN.MObI8-EboOk"),
             Ok(APPLICATION_VND_AMAZON_MOBI8_EBOOK)
         );
     }
@@ -72729,7 +72737,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AMERICANDYNAMICS_ACC)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCAtIon/VNd.AMErICaNDYNAMiCS.aCc"),
+            crate::Mime::parse("aPPlIcatIOn/VND.AMeRICANDyNAmiCs.acC"),
             Ok(APPLICATION_VND_AMERICANDYNAMICS_ACC)
         );
     }
@@ -72749,7 +72757,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AMIGA_AMI)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtioN/vnD.Amiga.ami"),
+            crate::Mime::parse("APPlicAtioN/Vnd.aMiga.amI"),
             Ok(APPLICATION_VND_AMIGA_AMI)
         );
     }
@@ -72771,7 +72779,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AMUNDSEN_MAZE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcatION/VNd.AmUNDSen.MazE+XML"),
+            crate::Mime::parse("ApplICAtIOn/VnD.AMunDSen.mAZE+XmL"),
             Ok(APPLICATION_VND_AMUNDSEN_MAZE_XML)
         );
     }
@@ -72791,7 +72799,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ANDROID_OTA)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcatiOn/VNd.ANdroid.oTa"),
+            crate::Mime::parse("AppliCaTIOn/VNd.androId.OTA"),
             Ok(APPLICATION_VND_ANDROID_OTA)
         );
     }
@@ -72813,7 +72821,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ANDROID_PACKAGE_ARCHIVE)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicATioN/VNd.aNdrOid.PaCKaGE-ArChivE"),
+            crate::Mime::parse("apPLicATIOn/vNd.AndrOiD.pACkAgE-arCHIvE"),
             Ok(APPLICATION_VND_ANDROID_PACKAGE_ARCHIVE)
         );
     }
@@ -72833,7 +72841,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ANKI)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCatIOn/VNd.ankI"),
+            crate::Mime::parse("aPplICaTIOn/vnd.aNKi"),
             Ok(APPLICATION_VND_ANKI)
         );
     }
@@ -72856,7 +72864,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ANSER_WEB_CERTIFICATE_ISSUE_INITIATION)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICAtiON/VnD.AnseR-wEB-CertiFiCATE-ISsue-iNITIatIOn"),
+            crate::Mime::parse("APPliCAtIoN/Vnd.ANsER-Web-cErTIFICATe-iSsUE-IniTIaTIOn"),
             Ok(APPLICATION_VND_ANSER_WEB_CERTIFICATE_ISSUE_INITIATION)
         );
     }
@@ -72879,7 +72887,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ANSER_WEB_FUNDS_TRANSFER_INITIATION)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCaTion/VND.AnsER-weB-fUNDS-tRANsFEr-initIaTIOn"),
+            crate::Mime::parse("aPpLicatION/Vnd.ANseR-wEB-FunDS-tRAnSfer-InITIatioN"),
             Ok(APPLICATION_VND_ANSER_WEB_FUNDS_TRANSFER_INITIATION)
         );
     }
@@ -72901,7 +72909,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ANTIX_GAME_COMPONENT)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcATIoN/vnd.antIX.gAme-CompOnENT"),
+            crate::Mime::parse("ApPLIcATion/vnd.AntIx.gAme-CoMPONent"),
             Ok(APPLICATION_VND_ANTIX_GAME_COMPONENT)
         );
     }
@@ -72923,7 +72931,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APACHE_ARROW_FILE)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcAtIOn/vnD.ApAcHe.arRoW.File"),
+            crate::Mime::parse("ApPlICatioN/VnD.ApachE.ArRow.fIlE"),
             Ok(APPLICATION_VND_APACHE_ARROW_FILE)
         );
     }
@@ -72945,7 +72953,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APACHE_ARROW_STREAM)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcATiON/VNd.aPACHe.ArRow.sTreaM"),
+            crate::Mime::parse("ApPLiCATIOn/vND.ApaChE.aRrOw.sTrEAM"),
             Ok(APPLICATION_VND_APACHE_ARROW_STREAM)
         );
     }
@@ -72967,7 +72975,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APACHE_THRIFT_BINARY)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcatioN/VnD.aPAChE.thrifT.binaRy"),
+            crate::Mime::parse("ApplicAtIoN/vND.aPAche.tHRift.BinARY"),
             Ok(APPLICATION_VND_APACHE_THRIFT_BINARY)
         );
     }
@@ -72989,7 +72997,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APACHE_THRIFT_COMPACT)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICation/VNd.aPaCHE.ThRIFT.CompaCT"),
+            crate::Mime::parse("APplicaTIOn/vNd.APaChE.THrIft.cOMpacT"),
             Ok(APPLICATION_VND_APACHE_THRIFT_COMPACT)
         );
     }
@@ -73011,7 +73019,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APACHE_THRIFT_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcAtIoN/Vnd.apacHE.thrIfT.JSon"),
+            crate::Mime::parse("ApPlIcAtIon/vnd.APache.tHRIFt.jSON"),
             Ok(APPLICATION_VND_APACHE_THRIFT_JSON)
         );
     }
@@ -73033,7 +73041,7 @@ pub mod constants {
             Ok(APPLICATION_VND_API_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICAtIOn/vNd.apI+jSOn"),
+            crate::Mime::parse("APPlICatiOn/vnD.aPI+jsON"),
             Ok(APPLICATION_VND_API_JSON)
         );
     }
@@ -73057,7 +73065,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APLEXTOR_WARRP_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCaTion/vnd.aPLExtor.WarrP+jSON"),
+            crate::Mime::parse("aPpLication/vND.aplexTor.WarRP+JSoN"),
             Ok(APPLICATION_VND_APLEXTOR_WARRP_JSON)
         );
     }
@@ -73081,7 +73089,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APOTHEKENDE_RESERVATION_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICatiOn/vnd.aPotHEKENdE.rEServAtIon+jSON"),
+            crate::Mime::parse("APpliCaTion/vNd.APOTHeKenDE.reSeRvaTiON+JSON"),
             Ok(APPLICATION_VND_APOTHEKENDE_RESERVATION_JSON)
         );
     }
@@ -73105,7 +73113,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APPLE_INSTALLER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicatIon/VnD.ApPLe.inStAlLer+xml"),
+            crate::Mime::parse("applIcatIoN/VnD.aPplE.InStaller+xML"),
             Ok(APPLICATION_VND_APPLE_INSTALLER_XML)
         );
     }
@@ -73125,7 +73133,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APPLE_KEYNOTE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicaTiOn/VNd.appLe.keyNoTE"),
+            crate::Mime::parse("appLiCaTIOn/vnd.apple.kEYnoTe"),
             Ok(APPLICATION_VND_APPLE_KEYNOTE)
         );
     }
@@ -73145,7 +73153,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APPLE_MPEGURL)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCAtiON/vnD.Apple.mPEgurL"),
+            crate::Mime::parse("aPPliCAtioN/Vnd.aPpLE.mpEguRl"),
             Ok(APPLICATION_VND_APPLE_MPEGURL)
         );
     }
@@ -73165,7 +73173,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APPLE_NUMBERS)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCaTIOn/Vnd.apPle.nUMbeRS"),
+            crate::Mime::parse("aPpLICatIon/vnD.appLE.nUMBERS"),
             Ok(APPLICATION_VND_APPLE_NUMBERS)
         );
     }
@@ -73185,7 +73193,7 @@ pub mod constants {
             Ok(APPLICATION_VND_APPLE_PAGES)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCATIon/vnD.APpLE.pAGES"),
+            crate::Mime::parse("aPPLIcaTioN/VNd.AppLE.Pages"),
             Ok(APPLICATION_VND_APPLE_PAGES)
         );
     }
@@ -73207,7 +73215,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ARISTANETWORKS_SWI)
         );
         assert_eq!(
-            crate::Mime::parse("appliCatIoN/vND.arIstANeTworkS.Swi"),
+            crate::Mime::parse("aPplIcAtiON/vnD.aRIsTanetWoRks.swi"),
             Ok(APPLICATION_VND_ARISTANETWORKS_SWI)
         );
     }
@@ -73229,7 +73237,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ARTISAN_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcAtion/vND.arTisAN+json"),
+            crate::Mime::parse("ApPlicatiON/vnD.aRTIsan+json"),
             Ok(APPLICATION_VND_ARTISAN_JSON)
         );
     }
@@ -73249,7 +73257,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ARTSQUARE)
         );
         assert_eq!(
-            crate::Mime::parse("applicATIon/vnd.ARtSQuaRe"),
+            crate::Mime::parse("apPLIcation/VNd.ArtSqUare"),
             Ok(APPLICATION_VND_ARTSQUARE)
         );
     }
@@ -73271,7 +73279,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ASTRAEA_SOFTWARE_IOTA)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicATIOn/VNd.AstrAEA-soFTWare.iOTa"),
+            crate::Mime::parse("apPLICaTIOn/Vnd.ASTraeA-SoftWaRE.ioTa"),
             Ok(APPLICATION_VND_ASTRAEA_SOFTWARE_IOTA)
         );
     }
@@ -73291,7 +73299,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AUDIOGRAPH)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicAtioN/VNd.AudIoGrAPh"),
+            crate::Mime::parse("apPlicAtIOn/Vnd.aUdIOgRapH"),
             Ok(APPLICATION_VND_AUDIOGRAPH)
         );
     }
@@ -73311,7 +73319,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AUTOPACKAGE)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCaTioN/vNd.AutoPaCKage"),
+            crate::Mime::parse("aPpLicAtiOn/Vnd.AuTOpackagE"),
             Ok(APPLICATION_VND_AUTOPACKAGE)
         );
     }
@@ -73333,7 +73341,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AVALON_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLICaTIoN/Vnd.aValON+jSoN"),
+            crate::Mime::parse("APpLIcATIon/vNd.AValOn+Json"),
             Ok(APPLICATION_VND_AVALON_JSON)
         );
     }
@@ -73355,7 +73363,7 @@ pub mod constants {
             Ok(APPLICATION_VND_AVISTAR_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICatIOn/VnD.aViSTAr+XmL"),
+            crate::Mime::parse("APplICaTIoN/vNd.AVisTaR+XML"),
             Ok(APPLICATION_VND_AVISTAR_XML)
         );
     }
@@ -73377,7 +73385,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BALSAMIQ_BMML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicaTIon/vnd.baLSamIq.bMMl+XmL"),
+            crate::Mime::parse("appLIcation/vnD.baLsAmIQ.BMmL+xml"),
             Ok(APPLICATION_VND_BALSAMIQ_BMML_XML)
         );
     }
@@ -73397,7 +73405,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BALSAMIQ_BMPR)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCaTIOn/vND.BALSamIq.bmpr"),
+            crate::Mime::parse("aPpLICaTiON/VND.baLsamiq.BMpr"),
             Ok(APPLICATION_VND_BALSAMIQ_BMPR)
         );
     }
@@ -73419,7 +73427,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BANANA_ACCOUNTING)
         );
         assert_eq!(
-            crate::Mime::parse("APplICatioN/VNd.BAnanA-AcCOuNTInG"),
+            crate::Mime::parse("APplicAtIOn/VNd.bAnAnA-aCCOuNTING"),
             Ok(APPLICATION_VND_BANANA_ACCOUNTING)
         );
     }
@@ -73439,7 +73447,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BBF_USP_ERROR)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcatIon/VNd.bbf.uSp.errOR"),
+            crate::Mime::parse("ApplIcatIOn/vnd.bBf.usp.ERRoR"),
             Ok(APPLICATION_VND_BBF_USP_ERROR)
         );
     }
@@ -73459,7 +73467,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BBF_USP_MSG)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcAtIOn/vnd.BBF.USP.MSG"),
+            crate::Mime::parse("ApPlICaTion/VND.BBF.USP.msg"),
             Ok(APPLICATION_VND_BBF_USP_MSG)
         );
     }
@@ -73481,7 +73489,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BBF_USP_MSG_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCAtiON/vnD.BBF.usp.MSg+jSoN"),
+            crate::Mime::parse("aPPliCAtioN/VND.bbf.USp.mSg+jSoN"),
             Ok(APPLICATION_VND_BBF_USP_MSG_JSON)
         );
     }
@@ -73505,7 +73513,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BEKITZUR_STECH_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICAtiON/vnD.bekITzur-STEcH+JSoN"),
+            crate::Mime::parse("APPliCAtioN/vnd.BekitZUR-StECh+jsOn"),
             Ok(APPLICATION_VND_BEKITZUR_STECH_JSON)
         );
     }
@@ -73527,7 +73535,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BINT_MED_CONTENT)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicAtIOn/VNd.biNT.MEd-content"),
+            crate::Mime::parse("apPlICatIOn/vnD.BINt.med-contENt"),
             Ok(APPLICATION_VND_BINT_MED_CONTENT)
         );
     }
@@ -73549,7 +73557,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BIOPAX_RDF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICATIoN/vnd.BiOPax.rDF+xML"),
+            crate::Mime::parse("APPLIcAtion/VnD.biopAX.rDF+XML"),
             Ok(APPLICATION_VND_BIOPAX_RDF_XML)
         );
     }
@@ -73571,7 +73579,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BLINK_IDB_VALUE_WRAPPER)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICATIon/VND.blINk-iDB-vAluE-WrAPpEr"),
+            crate::Mime::parse("APPLIcaTION/vnD.bLiNK-iDb-VaLuE-wRappER"),
             Ok(APPLICATION_VND_BLINK_IDB_VALUE_WRAPPER)
         );
     }
@@ -73593,7 +73601,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BLUEICE_MULTIPASS)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcAtiON/Vnd.bLuEICE.MULtIpAsS"),
+            crate::Mime::parse("ApPliCATIon/vNd.BLUeICE.MuLtIPaSs"),
             Ok(APPLICATION_VND_BLUEICE_MULTIPASS)
         );
     }
@@ -73615,7 +73623,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BLUETOOTH_EP_OOB)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICation/VnD.bLueToOTH.eP.oOb"),
+            crate::Mime::parse("APplicaTIoN/vNd.BlUETOoTH.Ep.OOB"),
             Ok(APPLICATION_VND_BLUETOOTH_EP_OOB)
         );
     }
@@ -73637,7 +73645,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BLUETOOTH_LE_OOB)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicaTION/vNd.bLuEtOoTh.lE.ooB"),
+            crate::Mime::parse("appLICAtiOn/vNd.bLuEtooTh.lE.ooB"),
             Ok(APPLICATION_VND_BLUETOOTH_LE_OOB)
         );
     }
@@ -73657,7 +73665,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BMI)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcaTion/Vnd.bmi"),
+            crate::Mime::parse("AppLicaTIon/vnd.bMI"),
             Ok(APPLICATION_VND_BMI)
         );
     }
@@ -73677,7 +73685,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BPF)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCaTioN/vnD.bpF"),
+            crate::Mime::parse("aPpLicAtioN/vnD.bpf"),
             Ok(APPLICATION_VND_BPF)
         );
     }
@@ -73697,7 +73705,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BPF3)
         );
         assert_eq!(
-            crate::Mime::parse("applicATION/VND.BpF3"),
+            crate::Mime::parse("apPLICAtION/VnD.bPF3"),
             Ok(APPLICATION_VND_BPF3)
         );
     }
@@ -73719,7 +73727,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BUSINESSOBJECTS)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCation/Vnd.busiNeSSobJectS"),
+            crate::Mime::parse("aPplicaTIon/vnd.BuSIneSsobJECTs"),
             Ok(APPLICATION_VND_BUSINESSOBJECTS)
         );
     }
@@ -73741,7 +73749,7 @@ pub mod constants {
             Ok(APPLICATION_VND_BYU_UAPI_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicaTiON/vND.bYU.uaPI+Json"),
+            crate::Mime::parse("appLiCATiON/vND.byU.uApi+JSoN"),
             Ok(APPLICATION_VND_BYU_UAPI_JSON)
         );
     }
@@ -73761,7 +73769,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CAB_JSCRIPT)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicATioN/VnD.cAb-jsCriPT"),
+            crate::Mime::parse("apPLicAtIoN/vNd.caB-jSCriPT"),
             Ok(APPLICATION_VND_CAB_JSCRIPT)
         );
     }
@@ -73781,7 +73789,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CANON_CPDL)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICATIOn/vnd.caNoN-CPDl"),
+            crate::Mime::parse("APPLICaTion/vnD.CaNON-cpdL"),
             Ok(APPLICATION_VND_CANON_CPDL)
         );
     }
@@ -73801,7 +73809,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CANON_LIPS)
         );
         assert_eq!(
-            crate::Mime::parse("appLICaTION/VNd.caNoN-lIPS"),
+            crate::Mime::parse("APpLICATIOn/vnD.CanON-lIPS"),
             Ok(APPLICATION_VND_CANON_LIPS)
         );
     }
@@ -73825,7 +73833,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CAPASYSTEMS_PG_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICATion/vnD.CApasystEms-Pg+JsON"),
+            crate::Mime::parse("APPLicaTioN/VNd.capaSystEmS-pG+JSON"),
             Ok(APPLICATION_VND_CAPASYSTEMS_PG_JSON)
         );
     }
@@ -73847,7 +73855,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CENDIO_THINLINC_CLIENTCONF)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicAtiON/VND.cEnDio.THiNlinc.CLiEnTconf"),
+            crate::Mime::parse("apPliCATION/vNd.ceNDIo.thinlINc.cLientCOnF"),
             Ok(APPLICATION_VND_CENDIO_THINLINC_CLIENTCONF)
         );
     }
@@ -73869,7 +73877,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CENTURY_SYSTEMS_TCP_STREAM)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCATION/VnD.ceNtUry-sYSteMS.TcP_STreAm"),
+            crate::Mime::parse("aPPLICATIoN/vnD.CenTuRY-sYSTEmS.TCp_StReaM"),
             Ok(APPLICATION_VND_CENTURY_SYSTEMS_TCP_STREAM)
         );
     }
@@ -73891,7 +73899,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CHEMDRAW_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcaTiON/vND.chEmDRAw+xmL"),
+            crate::Mime::parse("AppLiCAtiON/vnD.CHEmdraW+XML"),
             Ok(APPLICATION_VND_CHEMDRAW_XML)
         );
     }
@@ -73911,7 +73919,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CHESS_PGN)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicatIOn/VNd.CHeSs-Pgn"),
+            crate::Mime::parse("applICaTIOn/VNd.cHEss-pGn"),
             Ok(APPLICATION_VND_CHESS_PGN)
         );
     }
@@ -73933,7 +73941,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CHIPNUTS_KARAOKE_MMD)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcaTION/vnd.CHiPNUtS.KaRAoKe-mmd"),
+            crate::Mime::parse("AppLICAtion/VNd.CHiPnUtS.kArAoke-MMd"),
             Ok(APPLICATION_VND_CHIPNUTS_KARAOKE_MMD)
         );
     }
@@ -73953,7 +73961,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CIEDI)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcAtiON/Vnd.CiEdI"),
+            crate::Mime::parse("ApPliCAtIon/VnD.CIedI"),
             Ok(APPLICATION_VND_CIEDI)
         );
     }
@@ -73973,7 +73981,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CINDERELLA)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCAtION/VNd.cinDerElLa"),
+            crate::Mime::parse("aPPlICAtIOn/vnd.ciNdErelLa"),
             Ok(APPLICATION_VND_CINDERELLA)
         );
     }
@@ -73995,7 +74003,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CIRPACK_ISDN_EXT)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcation/vND.CIRPaCk.Isdn-EXt"),
+            crate::Mime::parse("ApplicaTiON/VND.cIrpAck.iSDn-ext"),
             Ok(APPLICATION_VND_CIRPACK_ISDN_EXT)
         );
     }
@@ -74019,7 +74027,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CITATIONSTYLES_STYLE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICaTIon/vnD.cItAtIoNSTyLES.STYle+xml"),
+            crate::Mime::parse("APpLIcaTioN/vNd.cItATIoNSTyLES.sTyle+XML"),
             Ok(APPLICATION_VND_CITATIONSTYLES_STYLE_XML)
         );
     }
@@ -74039,7 +74047,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CLAYMORE)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICATioN/VnD.cLAYmorE"),
+            crate::Mime::parse("APPLicATIoN/vND.claYMORe"),
             Ok(APPLICATION_VND_CLAYMORE)
         );
     }
@@ -74059,7 +74067,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CLOANTO_RP9)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicATion/vnD.CLOaNto.RP9"),
+            crate::Mime::parse("apPLicaTioN/VND.CloaNTo.RP9"),
             Ok(APPLICATION_VND_CLOANTO_RP9)
         );
     }
@@ -74079,7 +74087,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CLONK_C4GROUP)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICaTIoN/VND.clOnK.c4gRoUp"),
+            crate::Mime::parse("APpLIcATION/vnD.CloNk.c4gROuP"),
             Ok(APPLICATION_VND_CLONK_C4GROUP)
         );
     }
@@ -74101,7 +74109,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CLUETRUST_CARTOMOBILE_CONFIG)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcatION/vNd.cLUETRUSt.CArToMObIle-COnfIG"),
+            crate::Mime::parse("ApplICAtiOn/vND.CLUEtRUSt.cARtOmoBILe-COnfIG"),
             Ok(APPLICATION_VND_CLUETRUST_CARTOMOBILE_CONFIG)
         );
     }
@@ -74124,7 +74132,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CLUETRUST_CARTOMOBILE_CONFIG_PKG)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCaTion/vNd.CLuETRUsT.CArTOmobILe-ConfIg-pKG"),
+            crate::Mime::parse("aPpLicaTiOn/VNd.CLUeTrUSt.CartOMoBIle-ConfIG-pkG"),
             Ok(APPLICATION_VND_CLUETRUST_CARTOMOBILE_CONFIG_PKG)
         );
     }
@@ -74144,7 +74152,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COFFEESCRIPT)
         );
         assert_eq!(
-            crate::Mime::parse("appLicaTIon/VNd.CoffeeScriPt"),
+            crate::Mime::parse("appLIcatIOn/Vnd.coFfeeScrIPt"),
             Ok(APPLICATION_VND_COFFEESCRIPT)
         );
     }
@@ -74166,7 +74174,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_DOCUMENT)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicaTioN/vnD.collAbio.XoDOcuMenTs.doCuMeNt"),
+            crate::Mime::parse("appLicATioN/vnd.CollABiO.xoDocUmentS.DoCumEnt"),
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_DOCUMENT)
         );
     }
@@ -74189,7 +74197,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_DOCUMENT_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtiON/Vnd.COlLABIo.xOdoCumenTS.DOcUMeNT-TEmPlAtE"),
+            crate::Mime::parse("ApPliCAtIon/VNd.COLlAbIo.XodocUMENTs.DoCUmENt-tEmPlate"),
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_DOCUMENT_TEMPLATE)
         );
     }
@@ -74212,7 +74220,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_PRESENTATION)
         );
         assert_eq!(
-            crate::Mime::parse("applIcatioN/VND.cOlLABIo.XODOCUmeNTS.PreseNTatIon"),
+            crate::Mime::parse("ApplicATION/vNd.COLlABIO.XOdoCUMENts.pREseNtaTioN"),
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_PRESENTATION)
         );
     }
@@ -74235,7 +74243,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_PRESENTATION_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICaTion/Vnd.cOlLabiO.XoDoCumeNTS.preseNtaTIon-teMPlaTE"),
+            crate::Mime::parse("APpLicaTIon/vNd.colLaBiO.XodoCUMEnts.pResENtaTioN-teMPLAtE"),
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_PRESENTATION_TEMPLATE)
         );
     }
@@ -74258,7 +74266,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_SPREADSHEET)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCaTioN/Vnd.cOlLABiO.xODoCUMENTs.SpREAdsheET"),
+            crate::Mime::parse("aPpLicAtIon/vNd.COlLAbIO.XODOCUmENtS.SpreaDSHeEt"),
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_SPREADSHEET)
         );
     }
@@ -74281,7 +74289,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_SPREADSHEET_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicaTIoN/VNd.CoLLabio.xodOCUmENtS.SPreadSheet-TeMPLatE"),
+            crate::Mime::parse("appLIcATIOn/VnD.collabio.XOdOCuMENTs.spReadsHEeT-TemPLATE"),
             Ok(APPLICATION_VND_COLLABIO_XODOCUMENTS_SPREADSHEET_TEMPLATE)
         );
     }
@@ -74303,7 +74311,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COLLECTION_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCaTioN/VNd.cOLlEctiON+jSoN"),
+            crate::Mime::parse("aPpLicATIOn/vND.CollECtiOn+JsoN"),
             Ok(APPLICATION_VND_COLLECTION_JSON)
         );
     }
@@ -74327,7 +74335,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COLLECTION_DOC_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicaTIOn/vND.collEctiOn.DOC+json"),
+            crate::Mime::parse("appLICaTiON/vnd.CollEctION.doc+JsOn"),
             Ok(APPLICATION_VND_COLLECTION_DOC_JSON)
         );
     }
@@ -74351,7 +74359,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COLLECTION_NEXT_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcatIoN/VnD.cOlleCTIOn.NExt+JSOn"),
+            crate::Mime::parse("ApplIcAtIoN/vNd.cOLLEctIOn.NEXT+json"),
             Ok(APPLICATION_VND_COLLECTION_NEXT_JSON)
         );
     }
@@ -74373,7 +74381,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COMICBOOK_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("applICatioN/vnD.cOmIcBOoK+ziP"),
+            crate::Mime::parse("APplicAtioN/vNd.cOMiCBooK+Zip"),
             Ok(APPLICATION_VND_COMICBOOK_ZIP)
         );
     }
@@ -74393,7 +74401,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COMICBOOK_RAR)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicAtIOn/vnD.COMicbOOk-rAR"),
+            crate::Mime::parse("apPlICatioN/VND.coMIcboOK-RaR"),
             Ok(APPLICATION_VND_COMICBOOK_RAR)
         );
     }
@@ -74415,7 +74423,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COMMERCE_BATTELLE)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICATIoN/VnD.ComMErcE-BatteLLe"),
+            crate::Mime::parse("APPLIcATIoN/Vnd.ComMERce-bATteLLe"),
             Ok(APPLICATION_VND_COMMERCE_BATTELLE)
         );
     }
@@ -74435,7 +74443,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COMMONSPACE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcaTIOn/vND.coMmoNSPACe"),
+            crate::Mime::parse("AppLICaTiON/vnD.cOMMONspaCE"),
             Ok(APPLICATION_VND_COMMONSPACE)
         );
     }
@@ -74455,7 +74463,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CONTACT_CMSG)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicAtiON/Vnd.cONTACT.cMsg"),
+            crate::Mime::parse("apPliCATIon/vND.CONtaCt.CmSg"),
             Ok(APPLICATION_VND_CONTACT_CMSG)
         );
     }
@@ -74479,7 +74487,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COREOS_IGNITION_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcATion/VnD.cOREos.IGNitIon+jSon"),
+            crate::Mime::parse("ApPLicaTIoN/vND.coREOS.iGnitiOn+jSoN"),
             Ok(APPLICATION_VND_COREOS_IGNITION_JSON)
         );
     }
@@ -74499,7 +74507,7 @@ pub mod constants {
             Ok(APPLICATION_VND_COSMOCALLER)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICaTiOn/vNd.cosMoCALLEr"),
+            crate::Mime::parse("APpLiCaTiOn/vnd.cOSMOCallEr"),
             Ok(APPLICATION_VND_COSMOCALLER)
         );
     }
@@ -74519,7 +74527,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CRICK_CLICKER)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCatION/VND.CRICk.ClICKEr"),
+            crate::Mime::parse("aPplICATION/VND.cRIcK.CLiCKER"),
             Ok(APPLICATION_VND_CRICK_CLICKER)
         );
     }
@@ -74541,7 +74549,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CRICK_CLICKER_KEYBOARD)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicaTiOn/vnd.crIcK.clIcker.KeybOard"),
+            crate::Mime::parse("appLiCation/vnD.CRicK.clicKer.KeybOArd"),
             Ok(APPLICATION_VND_CRICK_CLICKER_KEYBOARD)
         );
     }
@@ -74563,7 +74571,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CRICK_CLICKER_PALETTE)
         );
         assert_eq!(
-            crate::Mime::parse("APplicatIoN/Vnd.CriCK.ClicKER.pAlEtTE"),
+            crate::Mime::parse("applIcAtIon/Vnd.CRIck.CLICkEr.pALeTTe"),
             Ok(APPLICATION_VND_CRICK_CLICKER_PALETTE)
         );
     }
@@ -74585,7 +74593,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CRICK_CLICKER_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcAtiON/VnD.CRiCK.clIcKeR.teMPLaTE"),
+            crate::Mime::parse("ApPliCATIoN/VNd.CRicK.ClICkeR.TeMPlAte"),
             Ok(APPLICATION_VND_CRICK_CLICKER_TEMPLATE)
         );
     }
@@ -74607,7 +74615,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CRICK_CLICKER_WORDBANK)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicAtioN/vnD.CRIcK.ClIckER.woRdbank"),
+            crate::Mime::parse("apPlicATioN/VND.CRIcK.cLICkeR.wordBaNK"),
             Ok(APPLICATION_VND_CRICK_CLICKER_WORDBANK)
         );
     }
@@ -74631,7 +74639,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CRITICALTOOLS_WBS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICatiOn/vnd.CRITICAltoolS.wbS+xMl"),
+            crate::Mime::parse("APpliCation/VND.CRIticalTOolS.wBs+Xml"),
             Ok(APPLICATION_VND_CRITICALTOOLS_WBS_XML)
         );
     }
@@ -74653,7 +74661,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CRYPTII_PIPE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCAtion/vND.crYpTii.piPe+Json"),
+            crate::Mime::parse("aPPlicaTiON/vnD.CryptiI.PIpe+jsoN"),
             Ok(APPLICATION_VND_CRYPTII_PIPE_JSON)
         );
     }
@@ -74675,7 +74683,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CRYPTO_SHADE_FILE)
         );
         assert_eq!(
-            crate::Mime::parse("appLICaTioN/VNd.cRYpTO-shAdE-fILe"),
+            crate::Mime::parse("APpLicATIOn/vND.CRyptO-SHaDE-fiLe"),
             Ok(APPLICATION_VND_CRYPTO_SHADE_FILE)
         );
     }
@@ -74697,7 +74705,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CRYPTOMATOR_ENCRYPTED)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICatIon/VNd.CrYptOmATor.eNcRyPTeD"),
+            crate::Mime::parse("APplIcatIOn/VnD.cRyPTomatOr.eNCrYPtEd"),
             Ok(APPLICATION_VND_CRYPTOMATOR_ENCRYPTED)
         );
     }
@@ -74719,7 +74727,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CRYPTOMATOR_VAULT)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCAtION/VNd.cRYPToMAtoR.vAULt"),
+            crate::Mime::parse("aPPlICATIOn/vND.CrYPtoMAtOR.vAUlt"),
             Ok(APPLICATION_VND_CRYPTOMATOR_VAULT)
         );
     }
@@ -74739,7 +74747,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CTC_POSML)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcatIoN/Vnd.ctC-pOSMl"),
+            crate::Mime::parse("ApplIcAtIon/vnD.cTC-poSml"),
             Ok(APPLICATION_VND_CTC_POSML)
         );
     }
@@ -74761,7 +74769,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CTCT_WS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCaTION/VNd.cTct.Ws+Xml"),
+            crate::Mime::parse("aPpLICAtIOn/vNd.cTct.ws+XMl"),
             Ok(APPLICATION_VND_CTCT_WS_XML)
         );
     }
@@ -74781,7 +74789,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CUPS_PDF)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicatIoN/vND.Cups-Pdf"),
+            crate::Mime::parse("applIcAtiON/Vnd.cUps-PdF"),
             Ok(APPLICATION_VND_CUPS_PDF)
         );
     }
@@ -74803,7 +74811,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CUPS_POSTSCRIPT)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicatION/Vnd.cuPs-POstsCRiPT"),
+            crate::Mime::parse("applICAtIon/vnD.CUPs-pOStSCRIpT"),
             Ok(APPLICATION_VND_CUPS_POSTSCRIPT)
         );
     }
@@ -74823,7 +74831,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CUPS_PPD)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICATIoN/vND.cUpS-ppd"),
+            crate::Mime::parse("APPLIcAtiON/vNd.cups-Ppd"),
             Ok(APPLICATION_VND_CUPS_PPD)
         );
     }
@@ -74843,7 +74851,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CUPS_RASTER)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcatiON/VND.CUps-rAster"),
+            crate::Mime::parse("AppliCATION/VNd.cuPs-raStER"),
             Ok(APPLICATION_VND_CUPS_RASTER)
         );
     }
@@ -74863,7 +74871,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CUPS_RAW)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICatIOn/Vnd.Cups-rAW"),
+            crate::Mime::parse("APplICatIon/Vnd.CuPS-rAW"),
             Ok(APPLICATION_VND_CUPS_RAW)
         );
     }
@@ -74883,7 +74891,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CURL)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcatIoN/vnd.Curl"),
+            crate::Mime::parse("ApplIcATion/Vnd.CuRL"),
             Ok(APPLICATION_VND_CURL)
         );
     }
@@ -74905,7 +74913,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CYAN_DEAN_ROOT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCATIOn/vnd.CYAn.dEAN.rOOt+xml"),
+            crate::Mime::parse("aPPLICation/VND.CyAN.DeAN.root+xml"),
             Ok(APPLICATION_VND_CYAN_DEAN_ROOT_XML)
         );
     }
@@ -74925,7 +74933,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CYBANK)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicaTiOn/VND.cYbaNk"),
+            crate::Mime::parse("appLiCatION/vNd.CyBank"),
             Ok(APPLICATION_VND_CYBANK)
         );
     }
@@ -74947,7 +74955,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CYCLONEDX_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicaTION/vNd.CYclOnedx+jsoN"),
+            crate::Mime::parse("appLICATiOn/VNd.Cyclonedx+jsOn"),
             Ok(APPLICATION_VND_CYCLONEDX_JSON)
         );
     }
@@ -74969,7 +74977,7 @@ pub mod constants {
             Ok(APPLICATION_VND_CYCLONEDX_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCATION/VnD.CyClOnEdX+Xml"),
+            crate::Mime::parse("aPPLICATIoN/VnD.CyClONEdx+xmL"),
             Ok(APPLICATION_VND_CYCLONEDX_XML)
         );
     }
@@ -74993,7 +75001,7 @@ pub mod constants {
             Ok(APPLICATION_VND_D2L_COURSEPACKAGE1P0_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatIon/VNd.d2l.cOURSEpACkAgE1P0+ziP"),
+            crate::Mime::parse("APplIcatIOn/vnd.d2L.COuRSePaCkAge1p0+ZIp"),
             Ok(APPLICATION_VND_D2L_COURSEPACKAGE1P0_ZIP)
         );
     }
@@ -75013,7 +75021,7 @@ pub mod constants {
             Ok(APPLICATION_VND_D3M_DATASET)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCatIOn/vNd.d3M-dAtaset"),
+            crate::Mime::parse("aPplICatiOn/vnD.d3m-dataSet"),
             Ok(APPLICATION_VND_D3M_DATASET)
         );
     }
@@ -75033,7 +75041,7 @@ pub mod constants {
             Ok(APPLICATION_VND_D3M_PROBLEM)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcatIoN/VNd.D3M-PrObLeM"),
+            crate::Mime::parse("ApplIcATIOn/VND.D3M-PrOBlEM"),
             Ok(APPLICATION_VND_D3M_PROBLEM)
         );
     }
@@ -75053,7 +75061,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DART)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCaTIon/vND.DaRT"),
+            crate::Mime::parse("aPpLIcaTiON/VnD.DARt"),
             Ok(APPLICATION_VND_DART)
         );
     }
@@ -75075,7 +75083,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DATA_VISION_RDZ)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICaTiOn/vND.daTa-vISioN.rDz"),
+            crate::Mime::parse("APpLiCaTiON/vnD.daTA-vISiOn.Rdz"),
             Ok(APPLICATION_VND_DATA_VISION_RDZ)
         );
     }
@@ -75097,7 +75105,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DATAPACKAGE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCaTioN/VNd.DATApACKaGE+JSON"),
+            crate::Mime::parse("aPpLicATIOn/VND.dATApACkAGE+JsOn"),
             Ok(APPLICATION_VND_DATAPACKAGE_JSON)
         );
     }
@@ -75119,7 +75127,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DATARESOURCE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicATiON/vND.daTareSourcE+JSon"),
+            crate::Mime::parse("apPLiCATiON/vnD.daTaresOURCe+JSoN"),
             Ok(APPLICATION_VND_DATARESOURCE_JSON)
         );
     }
@@ -75139,7 +75147,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DBF)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCATION/Vnd.dbf"),
+            crate::Mime::parse("aPPLICATIon/vnd.dbF"),
             Ok(APPLICATION_VND_DBF)
         );
     }
@@ -75161,7 +75169,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DEBIAN_BINARY_PACKAGE)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcAtION/vnD.DebiAN.bINary-pAcKage"),
+            crate::Mime::parse("ApPlICAtioN/Vnd.DEBiAN.binaRy-packagE"),
             Ok(APPLICATION_VND_DEBIAN_BINARY_PACKAGE)
         );
     }
@@ -75181,7 +75189,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DECE_DATA)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcaTION/vNd.dECE.dAta"),
+            crate::Mime::parse("AppLICAtiOn/vND.DeCe.dAta"),
             Ok(APPLICATION_VND_DECE_DATA)
         );
     }
@@ -75203,7 +75211,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DECE_TTML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCatiOn/vnd.DECe.ttmL+xMl"),
+            crate::Mime::parse("aPpliCaTion/VND.Dece.TtMl+XmL"),
             Ok(APPLICATION_VND_DECE_TTML_XML)
         );
     }
@@ -75225,7 +75233,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DECE_UNSPECIFIED)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCAtiON/VNd.dEce.UnspEciFIeD"),
+            crate::Mime::parse("aPPliCATIOn/vNd.DEce.UnsPEcIFIED"),
             Ok(APPLICATION_VND_DECE_UNSPECIFIED)
         );
     }
@@ -75245,7 +75253,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DECE_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcATIoN/vND.DeCe.ZIp"),
+            crate::Mime::parse("ApPLIcATiON/VnD.dECe.ZIP"),
             Ok(APPLICATION_VND_DECE_ZIP)
         );
     }
@@ -75267,7 +75275,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DENOVO_FCSELAYOUT_LINK)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICaTion/VND.DEnOvo.FcseLAyouT-liNk"),
+            crate::Mime::parse("APpLicaTION/VNd.denOvo.FCselAYouT-LinK"),
             Ok(APPLICATION_VND_DENOVO_FCSELAYOUT_LINK)
         );
     }
@@ -75287,7 +75295,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DESMUME_MOVIE)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtiON/Vnd.deSMUme.Movie"),
+            crate::Mime::parse("APPliCATIon/vnD.DesmUme.mOvIE"),
             Ok(APPLICATION_VND_DESMUME_MOVIE)
         );
     }
@@ -75309,7 +75317,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DIR_BI_PLATE_DL_NOSUFFIX)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICATiOn/vnd.DIR-bI.plate-dl-Nosuffix"),
+            crate::Mime::parse("APPLiCation/VND.dIr-bi.pLate-dl-nosuffix"),
             Ok(APPLICATION_VND_DIR_BI_PLATE_DL_NOSUFFIX)
         );
     }
@@ -75331,7 +75339,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DM_DELEGATION_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applicATIOn/vnD.dm.DeLeGATion+XMl"),
+            crate::Mime::parse("apPLICaTioN/vnd.dM.DELegatIOn+Xml"),
             Ok(APPLICATION_VND_DM_DELEGATION_XML)
         );
     }
@@ -75351,7 +75359,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DNA)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicAtiOn/VNd.DNa"),
+            crate::Mime::parse("apPliCaTIOn/VNd.DNa"),
             Ok(APPLICATION_VND_DNA)
         );
     }
@@ -75373,7 +75381,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DOCUMENT_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcaTIOn/vnd.DOCUMEnt+jsoN"),
+            crate::Mime::parse("AppLICation/VND.DOcuMent+jsoN"),
             Ok(APPLICATION_VND_DOCUMENT_JSON)
         );
     }
@@ -75393,7 +75401,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DOLBY_MOBILE_1)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcaTiON/VnD.DolbY.mobIle.1"),
+            crate::Mime::parse("AppLiCATIoN/Vnd.DOlby.mobiLe.1"),
             Ok(APPLICATION_VND_DOLBY_MOBILE_1)
         );
     }
@@ -75413,7 +75421,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DOLBY_MOBILE_2)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCATIon/VNd.DolBy.mobILE.2"),
+            crate::Mime::parse("aPPLIcaTIOn/Vnd.dolby.MOBILe.2"),
             Ok(APPLICATION_VND_DOLBY_MOBILE_2)
         );
     }
@@ -75436,7 +75444,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DOREMIR_SCORECLOUD_BINARY_DOCUMENT)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcatIoN/vnD.DoRemIR.scorEclOUD-bINARy-DOCUmEnT"),
+            crate::Mime::parse("ApplIcATioN/VnD.dORemir.ScoRECloUD-BinARY-dOcUMenT"),
             Ok(APPLICATION_VND_DOREMIR_SCORECLOUD_BINARY_DOCUMENT)
         );
     }
@@ -75456,7 +75464,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DPGRAPH)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICatION/Vnd.dpgRApH"),
+            crate::Mime::parse("APplICATIon/vnd.DpGRapH"),
             Ok(APPLICATION_VND_DPGRAPH)
         );
     }
@@ -75476,7 +75484,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DREAMFACTORY)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcATIoN/vND.dreAMFActoRY"),
+            crate::Mime::parse("ApPLIcATiON/vnd.DREamfACtory"),
             Ok(APPLICATION_VND_DREAMFACTORY)
         );
     }
@@ -75498,7 +75506,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DRIVE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("applIcAtioN/vND.drive+jsoN"),
+            crate::Mime::parse("ApPlicATiON/vnd.drive+jSON"),
             Ok(APPLICATION_VND_DRIVE_JSON)
         );
     }
@@ -75518,7 +75526,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DTG_LOCAL)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcAtioN/vnd.DTG.loCal"),
+            crate::Mime::parse("ApPlicAtion/VND.dtG.local"),
             Ok(APPLICATION_VND_DTG_LOCAL)
         );
     }
@@ -75540,7 +75548,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DTG_LOCAL_FLASH)
         );
         assert_eq!(
-            crate::Mime::parse("appliCATiON/VnD.dtG.lOcAl.fLash"),
+            crate::Mime::parse("aPPLiCAtIoN/vnD.dTg.lOcAl.flAsh"),
             Ok(APPLICATION_VND_DTG_LOCAL_FLASH)
         );
     }
@@ -75560,7 +75568,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DTG_LOCAL_HTML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcATION/VnD.DTg.locAl.HTMl"),
+            crate::Mime::parse("ApPLICATIoN/VNd.dtg.loCAL.hTml"),
             Ok(APPLICATION_VND_DTG_LOCAL_HTML)
         );
     }
@@ -75580,7 +75588,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_AIT)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcATiON/vND.dVb.aiT"),
+            crate::Mime::parse("ApPLiCATiON/vNd.dvB.AiT"),
             Ok(APPLICATION_VND_DVB_AIT)
         );
     }
@@ -75602,7 +75610,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_DVBISL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCATIOn/vNd.DvB.DvbISl+Xml"),
+            crate::Mime::parse("aPPLICatiOn/VnD.Dvb.DvbIsl+XMl"),
             Ok(APPLICATION_VND_DVB_DVBISL_XML)
         );
     }
@@ -75622,7 +75630,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_DVBJ)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcaTIoN/vND.dVB.DVbJ"),
+            crate::Mime::parse("AppLIcAtiON/vND.DVb.dVbJ"),
             Ok(APPLICATION_VND_DVB_DVBJ)
         );
     }
@@ -75644,7 +75652,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_ESGCONTAINER)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCATiON/VnD.dVB.EsGCoNTAiNer"),
+            crate::Mime::parse("aPPLiCAtIoN/vND.DvB.eSGCoNtaiNEr"),
             Ok(APPLICATION_VND_DVB_ESGCONTAINER)
         );
     }
@@ -75666,7 +75674,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_IPDCDFTNOTIFACCESS)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcaTiOn/vND.DVb.iPdcDFtNOtiFACceSs"),
+            crate::Mime::parse("AppLiCaTiON/VNd.dVb.IPdCDftNOTifAcCess"),
             Ok(APPLICATION_VND_DVB_IPDCDFTNOTIFACCESS)
         );
     }
@@ -75688,7 +75696,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_IPDCESGACCESS)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICatioN/vNd.dvb.ipdcESGaccESS"),
+            crate::Mime::parse("APplicATiOn/vnd.dvb.IPDcesGACCesS"),
             Ok(APPLICATION_VND_DVB_IPDCESGACCESS)
         );
     }
@@ -75710,7 +75718,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_IPDCESGACCESS2)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicatIOn/VNd.DvB.IpDCesGACCeSS2"),
+            crate::Mime::parse("applICaTIOn/VnD.DvB.ipDCESgACcesS2"),
             Ok(APPLICATION_VND_DVB_IPDCESGACCESS2)
         );
     }
@@ -75732,7 +75740,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_IPDCESGPDD)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCaTioN/vnd.DVb.IpDcESGPDD"),
+            crate::Mime::parse("aPpLicATion/VNd.DvB.IPDCESGpdd"),
             Ok(APPLICATION_VND_DVB_IPDCESGPDD)
         );
     }
@@ -75754,7 +75762,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_IPDCROAMING)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcaTIon/vND.DVb.iPDcRoaMiNg"),
+            crate::Mime::parse("AppLIcatiON/VNd.dVB.IpdCrOamInG"),
             Ok(APPLICATION_VND_DVB_IPDCROAMING)
         );
     }
@@ -75776,7 +75784,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_IPTV_ALFEC_BASE)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcAtioN/vnD.dvB.iPTv.alFeC-base"),
+            crate::Mime::parse("ApPlicAtioN/vnD.dVB.iptV.ALfec-bAsE"),
             Ok(APPLICATION_VND_DVB_IPTV_ALFEC_BASE)
         );
     }
@@ -75798,7 +75806,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_IPTV_ALFEC_ENHANCEMENT)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCAtioN/VND.dvb.IPTv.alFeC-ENHaNcemenT"),
+            crate::Mime::parse("aPPlicATION/vnd.DVB.iptV.ALFEC-EnhancEMenT"),
             Ok(APPLICATION_VND_DVB_IPTV_ALFEC_ENHANCEMENT)
         );
     }
@@ -75822,7 +75830,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_NOTIF_AGGREGATE_ROOT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicATION/Vnd.dVB.NOtiF-AGGrEgaTE-RoOT+xMl"),
+            crate::Mime::parse("apPLICATIon/vND.DVb.NOTIF-AggREGAtE-roOt+xMl"),
             Ok(APPLICATION_VND_DVB_NOTIF_AGGREGATE_ROOT_XML)
         );
     }
@@ -75846,7 +75854,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_NOTIF_CONTAINER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCaTIOn/VND.dVb.notiF-containeR+XML"),
+            crate::Mime::parse("aPpLICaTION/vNd.dvb.Notif-contAINER+XmL"),
             Ok(APPLICATION_VND_DVB_NOTIF_CONTAINER_XML)
         );
     }
@@ -75870,7 +75878,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_NOTIF_GENERIC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCation/vNd.dVB.nOtIf-GeNERic+XMl"),
+            crate::Mime::parse("aPplicatiOn/vND.dVb.nOTiF-GeneRIc+xMl"),
             Ok(APPLICATION_VND_DVB_NOTIF_GENERIC_XML)
         );
     }
@@ -75894,7 +75902,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_NOTIF_IA_MSGLIST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCaTIoN/vnd.dVb.noTiF-IA-MsglIsT+xMl"),
+            crate::Mime::parse("aPpLIcATion/vNd.dvB.NoTIf-ia-MsGliSt+xml"),
             Ok(APPLICATION_VND_DVB_NOTIF_IA_MSGLIST_XML)
         );
     }
@@ -75919,7 +75927,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_NOTIF_IA_REGISTRATION_REQUEST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICATiOn/VNd.DVb.notIF-IA-rEgISTRAtIoN-rEQuEsT+XmL"),
+            crate::Mime::parse("APPLiCaTIOn/VNd.dvb.NoTIF-Ia-REGIsTrAtiON-ReQUEsT+XmL"),
             Ok(APPLICATION_VND_DVB_NOTIF_IA_REGISTRATION_REQUEST_XML)
         );
     }
@@ -75944,7 +75952,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_NOTIF_IA_REGISTRATION_RESPONSE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICaTion/vND.Dvb.Notif-iA-REgIstRAtIon-RESPOnSe+XMl"),
+            crate::Mime::parse("APpLicaTiON/Vnd.Dvb.notIf-Ia-reGIsTraTION-ReSpONSe+XmL"),
             Ok(APPLICATION_VND_DVB_NOTIF_IA_REGISTRATION_RESPONSE_XML)
         );
     }
@@ -75966,7 +75974,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_NOTIF_INIT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCATIOn/vnd.dVb.notIf-INIT+XMl"),
+            crate::Mime::parse("aPPLICation/vNd.dvb.noTIF-INIt+xML"),
             Ok(APPLICATION_VND_DVB_NOTIF_INIT_XML)
         );
     }
@@ -75986,7 +75994,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_PFR)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICATIOn/vNd.dVb.pfR"),
+            crate::Mime::parse("APPLICatiOn/vNd.dvB.PfR"),
             Ok(APPLICATION_VND_DVB_PFR)
         );
     }
@@ -76006,7 +76014,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DVB_SERVICE)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicaTIOn/vNd.dVb.sERvICE"),
+            crate::Mime::parse("appLICaTiOn/vNd.dVB.SERvicE"),
             Ok(APPLICATION_VND_DVB_SERVICE)
         );
     }
@@ -76026,7 +76034,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DXR)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcaTion/vNd.Dxr"),
+            crate::Mime::parse("AppLicaTiOn/Vnd.dXR"),
             Ok(APPLICATION_VND_DXR)
         );
     }
@@ -76046,7 +76054,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DYNAGEO)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcATiON/vnd.DYnagEo"),
+            crate::Mime::parse("ApPLiCAtion/VNd.dYnAgEo"),
             Ok(APPLICATION_VND_DYNAGEO)
         );
     }
@@ -76066,7 +76074,7 @@ pub mod constants {
             Ok(APPLICATION_VND_DZR)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCatIOn/vnd.Dzr"),
+            crate::Mime::parse("aPplICation/Vnd.dZR"),
             Ok(APPLICATION_VND_DZR)
         );
     }
@@ -76088,7 +76096,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EASYKARAOKE_CDGDOWNLOAD)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcATion/vNd.easYkARaoKe.cDgdOwNLoaD"),
+            crate::Mime::parse("ApPLicatiOn/vnd.eASykArAoKe.CdGDowNloAd"),
             Ok(APPLICATION_VND_EASYKARAOKE_CDGDOWNLOAD)
         );
     }
@@ -76108,7 +76116,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ECDIS_UPDATE)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCaTIon/vnd.EcDis-uPdaTE"),
+            crate::Mime::parse("aPpLIcation/VnD.eCdIs-UPdAte"),
             Ok(APPLICATION_VND_ECDIS_UPDATE)
         );
     }
@@ -76128,7 +76136,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ECIP_RLP)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcatiON/vNd.ecIP.Rlp"),
+            crate::Mime::parse("AppliCATiOn/vnD.ECip.RLP"),
             Ok(APPLICATION_VND_ECIP_RLP)
         );
     }
@@ -76150,7 +76158,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ECLIPSE_DITTO_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicAtiOn/vND.EclipsE.DItto+jSon"),
+            crate::Mime::parse("apPliCaTiON/Vnd.ecLiPSe.ditTo+jSON"),
             Ok(APPLICATION_VND_ECLIPSE_DITTO_JSON)
         );
     }
@@ -76170,7 +76178,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ECOWIN_CHART)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcATIOn/VNd.ecowIN.ChArt"),
+            crate::Mime::parse("ApPLICaTIOn/vnd.ECOWiN.cHART"),
             Ok(APPLICATION_VND_ECOWIN_CHART)
         );
     }
@@ -76192,7 +76200,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ECOWIN_FILEREQUEST)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcATioN/VND.ECOWiN.FiLerEqUest"),
+            crate::Mime::parse("ApPLicAtION/VND.eCOWiN.fIlErequESt"),
             Ok(APPLICATION_VND_ECOWIN_FILEREQUEST)
         );
     }
@@ -76214,7 +76222,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ECOWIN_FILEUPDATE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICatioN/Vnd.Ecowin.fILEupdATe"),
+            crate::Mime::parse("APplicATIon/Vnd.ecowIN.filEUpdATE"),
             Ok(APPLICATION_VND_ECOWIN_FILEUPDATE)
         );
     }
@@ -76234,7 +76242,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ECOWIN_SERIES)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCaTIOn/vND.ecOWin.sEriES"),
+            crate::Mime::parse("aPpLICatiON/vnD.ecowIn.SERIeS"),
             Ok(APPLICATION_VND_ECOWIN_SERIES)
         );
     }
@@ -76256,7 +76264,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ECOWIN_SERIESREQUEST)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCAtIon/vND.eCOwIn.SeRiESrEqUesT"),
+            crate::Mime::parse("aPPlIcaTiON/vND.EcOWiN.SErIeSreQUeSt"),
             Ok(APPLICATION_VND_ECOWIN_SERIESREQUEST)
         );
     }
@@ -76278,7 +76286,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ECOWIN_SERIESUPDATE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICatiOn/Vnd.eCOwin.seRIesUpdAtE"),
+            crate::Mime::parse("APpliCaTIon/vND.ecOwiN.seRieSuPDAte"),
             Ok(APPLICATION_VND_ECOWIN_SERIESUPDATE)
         );
     }
@@ -76298,7 +76306,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EFI_IMG)
         );
         assert_eq!(
-            crate::Mime::parse("APplICaTIoN/Vnd.efI.img"),
+            crate::Mime::parse("APpLIcAtIon/vnD.efi.ImG"),
             Ok(APPLICATION_VND_EFI_IMG)
         );
     }
@@ -76318,7 +76326,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EFI_ISO)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicatiOn/Vnd.EFI.iso"),
+            crate::Mime::parse("appliCatIon/VND.efi.IsO"),
             Ok(APPLICATION_VND_EFI_ISO)
         );
     }
@@ -76342,7 +76350,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EMCLIENT_ACCESSREQUEST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICAtIon/VNd.eMcLIeNT.ACCEssREquEsT+XML"),
+            crate::Mime::parse("APPlIcaTIOn/vNd.EmCLIENT.acCEssReQUEST+Xml"),
             Ok(APPLICATION_VND_EMCLIENT_ACCESSREQUEST_XML)
         );
     }
@@ -76362,7 +76370,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ENLIVEN)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcatiON/vNd.EnLiven"),
+            crate::Mime::parse("AppliCAtiOn/VnD.enlIvEN"),
             Ok(APPLICATION_VND_ENLIVEN)
         );
     }
@@ -76382,7 +76390,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ENPHASE_ENVOY)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcAtIoN/vNd.EnPhase.eNVOY"),
+            crate::Mime::parse("ApPlIcAtiOn/VnD.enpHaSE.EnVoY"),
             Ok(APPLICATION_VND_ENPHASE_ENVOY)
         );
     }
@@ -76404,7 +76412,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EPRINTS_DATA_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCATiOn/VnD.EPRiNTs.DAtA+xML"),
+            crate::Mime::parse("aPPLiCatIoN/VND.EPriNTs.daTA+xmL"),
             Ok(APPLICATION_VND_EPRINTS_DATA_XML)
         );
     }
@@ -76424,7 +76432,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EPSON_ESF)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICatION/VND.EPSoN.EsF"),
+            crate::Mime::parse("APplICAtION/VND.EPSoN.eSf"),
             Ok(APPLICATION_VND_EPSON_ESF)
         );
     }
@@ -76444,7 +76452,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EPSON_MSF)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicAtiON/vnd.EpSoN.Msf"),
+            crate::Mime::parse("apPliCAtion/VnD.EPSon.MSf"),
             Ok(APPLICATION_VND_EPSON_MSF)
         );
     }
@@ -76466,7 +76474,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EPSON_QUICKANIME)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicAtIOn/vND.epsoN.qUICkANIMe"),
+            crate::Mime::parse("apPlICatiON/vnd.EpsON.qUICKanIMe"),
             Ok(APPLICATION_VND_EPSON_QUICKANIME)
         );
     }
@@ -76486,7 +76494,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EPSON_SALT)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICATIon/VnD.EPSON.salT"),
+            crate::Mime::parse("APPLIcaTIoN/VND.EPson.sALT"),
             Ok(APPLICATION_VND_EPSON_SALT)
         );
     }
@@ -76506,7 +76514,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EPSON_SSF)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicAtIOn/VNd.epSon.sSf"),
+            crate::Mime::parse("apPlICatIOn/vnD.ePsOn.ssf"),
             Ok(APPLICATION_VND_EPSON_SSF)
         );
     }
@@ -76528,7 +76536,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ERICSSON_QUICKCALL)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCatION/VNd.eRiCsSon.qUicKcall"),
+            crate::Mime::parse("aPplICAtIOn/vNd.eRicSsOn.Quickcall"),
             Ok(APPLICATION_VND_ERICSSON_QUICKCALL)
         );
     }
@@ -76550,7 +76558,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ESPASS_ESPASS_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("applIcATIon/Vnd.espass-esPAss+ZiP"),
+            crate::Mime::parse("ApPLIcatIon/vnd.esPasS-esPAsS+ZIP"),
             Ok(APPLICATION_VND_ESPASS_ESPASS_ZIP)
         );
     }
@@ -76572,7 +76580,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ESZIGNO3_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcAtIoN/VnD.esziGnO3+XML"),
+            crate::Mime::parse("ApPlIcAtIoN/vnd.EsZiGNO3+xML"),
             Ok(APPLICATION_VND_ESZIGNO3_XML)
         );
     }
@@ -76594,7 +76602,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_AOC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCAtION/VnD.ETsi.Aoc+XmL"),
+            crate::Mime::parse("aPPlICAtIoN/VNd.eTsi.AoC+XmL"),
             Ok(APPLICATION_VND_ETSI_AOC_XML)
         );
     }
@@ -76616,7 +76624,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_ASIC_E_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcATION/vND.eTsI.asIC-e+zIp"),
+            crate::Mime::parse("ApPLICAtiON/vNd.etsI.Asic-e+ziP"),
             Ok(APPLICATION_VND_ETSI_ASIC_E_ZIP)
         );
     }
@@ -76638,7 +76646,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_ASIC_S_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("appLicATiON/VND.eTSI.ASiC-S+ZIp"),
+            crate::Mime::parse("apPLiCATION/vND.ETSi.aSIC-s+ZIP"),
             Ok(APPLICATION_VND_ETSI_ASIC_S_ZIP)
         );
     }
@@ -76660,7 +76668,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_CUG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcATIoN/VNd.ETsi.cuG+xML"),
+            crate::Mime::parse("ApPLIcAtIOn/VNd.EtsI.cUG+xml"),
             Ok(APPLICATION_VND_ETSI_CUG_XML)
         );
     }
@@ -76684,7 +76692,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_IPTVCOMMAND_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applIcatiOn/VND.etSI.IPtvCommand+xMl"),
+            crate::Mime::parse("AppliCatION/vnD.ETSi.IptvcommaNd+XMl"),
             Ok(APPLICATION_VND_ETSI_IPTVCOMMAND_XML)
         );
     }
@@ -76708,7 +76716,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_IPTVDISCOVERY_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCAtion/VND.etsI.iPTVdiSCoVeRY+XmL"),
+            crate::Mime::parse("aPPlicaTION/vnd.etSI.ipTVdIsCOVErY+XmL"),
             Ok(APPLICATION_VND_ETSI_IPTVDISCOVERY_XML)
         );
     }
@@ -76732,7 +76740,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_IPTVPROFILE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicATiON/VnD.EtSI.IPTVPrOfIlE+xmL"),
+            crate::Mime::parse("apPLiCAtIoN/VnD.eTSI.IpTvPrOFilE+XMl"),
             Ok(APPLICATION_VND_ETSI_IPTVPROFILE_XML)
         );
     }
@@ -76756,7 +76764,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_IPTVSAD_BC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCaTIon/VND.ETSI.iPTVSAd-bc+XmL"),
+            crate::Mime::parse("aPpLIcatION/VND.EtSI.IPtVsad-bC+XmL"),
             Ok(APPLICATION_VND_ETSI_IPTVSAD_BC_XML)
         );
     }
@@ -76780,7 +76788,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_IPTVSAD_COD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicATioN/VND.ETSi.IPTvSaD-cOd+xMl"),
+            crate::Mime::parse("apPLicAtION/VND.ETSI.IpTVsAd-cOd+XmL"),
             Ok(APPLICATION_VND_ETSI_IPTVSAD_COD_XML)
         );
     }
@@ -76804,7 +76812,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_IPTVSAD_NPVR_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCaTION/vND.etSI.iptVsad-nPvr+xMl"),
+            crate::Mime::parse("aPpLICATiON/vnD.etsi.iptVsAd-NpVr+XmL"),
             Ok(APPLICATION_VND_ETSI_IPTVSAD_NPVR_XML)
         );
     }
@@ -76828,7 +76836,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_IPTVSERVICE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICaTiON/Vnd.eTsI.iPtVSErviCE+Xml"),
+            crate::Mime::parse("APpLiCAtIon/vNd.EtSi.IPtvsERVIce+XML"),
             Ok(APPLICATION_VND_ETSI_IPTVSERVICE_XML)
         );
     }
@@ -76850,7 +76858,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_IPTVSYNC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcatIon/VNd.EtSi.IpTvSYNC+XmL"),
+            crate::Mime::parse("ApplIcatIOn/VnD.eTsI.IPTVSYnC+xML"),
             Ok(APPLICATION_VND_ETSI_IPTVSYNC_XML)
         );
     }
@@ -76874,7 +76882,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_IPTVUEPROFILE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICAtIon/vnd.ETsI.IpTvuePROFiLe+XMl"),
+            crate::Mime::parse("APPlIcation/VNd.eTsI.ipTVUEpRoFILe+XML"),
             Ok(APPLICATION_VND_ETSI_IPTVUEPROFILE_XML)
         );
     }
@@ -76896,7 +76904,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_MCID_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCaTIon/VNd.ETSi.MciD+xMl"),
+            crate::Mime::parse("aPpLIcatIOn/VND.ETsi.mcId+xML"),
             Ok(APPLICATION_VND_ETSI_MCID_XML)
         );
     }
@@ -76916,7 +76924,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_MHEG5)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCATIon/VnD.Etsi.mheg5"),
+            crate::Mime::parse("aPPLIcaTIoN/Vnd.Etsi.MhEG5"),
             Ok(APPLICATION_VND_ETSI_MHEG5)
         );
     }
@@ -76941,7 +76949,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_OVERLOAD_CONTROL_POLICY_DATASET_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtIOn/VND.EtSi.OVErlOAd-coNTrOl-pOLICy-DatASet+xML"),
+            crate::Mime::parse("aPPlICatION/VnD.eTSI.oVErloaD-cOnTrOL-PolIcy-DatAsET+xml"),
             Ok(APPLICATION_VND_ETSI_OVERLOAD_CONTROL_POLICY_DATASET_XML)
         );
     }
@@ -76963,7 +76971,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_PSTN_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applIcaTiON/VND.eTSI.PsTn+xml"),
+            crate::Mime::parse("AppLiCATION/vND.ETsI.pstn+XML"),
             Ok(APPLICATION_VND_ETSI_PSTN_XML)
         );
     }
@@ -76985,7 +76993,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_SCI_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicAtIOn/vNd.ETsI.Sci+xML"),
+            crate::Mime::parse("apPlICaTiOn/VNd.ETsi.sCI+xml"),
             Ok(APPLICATION_VND_ETSI_SCI_XML)
         );
     }
@@ -77007,7 +77015,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_SIMSERVS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcAtIOn/VNd.EtSI.sIMSERvs+Xml"),
+            crate::Mime::parse("ApPlICatIOn/VnD.etSI.SImseRvs+xmL"),
             Ok(APPLICATION_VND_ETSI_SIMSERVS_XML)
         );
     }
@@ -77029,7 +77037,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_TIMESTAMP_TOKEN)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicaTIOn/vNd.eTSI.timESTAmp-tOKEn"),
+            crate::Mime::parse("appLICaTiOn/vND.Etsi.TIMesTaMP-tokEn"),
             Ok(APPLICATION_VND_ETSI_TIMESTAMP_TOKEN)
         );
     }
@@ -77051,7 +77059,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_TSL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicAtIon/vnD.ETsI.tsl+XML"),
+            crate::Mime::parse("apPlIcatioN/VNd.Etsi.TSL+xML"),
             Ok(APPLICATION_VND_ETSI_TSL_XML)
         );
     }
@@ -77071,7 +77079,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ETSI_TSL_DER)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICAtiON/vnD.eTsI.TSl.der"),
+            crate::Mime::parse("APPliCAtioN/vNd.ETSi.tsl.dER"),
             Ok(APPLICATION_VND_ETSI_TSL_DER)
         );
     }
@@ -77095,7 +77103,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EU_KASPARIAN_CAR_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCAtioN/VNd.Eu.kaspAriAN.Car+JsOn"),
+            crate::Mime::parse("aPPlicAtIOn/Vnd.eu.KasPArIan.CaR+jsOn"),
             Ok(APPLICATION_VND_EU_KASPARIAN_CAR_JSON)
         );
     }
@@ -77115,7 +77123,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EUDORA_DATA)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicATIOn/vnD.eudOra.DAtA"),
+            crate::Mime::parse("apPLICatioN/vnd.eudORa.dATA"),
             Ok(APPLICATION_VND_EUDORA_DATA)
         );
     }
@@ -77137,7 +77145,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EVOLV_ECIG_PROFILE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcATion/vNd.EvoLV.ECig.PROfILe"),
+            crate::Mime::parse("ApPLicaTiOn/Vnd.EVOLv.eCIG.PRofILe"),
             Ok(APPLICATION_VND_EVOLV_ECIG_PROFILE)
         );
     }
@@ -77159,7 +77167,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EVOLV_ECIG_SETTINGS)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICaTION/vnd.eVOLv.EciG.setTINgs"),
+            crate::Mime::parse("APpLICAtion/vND.eVOlv.Ecig.SEttinGS"),
             Ok(APPLICATION_VND_EVOLV_ECIG_SETTINGS)
         );
     }
@@ -77181,7 +77189,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EVOLV_ECIG_THEME)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICATiON/vND.EvoLv.ecIg.tHeme"),
+            crate::Mime::parse("APPLiCATiON/Vnd.evolV.ecIg.theMe"),
             Ok(APPLICATION_VND_EVOLV_ECIG_THEME)
         );
     }
@@ -77205,7 +77213,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EXSTREAM_EMPOWER_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcAtiON/vND.exstREAm-EMpOWeR+zip"),
+            crate::Mime::parse("ApPliCAtiON/vnd.EXStREAm-EmPower+ZiP"),
             Ok(APPLICATION_VND_EXSTREAM_EMPOWER_ZIP)
         );
     }
@@ -77227,7 +77235,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EXSTREAM_PACKAGE)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcatiOn/vND.ExSTReAM-pAcKaGe"),
+            crate::Mime::parse("AppliCatiON/VnD.ExSTreAm-pAcKaGe"),
             Ok(APPLICATION_VND_EXSTREAM_PACKAGE)
         );
     }
@@ -77247,7 +77255,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EZPIX_ALBUM)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCaTIon/vnd.eZpiX-Album"),
+            crate::Mime::parse("aPpLIcaTion/vNd.EzPix-aLBUM"),
             Ok(APPLICATION_VND_EZPIX_ALBUM)
         );
     }
@@ -77267,7 +77275,7 @@ pub mod constants {
             Ok(APPLICATION_VND_EZPIX_PACKAGE)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicatIOn/vnD.eZpIx-paCkAGE"),
+            crate::Mime::parse("applICatioN/vNd.ezpiX-PACkaGe"),
             Ok(APPLICATION_VND_EZPIX_PACKAGE)
         );
     }
@@ -77289,7 +77297,7 @@ pub mod constants {
             Ok(APPLICATION_VND_F_SECURE_MOBILE)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcatiOn/VNd.f-sEcURe.MOBIlE"),
+            crate::Mime::parse("AppliCatIOn/vNd.f-SecURE.mObiLE"),
             Ok(APPLICATION_VND_F_SECURE_MOBILE)
         );
     }
@@ -77313,7 +77321,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FAMILYSEARCH_GEDCOM_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCAtiOn/vND.fAmiLyseARch.gEdcOM+ZiP"),
+            crate::Mime::parse("aPPliCatiON/vNd.FamiLYseArCh.GEdCoM+ZiP"),
             Ok(APPLICATION_VND_FAMILYSEARCH_GEDCOM_ZIP)
         );
     }
@@ -77335,7 +77343,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FASTCOPY_DISK_IMAGE)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCaTION/VND.fAStCopY-diSk-IMaGE"),
+            crate::Mime::parse("aPpLICATION/vND.FasTCopY-DISk-ImagE"),
             Ok(APPLICATION_VND_FASTCOPY_DISK_IMAGE)
         );
     }
@@ -77355,7 +77363,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FDF)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcAtiOn/vnd.fdf"),
+            crate::Mime::parse("ApPliCaTion/vnd.fDf"),
             Ok(APPLICATION_VND_FDF)
         );
     }
@@ -77375,7 +77383,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FDSN_MSEED)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICatiON/VnD.fdSN.mSeeD"),
+            crate::Mime::parse("APpliCATIoN/vnD.FdSn.MSeEd"),
             Ok(APPLICATION_VND_FDSN_MSEED)
         );
     }
@@ -77395,7 +77403,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FDSN_SEED)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcatioN/vND.FDsN.seEd"),
+            crate::Mime::parse("ApplicAtiON/VNd.FdsN.Seed"),
             Ok(APPLICATION_VND_FDSN_SEED)
         );
     }
@@ -77415,7 +77423,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FFSNS)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcATiOn/VNd.fFsns"),
+            crate::Mime::parse("ApPLiCatIOn/vNd.ffsns"),
             Ok(APPLICATION_VND_FFSNS)
         );
     }
@@ -77437,7 +77445,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FICLAB_FLB_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("applicAtIOn/VnD.ficlAb.FLb+zip"),
+            crate::Mime::parse("apPlICatIoN/vnd.FiCLAb.flb+zIp"),
             Ok(APPLICATION_VND_FICLAB_FLB_ZIP)
         );
     }
@@ -77457,7 +77465,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FILMIT_ZFC)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicATioN/vND.FILmiT.Zfc"),
+            crate::Mime::parse("apPLicATiON/VND.fIlMit.ZFc"),
             Ok(APPLICATION_VND_FILMIT_ZFC)
         );
     }
@@ -77477,7 +77485,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FINTS)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICatIoN/vnd.FintS"),
+            crate::Mime::parse("APplIcATion/Vnd.FINTs"),
             Ok(APPLICATION_VND_FINTS)
         );
     }
@@ -77499,7 +77507,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FIREMONKEYS_CLOUDCELL)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicAtIoN/VND.fIremONKEYs.CLouDCEll"),
+            crate::Mime::parse("apPlIcAtION/vNd.fIREMOnKEYs.CLOudCEll"),
             Ok(APPLICATION_VND_FIREMONKEYS_CLOUDCELL)
         );
     }
@@ -77519,7 +77527,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FLO_GRAPH_IT)
         );
         assert_eq!(
-            crate::Mime::parse("APplicATIon/VNd.flograPHIt"),
+            crate::Mime::parse("apPLIcaTIOn/vnd.flOGRaPHIt"),
             Ok(APPLICATION_VND_FLO_GRAPH_IT)
         );
     }
@@ -77539,7 +77547,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FLUXTIME_CLIP)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicAtIon/VnD.fluXTiME.CLIP"),
+            crate::Mime::parse("apPlIcatIoN/vnd.FlUXTIME.clIP"),
             Ok(APPLICATION_VND_FLUXTIME_CLIP)
         );
     }
@@ -77561,7 +77569,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FONT_FONTFORGE_SFD)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICatiOn/VnD.font-FonTfOrGE-SFd"),
+            crate::Mime::parse("APpliCaTIoN/vnd.fOnt-fOnTFORGe-sfD"),
             Ok(APPLICATION_VND_FONT_FONTFORGE_SFD)
         );
     }
@@ -77581,7 +77589,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FRAMEMAKER)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCAtiOn/VnD.FrAmemakEr"),
+            crate::Mime::parse("aPPliCatIoN/VnD.framEmAkEr"),
             Ok(APPLICATION_VND_FRAMEMAKER)
         );
     }
@@ -77601,7 +77609,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FSC_WEBLAUNCH)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICatIon/vNd.fSc.WEBlauNCh"),
+            crate::Mime::parse("APplIcaTiOn/vNd.FSC.weBLaunCh"),
             Ok(APPLICATION_VND_FSC_WEBLAUNCH)
         );
     }
@@ -77623,7 +77631,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIFILM_FB_DOCUWORKS)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcAtION/Vnd.FUJifIlm.fB.doCUworkS"),
+            crate::Mime::parse("ApPlICATIon/VND.fUjifiLm.fB.docuWORKS"),
             Ok(APPLICATION_VND_FUJIFILM_FB_DOCUWORKS)
         );
     }
@@ -77645,7 +77653,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIFILM_FB_DOCUWORKS_BINDER)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcAtiON/VnD.FUJiFILm.Fb.DOcuwoRKS.biNdeR"),
+            crate::Mime::parse("ApPliCATIoN/VND.FUJifIlM.Fb.doCUWOrkS.bINdEr"),
             Ok(APPLICATION_VND_FUJIFILM_FB_DOCUWORKS_BINDER)
         );
     }
@@ -77667,7 +77675,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIFILM_FB_DOCUWORKS_CONTAINER)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicAtIon/vND.fujiFilM.Fb.dOCUWorKS.COnTAInEr"),
+            crate::Mime::parse("apPlIcaTiON/vnd.FujIFIlm.FB.DocUWORKs.COnTainER"),
             Ok(APPLICATION_VND_FUJIFILM_FB_DOCUWORKS_CONTAINER)
         );
     }
@@ -77691,7 +77699,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIFILM_FB_JFI_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcatiON/VnD.fuJIfILm.Fb.jfI+xmL"),
+            crate::Mime::parse("AppliCATIoN/vnD.fUJiFIlM.fB.jfI+xMl"),
             Ok(APPLICATION_VND_FUJIFILM_FB_JFI_XML)
         );
     }
@@ -77711,7 +77719,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJITSU_OASYS)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcatioN/vnD.FujITsu.oasYs"),
+            crate::Mime::parse("ApplicATioN/Vnd.FujItsu.oaSYS"),
             Ok(APPLICATION_VND_FUJITSU_OASYS)
         );
     }
@@ -77733,7 +77741,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJITSU_OASYS2)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtiON/vND.fuJITSU.oasyS2"),
+            crate::Mime::parse("aPPliCAtiON/vnD.FUJItsu.OaSyS2"),
             Ok(APPLICATION_VND_FUJITSU_OASYS2)
         );
     }
@@ -77755,7 +77763,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJITSU_OASYS3)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcaTIoN/VNd.FUJItsU.oasYS3"),
+            crate::Mime::parse("AppLIcATIOn/VND.fuJItsu.OASys3"),
             Ok(APPLICATION_VND_FUJITSU_OASYS3)
         );
     }
@@ -77777,7 +77785,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJITSU_OASYSGP)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcaTIon/vNd.fUJiTsu.OASYSgp"),
+            crate::Mime::parse("AppLIcaTiOn/vND.FujiTSU.OasYSgp"),
             Ok(APPLICATION_VND_FUJITSU_OASYSGP)
         );
     }
@@ -77799,7 +77807,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJITSU_OASYSPRS)
         );
         assert_eq!(
-            crate::Mime::parse("APplication/VnD.FUjiTsu.OaSysprS"),
+            crate::Mime::parse("applicaTIoN/VNd.FujiTsU.oasYsPRS"),
             Ok(APPLICATION_VND_FUJITSU_OASYSPRS)
         );
     }
@@ -77821,7 +77829,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIXEROX_ART_EX)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtiOn/vNd.fujIXeROX.Art-ex"),
+            crate::Mime::parse("aPPliCatiOn/vnd.FuJIXeRox.art-EX"),
             Ok(APPLICATION_VND_FUJIXEROX_ART_EX)
         );
     }
@@ -77843,7 +77851,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIXEROX_ART4)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtIon/VNd.FUjiXerOX.ART4"),
+            crate::Mime::parse("aPPlIcatIOn/VNd.FujIXEROX.ARt4"),
             Ok(APPLICATION_VND_FUJIXEROX_ART4)
         );
     }
@@ -77863,7 +77871,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIXEROX_DDD)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcaTioN/Vnd.FUjiXErox.dDD"),
+            crate::Mime::parse("AppLicAtIon/VNd.FUjixerOX.ddd"),
             Ok(APPLICATION_VND_FUJIXEROX_DDD)
         );
     }
@@ -77885,7 +77893,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIXEROX_DOCUWORKS)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICatIOn/vnd.fUjixerOx.docUWOrKs"),
+            crate::Mime::parse("APplICaTion/vNd.fujIxErox.DOcUwORKS"),
             Ok(APPLICATION_VND_FUJIXEROX_DOCUWORKS)
         );
     }
@@ -77907,7 +77915,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIXEROX_DOCUWORKS_BINDER)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcAtion/VND.FUJIxERoX.docUwoRkS.BInDER"),
+            crate::Mime::parse("ApPlicaTION/VND.fUJiXerox.doCuWoRKs.BInDER"),
             Ok(APPLICATION_VND_FUJIXEROX_DOCUWORKS_BINDER)
         );
     }
@@ -77929,7 +77937,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIXEROX_DOCUWORKS_CONTAINER)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicAtiOn/vNd.FUjIXEROX.DocuwORkS.cOntAINer"),
+            crate::Mime::parse("apPliCaTiOn/VNd.FUJIXERox.dOCuWOrKs.CONtaINeR"),
             Ok(APPLICATION_VND_FUJIXEROX_DOCUWORKS_CONTAINER)
         );
     }
@@ -77951,7 +77959,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUJIXEROX_HBPL)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicAtion/Vnd.fUjIxeroX.hbpL"),
+            crate::Mime::parse("apPlicatIon/vNd.fujiXerox.HBPl"),
             Ok(APPLICATION_VND_FUJIXEROX_HBPL)
         );
     }
@@ -77971,7 +77979,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUT_MISNET)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcation/vND.FuT-MIsnet"),
+            crate::Mime::parse("ApplicaTiON/VnD.FUt-misNeT"),
             Ok(APPLICATION_VND_FUT_MISNET)
         );
     }
@@ -77993,7 +78001,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUTOIN_CBOR)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicatioN/Vnd.FUtOIn+CBOr"),
+            crate::Mime::parse("applicATIon/VNd.FuTOIN+cbOR"),
             Ok(APPLICATION_VND_FUTOIN_CBOR)
         );
     }
@@ -78015,7 +78023,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUTOIN_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICatIoN/vNd.futoIn+jsOn"),
+            crate::Mime::parse("APplIcAtiOn/vnd.FutoiN+JSoN"),
             Ok(APPLICATION_VND_FUTOIN_JSON)
         );
     }
@@ -78035,7 +78043,7 @@ pub mod constants {
             Ok(APPLICATION_VND_FUZZYSHEET)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicATiON/VnD.FuzZYSheet"),
+            crate::Mime::parse("apPLiCATIoN/Vnd.FUzzysheet"),
             Ok(APPLICATION_VND_FUZZYSHEET)
         );
     }
@@ -78057,7 +78065,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GENOMATIX_TUXEDO)
         );
         assert_eq!(
-            crate::Mime::parse("applicATION/vnd.gEnomatix.Tuxedo"),
+            crate::Mime::parse("apPLICATion/vNd.genomaTix.tuXEDo"),
             Ok(APPLICATION_VND_GENOMATIX_TUXEDO)
         );
     }
@@ -78079,7 +78087,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GENTICS_GRD_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicaTioN/vND.GENtICS.GRD+jSoN"),
+            crate::Mime::parse("appLicATiON/VND.GENtICS.gRd+jSON"),
             Ok(APPLICATION_VND_GENTICS_GRD_JSON)
         );
     }
@@ -78099,7 +78107,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GEOGEBRA_FILE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICATioN/vND.gEoGebrA.fiLe"),
+            crate::Mime::parse("APPLicAtiON/vNd.geoGEbrA.FIle"),
             Ok(APPLICATION_VND_GEOGEBRA_FILE)
         );
     }
@@ -78121,7 +78129,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GEOGEBRA_SLIDES)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCAtiON/VND.GeOgEBRA.sLIdeS"),
+            crate::Mime::parse("aPPliCAtION/VnD.GEOGEbRA.sLIdES"),
             Ok(APPLICATION_VND_GEOGEBRA_SLIDES)
         );
     }
@@ -78141,7 +78149,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GEOGEBRA_TOOL)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICAtIOn/vnD.gEOgebRa.tool"),
+            crate::Mime::parse("APPlICatioN/vND.geOgebra.TOoL"),
             Ok(APPLICATION_VND_GEOGEBRA_TOOL)
         );
     }
@@ -78163,7 +78171,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GEOMETRY_EXPLORER)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicATIOn/vND.GeoMEtRy-EXPLOREr"),
+            crate::Mime::parse("apPLICatiON/Vnd.GeOmETRY-EXPloREr"),
             Ok(APPLICATION_VND_GEOMETRY_EXPLORER)
         );
     }
@@ -78183,7 +78191,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GEONEXT)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcatIon/VND.GEOnexT"),
+            crate::Mime::parse("ApplIcatION/VND.geONExt"),
             Ok(APPLICATION_VND_GEONEXT)
         );
     }
@@ -78203,7 +78211,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GEOPLAN)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcAtIon/VNd.GEoplAn"),
+            crate::Mime::parse("ApPlIcatIOn/VNd.gEoPlAN"),
             Ok(APPLICATION_VND_GEOPLAN)
         );
     }
@@ -78223,7 +78231,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GEOSPACE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCaTiON/vND.gEOSPAce"),
+            crate::Mime::parse("aPpLiCATiON/vND.GEospAcE"),
             Ok(APPLICATION_VND_GEOSPACE)
         );
     }
@@ -78243,7 +78251,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GERBER)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcAtiON/VnD.gErBeR"),
+            crate::Mime::parse("ApPliCAtIoN/vNd.gERber"),
             Ok(APPLICATION_VND_GERBER)
         );
     }
@@ -78265,7 +78273,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GLOBALPLATFORM_CARD_CONTENT_MGT)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCATIOn/vnD.gLobALplaTFOrm.caRd-Content-MGT"),
+            crate::Mime::parse("aPPLICatioN/vNd.GLobaLPLatForM.CArd-contENT-mgt"),
             Ok(APPLICATION_VND_GLOBALPLATFORM_CARD_CONTENT_MGT)
         );
     }
@@ -78288,7 +78296,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GLOBALPLATFORM_CARD_CONTENT_MGT_RESPONSE)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcAtiOn/vNd.GLoBaLpLATfOrm.cArD-COnTenT-MGt-reSpoNSe"),
+            crate::Mime::parse("ApPliCatiOn/VNd.gLoBALpLatfoRm.cARd-coNtENt-mgT-rESpoNse"),
             Ok(APPLICATION_VND_GLOBALPLATFORM_CARD_CONTENT_MGT_RESPONSE)
         );
     }
@@ -78312,7 +78320,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GNU_TALER_EXCHANGE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcATioN/vnD.GnU.taleR.ExCHange+JSoN"),
+            crate::Mime::parse("ApPLicAtioN/VnD.gnu.TaLeR.exchANGe+jSON"),
             Ok(APPLICATION_VND_GNU_TALER_EXCHANGE_JSON)
         );
     }
@@ -78336,7 +78344,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GNU_TALER_MERCHANT_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcAtiOn/VnD.gnU.tALeR.MErchant+jSON"),
+            crate::Mime::parse("ApPliCaTIoN/vnD.gNU.TaLEr.mercHaNT+json"),
             Ok(APPLICATION_VND_GNU_TALER_MERCHANT_JSON)
         );
     }
@@ -78360,7 +78368,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GOOGLE_EARTH_KML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applIcaTiOn/vnD.GOOgle-eARth.kMl+XMl"),
+            crate::Mime::parse("AppLiCatioN/VND.googLE-eArTh.KMl+xmL"),
             Ok(APPLICATION_VND_GOOGLE_EARTH_KML_XML)
         );
     }
@@ -78382,7 +78390,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GOOGLE_EARTH_KMZ)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICATIOn/vnD.gooGLe-eaRth.kMZ"),
+            crate::Mime::parse("APPLICatioN/vnd.GooglE-eArTH.kMz"),
             Ok(APPLICATION_VND_GOOGLE_EARTH_KMZ)
         );
     }
@@ -78404,7 +78412,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GOV_SK_E_FORM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcaTioN/vNd.gOv.SK.E-FORm+xml"),
+            crate::Mime::parse("AppLicATiOn/vNd.GOV.sK.E-Form+xMl"),
             Ok(APPLICATION_VND_GOV_SK_E_FORM_XML)
         );
     }
@@ -78426,7 +78434,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GOV_SK_E_FORM_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcatION/vnD.gOV.SK.e-fOrm+zIp"),
+            crate::Mime::parse("ApplICATioN/vND.GOv.sk.e-FoRm+ziP"),
             Ok(APPLICATION_VND_GOV_SK_E_FORM_ZIP)
         );
     }
@@ -78450,7 +78458,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GOV_SK_XMLDATACONTAINER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLicatioN/VND.GOv.sK.XMlDaTaCONtaIner+XML"),
+            crate::Mime::parse("applicATION/VNd.gOv.Sk.xMlDATacOntaINER+xmL"),
             Ok(APPLICATION_VND_GOV_SK_XMLDATACONTAINER_XML)
         );
     }
@@ -78470,7 +78478,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GRAFEQ)
         );
         assert_eq!(
-            crate::Mime::parse("AppLication/VNd.GRAfeq"),
+            crate::Mime::parse("applicatIOn/VND.graFeQ"),
             Ok(APPLICATION_VND_GRAFEQ)
         );
     }
@@ -78490,7 +78498,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GRIDMP)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcatioN/vnd.gRIdMP"),
+            crate::Mime::parse("ApplicATion/vND.GRIDmp"),
             Ok(APPLICATION_VND_GRIDMP)
         );
     }
@@ -78512,7 +78520,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GROOVE_ACCOUNT)
         );
         assert_eq!(
-            crate::Mime::parse("APplicATion/vnd.GROOVE-AccOUnT"),
+            crate::Mime::parse("apPLicaTion/VND.GRoOve-AcCOUNT"),
             Ok(APPLICATION_VND_GROOVE_ACCOUNT)
         );
     }
@@ -78532,7 +78540,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GROOVE_HELP)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcaTION/VnD.grOOVe-heLP"),
+            crate::Mime::parse("AppLICATIoN/vnD.GrOovE-HeLp"),
             Ok(APPLICATION_VND_GROOVE_HELP)
         );
     }
@@ -78554,7 +78562,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GROOVE_IDENTITY_MESSAGE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcAtIon/vND.groOVE-idENTiTy-MESSage"),
+            crate::Mime::parse("ApPlIcatiON/vnd.GROovE-IdEntITY-messaGe"),
             Ok(APPLICATION_VND_GROOVE_IDENTITY_MESSAGE)
         );
     }
@@ -78576,7 +78584,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GROOVE_INJECTOR)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcaTIOn/vnD.Groove-injEcTOR"),
+            crate::Mime::parse("AppLICatioN/Vnd.groove-iNJECTOR"),
             Ok(APPLICATION_VND_GROOVE_INJECTOR)
         );
     }
@@ -78598,7 +78606,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GROOVE_TOOL_MESSAGE)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicatioN/VND.gROOVe-TooL-mEssaGe"),
+            crate::Mime::parse("applicATION/vND.GrOOve-toOl-mEsSAGE"),
             Ok(APPLICATION_VND_GROOVE_TOOL_MESSAGE)
         );
     }
@@ -78620,7 +78628,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GROOVE_TOOL_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICAtION/VnD.GRoove-tOOl-TEmpLATe"),
+            crate::Mime::parse("APPlICAtIoN/VNd.grooVE-tOOl-TEMplAtE"),
             Ok(APPLICATION_VND_GROOVE_TOOL_TEMPLATE)
         );
     }
@@ -78640,7 +78648,7 @@ pub mod constants {
             Ok(APPLICATION_VND_GROOVE_VCARD)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCation/vND.GRoovE-VcaRD"),
+            crate::Mime::parse("aPplicatiON/VNd.gROOve-VcARD"),
             Ok(APPLICATION_VND_GROOVE_VCARD)
         );
     }
@@ -78662,7 +78670,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HAL_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicATiOn/vND.HaL+jsON"),
+            crate::Mime::parse("apPLiCaTiON/VnD.haL+jSon"),
             Ok(APPLICATION_VND_HAL_JSON)
         );
     }
@@ -78684,7 +78692,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HAL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcatioN/Vnd.HAl+XmL"),
+            crate::Mime::parse("ApplicAtIon/VNd.HaL+xml"),
             Ok(APPLICATION_VND_HAL_XML)
         );
     }
@@ -78708,7 +78716,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HAND_HELD_ENTERTAINMENT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcAtiON/VnD.haNDhElD-enterTaINmEnT+xMl"),
+            crate::Mime::parse("ApPliCATIoN/vnD.hAnDheld-eNtERtAiNMeNt+xMl"),
             Ok(APPLICATION_VND_HAND_HELD_ENTERTAINMENT_XML)
         );
     }
@@ -78728,7 +78736,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HBCI)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcATioN/VnD.HBCi"),
+            crate::Mime::parse("ApPLicATIoN/VND.hBci"),
             Ok(APPLICATION_VND_HBCI)
         );
     }
@@ -78750,7 +78758,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HC_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicAtIoN/VnD.hC+jSOn"),
+            crate::Mime::parse("apPlIcAtIoN/vND.HC+JsON"),
             Ok(APPLICATION_VND_HC_JSON)
         );
     }
@@ -78770,7 +78778,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HCL_BIREPORTS)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICAtION/vnd.hcL-BiREpORts"),
+            crate::Mime::parse("APPlICAtion/vnD.HcL-bIRepOrts"),
             Ok(APPLICATION_VND_HCL_BIREPORTS)
         );
     }
@@ -78790,7 +78798,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HDT)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcatION/vnD.HdT"),
+            crate::Mime::parse("ApplICAtioN/VnD.HDT"),
             Ok(APPLICATION_VND_HDT)
         );
     }
@@ -78812,7 +78820,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HEROKU_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICatION/vnd.HErokU+jsON"),
+            crate::Mime::parse("APplICAtion/VNd.hErokU+JsoN"),
             Ok(APPLICATION_VND_HEROKU_JSON)
         );
     }
@@ -78834,7 +78842,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HHE_LESSON_PLAYER)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtiOn/vnd.HHE.LESSon-plAYER"),
+            crate::Mime::parse("APPliCaTion/VND.HHE.lessoN-PLayer"),
             Ok(APPLICATION_VND_HHE_LESSON_PLAYER)
         );
     }
@@ -78856,7 +78864,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HL7CDA_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applIcAtioN/vnd.HL7CdA+XML"),
+            crate::Mime::parse("ApPlicATion/VND.hL7CDA+XMl"),
             Ok(APPLICATION_VND_HL7CDA_XML)
         );
     }
@@ -78878,7 +78886,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HL7V2_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcAtiOn/VnD.hl7V2+xml"),
+            crate::Mime::parse("ApPliCatIoN/vnD.hL7v2+xml"),
             Ok(APPLICATION_VND_HL7V2_XML)
         );
     }
@@ -78898,7 +78906,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HP_HPGL)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicaTiOn/vnd.HP-HpgL"),
+            crate::Mime::parse("appLiCation/VNd.hp-hpgL"),
             Ok(APPLICATION_VND_HP_HPGL)
         );
     }
@@ -78918,7 +78926,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HP_HPID)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatiOn/VND.Hp-HPID"),
+            crate::Mime::parse("APpliCaTION/VnD.HP-HpId"),
             Ok(APPLICATION_VND_HP_HPID)
         );
     }
@@ -78938,7 +78946,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HP_HPS)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCatIon/VNd.HP-hPs"),
+            crate::Mime::parse("aPplIcaTIOn/VNd.Hp-HPs"),
             Ok(APPLICATION_VND_HP_HPS)
         );
     }
@@ -78958,7 +78966,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HP_JLYT)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCaTIoN/VnD.HP-Jlyt"),
+            crate::Mime::parse("aPpLIcAtIoN/VND.hp-JlYT"),
             Ok(APPLICATION_VND_HP_JLYT)
         );
     }
@@ -78978,7 +78986,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HP_PCL)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCatiOn/VNd.Hp-pCL"),
+            crate::Mime::parse("aPpliCaTIOn/VnD.HP-PcL"),
             Ok(APPLICATION_VND_HP_PCL)
         );
     }
@@ -78998,7 +79006,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HP_PCLXL)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCAtioN/vND.hp-PclXL"),
+            crate::Mime::parse("aPPlicATiON/vnD.hp-PCLxL"),
             Ok(APPLICATION_VND_HP_PCLXL)
         );
     }
@@ -79018,7 +79026,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HTTPHONE)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicatioN/vND.htTPhonE"),
+            crate::Mime::parse("applicATiON/vnD.httPHONe"),
             Ok(APPLICATION_VND_HTTPHONE)
         );
     }
@@ -79040,7 +79048,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HYDROSTATIX_SOF_DATA)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCAtIoN/Vnd.HYDrOstAtix.soF-daTa"),
+            crate::Mime::parse("aPPlIcATIon/VND.HydRostatiX.soF-dAtA"),
             Ok(APPLICATION_VND_HYDROSTATIX_SOF_DATA)
         );
     }
@@ -79062,7 +79070,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HYPER_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTIOn/vnd.hyPEr+JsOn"),
+            crate::Mime::parse("AppLICaTion/vnD.hyPeR+JSoN"),
             Ok(APPLICATION_VND_HYPER_JSON)
         );
     }
@@ -79084,7 +79092,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HYPER_ITEM_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcAtIOn/VND.hYper-itEm+JsOn"),
+            crate::Mime::parse("ApPlICatION/vNd.hYpeR-ITeM+JSoN"),
             Ok(APPLICATION_VND_HYPER_ITEM_JSON)
         );
     }
@@ -79106,7 +79114,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HYPERDRIVE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicatIOn/Vnd.HYPeRdriVe+JsOn"),
+            crate::Mime::parse("applICatIon/VND.HypeRdrIvE+JsoN"),
             Ok(APPLICATION_VND_HYPERDRIVE_JSON)
         );
     }
@@ -79128,7 +79136,7 @@ pub mod constants {
             Ok(APPLICATION_VND_HZN_3D_CROSSWORD)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicATIoN/vnd.hzN-3D-CRosSwORD"),
+            crate::Mime::parse("apPLIcAtion/vnD.hZn-3d-CrOSSWORD"),
             Ok(APPLICATION_VND_HZN_3D_CROSSWORD)
         );
     }
@@ -79150,7 +79158,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IBM_ELECTRONIC_MEDIA)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICatIon/VND.IbM.ELectROnIc-MedIA"),
+            crate::Mime::parse("APplIcaTION/VnD.IBm.eLEcTroNic-MEDiA"),
             Ok(APPLICATION_VND_IBM_ELECTRONIC_MEDIA)
         );
     }
@@ -79170,7 +79178,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IBM_MINI_PAY)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcatiON/VnD.ibM.MINipaY"),
+            crate::Mime::parse("AppliCAtIoN/vnD.IBM.miNIpay"),
             Ok(APPLICATION_VND_IBM_MINI_PAY)
         );
     }
@@ -79192,7 +79200,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IBM_RIGHTS_MANAGEMENT)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicATIon/Vnd.IBM.Rights-mAnAGeMENT"),
+            crate::Mime::parse("apPLIcaTIon/VND.Ibm.riGhTs-MaNAGEment"),
             Ok(APPLICATION_VND_IBM_RIGHTS_MANAGEMENT)
         );
     }
@@ -79214,7 +79222,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IBM_SECURE_CONTAINER)
         );
         assert_eq!(
-            crate::Mime::parse("applICATION/Vnd.Ibm.sEcuRE-CoNtAiNer"),
+            crate::Mime::parse("APPLICAtIon/Vnd.iBm.SECUrE-CoNtaiNer"),
             Ok(APPLICATION_VND_IBM_SECURE_CONTAINER)
         );
     }
@@ -79234,7 +79242,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ICCPROFILE)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicAtion/vNd.ICcPRoFIlE"),
+            crate::Mime::parse("apPlicatiOn/VNd.IcCPrOFIle"),
             Ok(APPLICATION_VND_ICCPROFILE)
         );
     }
@@ -79254,7 +79262,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IEEE_1905)
         );
         assert_eq!(
-            crate::Mime::parse("APplICaTiOn/Vnd.IEeE.1905"),
+            crate::Mime::parse("APpLiCatIon/VNd.ieEe.1905"),
             Ok(APPLICATION_VND_IEEE_1905)
         );
     }
@@ -79274,7 +79282,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IGLOADER)
         );
         assert_eq!(
-            crate::Mime::parse("appliCaTIOn/VNd.IGlOaDer"),
+            crate::Mime::parse("aPpLICatIOn/VNd.iGloadEr"),
             Ok(APPLICATION_VND_IGLOADER)
         );
     }
@@ -79298,7 +79306,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMAGEMETER_FOLDER_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCatIOn/vnD.ImaGEMETER.FOldEr+ZiP"),
+            crate::Mime::parse("aPplICatioN/Vnd.IMAGEMETEr.FoLDeR+zip"),
             Ok(APPLICATION_VND_IMAGEMETER_FOLDER_ZIP)
         );
     }
@@ -79322,7 +79330,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMAGEMETER_IMAGE_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("appliCaTioN/vnD.imagemEtER.ImaGe+ZiP"),
+            crate::Mime::parse("aPpLicATioN/vnd.imAgEMETer.imAgE+ZIp"),
             Ok(APPLICATION_VND_IMAGEMETER_IMAGE_ZIP)
         );
     }
@@ -79344,7 +79352,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMMERVISION_IVP)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcatIOn/VNd.iMMERVISiON-IVP"),
+            crate::Mime::parse("ApplICatIOn/vND.IMMErVISION-IvP"),
             Ok(APPLICATION_VND_IMMERVISION_IVP)
         );
     }
@@ -79366,7 +79374,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMMERVISION_IVU)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTIOn/vnd.imMeRvisION-IvU"),
+            crate::Mime::parse("AppLICaTion/vnD.ImmeRVIsIoN-Ivu"),
             Ok(APPLICATION_VND_IMMERVISION_IVU)
         );
     }
@@ -79386,7 +79394,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMS_IMSCCV1P1)
         );
         assert_eq!(
-            crate::Mime::parse("APplICAtiOn/VND.iMS.imsCcV1P1"),
+            crate::Mime::parse("APPliCaTION/vND.ims.iMSCCv1p1"),
             Ok(APPLICATION_VND_IMS_IMSCCV1P1)
         );
     }
@@ -79406,7 +79414,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMS_IMSCCV1P2)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcATIon/vNd.imS.imsCCV1P2"),
+            crate::Mime::parse("ApPLIcatiOn/vnD.ims.IMsCcV1P2"),
             Ok(APPLICATION_VND_IMS_IMSCCV1P2)
         );
     }
@@ -79426,7 +79434,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMS_IMSCCV1P3)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCatIoN/Vnd.IMs.iMsCCV1P3"),
+            crate::Mime::parse("aPplIcATIon/VNd.iMs.IMSCCV1p3"),
             Ok(APPLICATION_VND_IMS_IMSCCV1P3)
         );
     }
@@ -79450,7 +79458,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMS_LIS_V2_RESULT_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicAtIoN/vnd.iMS.lis.v2.REsULT+JsON"),
+            crate::Mime::parse("apPlIcATion/vND.ims.lIS.V2.RESUlT+JSon"),
             Ok(APPLICATION_VND_IMS_LIS_V2_RESULT_JSON)
         );
     }
@@ -79475,7 +79483,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMS_LTI_V2_TOOLCONSUMERPROFILE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APplication/VNd.ims.LTi.V2.tOOLCoNSUMeRpRoFILe+JSON"),
+            crate::Mime::parse("applicaTIOn/vnd.IMs.LTI.V2.ToOLCOnSuMeRPRofILE+Json"),
             Ok(APPLICATION_VND_IMS_LTI_V2_TOOLCONSUMERPROFILE_JSON)
         );
     }
@@ -79499,7 +79507,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMS_LTI_V2_TOOLPROXY_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcATIoN/vND.IMs.LtI.v2.toOLPrOxY+jSON"),
+            crate::Mime::parse("ApPLIcATiON/VNd.ImS.lti.v2.ToOlPRoXY+jsOn"),
             Ok(APPLICATION_VND_IMS_LTI_V2_TOOLPROXY_JSON)
         );
     }
@@ -79523,7 +79531,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMS_LTI_V2_TOOLPROXY_ID_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicaTION/VND.IMS.LtI.v2.TOOlpROXy.Id+jsOn"),
+            crate::Mime::parse("appLICAtION/VND.ImS.lTI.V2.tOOLpROxy.iD+jSON"),
             Ok(APPLICATION_VND_IMS_LTI_V2_TOOLPROXY_ID_JSON)
         );
     }
@@ -79547,7 +79555,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMS_LTI_V2_TOOLSETTINGS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcAtIoN/vNd.ImS.LTi.v2.tOOlSeTtinGs+JsoN"),
+            crate::Mime::parse("ApPlIcAtiOn/VnD.IMs.lTI.V2.ToOlseTtINgs+JSon"),
             Ok(APPLICATION_VND_IMS_LTI_V2_TOOLSETTINGS_JSON)
         );
     }
@@ -79572,7 +79580,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IMS_LTI_V2_TOOLSETTINGS_SIMPLE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APplication/vND.IMS.lTi.v2.tOoLsettinGS.sImPle+jSON"),
+            crate::Mime::parse("applicatiON/VND.iMs.lti.V2.toolseTTinGs.simpLE+JsON"),
             Ok(APPLICATION_VND_IMS_LTI_V2_TOOLSETTINGS_SIMPLE_JSON)
         );
     }
@@ -79596,7 +79604,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INFORMEDCONTROL_RMS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCatiON/VND.iNfOrMedcOntroL.rMs+Xml"),
+            crate::Mime::parse("aPpliCAtION/vNd.iNforMedcoNTrOl.Rms+XmL"),
             Ok(APPLICATION_VND_INFORMEDCONTROL_RMS_XML)
         );
     }
@@ -79618,7 +79626,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INFOTECH_PROJECT)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicatIoN/vND.inFOTeCH.PrOJect"),
+            crate::Mime::parse("applIcATiON/vnD.InFOtEcH.projECt"),
             Ok(APPLICATION_VND_INFOTECH_PROJECT)
         );
     }
@@ -79642,7 +79650,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INFOTECH_PROJECT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicatIoN/VND.InfOtECH.pROJeCT+XML"),
+            crate::Mime::parse("applIcATION/Vnd.iNFOteCH.pROJECT+xmL"),
             Ok(APPLICATION_VND_INFOTECH_PROJECT_XML)
         );
     }
@@ -79664,7 +79672,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INNOPATH_WAMP_NOTIFICATION)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcation/vnD.InNoPATH.WAmp.nOTifiCaTIoN"),
+            crate::Mime::parse("ApplicaTioN/VnD.INNOPATh.waMP.noTiFIcAtIoN"),
             Ok(APPLICATION_VND_INNOPATH_WAMP_NOTIFICATION)
         );
     }
@@ -79684,7 +79692,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INSORS_IGM)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTION/vnD.InsOrs.igm"),
+            crate::Mime::parse("AppLICAtioN/Vnd.inSors.igM"),
             Ok(APPLICATION_VND_INSORS_IGM)
         );
     }
@@ -79706,7 +79714,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INTERCON_FORMNET)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicaTIon/vnd.InTErcOn.fORMneT"),
+            crate::Mime::parse("appLIcaTion/VnD.inTeRcON.foRMnEt"),
             Ok(APPLICATION_VND_INTERCON_FORMNET)
         );
     }
@@ -79726,7 +79734,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INTERGEO)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcAtIoN/vNd.INtergeO"),
+            crate::Mime::parse("ApPlIcATiOn/VNd.intERGEo"),
             Ok(APPLICATION_VND_INTERGEO)
         );
     }
@@ -79748,7 +79756,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INTERTRUST_DIGIBOX)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCatIoN/vND.inTERTrUST.dIgIBOX"),
+            crate::Mime::parse("aPplIcAtiON/vnD.INtERTRuSt.DIGIbOX"),
             Ok(APPLICATION_VND_INTERTRUST_DIGIBOX)
         );
     }
@@ -79770,7 +79778,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INTERTRUST_NNCP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCaTiOn/vnD.IntErTRusT.NncP"),
+            crate::Mime::parse("aPpLiCatioN/Vnd.iNTerTRUst.nncP"),
             Ok(APPLICATION_VND_INTERTRUST_NNCP)
         );
     }
@@ -79790,7 +79798,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INTU_QBO)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCAtion/vnD.InTU.QBO"),
+            crate::Mime::parse("aPPlicatioN/VnD.iNTU.QBO"),
             Ok(APPLICATION_VND_INTU_QBO)
         );
     }
@@ -79810,7 +79818,7 @@ pub mod constants {
             Ok(APPLICATION_VND_INTU_QFX)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcatIon/vNd.INTu.qFX"),
+            crate::Mime::parse("ApplIcaTiOn/VND.inTU.qFX"),
             Ok(APPLICATION_VND_INTU_QFX)
         );
     }
@@ -79834,7 +79842,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IPTC_G2_CATALOGITEM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICAtION/vNd.IpTC.G2.cATaLogItEm+XML"),
+            crate::Mime::parse("APPlICAtiOn/VnD.iPtC.G2.CatAlOgITEM+xmL"),
             Ok(APPLICATION_VND_IPTC_G2_CATALOGITEM_XML)
         );
     }
@@ -79858,7 +79866,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IPTC_G2_CONCEPTITEM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcATion/vND.Iptc.g2.coNCEPTIteM+XmL"),
+            crate::Mime::parse("ApPLicatiON/Vnd.ipTC.g2.CONCepTiTeM+xml"),
             Ok(APPLICATION_VND_IPTC_G2_CONCEPTITEM_XML)
         );
     }
@@ -79882,7 +79890,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IPTC_G2_KNOWLEDGEITEM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICatION/VnD.IpTC.g2.KNowleDgeItEM+XMl"),
+            crate::Mime::parse("APplICATIoN/VnD.iptC.G2.knOwlEdGEITEm+XmL"),
             Ok(APPLICATION_VND_IPTC_G2_KNOWLEDGEITEM_XML)
         );
     }
@@ -79906,7 +79914,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IPTC_G2_NEWSITEM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTIon/vnd.IPTc.G2.newsitEM+xml"),
+            crate::Mime::parse("AppLIcation/VND.iPTC.g2.neWSItem+XmL"),
             Ok(APPLICATION_VND_IPTC_G2_NEWSITEM_XML)
         );
     }
@@ -79930,7 +79938,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IPTC_G2_NEWSMESSAGE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCaTiON/vND.IptC.G2.NewsmESsAGE+xML"),
+            crate::Mime::parse("aPpLiCAtiON/Vnd.iPtC.g2.nEWsMESSaGE+xml"),
             Ok(APPLICATION_VND_IPTC_G2_NEWSMESSAGE_XML)
         );
     }
@@ -79954,7 +79962,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IPTC_G2_PACKAGEITEM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCATION/Vnd.Iptc.g2.pACKAgeITem+XMl"),
+            crate::Mime::parse("aPPLICAtIon/Vnd.iptC.G2.PacKAgeITEm+Xml"),
             Ok(APPLICATION_VND_IPTC_G2_PACKAGEITEM_XML)
         );
     }
@@ -79978,7 +79986,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IPTC_G2_PLANNINGITEM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcaTIoN/Vnd.IPtc.g2.plaNNiNGiTEM+Xml"),
+            crate::Mime::parse("AppLIcATIon/VNd.ipTc.g2.PlANnINGITem+xML"),
             Ok(APPLICATION_VND_IPTC_G2_PLANNINGITEM_XML)
         );
     }
@@ -80000,7 +80008,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IPUNPLUGGED_RCPROFILE)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICatIon/vnD.iPuNPLugGeD.RCPrOFIlE"),
+            crate::Mime::parse("APplIcatioN/vNd.IPunPlUGGED.RCPrOFiLe"),
             Ok(APPLICATION_VND_IPUNPLUGGED_RCPROFILE)
         );
     }
@@ -80024,7 +80032,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IREPOSITORY_PACKAGE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICATiOn/vNd.IREpositorY.PaCKAGE+xMl"),
+            crate::Mime::parse("APPLiCatiOn/VND.ireposItOrY.PACKaGe+xmL"),
             Ok(APPLICATION_VND_IREPOSITORY_PACKAGE_XML)
         );
     }
@@ -80044,7 +80052,7 @@ pub mod constants {
             Ok(APPLICATION_VND_IS_XPR)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcaTIOn/VNd.iS-xpR"),
+            crate::Mime::parse("AppLICaTIOn/vNd.iS-XPR"),
             Ok(APPLICATION_VND_IS_XPR)
         );
     }
@@ -80064,7 +80072,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ISAC_FCS)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcATiON/vNd.iSAC.FCS"),
+            crate::Mime::parse("ApPLiCAtiOn/vND.ISAC.FCs"),
             Ok(APPLICATION_VND_ISAC_FCS)
         );
     }
@@ -80086,7 +80094,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ISO11783_10_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICaTION/Vnd.iSo11783-10+ZIp"),
+            crate::Mime::parse("APpLICAtIon/vNd.iSo11783-10+ziP"),
             Ok(APPLICATION_VND_ISO11783_10_ZIP)
         );
     }
@@ -80106,7 +80114,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JAM)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICatiON/vnd.JaM"),
+            crate::Mime::parse("APpliCAtion/VnD.Jam"),
             Ok(APPLICATION_VND_JAM)
         );
     }
@@ -80128,7 +80136,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JAPANNET_DIRECTORY_SERVICE)
         );
         assert_eq!(
-            crate::Mime::parse("APplICATION/vND.JAPaNNeT-DirectOrY-sErViCE"),
+            crate::Mime::parse("APPLICATiON/VND.JApAnNet-diReCToRy-sERvICE"),
             Ok(APPLICATION_VND_JAPANNET_DIRECTORY_SERVICE)
         );
     }
@@ -80150,7 +80158,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JAPANNET_JPNSTORE_WAKEUP)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCaTIon/vND.JAPaNnET-jPNstOrE-WaKeup"),
+            crate::Mime::parse("aPpLIcatiON/VND.JaPAnnET-jPnSTOrE-wakEUP"),
             Ok(APPLICATION_VND_JAPANNET_JPNSTORE_WAKEUP)
         );
     }
@@ -80172,7 +80180,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JAPANNET_PAYMENT_WAKEUP)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicATiOn/vnD.jaPANnet-PAYmeNT-WAkEUp"),
+            crate::Mime::parse("apPLiCaTioN/vnD.JapanNET-pAYMENt-WakeUP"),
             Ok(APPLICATION_VND_JAPANNET_PAYMENT_WAKEUP)
         );
     }
@@ -80194,7 +80202,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JAPANNET_REGISTRATION)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCatIOn/vnD.jApaNNET-rEGIstRAtIoN"),
+            crate::Mime::parse("aPplICaTioN/vNd.JAPANnET-reGIsTrATiOn"),
             Ok(APPLICATION_VND_JAPANNET_REGISTRATION)
         );
     }
@@ -80216,7 +80224,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JAPANNET_REGISTRATION_WAKEUP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcATiOn/vND.JAPaNneT-ReGiSTRaTIon-WAkeUp"),
+            crate::Mime::parse("ApPLiCatiON/VND.JapAnNeT-REGiSTraTIOn-WaKEuP"),
             Ok(APPLICATION_VND_JAPANNET_REGISTRATION_WAKEUP)
         );
     }
@@ -80238,7 +80246,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JAPANNET_SETSTORE_WAKEUP)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicAtiOn/VnD.JapANNeT-SetsTORE-WakeuP"),
+            crate::Mime::parse("apPliCatIoN/Vnd.JApAnNet-SETStOre-wAKeuP"),
             Ok(APPLICATION_VND_JAPANNET_SETSTORE_WAKEUP)
         );
     }
@@ -80260,7 +80268,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JAPANNET_VERIFICATION)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtioN/VND.JAPANNet-verifIcATION"),
+            crate::Mime::parse("APPlicAtION/VND.JApaNnet-vErIFICAtioN"),
             Ok(APPLICATION_VND_JAPANNET_VERIFICATION)
         );
     }
@@ -80282,7 +80290,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JAPANNET_VERIFICATION_WAKEUP)
         );
         assert_eq!(
-            crate::Mime::parse("appLICaTiON/VnD.japAnneT-VEriFIcATion-WaKeUP"),
+            crate::Mime::parse("APpLiCAtIoN/vnd.japANNEt-VErIFicatIoN-WAKeuP"),
             Ok(APPLICATION_VND_JAPANNET_VERIFICATION_WAKEUP)
         );
     }
@@ -80304,7 +80312,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JCP_JAVAME_MIDLET_RMS)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicAtion/VnD.JCP.JaVame.MIdLet-RmS"),
+            crate::Mime::parse("apPlicatIoN/VND.JcP.jaVAMe.midLeT-RMS"),
             Ok(APPLICATION_VND_JCP_JAVAME_MIDLET_RMS)
         );
     }
@@ -80324,7 +80332,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JISP)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcaTioN/VND.JISp"),
+            crate::Mime::parse("AppLicATION/VND.jiSp"),
             Ok(APPLICATION_VND_JISP)
         );
     }
@@ -80346,7 +80354,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JOOST_JODA_ARCHIVE)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICATIon/vnD.jOost.joDa-ARchiVE"),
+            crate::Mime::parse("APPLIcatioN/vNd.jOosT.JODa-aRCHIVe"),
             Ok(APPLICATION_VND_JOOST_JODA_ARCHIVE)
         );
     }
@@ -80366,7 +80374,7 @@ pub mod constants {
             Ok(APPLICATION_VND_JSK_ISDN_NGN)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcaTION/vND.Jsk.ISdN-NgN"),
+            crate::Mime::parse("AppLICATiON/Vnd.JSk.ISdN-ngN"),
             Ok(APPLICATION_VND_JSK_ISDN_NGN)
         );
     }
@@ -80386,7 +80394,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KAHOOTZ)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCaTiON/VnD.KaHOotz"),
+            crate::Mime::parse("aPpLiCAtIoN/VnD.kahoOtZ"),
             Ok(APPLICATION_VND_KAHOOTZ)
         );
     }
@@ -80406,7 +80414,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KDE_KARBON)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcAtiON/Vnd.kDE.kaRBOn"),
+            crate::Mime::parse("ApPliCATIon/vND.kdE.KarbON"),
             Ok(APPLICATION_VND_KDE_KARBON)
         );
     }
@@ -80426,7 +80434,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KDE_KCHART)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCATioN/Vnd.kDe.kCHart"),
+            crate::Mime::parse("aPPLicAtIon/vNd.kDE.kcHArT"),
             Ok(APPLICATION_VND_KDE_KCHART)
         );
     }
@@ -80446,7 +80454,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KDE_KFORMULA)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicaTIOn/vND.kdE.KFORmuLA"),
+            crate::Mime::parse("appLICaTiON/vnD.KDE.kfORMula"),
             Ok(APPLICATION_VND_KDE_KFORMULA)
         );
     }
@@ -80466,7 +80474,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KDE_KIVIO)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicAtIon/vNd.Kde.kivio"),
+            crate::Mime::parse("apPlIcatiOn/Vnd.kde.kiViO"),
             Ok(APPLICATION_VND_KDE_KIVIO)
         );
     }
@@ -80486,7 +80494,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KDE_KONTOUR)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCATIoN/VnD.kdE.koNtOuR"),
+            crate::Mime::parse("aPPLIcAtIoN/vnD.kdE.KoNtOUR"),
             Ok(APPLICATION_VND_KDE_KONTOUR)
         );
     }
@@ -80508,7 +80516,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KDE_KPRESENTER)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicaTion/vnd.KDE.kPReSENtER"),
+            crate::Mime::parse("appLication/VND.kDE.KPReSEnTER"),
             Ok(APPLICATION_VND_KDE_KPRESENTER)
         );
     }
@@ -80528,7 +80536,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KDE_KSPREAD)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcATIon/vNd.kDe.ksPREad"),
+            crate::Mime::parse("ApPLIcaTiOn/vNd.kdE.KspRead"),
             Ok(APPLICATION_VND_KDE_KSPREAD)
         );
     }
@@ -80548,7 +80556,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KDE_KWORD)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicaTIoN/VnD.kDe.KwOrd"),
+            crate::Mime::parse("appLIcAtIoN/vNd.KdE.kwOrd"),
             Ok(APPLICATION_VND_KDE_KWORD)
         );
     }
@@ -80568,7 +80576,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KENAMEAAPP)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICation/Vnd.kEnAmEaapp"),
+            crate::Mime::parse("APplicaTIon/vNd.kEnameAAPp"),
             Ok(APPLICATION_VND_KENAMEAAPP)
         );
     }
@@ -80588,7 +80596,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KIDSPIRATION)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcaTion/VND.kidspIrATIOn"),
+            crate::Mime::parse("AppLicatION/vnd.kIdSPIRatiON"),
             Ok(APPLICATION_VND_KIDSPIRATION)
         );
     }
@@ -80608,7 +80616,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KINAR)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICAtioN/vnd.kInAr"),
+            crate::Mime::parse("APPlicATion/vNd.kINar"),
             Ok(APPLICATION_VND_KINAR)
         );
     }
@@ -80628,7 +80636,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KOAN)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCAtiON/vnd.kOAn"),
+            crate::Mime::parse("aPPliCAtion/vND.kOAn"),
             Ok(APPLICATION_VND_KOAN)
         );
     }
@@ -80650,7 +80658,7 @@ pub mod constants {
             Ok(APPLICATION_VND_KODAK_DESCRIPTOR)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicATIOn/Vnd.kodAK-deScRIpTor"),
+            crate::Mime::parse("apPLICatIon/vnd.KOdaK-DEsCripToR"),
             Ok(APPLICATION_VND_KODAK_DESCRIPTOR)
         );
     }
@@ -80670,7 +80678,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LAS)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCaTIoN/vnD.LAs"),
+            crate::Mime::parse("aPpLIcAtioN/VNd.LaS"),
             Ok(APPLICATION_VND_LAS)
         );
     }
@@ -80692,7 +80700,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LAS_LAS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICAtION/VND.LaS.las+JsOn"),
+            crate::Mime::parse("APPlICATION/VnD.las.LaS+json"),
             Ok(APPLICATION_VND_LAS_LAS_JSON)
         );
     }
@@ -80714,7 +80722,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LAS_LAS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appliCaTiON/VNd.lAs.LaS+XML"),
+            crate::Mime::parse("aPpLiCATIOn/vNd.LaS.LAS+Xml"),
             Ok(APPLICATION_VND_LAS_LAS_XML)
         );
     }
@@ -80734,7 +80742,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LASZIP)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcATIOn/VnD.LasziP"),
+            crate::Mime::parse("ApPLICatIoN/Vnd.lAsziP"),
             Ok(APPLICATION_VND_LASZIP)
         );
     }
@@ -80756,7 +80764,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LEAP_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLicatIOn/vND.leAP+JSON"),
+            crate::Mime::parse("applICaTiON/vnD.LEAP+Json"),
             Ok(APPLICATION_VND_LEAP_JSON)
         );
     }
@@ -80780,7 +80788,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LIBERTY_REQUEST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("Application/VnD.lIBeRtY-reQUEST+XMl"),
+            crate::Mime::parse("applicatIoN/vND.LiBertY-REQUESt+xMl"),
             Ok(APPLICATION_VND_LIBERTY_REQUEST_XML)
         );
     }
@@ -80803,7 +80811,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LLAMAGRAPHICS_LIFE_BALANCE_DESKTOP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCaTION/Vnd.lLAmAgRAphIcs.LiFe-BALaNcE.dEsktOp"),
+            crate::Mime::parse("aPpLICAtIon/vND.LlAMagRaphIcS.lIFE-BaLAnCe.dEsKTOp"),
             Ok(APPLICATION_VND_LLAMAGRAPHICS_LIFE_BALANCE_DESKTOP)
         );
     }
@@ -80828,7 +80836,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LLAMAGRAPHICS_LIFE_BALANCE_EXCHANGE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICaTioN/vND.lLamaGRaphiCs.lIfE-bALAnCe.eXCHANgE+XmL"),
+            crate::Mime::parse("APpLicATiON/vNd.lLAmagrAphiCs.liFE-bAlAnCE.EXcHaNgE+xMl"),
             Ok(APPLICATION_VND_LLAMAGRAPHICS_LIFE_BALANCE_EXCHANGE_XML)
         );
     }
@@ -80852,7 +80860,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LOGIPIPE_CIRCUIT_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCatiOn/vnd.logiPIPe.circUIT+ZiP"),
+            crate::Mime::parse("aPpliCation/vnd.LOGiPipe.CIRcUiT+zip"),
             Ok(APPLICATION_VND_LOGIPIPE_CIRCUIT_ZIP)
         );
     }
@@ -80872,7 +80880,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LOOM)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicaTioN/VnD.lOoM"),
+            crate::Mime::parse("appLicAtIoN/vNd.LOom"),
             Ok(APPLICATION_VND_LOOM)
         );
     }
@@ -80892,7 +80900,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LOTUS_1_2_3)
         );
         assert_eq!(
-            crate::Mime::parse("APplICAtiON/VND.lOTuS-1-2-3"),
+            crate::Mime::parse("APPliCAtION/vND.LotuS-1-2-3"),
             Ok(APPLICATION_VND_LOTUS_1_2_3)
         );
     }
@@ -80914,7 +80922,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LOTUS_APPROACH)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicATion/vnd.Lotus-apPRoACH"),
+            crate::Mime::parse("apPLicaTion/Vnd.lOtuS-aPPROaCh"),
             Ok(APPLICATION_VND_LOTUS_APPROACH)
         );
     }
@@ -80936,7 +80944,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LOTUS_FREELANCE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicAtIoN/vnD.loTuS-FReelANcE"),
+            crate::Mime::parse("apPlIcATioN/vnD.LoTUs-fREeLANCE"),
             Ok(APPLICATION_VND_LOTUS_FREELANCE)
         );
     }
@@ -80956,7 +80964,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LOTUS_NOTES)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCatioN/Vnd.lotuS-noTeS"),
+            crate::Mime::parse("aPplicATIon/vnd.LOtuS-NOTEs"),
             Ok(APPLICATION_VND_LOTUS_NOTES)
         );
     }
@@ -80978,7 +80986,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LOTUS_ORGANIZER)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicATIoN/VnD.lotuS-oRGaNIzEr"),
+            crate::Mime::parse("apPLIcAtIoN/vnd.LOtUS-ORgAnizER"),
             Ok(APPLICATION_VND_LOTUS_ORGANIZER)
         );
     }
@@ -81000,7 +81008,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LOTUS_SCREENCAM)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICatioN/vnd.loTus-scREencaM"),
+            crate::Mime::parse("APplicAtion/vnD.lotuS-screENcam"),
             Ok(APPLICATION_VND_LOTUS_SCREENCAM)
         );
     }
@@ -81020,7 +81028,7 @@ pub mod constants {
             Ok(APPLICATION_VND_LOTUS_WORDPRO)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcatION/Vnd.lOtus-wORDPRO"),
+            crate::Mime::parse("ApplICAtIon/vNd.lOtUS-WORdpRo"),
             Ok(APPLICATION_VND_LOTUS_WORDPRO)
         );
     }
@@ -81042,7 +81050,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MACPORTS_PORTPKG)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcatION/VND.mACPORTS.pOrtpkg"),
+            crate::Mime::parse("ApplICATION/vND.MACPorTs.porTPkG"),
             Ok(APPLICATION_VND_MACPORTS_PORTPKG)
         );
     }
@@ -81064,7 +81072,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MAPBOX_VECTOR_TILE)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICaTIon/VND.MaPBox-VecToR-TiLe"),
+            crate::Mime::parse("APpLIcaTION/VnD.maPBox-vEcToR-tiLE"),
             Ok(APPLICATION_VND_MAPBOX_VECTOR_TILE)
         );
     }
@@ -81088,7 +81096,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MARLIN_DRM_ACTIONTOKEN_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcaTIon/vnD.mArLin.DRM.ActiOntOkeN+xml"),
+            crate::Mime::parse("AppLIcatioN/vNd.marLIN.Drm.ActIonTOken+XMl"),
             Ok(APPLICATION_VND_MARLIN_DRM_ACTIONTOKEN_XML)
         );
     }
@@ -81112,7 +81120,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MARLIN_DRM_CONFTOKEN_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCaTion/vnD.maRlIn.Drm.CONFtOKEN+xml"),
+            crate::Mime::parse("aPpLicaTioN/vnD.MarLin.DRM.cONFToken+XmL"),
             Ok(APPLICATION_VND_MARLIN_DRM_CONFTOKEN_XML)
         );
     }
@@ -81136,7 +81144,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MARLIN_DRM_LICENSE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCaTion/VNd.MarLiN.DRM.lIcenSe+XML"),
+            crate::Mime::parse("aPpLicatIOn/Vnd.mArLIN.dRm.lIceNSE+XMl"),
             Ok(APPLICATION_VND_MARLIN_DRM_LICENSE_XML)
         );
     }
@@ -81158,7 +81166,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MARLIN_DRM_MDCF)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICAtion/vND.MaRLIN.DRM.mdcF"),
+            crate::Mime::parse("APPlicatiON/VnD.MARLIN.drm.MdcF"),
             Ok(APPLICATION_VND_MARLIN_DRM_MDCF)
         );
     }
@@ -81180,7 +81188,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MASON_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicAtion/vND.maSOn+Json"),
+            crate::Mime::parse("apPlicatiON/vnD.mASon+jsOn"),
             Ok(APPLICATION_VND_MASON_JSON)
         );
     }
@@ -81204,7 +81212,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MAXAR_ARCHIVE_3TZ_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicAtIoN/VNd.MAxaR.ArcHivE.3TZ+ZIP"),
+            crate::Mime::parse("apPlIcATIOn/VNd.MaXar.arCHIVE.3TZ+zip"),
             Ok(APPLICATION_VND_MAXAR_ARCHIVE_3TZ_ZIP)
         );
     }
@@ -81226,7 +81234,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MAXMIND_MAXMIND_DB)
         );
         assert_eq!(
-            crate::Mime::parse("appliCaTION/VNd.maxmiNd.MAXmind-Db"),
+            crate::Mime::parse("aPpLICAtIOn/vnd.mAxMIND.maxMInd-db"),
             Ok(APPLICATION_VND_MAXMIND_MAXMIND_DB)
         );
     }
@@ -81246,7 +81254,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MCD)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcatIon/vND.MCd"),
+            crate::Mime::parse("ApplIcaTiON/VNd.Mcd"),
             Ok(APPLICATION_VND_MCD)
         );
     }
@@ -81266,7 +81274,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MEDCALCDATA)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcatIoN/VND.medCalCdATA"),
+            crate::Mime::parse("ApplIcAtION/vnd.meDcALCdAtA"),
             Ok(APPLICATION_VND_MEDCALCDATA)
         );
     }
@@ -81288,7 +81296,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MEDIASTATION_CDKEY)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCatION/vnD.mEDIAStaTION.cDkEY"),
+            crate::Mime::parse("aPplICAtioN/vND.MEdiASTAtiOn.CDkeY"),
             Ok(APPLICATION_VND_MEDIASTATION_CDKEY)
         );
     }
@@ -81310,7 +81318,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MERIDIAN_SLINGSHOT)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtiOn/vnd.mErIDIAN-SlIngShOt"),
+            crate::Mime::parse("APPliCation/vNd.MERIDIaN-sLiNgShOT"),
             Ok(APPLICATION_VND_MERIDIAN_SLINGSHOT)
         );
     }
@@ -81330,7 +81338,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MFER)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCaTiOn/vND.mfEr"),
+            crate::Mime::parse("aPpLiCatiON/vnD.mFeR"),
             Ok(APPLICATION_VND_MFER)
         );
     }
@@ -81350,7 +81358,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MFMP)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICatiOn/vND.mfMP"),
+            crate::Mime::parse("APpliCatiON/vnD.MfMP"),
             Ok(APPLICATION_VND_MFMP)
         );
     }
@@ -81372,7 +81380,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MICRO_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcAtION/VND.mICRo+JsOn"),
+            crate::Mime::parse("ApPlICATION/vND.miCrO+jsOn"),
             Ok(APPLICATION_VND_MICRO_JSON)
         );
     }
@@ -81394,7 +81402,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MICROGRAFX_FLO)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcaTiOn/VnD.mIcROgrAFx.FLo"),
+            crate::Mime::parse("AppLiCatIoN/vNd.MicROgRAFx.FlO"),
             Ok(APPLICATION_VND_MICROGRAFX_FLO)
         );
     }
@@ -81416,7 +81424,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MICROGRAFX_IGX)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcatION/vNd.MiCroGRaFx.igx"),
+            crate::Mime::parse("ApplICATiOn/VnD.mICrOgRafx.iGX"),
             Ok(APPLICATION_VND_MICROGRAFX_IGX)
         );
     }
@@ -81438,7 +81446,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MICROSOFT_PORTABLE_EXECUTABLE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcatiOn/Vnd.MICroSofT.POrTaBLe-eXecuTabLE"),
+            crate::Mime::parse("AppliCaTIon/VND.mIcrOSOFt.pORtAbLe-eXecUTABLE"),
             Ok(APPLICATION_VND_MICROSOFT_PORTABLE_EXECUTABLE)
         );
     }
@@ -81461,7 +81469,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MICROSOFT_WINDOWS_THUMBNAIL_CACHE)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICatiOn/Vnd.micRoSoFt.wiNdOws.tHumbNaiL-CachE"),
+            crate::Mime::parse("APpliCatIon/vnd.mIcRosofT.WinDoWs.tHumBnAil-CAChE"),
             Ok(APPLICATION_VND_MICROSOFT_WINDOWS_THUMBNAIL_CACHE)
         );
     }
@@ -81483,7 +81491,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MIELE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicaTioN/VND.mIeLe+jSON"),
+            crate::Mime::parse("appLicATION/vNd.mieLE+jsOn"),
             Ok(APPLICATION_VND_MIELE_JSON)
         );
     }
@@ -81503,7 +81511,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MIF)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicatiON/vNd.miF"),
+            crate::Mime::parse("appliCATiOn/vnD.MiF"),
             Ok(APPLICATION_VND_MIF)
         );
     }
@@ -81525,7 +81533,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MINISOFT_HP3000_SAVE)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICatioN/VnD.mINIsOFT-Hp3000-Save"),
+            crate::Mime::parse("APplicATIoN/vND.mINISOfT-HP3000-SaVE"),
             Ok(APPLICATION_VND_MINISOFT_HP3000_SAVE)
         );
     }
@@ -81547,7 +81555,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MITSUBISHI_MISTY_GUARD_TRUSTWEB)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicatioN/Vnd.MItsuBIshi.MisTY-gUaRd.TRUSTweb"),
+            crate::Mime::parse("applicATIon/VNd.mITsubiShi.MIsTy-guARD.TrustwEB"),
             Ok(APPLICATION_VND_MITSUBISHI_MISTY_GUARD_TRUSTWEB)
         );
     }
@@ -81567,7 +81575,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOBIUS_DAF)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicaTIon/vnd.MObIuS.daF"),
+            crate::Mime::parse("appLIcaTion/VNd.mOBiuS.DAF"),
             Ok(APPLICATION_VND_MOBIUS_DAF)
         );
     }
@@ -81587,7 +81595,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOBIUS_DIS)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcatiOn/vNd.mObIUs.DIs"),
+            crate::Mime::parse("AppliCatiOn/vNd.MobIUs.diS"),
             Ok(APPLICATION_VND_MOBIUS_DIS)
         );
     }
@@ -81607,7 +81615,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOBIUS_MBK)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICaTion/VnD.moBiUS.Mbk"),
+            crate::Mime::parse("APpLicaTIoN/vnD.MObIus.mBk"),
             Ok(APPLICATION_VND_MOBIUS_MBK)
         );
     }
@@ -81627,7 +81635,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOBIUS_MQY)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCatioN/vND.mobIUs.mqy"),
+            crate::Mime::parse("aPplicAtiON/vnd.Mobius.MQY"),
             Ok(APPLICATION_VND_MOBIUS_MQY)
         );
     }
@@ -81647,7 +81655,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOBIUS_MSL)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCaTiOn/vnd.moBIus.MSl"),
+            crate::Mime::parse("aPpLiCation/vnD.mobIUs.mSl"),
             Ok(APPLICATION_VND_MOBIUS_MSL)
         );
     }
@@ -81667,7 +81675,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOBIUS_PLC)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcAtIOn/VNd.moBiuS.plc"),
+            crate::Mime::parse("ApPlICatIOn/vnD.mObius.Plc"),
             Ok(APPLICATION_VND_MOBIUS_PLC)
         );
     }
@@ -81687,7 +81695,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOBIUS_TXF)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcAtIon/VnD.moBIUs.tXf"),
+            crate::Mime::parse("ApPlIcatIoN/vnD.MobiUs.txF"),
             Ok(APPLICATION_VND_MOBIUS_TXF)
         );
     }
@@ -81709,7 +81717,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOPHUN_APPLICATION)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCaTiOn/VNd.mOpHUn.ApplicatioN"),
+            crate::Mime::parse("aPpLiCatIOn/vNd.MoPHun.applicAtIon"),
             Ok(APPLICATION_VND_MOPHUN_APPLICATION)
         );
     }
@@ -81731,7 +81739,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOPHUN_CERTIFICATE)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicATiOn/VND.moPhuN.cErtIFicATe"),
+            crate::Mime::parse("apPLiCatION/vnD.mOphUn.CErtIFicate"),
             Ok(APPLICATION_VND_MOPHUN_CERTIFICATE)
         );
     }
@@ -81753,7 +81761,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE)
         );
         assert_eq!(
-            crate::Mime::parse("applicatiON/vnD.moToRola.fLexSUITe"),
+            crate::Mime::parse("appliCATioN/vnD.MotoRoLa.FLEXsUITe"),
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE)
         );
     }
@@ -81775,7 +81783,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_ADSI)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcatiON/vND.mOTORola.FLEXsuITE.ADSi"),
+            crate::Mime::parse("AppliCAtiON/vND.MotoROLA.flEXSUITE.adSi"),
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_ADSI)
         );
     }
@@ -81797,7 +81805,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_FIS)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcaTiOn/VnD.motorOLa.fLEXsUITE.Fis"),
+            crate::Mime::parse("AppLiCatIoN/vnd.mOToroLA.fLEXSuIte.fiS"),
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_FIS)
         );
     }
@@ -81819,7 +81827,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_GOTAP)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcAtioN/VNd.MoTorola.fLEXsuItE.GOtAp"),
+            crate::Mime::parse("ApPlicATIOn/VnD.motoroLA.flExSUITe.goTAp"),
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_GOTAP)
         );
     }
@@ -81841,7 +81849,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_KMR)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicaTiOn/vnD.mOtoROLa.fLEXSuITe.Kmr"),
+            crate::Mime::parse("appLiCaTioN/vNd.MOToroLA.FlEXsuIte.KmR"),
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_KMR)
         );
     }
@@ -81863,7 +81871,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_TTC)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicATIoN/Vnd.moTOrOLa.FlexsUite.ttC"),
+            crate::Mime::parse("apPLIcATIon/vnD.mOToROla.fLexsuitE.TTC"),
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_TTC)
         );
     }
@@ -81885,7 +81893,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_WEM)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICaTiOn/VnD.mOToROlA.FlEXsUiTE.wEM"),
+            crate::Mime::parse("APpLiCatIoN/vND.MOtOROlA.fLeXSuiTE.WeM"),
             Ok(APPLICATION_VND_MOTOROLA_FLEXSUITE_WEM)
         );
     }
@@ -81905,7 +81913,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOTOROLA_IPRM)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCaTIon/VND.MOTorOlA.IPrM"),
+            crate::Mime::parse("aPpLIcatION/VND.mOtOROLa.iPrm"),
             Ok(APPLICATION_VND_MOTOROLA_IPRM)
         );
     }
@@ -81927,7 +81935,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MOZILLA_XUL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtIon/vnD.mOZIlLA.XuL+XmL"),
+            crate::Mime::parse("ApPlIcatioN/vND.mOZiLlA.XuL+xml"),
             Ok(APPLICATION_VND_MOZILLA_XUL_XML)
         );
     }
@@ -81949,7 +81957,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_3MFDOCUMENT)
         );
         assert_eq!(
-            crate::Mime::parse("applIcAtioN/vND.mS-3MFdOCuMenT"),
+            crate::Mime::parse("ApPlicAtiON/vNd.MS-3MfDocUMent"),
             Ok(APPLICATION_VND_MS_3MFDOCUMENT)
         );
     }
@@ -81969,7 +81977,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_ARTGALRY)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICATion/vnD.Ms-ArtGAlRY"),
+            crate::Mime::parse("APPLicatioN/VnD.ms-ArTGAlRy"),
             Ok(APPLICATION_VND_MS_ARTGALRY)
         );
     }
@@ -81989,7 +81997,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_ASF)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCaTion/vND.mS-AsF"),
+            crate::Mime::parse("aPpLicaTiON/vND.mS-asF"),
             Ok(APPLICATION_VND_MS_ASF)
         );
     }
@@ -82011,7 +82019,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_CAB_COMPRESSED)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcation/vnD.mS-caB-compREssed"),
+            crate::Mime::parse("ApplicatioN/vNd.mS-cab-COmpresseD"),
             Ok(APPLICATION_VND_MS_CAB_COMPRESSED)
         );
     }
@@ -82031,7 +82039,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_EXCEL)
         );
         assert_eq!(
-            crate::Mime::parse("appLICaTIoN/VnD.MS-EXCel"),
+            crate::Mime::parse("APpLIcATIoN/VND.MS-eXCEL"),
             Ok(APPLICATION_VND_MS_EXCEL)
         );
     }
@@ -82053,7 +82061,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_EXCEL_ADDIN_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCAtion/vnD.ms-eXceL.AddIn.MaCRoENabled.12"),
+            crate::Mime::parse("aPPlicatioN/vnd.Ms-EXCel.adDiN.mACroenablEd.12"),
             Ok(APPLICATION_VND_MS_EXCEL_ADDIN_MACRO_ENABLED_12)
         );
     }
@@ -82076,7 +82084,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_EXCEL_SHEET_BINARY_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("appliCATION/VND.mS-exceL.SHEeT.bINARY.MaCROenabLeD.12"),
+            crate::Mime::parse("aPPLICATION/vNd.ms-ExCEL.SHeET.BINArY.MacroEnAblED.12"),
             Ok(APPLICATION_VND_MS_EXCEL_SHEET_BINARY_MACRO_ENABLED_12)
         );
     }
@@ -82098,7 +82106,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_EXCEL_SHEET_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcAtiOn/VND.Ms-EXcel.sHEeT.MACROeNABLed.12"),
+            crate::Mime::parse("ApPliCaTION/Vnd.Ms-eXcEL.ShEET.MaCROEnaBleD.12"),
             Ok(APPLICATION_VND_MS_EXCEL_SHEET_MACRO_ENABLED_12)
         );
     }
@@ -82121,7 +82129,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_EXCEL_TEMPLATE_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCATion/Vnd.ms-EXCel.TEmplATE.mAcroENaBled.12"),
+            crate::Mime::parse("aPPLicaTIon/vnD.MS-exCEl.tEMPLaTe.mACrOenableD.12"),
             Ok(APPLICATION_VND_MS_EXCEL_TEMPLATE_MACRO_ENABLED_12)
         );
     }
@@ -82141,7 +82149,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_FONTOBJECT)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCatioN/vNd.ms-fontOBjEcT"),
+            crate::Mime::parse("aPplicAtiOn/vnD.ms-FOnToBJeCt"),
             Ok(APPLICATION_VND_MS_FONTOBJECT)
         );
     }
@@ -82161,7 +82169,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_HTMLHELP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcAtIoN/VND.ms-HTMLheLp"),
+            crate::Mime::parse("ApPlIcATION/vnd.MS-htMlHElP"),
             Ok(APPLICATION_VND_MS_HTMLHELP)
         );
     }
@@ -82181,7 +82189,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_IMS)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCatIon/Vnd.Ms-imS"),
+            crate::Mime::parse("aPplIcatIon/Vnd.mS-IMS"),
             Ok(APPLICATION_VND_MS_IMS)
         );
     }
@@ -82201,7 +82209,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_LRM)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicaTiOn/vND.ms-Lrm"),
+            crate::Mime::parse("appLiCatiON/vnD.ms-lRM"),
             Ok(APPLICATION_VND_MS_LRM)
         );
     }
@@ -82225,7 +82233,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_OFFICE_ACTIVE_X_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICAtiON/VND.ms-Office.aCTiveX+XML"),
+            crate::Mime::parse("APPliCAtION/vnd.ms-ofFiCE.acTIVEX+xMl"),
             Ok(APPLICATION_VND_MS_OFFICE_ACTIVE_X_XML)
         );
     }
@@ -82247,7 +82255,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_OFFICETHEME)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCATIoN/vNd.mS-OFFiCEThEMe"),
+            crate::Mime::parse("aPPLIcATiOn/vND.MS-OFFiCEthEME"),
             Ok(APPLICATION_VND_MS_OFFICETHEME)
         );
     }
@@ -82267,7 +82275,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_PKI_SECCAT)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicATION/vNd.mS-Pki.seccat"),
+            crate::Mime::parse("apPLICATiOn/vND.ms-pki.seCCaT"),
             Ok(APPLICATION_VND_MS_PKI_SECCAT)
         );
     }
@@ -82291,7 +82299,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_PLAYREADY_INITIATOR_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcaTioN/vnD.mS-PlaYreADY.iniTiATOR+xMl"),
+            crate::Mime::parse("AppLicAtioN/vND.ms-plAYREady.iNITIatOr+xmL"),
             Ok(APPLICATION_VND_MS_PLAYREADY_INITIATOR_XML)
         );
     }
@@ -82311,7 +82319,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_POWERPOINT)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCatIon/VNd.Ms-powerPOInT"),
+            crate::Mime::parse("aPplIcaTIOn/Vnd.ms-pOWErPOINt"),
             Ok(APPLICATION_VND_MS_POWERPOINT)
         );
     }
@@ -82334,7 +82342,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_POWERPOINT_ADDIN_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcATion/vnd.ms-poWerPoint.AdDIn.macROENABLEd.12"),
+            crate::Mime::parse("ApPLicaTion/vnD.mS-pOwerpOInT.aDdin.MACROENablED.12"),
             Ok(APPLICATION_VND_MS_POWERPOINT_ADDIN_MACRO_ENABLED_12)
         );
     }
@@ -82357,7 +82365,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_POWERPOINT_PRESENTATION_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicaTion/vnD.ms-pOWeRpoInt.PReseNtAtion.mACroenaBled.12"),
+            crate::Mime::parse("appLicaTioN/vnD.MS-PowErpoINt.pReSentaTiON.macrOenaBLed.12"),
             Ok(APPLICATION_VND_MS_POWERPOINT_PRESENTATION_MACRO_ENABLED_12)
         );
     }
@@ -82380,7 +82388,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_POWERPOINT_SLIDE_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcAtiON/VNd.Ms-PoWERpOiNt.SliDE.mAcRoenabLEd.12"),
+            crate::Mime::parse("ApPliCAtIOn/VnD.mS-PoWeRpoInt.SLiDe.macroENabLed.12"),
             Ok(APPLICATION_VND_MS_POWERPOINT_SLIDE_MACRO_ENABLED_12)
         );
     }
@@ -82403,7 +82411,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_POWERPOINT_SLIDESHOW_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("appliCATIoN/VNd.MS-pOwERPOiNt.sLidEsHow.MACROENaBlEd.12"),
+            crate::Mime::parse("aPPLIcATIOn/VND.Ms-POWeRpOiNt.SlIdesHOW.MACrOeNaBleD.12"),
             Ok(APPLICATION_VND_MS_POWERPOINT_SLIDESHOW_MACRO_ENABLED_12)
         );
     }
@@ -82426,7 +82434,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_POWERPOINT_TEMPLATE_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCaTIoN/vND.Ms-poWerPOINt.TemPLaTE.maCROenABlEd.12"),
+            crate::Mime::parse("aPpLIcAtiON/Vnd.mS-pOWERpOInt.TeMPLatE.MacROeNabLeD.12"),
             Ok(APPLICATION_VND_MS_POWERPOINT_TEMPLATE_MACRO_ENABLED_12)
         );
     }
@@ -82451,7 +82459,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_PRINT_DEVICE_CAPABILITIES_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcATiON/vNd.ms-PRinTDEVicecApabiLITIes+XMl"),
+            crate::Mime::parse("ApPLiCAtiOn/vnd.Ms-PRINtdevIcecaPABIlitIEs+XmL"),
             Ok(APPLICATION_VND_MS_PRINT_DEVICE_CAPABILITIES_XML)
         );
     }
@@ -82475,7 +82483,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_PRINT_SCHEMA_TICKET_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcatION/VNd.mS-PRiNTScheMaTickET+XML"),
+            crate::Mime::parse("ApplICAtIOn/vND.Ms-PRintScHemaTIcKET+xMl"),
             Ok(APPLICATION_VND_MS_PRINT_SCHEMA_TICKET_XML)
         );
     }
@@ -82495,7 +82503,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_PROJECT)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicatiOn/vND.MS-PRojeCT"),
+            crate::Mime::parse("appliCaTiON/VNd.Ms-pROJECt"),
             Ok(APPLICATION_VND_MS_PROJECT)
         );
     }
@@ -82515,7 +82523,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_TNEF)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCaTion/VNd.mS-tNEf"),
+            crate::Mime::parse("aPpLicaTIOn/vNd.MS-tNEf"),
             Ok(APPLICATION_VND_MS_TNEF)
         );
     }
@@ -82537,7 +82545,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WINDOWS_DEVICEPAIRING)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcATIOn/vND.ms-winDoWs.dEvIcEpAIriNG"),
+            crate::Mime::parse("ApPLICatiON/vnD.ms-wInDoWs.dEvICepAIRING"),
             Ok(APPLICATION_VND_MS_WINDOWS_DEVICEPAIRING)
         );
     }
@@ -82559,7 +82567,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WINDOWS_NWPRINTING_OOB)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICation/Vnd.ms-wiNdOWS.NwPRiNTiNg.OOB"),
+            crate::Mime::parse("APplicaTIon/vnd.mS-WINDOwS.nWPrIntING.OOb"),
             Ok(APPLICATION_VND_MS_WINDOWS_NWPRINTING_OOB)
         );
     }
@@ -82581,7 +82589,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WINDOWS_PRINTERPAIRING)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcAtion/vNd.Ms-WiNdOWS.prInTErpaIrIng"),
+            crate::Mime::parse("ApPlicaTiOn/Vnd.mS-WINDowS.PRintErPaiRINg"),
             Ok(APPLICATION_VND_MS_WINDOWS_PRINTERPAIRING)
         );
     }
@@ -82603,7 +82611,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WINDOWS_WSD_OOB)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcatIoN/VND.ms-wiNdows.Wsd.ooB"),
+            crate::Mime::parse("ApplIcATION/vnd.mS-winDOws.wsD.ooB"),
             Ok(APPLICATION_VND_MS_WINDOWS_WSD_OOB)
         );
     }
@@ -82625,7 +82633,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WMDRM_LIC_CHLG_REQ)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCAtIon/VND.mS-WmDrm.liC-ChlG-Req"),
+            crate::Mime::parse("aPPlIcaTION/vNd.mS-wmdrM.Lic-cHlg-REq"),
             Ok(APPLICATION_VND_MS_WMDRM_LIC_CHLG_REQ)
         );
     }
@@ -82647,7 +82655,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WMDRM_LIC_RESP)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcaTIoN/vnD.ms-WmdRm.lic-reSp"),
+            crate::Mime::parse("AppLIcATioN/vnd.ms-wmdrm.liC-Resp"),
             Ok(APPLICATION_VND_MS_WMDRM_LIC_RESP)
         );
     }
@@ -82669,7 +82677,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WMDRM_METER_CHLG_REQ)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicATion/VnD.Ms-wMdrM.METEr-CHLG-ReQ"),
+            crate::Mime::parse("apPLicatIoN/Vnd.Ms-WmDRM.meTER-cHlG-req"),
             Ok(APPLICATION_VND_MS_WMDRM_METER_CHLG_REQ)
         );
     }
@@ -82691,7 +82699,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WMDRM_METER_RESP)
         );
         assert_eq!(
-            crate::Mime::parse("applicAtIon/Vnd.ms-WmDRM.METER-resp"),
+            crate::Mime::parse("apPlIcatIon/vnd.mS-WMDRM.Meter-resp"),
             Ok(APPLICATION_VND_MS_WMDRM_METER_RESP)
         );
     }
@@ -82714,7 +82722,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WORD_DOCUMENT_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("appliCATION/Vnd.MS-Word.DOcUMENt.maCroenaBLed.12"),
+            crate::Mime::parse("aPPLICAtIon/VND.ms-wORd.DOCumenT.macrOEnaBleD.12"),
             Ok(APPLICATION_VND_MS_WORD_DOCUMENT_MACRO_ENABLED_12)
         );
     }
@@ -82737,7 +82745,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WORD_TEMPLATE_MACRO_ENABLED_12)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCATION/Vnd.MS-WOrD.tEMplate.MAcROenableD.12"),
+            crate::Mime::parse("aPPLICATIon/VND.Ms-woRD.tempLATe.MacroenAbLED.12"),
             Ok(APPLICATION_VND_MS_WORD_TEMPLATE_MACRO_ENABLED_12)
         );
     }
@@ -82757,7 +82765,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WORKS)
         );
         assert_eq!(
-            crate::Mime::parse("APplicAtIon/VNd.MS-WorKS"),
+            crate::Mime::parse("apPlIcaTIOn/VNd.ms-WORKs"),
             Ok(APPLICATION_VND_MS_WORKS)
         );
     }
@@ -82777,7 +82785,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_WPL)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCatiON/vNd.MS-wPL"),
+            crate::Mime::parse("aPpliCATiOn/VNd.MS-WPL"),
             Ok(APPLICATION_VND_MS_WPL)
         );
     }
@@ -82799,7 +82807,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MS_XPSDOCUMENT)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICATIon/VnD.MS-xpsDoCuMenT"),
+            crate::Mime::parse("APPLIcatIoN/VNd.ms-xPsDocUMeNT"),
             Ok(APPLICATION_VND_MS_XPSDOCUMENT)
         );
     }
@@ -82819,7 +82827,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MSA_DISK_IMAGE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCATiON/vND.MSA-diSK-ImAGE"),
+            crate::Mime::parse("aPPLiCATiON/VND.msA-DIsK-ImAge"),
             Ok(APPLICATION_VND_MSA_DISK_IMAGE)
         );
     }
@@ -82839,7 +82847,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MSEQ)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcATiON/Vnd.mSEq"),
+            crate::Mime::parse("ApPLiCAtIon/vND.MSeq"),
             Ok(APPLICATION_VND_MSEQ)
         );
     }
@@ -82859,7 +82867,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MSIGN)
         );
         assert_eq!(
-            crate::Mime::parse("APplICATIOn/VND.msiGn"),
+            crate::Mime::parse("APPLICaTION/vnd.msIGN"),
             Ok(APPLICATION_VND_MSIGN)
         );
     }
@@ -82881,7 +82889,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MULTIAD_CREATOR)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCATion/Vnd.muLTIAd.crEAtOr"),
+            crate::Mime::parse("aPPLicatIon/vnD.MUltiaD.cReATOr"),
             Ok(APPLICATION_VND_MULTIAD_CREATOR)
         );
     }
@@ -82903,7 +82911,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MULTIAD_CREATOR_CIF)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCATION/Vnd.mULtiAD.creatOr.CIf"),
+            crate::Mime::parse("aPPLICATIon/vND.mULTiad.cReaTOr.cIf"),
             Ok(APPLICATION_VND_MULTIAD_CREATOR_CIF)
         );
     }
@@ -82923,7 +82931,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MUSIC_NIFF)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICation/vND.music-nIFF"),
+            crate::Mime::parse("APplicatiON/vnd.mUsIC-nIfF"),
             Ok(APPLICATION_VND_MUSIC_NIFF)
         );
     }
@@ -82943,7 +82951,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MUSICIAN)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicatioN/VND.MUSICIaN"),
+            crate::Mime::parse("applicAtION/VND.MUsICIaN"),
             Ok(APPLICATION_VND_MUSICIAN)
         );
     }
@@ -82963,7 +82971,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MUVEE_STYLE)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicatiON/Vnd.MUVEe.stYle"),
+            crate::Mime::parse("appliCATIon/VND.muveE.sTYle"),
             Ok(APPLICATION_VND_MUVEE_STYLE)
         );
     }
@@ -82983,7 +82991,7 @@ pub mod constants {
             Ok(APPLICATION_VND_MYNFC)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcAtioN/VND.mYnFc"),
+            crate::Mime::parse("ApPlicAtION/vNd.myNFC"),
             Ok(APPLICATION_VND_MYNFC)
         );
     }
@@ -83005,7 +83013,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NACAMAR_YBRID_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICATIOn/VND.NaCamAR.yBRID+jSoN"),
+            crate::Mime::parse("APPLICatION/VnD.nACAmAR.YBrId+JsOn"),
             Ok(APPLICATION_VND_NACAMAR_YBRID_JSON)
         );
     }
@@ -83025,7 +83033,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NCD_CONTROL)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicAtioN/vnd.NcD.contRoL"),
+            crate::Mime::parse("apPlicATion/VnD.ncd.CoNtRoL"),
             Ok(APPLICATION_VND_NCD_CONTROL)
         );
     }
@@ -83045,7 +83053,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NCD_REFERENCE)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCaTIon/VND.NcD.reFerenCE"),
+            crate::Mime::parse("aPpLIcaTION/VnD.ncD.refEReNce"),
             Ok(APPLICATION_VND_NCD_REFERENCE)
         );
     }
@@ -83067,7 +83075,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NEARST_INV_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicAtIon/VNd.nEarST.iNv+Json"),
+            crate::Mime::parse("apPlIcaTIOn/vNd.NEarSt.Inv+JSon"),
             Ok(APPLICATION_VND_NEARST_INV_JSON)
         );
     }
@@ -83087,7 +83095,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NEBUMIND_LINE)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcATIon/VND.nEBUmind.LiNe"),
+            crate::Mime::parse("ApPLIcaTION/vND.nebuMInD.lINe"),
             Ok(APPLICATION_VND_NEBUMIND_LINE)
         );
     }
@@ -83107,7 +83115,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NERVANA)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcaTioN/vnD.neRvAnA"),
+            crate::Mime::parse("AppLicAtioN/vnD.NeRVANA"),
             Ok(APPLICATION_VND_NERVANA)
         );
     }
@@ -83127,7 +83135,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NETFPX)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicaTIon/vnd.nEtFpX"),
+            crate::Mime::parse("appLIcaTion/vNd.nETFPx"),
             Ok(APPLICATION_VND_NETFPX)
         );
     }
@@ -83149,7 +83157,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NEUROLANGUAGE_NLU)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCaTioN/Vnd.nEurOLaNGuage.nlU"),
+            crate::Mime::parse("aPpLicATIon/vNd.NEuROlangUagE.NLu"),
             Ok(APPLICATION_VND_NEUROLANGUAGE_NLU)
         );
     }
@@ -83169,7 +83177,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NIMN)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICaTion/vnD.nIMn"),
+            crate::Mime::parse("APpLicaTioN/vND.NiMn"),
             Ok(APPLICATION_VND_NIMN)
         );
     }
@@ -83191,7 +83199,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NINTENDO_NITRO_ROM)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICAtion/VnD.NiNTENdO.nitro.Rom"),
+            crate::Mime::parse("APPlicatIoN/VnD.NInTEndo.niTro.RoM"),
             Ok(APPLICATION_VND_NINTENDO_NITRO_ROM)
         );
     }
@@ -83213,7 +83221,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NINTENDO_SNES_ROM)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcAtion/vNd.nINtEndO.sNES.roM"),
+            crate::Mime::parse("ApPlicatiOn/vND.NinTenDO.sneS.ROM"),
             Ok(APPLICATION_VND_NINTENDO_SNES_ROM)
         );
     }
@@ -83233,7 +83241,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NITF)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCATION/vNd.Nitf"),
+            crate::Mime::parse("aPPLICATiOn/Vnd.nitf"),
             Ok(APPLICATION_VND_NITF)
         );
     }
@@ -83255,7 +83263,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOBLENET_DIRECTORY)
         );
         assert_eq!(
-            crate::Mime::parse("applICATiOn/vnd.nOBLeNEt-direCtOry"),
+            crate::Mime::parse("APPLiCation/vND.nOBlEnet-DiRecTorY"),
             Ok(APPLICATION_VND_NOBLENET_DIRECTORY)
         );
     }
@@ -83277,7 +83285,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOBLENET_SEALER)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCAtioN/Vnd.nObLenet-seaLer"),
+            crate::Mime::parse("aPPlicAtIon/vNd.noblEnet-seALeR"),
             Ok(APPLICATION_VND_NOBLENET_SEALER)
         );
     }
@@ -83297,7 +83305,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOBLENET_WEB)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCAtIOn/Vnd.nobLeNEt-WeB"),
+            crate::Mime::parse("aPPlICatIon/vnd.nOBleNeT-WeB"),
             Ok(APPLICATION_VND_NOBLENET_WEB)
         );
     }
@@ -83319,7 +83327,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_CATALOGS)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicatION/Vnd.nOkIa.CAtaLogS"),
+            crate::Mime::parse("applICATIon/vNd.noKIa.CatAlOGs"),
             Ok(APPLICATION_VND_NOKIA_CATALOGS)
         );
     }
@@ -83341,7 +83349,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_CONML_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCATIon/vND.NOKIa.cONMl+WBxml"),
+            crate::Mime::parse("aPPLIcatiON/VND.nokIA.coNMl+wbXMl"),
             Ok(APPLICATION_VND_NOKIA_CONML_WBXML)
         );
     }
@@ -83363,7 +83371,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_CONML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICatIOn/VnD.nOkia.cONMl+xml"),
+            crate::Mime::parse("APplICatIoN/vNd.nOkIA.conml+XML"),
             Ok(APPLICATION_VND_NOKIA_CONML_XML)
         );
     }
@@ -83387,7 +83395,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_IPTV_CONFIG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCATIon/vNd.NOkIA.Iptv.ConFig+XmL"),
+            crate::Mime::parse("aPPLIcaTiOn/VNd.NOKia.IPtv.coNFiG+xmL"),
             Ok(APPLICATION_VND_NOKIA_IPTV_CONFIG_XML)
         );
     }
@@ -83409,7 +83417,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_I_SDS_RADIO_PRESETS)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCation/VnD.NokIA.IsdS-RADIo-preSETs"),
+            crate::Mime::parse("aPplicatIoN/Vnd.NoKia.ISDS-rAdio-PResEtS"),
             Ok(APPLICATION_VND_NOKIA_I_SDS_RADIO_PRESETS)
         );
     }
@@ -83433,7 +83441,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_LANDMARK_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICATION/vnd.nokia.LANDMaRk+wbXmL"),
+            crate::Mime::parse("APPLICAtion/vnd.noKIA.LaNdmarK+WBxmL"),
             Ok(APPLICATION_VND_NOKIA_LANDMARK_WBXML)
         );
     }
@@ -83457,7 +83465,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_LANDMARK_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcatION/VNd.NokIA.LanDMARK+xMl"),
+            crate::Mime::parse("ApplICAtIOn/Vnd.NoKia.LANDMaRk+Xml"),
             Ok(APPLICATION_VND_NOKIA_LANDMARK_XML)
         );
     }
@@ -83481,7 +83489,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_LANDMARKCOLLECTION_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicAtION/VnD.noKiA.lanDmARKCoLLECtIoN+XmL"),
+            crate::Mime::parse("apPlICATIoN/vnD.NOkia.lANDMaRKCOlLeCTIoN+xmL"),
             Ok(APPLICATION_VND_NOKIA_LANDMARKCOLLECTION_XML)
         );
     }
@@ -83503,7 +83511,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_N_GAGE_AC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLicaTIon/vnd.NOKIA.N-gaGe.AC+Xml"),
+            crate::Mime::parse("appLIcaTion/VND.NoKia.N-gAGE.ac+XmL"),
             Ok(APPLICATION_VND_NOKIA_N_GAGE_AC_XML)
         );
     }
@@ -83525,7 +83533,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_N_GAGE_DATA)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcATIoN/VNd.NoKiA.N-GaGe.daTA"),
+            crate::Mime::parse("ApPLIcATIOn/VnD.NoKIA.N-GagE.daTa"),
             Ok(APPLICATION_VND_NOKIA_N_GAGE_DATA)
         );
     }
@@ -83545,7 +83553,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_NCD)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicAtIon/VNd.nOkIa.Ncd"),
+            crate::Mime::parse("apPlIcatIOn/vNd.nOKia.NCD"),
             Ok(APPLICATION_VND_NOKIA_NCD)
         );
     }
@@ -83567,7 +83575,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_PCD_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtIOn/VNd.NOkIA.pcd+WbXmL"),
+            crate::Mime::parse("aPPlICatIOn/VNd.Nokia.PcD+WBxMl"),
             Ok(APPLICATION_VND_NOKIA_PCD_WBXML)
         );
     }
@@ -83589,7 +83597,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_PCD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICaTiOn/vNd.NOkIa.Pcd+XML"),
+            crate::Mime::parse("APpLiCatiOn/VNd.noKia.PCD+Xml"),
             Ok(APPLICATION_VND_NOKIA_PCD_XML)
         );
     }
@@ -83611,7 +83619,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_RADIO_PRESET)
         );
         assert_eq!(
-            crate::Mime::parse("APplICATiON/vND.NOKia.raDio-PRESeT"),
+            crate::Mime::parse("APPLiCAtiON/VND.nOkiA.raDIO-pREsET"),
             Ok(APPLICATION_VND_NOKIA_RADIO_PRESET)
         );
     }
@@ -83633,7 +83641,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOKIA_RADIO_PRESETS)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcATIoN/VND.NokIa.radIO-PResETS"),
+            crate::Mime::parse("ApPLIcATION/Vnd.nOkia.RADIo-PRESETs"),
             Ok(APPLICATION_VND_NOKIA_RADIO_PRESETS)
         );
     }
@@ -83653,7 +83661,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOVADIGM_EDM)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicATION/VnD.nOvadiGM.edM"),
+            crate::Mime::parse("apPLICAtIoN/vNd.noVADigM.eDM"),
             Ok(APPLICATION_VND_NOVADIGM_EDM)
         );
     }
@@ -83673,7 +83681,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOVADIGM_EDX)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICAtION/VNd.novadIgm.eDx"),
+            crate::Mime::parse("APPlICAtIOn/vnd.nOvadiGm.EdX"),
             Ok(APPLICATION_VND_NOVADIGM_EDX)
         );
     }
@@ -83693,7 +83701,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NOVADIGM_EXT)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicAtION/VND.nOvadIgM.ExT"),
+            crate::Mime::parse("apPlICAtION/vNd.nOvADIgM.EXT"),
             Ok(APPLICATION_VND_NOVADIGM_EXT)
         );
     }
@@ -83715,7 +83723,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NTT_LOCAL_CONTENT_SHARE)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICaTiON/VND.nTt-loCAL.ConteNT-share"),
+            crate::Mime::parse("APpLiCAtION/vNd.ntT-LoCal.cONtent-shARe"),
             Ok(APPLICATION_VND_NTT_LOCAL_CONTENT_SHARE)
         );
     }
@@ -83737,7 +83745,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NTT_LOCAL_FILE_TRANSFER)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICATIoN/VnD.Ntt-LoCal.FiLE-tRAnsFEr"),
+            crate::Mime::parse("APPLIcATIoN/Vnd.NtT-loCaL.fiLE-tRAnsFer"),
             Ok(APPLICATION_VND_NTT_LOCAL_FILE_TRANSFER)
         );
     }
@@ -83759,7 +83767,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NTT_LOCAL_OGW_REMOTE_ACCESS)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicATIon/vNd.Ntt-LOcAL.OGW_REmOte-ACcESS"),
+            crate::Mime::parse("apPLIcaTiOn/Vnd.NTt-LOCAL.OGw_reMOTe-ACcEss"),
             Ok(APPLICATION_VND_NTT_LOCAL_OGW_REMOTE_ACCESS)
         );
     }
@@ -83781,7 +83789,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NTT_LOCAL_SIP_TA_REMOTE)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicATIon/Vnd.ntT-LOcAL.siP-TA_reMOTe"),
+            crate::Mime::parse("apPLIcatIon/vnD.NTt-LOcaL.SIP-tA_RemOTe"),
             Ok(APPLICATION_VND_NTT_LOCAL_SIP_TA_REMOTE)
         );
     }
@@ -83803,7 +83811,7 @@ pub mod constants {
             Ok(APPLICATION_VND_NTT_LOCAL_SIP_TA_TCP_STREAM)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICAtIon/vnD.ntt-lOcAl.SIP-Ta_TCp_stREAM"),
+            crate::Mime::parse("APPlIcatioN/vnd.nTt-lOCAL.SiP-Ta_tcP_STREaM"),
             Ok(APPLICATION_VND_NTT_LOCAL_SIP_TA_TCP_STREAM)
         );
     }
@@ -83825,7 +83833,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_CHART)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcatIon/vNd.OaSIS.oPEndOCumENt.Chart"),
+            crate::Mime::parse("ApplIcatiOn/VnD.OasIS.oPEndOCuMEnt.chaRt"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_CHART)
         );
     }
@@ -83848,7 +83856,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_CHART_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCATion/vnD.oasiS.OPEndocuMEnt.chart-TeMplaTe"),
+            crate::Mime::parse("aPPLicaTioN/vnd.OaSIS.openDOcument.cHArT-teMpLaTe"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_CHART_TEMPLATE)
         );
     }
@@ -83870,7 +83878,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_DATABASE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICaTioN/vnD.OAsIs.oPENdOCumeNt.DATaBasE"),
+            crate::Mime::parse("APpLicATioN/VNd.oAsIS.oPEndoCuMENT.DatAbASE"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_DATABASE)
         );
     }
@@ -83892,7 +83900,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_FORMULA)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcAtion/vNd.oAsiS.OpeNdOCumEnt.formULa"),
+            crate::Mime::parse("ApPlicatiOn/vNd.OaSis.oPEndOcuMent.FOrMuLA"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_FORMULA)
         );
     }
@@ -83915,7 +83923,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_FORMULA_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicAtIon/VNd.oAsIS.OPendocUmEnt.Formula-TeMpLate"),
+            crate::Mime::parse("apPlIcatIOn/vNd.OASIs.opeNdOcumEnt.formUlA-TemplaTe"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_FORMULA_TEMPLATE)
         );
     }
@@ -83937,7 +83945,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_GRAPHICS)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCatIoN/VND.OaSis.OpEndOcumeNt.GraPhIcS"),
+            crate::Mime::parse("aPplIcATION/VnD.oaSiS.oPendoCumEnt.gRaPhIcs"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_GRAPHICS)
         );
     }
@@ -83960,7 +83968,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_GRAPHICS_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicAtiOn/vNd.oASIs.oPendoCuMeNt.GrapHiCs-TempLATE"),
+            crate::Mime::parse("apPliCaTiOn/vND.oasIs.opEnDoCuMEnt.GrApHIcs-TEMPLAte"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_GRAPHICS_TEMPLATE)
         );
     }
@@ -83982,7 +83990,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_IMAGE)
         );
         assert_eq!(
-            crate::Mime::parse("APplicaTION/vnd.oASis.opEndOCUmeNt.iMAgE"),
+            crate::Mime::parse("appLICATion/vND.oasiS.oPENdoCuMeNT.IMAge"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_IMAGE)
         );
     }
@@ -84005,7 +84013,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_IMAGE_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("APplICAtION/vNd.oaSIs.OPendOcumeNt.ImagE-TEMplAte"),
+            crate::Mime::parse("APPlICAtiOn/vnD.oaSIs.oPendoCumEnt.ImAGE-tEmplATE"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_IMAGE_TEMPLATE)
         );
     }
@@ -84027,7 +84035,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICATION/Vnd.OAsis.opEnDOcuMENT.PrESentATIOn"),
+            crate::Mime::parse("APPLICAtIon/VNd.oAsiS.OPenDOCUMEnT.preSENTatIoN"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION)
         );
     }
@@ -84050,7 +84058,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicAtioN/VNd.oAsIs.OpENdoCumENt.pREsEnTation-TeMPLATe"),
+            crate::Mime::parse("apPlicAtIOn/vNd.oaSiS.opEndOCuMeNT.PrEsentaTIoN-TEMplatE"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION_TEMPLATE)
         );
     }
@@ -84072,7 +84080,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET)
         );
         assert_eq!(
-            crate::Mime::parse("appLICaTiOn/VNd.oasiS.oPeNDOcUMeNT.SPREAdSHeet"),
+            crate::Mime::parse("APpLiCatIOn/vnd.OAsIs.OPeNDoCUmENT.SpREadshEEt"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET)
         );
     }
@@ -84095,7 +84103,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicATiOn/vnd.oAsiS.OpEnDOCUMent.SpREADShEEt-tEmpLATE"),
+            crate::Mime::parse("apPLiCaTion/vNd.OASiS.OPENDocumEnT.SPReADsHeEt-TEMPlATE"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET_TEMPLATE)
         );
     }
@@ -84117,7 +84125,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicaTION/vnD.oasIs.opEnDoCumEnt.TEXT"),
+            crate::Mime::parse("appLICAtioN/vnd.oAsiS.OpEndOcumENT.tEXt"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT)
         );
     }
@@ -84139,7 +84147,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT_MASTER)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCAtioN/vNd.OasiS.opeNDOcuMent.TEXt-maSter"),
+            crate::Mime::parse("aPPlicAtiOn/Vnd.OAsis.OPenDocuMENT.texT-maSTER"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT_MASTER)
         );
     }
@@ -84162,7 +84170,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcAtion/VND.OaSIS.OPEnDOcUmENt.TEXT-tEmplate"),
+            crate::Mime::parse("ApPlicatION/VnD.OASIS.OPeNdOCuMENT.TeXt-tempLAtE"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT_TEMPLATE)
         );
     }
@@ -84184,7 +84192,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT_WEB)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCaTiOn/vnd.oASIS.OpendOcUMEnt.tExT-web"),
+            crate::Mime::parse("aPpLiCation/vND.OASis.oPeNDOcumeNt.Text-WeB"),
             Ok(APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT_WEB)
         );
     }
@@ -84204,7 +84212,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OBN)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICATIoN/VnD.ObN"),
+            crate::Mime::parse("APPLIcATIoN/VnD.Obn"),
             Ok(APPLICATION_VND_OBN)
         );
     }
@@ -84226,7 +84234,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OCF_CBOR)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICAtioN/vnD.OcF+cBOr"),
+            crate::Mime::parse("APPlicATioN/VnD.oCF+CBOr"),
             Ok(APPLICATION_VND_OCF_CBOR)
         );
     }
@@ -84250,7 +84258,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OCI_IMAGE_MANIFEST_V1_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcATIOn/vND.OCi.iMAGe.mANIFesT.V1+jSON"),
+            crate::Mime::parse("ApPLICatiON/VNd.oCI.iMaGE.ManIFEsT.V1+JSON"),
             Ok(APPLICATION_VND_OCI_IMAGE_MANIFEST_V1_JSON)
         );
     }
@@ -84272,7 +84280,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OFTN_L10N_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicatIoN/vnD.oftN.L10N+JSon"),
+            crate::Mime::parse("applIcATioN/vnd.oFTn.l10n+jSON"),
             Ok(APPLICATION_VND_OFTN_L10N_JSON)
         );
     }
@@ -84296,7 +84304,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_CONTENTACCESSDOWNLOAD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICatiOn/vnD.oIpF.coNTeNtacCesSdOwnlOAD+xml"),
+            crate::Mime::parse("APpliCatioN/vNd.OipF.cOnteNtaCcEssdOWNLoad+Xml"),
             Ok(APPLICATION_VND_OIPF_CONTENTACCESSDOWNLOAD_XML)
         );
     }
@@ -84320,7 +84328,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_CONTENTACCESSSTREAMING_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcATion/vND.oIpf.ConTENtAcCeSSsTrEaMINg+XML"),
+            crate::Mime::parse("ApPLicatiON/vNd.OIpf.COnTeNtACcEsSsTREaMING+Xml"),
             Ok(APPLICATION_VND_OIPF_CONTENTACCESSSTREAMING_XML)
         );
     }
@@ -84342,7 +84350,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_CSPG_HEXBINARY)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtioN/Vnd.OIpF.cspG-HExbiNary"),
+            crate::Mime::parse("ApPlicATIon/VNd.oipf.cSPg-hExbinARY"),
             Ok(APPLICATION_VND_OIPF_CSPG_HEXBINARY)
         );
     }
@@ -84364,7 +84372,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_DAE_SVG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcAtiOn/VnD.OIpf.daE.sVg+xMl"),
+            crate::Mime::parse("ApPliCaTIoN/VNd.oipF.dAe.sVg+XML"),
             Ok(APPLICATION_VND_OIPF_DAE_SVG_XML)
         );
     }
@@ -84386,7 +84394,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_DAE_XHTML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcatIOn/vNd.oipf.Dae.xhTml+XmL"),
+            crate::Mime::parse("ApplICaTiOn/vnd.oIpf.daE.xhTmL+xML"),
             Ok(APPLICATION_VND_OIPF_DAE_XHTML_XML)
         );
     }
@@ -84410,7 +84418,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_MIPPVCONTROLMESSAGE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCATIon/vNd.OIpf.MIpPvcoNTRolmessaGE+xml"),
+            crate::Mime::parse("aPPLIcatiOn/VNd.oIPf.mipPVControlmESsage+xmL"),
             Ok(APPLICATION_VND_OIPF_MIPPVCONTROLMESSAGE_XML)
         );
     }
@@ -84430,7 +84438,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_PAE_GEM)
         );
         assert_eq!(
-            crate::Mime::parse("appLICAtIOn/vnd.oiPf.paE.GEM"),
+            crate::Mime::parse("APPlICaTion/vnD.OipF.PAE.gem"),
             Ok(APPLICATION_VND_OIPF_PAE_GEM)
         );
     }
@@ -84454,7 +84462,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_SPDISCOVERY_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCATIon/Vnd.oiPf.SPdisCOvERY+xml"),
+            crate::Mime::parse("aPPLIcaTIon/vnD.oIPf.sPDiSCOvery+xml"),
             Ok(APPLICATION_VND_OIPF_SPDISCOVERY_XML)
         );
     }
@@ -84476,7 +84484,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_SPDLIST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICaTION/vND.OiPf.sPDliST+XMl"),
+            crate::Mime::parse("APpLICAtiON/VnD.OiPF.sPDLISt+xMl"),
             Ok(APPLICATION_VND_OIPF_SPDLIST_XML)
         );
     }
@@ -84500,7 +84508,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_UEPROFILE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicATION/VNd.oIpf.uEpRofIlE+XML"),
+            crate::Mime::parse("apPLICATIOn/vNd.OiPf.uePrOfILE+xMl"),
             Ok(APPLICATION_VND_OIPF_UEPROFILE_XML)
         );
     }
@@ -84524,7 +84532,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OIPF_USERPROFILE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICaTIoN/vNd.oiPf.usERProFIlE+xMl"),
+            crate::Mime::parse("APpLIcAtiOn/vnD.OipF.UseRPrOFiLe+Xml"),
             Ok(APPLICATION_VND_OIPF_USERPROFILE_XML)
         );
     }
@@ -84544,7 +84552,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OLPC_SUGAR)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicATiON/vnd.OLpc-sUgAr"),
+            crate::Mime::parse("apPLiCATion/VNd.OlPc-suGaR"),
             Ok(APPLICATION_VND_OLPC_SUGAR)
         );
     }
@@ -84566,7 +84574,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_SCWS_CONFIG)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicaTioN/VNd.oMA-scWS-ConFig"),
+            crate::Mime::parse("appLicATIOn/vND.omA-sCws-coNFiG"),
             Ok(APPLICATION_VND_OMA_SCWS_CONFIG)
         );
     }
@@ -84588,7 +84596,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_SCWS_HTTP_REQUEST)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICAtiOn/vNd.OMa-ScWs-HTtp-ReQUEST"),
+            crate::Mime::parse("APPliCaTiOn/VNd.OmA-sCWs-hTtP-REQuesT"),
             Ok(APPLICATION_VND_OMA_SCWS_HTTP_REQUEST)
         );
     }
@@ -84610,7 +84618,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_SCWS_HTTP_RESPONSE)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCAtIoN/vnD.Oma-sCWS-htTP-rESPonsE"),
+            crate::Mime::parse("aPPlIcAtioN/Vnd.oMA-ScwS-htTP-resPOnsE"),
             Ok(APPLICATION_VND_OMA_SCWS_HTTP_RESPONSE)
         );
     }
@@ -84635,7 +84643,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_ASSOCIATED_PROCEDURE_PARAMETER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicAtIOn/VNd.OMA.bCAsT.aSsOciaTEd-prOCEdURE-PARAmEtEr+xmL"),
+            crate::Mime::parse("apPlICaTIOn/VND.oMA.BCaSt.assOCiAteD-PrOCEDURE-pArAmEteR+XML"),
             Ok(APPLICATION_VND_OMA_BCAST_ASSOCIATED_PROCEDURE_PARAMETER_XML)
         );
     }
@@ -84659,7 +84667,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_DRM_TRIGGER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCaTIoN/VnD.omA.BCAsT.drm-TriGGER+XmL"),
+            crate::Mime::parse("aPpLIcATIoN/vnD.OMA.BCast.Drm-TRIgGeR+xML"),
             Ok(APPLICATION_VND_OMA_BCAST_DRM_TRIGGER_XML)
         );
     }
@@ -84681,7 +84689,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_IMD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcatioN/VNd.Oma.bCaST.ImD+XmL"),
+            crate::Mime::parse("ApplicATIOn/Vnd.oMa.BCAsT.ImD+xMl"),
             Ok(APPLICATION_VND_OMA_BCAST_IMD_XML)
         );
     }
@@ -84701,7 +84709,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_LTKM)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicATION/VND.oMa.Bcast.LTkm"),
+            crate::Mime::parse("apPLICATION/vNd.Oma.bCASt.LTkm"),
             Ok(APPLICATION_VND_OMA_BCAST_LTKM)
         );
     }
@@ -84725,7 +84733,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_NOTIFICATION_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplicatiOn/vnd.omA.BCAsT.NoTIFicAtion+XMl"),
+            crate::Mime::parse("appliCaTion/vnD.OMA.BcAsT.NotIficatIOn+xml"),
             Ok(APPLICATION_VND_OMA_BCAST_NOTIFICATION_XML)
         );
     }
@@ -84747,7 +84755,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_PROVISIONINGTRIGGER)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcaTION/VND.oMa.bCAST.PRoVIsIoninGTRigger"),
+            crate::Mime::parse("AppLICAtION/vNd.oMA.BcASt.PrOvisiONIngtrigGeR"),
             Ok(APPLICATION_VND_OMA_BCAST_PROVISIONINGTRIGGER)
         );
     }
@@ -84769,7 +84777,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_SGBOOT)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCAtIOn/Vnd.oMA.bcaSt.SgbooT"),
+            crate::Mime::parse("aPPlICatIon/vND.oma.bCAst.sGbOOT"),
             Ok(APPLICATION_VND_OMA_BCAST_SGBOOT)
         );
     }
@@ -84791,7 +84799,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_SGDD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCation/Vnd.Oma.bcaST.SGDd+Xml"),
+            crate::Mime::parse("aPplicatIon/Vnd.oma.BcAST.SGdd+xml"),
             Ok(APPLICATION_VND_OMA_BCAST_SGDD_XML)
         );
     }
@@ -84811,7 +84819,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_SGDU)
         );
         assert_eq!(
-            crate::Mime::parse("appliCaTIon/VNd.OmA.BcAsT.SGDU"),
+            crate::Mime::parse("aPpLIcaTIOn/VnD.OmA.BcAST.SGdu"),
             Ok(APPLICATION_VND_OMA_BCAST_SGDU)
         );
     }
@@ -84834,7 +84842,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_SIMPLE_SYMBOL_CONTAINER)
         );
         assert_eq!(
-            crate::Mime::parse("APplicaTION/vNd.oMa.bCaST.siMplE-SymbOL-cONTAINer"),
+            crate::Mime::parse("appLICATiOn/vNd.oMa.BcasT.sIMPle-SYMbOL-CONtaIner"),
             Ok(APPLICATION_VND_OMA_BCAST_SIMPLE_SYMBOL_CONTAINER)
         );
     }
@@ -84858,7 +84866,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_SMARTCARD_TRIGGER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicAtiON/vnD.OMa.bCAsT.sMarTcArD-triggER+xml"),
+            crate::Mime::parse("apPliCAtioN/VNd.oMA.BCaSt.SmArTCard-tRIgger+xml"),
             Ok(APPLICATION_VND_OMA_BCAST_SMARTCARD_TRIGGER_XML)
         );
     }
@@ -84882,7 +84890,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_SPROV_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appliCatiOn/vNd.oMa.BCAsT.SPRoV+XMl"),
+            crate::Mime::parse("aPpliCaTiOn/vNd.OMA.BCAST.SpROv+XMl"),
             Ok(APPLICATION_VND_OMA_BCAST_SPROV_XML)
         );
     }
@@ -84902,7 +84910,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_BCAST_STKM)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicAtIOn/vND.oMa.BCAst.StkM"),
+            crate::Mime::parse("apPlICaTiON/vNd.OMA.bCAst.sTkM"),
             Ok(APPLICATION_VND_OMA_BCAST_STKM)
         );
     }
@@ -84926,7 +84934,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_CAB_ADDRESS_BOOK_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCaTioN/vNd.oMa.CaB-ADdrESS-book+xMl"),
+            crate::Mime::parse("aPpLicAtiOn/vNd.OmA.CAb-ADDRess-BoOk+xML"),
             Ok(APPLICATION_VND_OMA_CAB_ADDRESS_BOOK_XML)
         );
     }
@@ -84950,7 +84958,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_CAB_FEATURE_HANDLER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcaTiOn/VNd.Oma.CAb-FEATURE-hAndler+xmL"),
+            crate::Mime::parse("AppLiCatIOn/Vnd.OMa.CAB-FEATuRe-handleR+xml"),
             Ok(APPLICATION_VND_OMA_CAB_FEATURE_HANDLER_XML)
         );
     }
@@ -84972,7 +84980,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_CAB_PCC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicAtiOn/VnD.oMa.cAb-PCC+xmL"),
+            crate::Mime::parse("apPliCatIoN/vNd.oMa.CAB-pcC+XmL"),
             Ok(APPLICATION_VND_OMA_CAB_PCC_XML)
         );
     }
@@ -84996,7 +85004,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_CAB_SUBS_INVITE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcaTIOn/vND.oma.cAB-subS-iNVIte+XML"),
+            crate::Mime::parse("AppLICatiON/vnd.oMA.cab-suBS-invITE+Xml"),
             Ok(APPLICATION_VND_OMA_CAB_SUBS_INVITE_XML)
         );
     }
@@ -85020,7 +85028,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_CAB_USER_PREFS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCaTIoN/vND.oma.cAb-useR-PrEFs+XMl"),
+            crate::Mime::parse("aPpLIcAtiON/vnd.oMa.cab-USeR-pREFs+XMl"),
             Ok(APPLICATION_VND_OMA_CAB_USER_PREFS_XML)
         );
     }
@@ -85040,7 +85048,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_DCD)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicaTioN/VND.OMA.dCD"),
+            crate::Mime::parse("appLicATION/VND.oMA.DCD"),
             Ok(APPLICATION_VND_OMA_DCD)
         );
     }
@@ -85060,7 +85068,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_DCDC)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicatioN/Vnd.OMa.dcDC"),
+            crate::Mime::parse("applicAtIon/VNd.omA.DCdc"),
             Ok(APPLICATION_VND_OMA_DCDC)
         );
     }
@@ -85082,7 +85090,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_DD2_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcATion/vND.Oma.dd2+XmL"),
+            crate::Mime::parse("ApPLicaTiON/Vnd.oma.Dd2+xMl"),
             Ok(APPLICATION_VND_OMA_DD2_XML)
         );
     }
@@ -85104,7 +85112,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_DRM_RISD_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICatIon/VND.oMA.Drm.Risd+xml"),
+            crate::Mime::parse("APplIcaTION/vND.Oma.Drm.Risd+XML"),
             Ok(APPLICATION_VND_OMA_DRM_RISD_XML)
         );
     }
@@ -85128,7 +85136,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_GROUP_USAGE_LIST_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICAtIoN/vNd.oMA.gRouP-uSaGe-lIST+Xml"),
+            crate::Mime::parse("APPlIcATiOn/vND.oMa.GRoUp-uSaGE-lIst+xmL"),
             Ok(APPLICATION_VND_OMA_GROUP_USAGE_LIST_XML)
         );
     }
@@ -85150,7 +85158,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_LWM2M_CBOR)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcatIon/vnd.OmA.Lwm2M+CboR"),
+            crate::Mime::parse("ApplIcaTion/VnD.Oma.LwM2m+cBoR"),
             Ok(APPLICATION_VND_OMA_LWM2M_CBOR)
         );
     }
@@ -85172,7 +85180,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_LWM2M_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCAtION/vnD.OMA.lwM2m+jsoN"),
+            crate::Mime::parse("aPPlICATioN/VND.omA.lWm2m+jsoN"),
             Ok(APPLICATION_VND_OMA_LWM2M_JSON)
         );
     }
@@ -85194,7 +85202,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_LWM2M_TLV)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCaTion/vND.oma.lwm2m+tLv"),
+            crate::Mime::parse("aPpLicatiON/vnd.oma.lwm2m+Tlv"),
             Ok(APPLICATION_VND_OMA_LWM2M_TLV)
         );
     }
@@ -85216,7 +85224,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_PAL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCatiOn/VNd.OMA.PAl+XmL"),
+            crate::Mime::parse("aPpliCatIOn/VND.OMa.PaL+XmL"),
             Ok(APPLICATION_VND_OMA_PAL_XML)
         );
     }
@@ -85241,7 +85249,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_POC_DETAILED_PROGRESS_REPORT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICAtioN/vND.OMa.POC.DETaiLeD-PROgREsS-rEpORT+XmL"),
+            crate::Mime::parse("APPlicATiON/VNd.OMA.POC.dEtAiLED-PRoGReSs-REPOrT+xml"),
             Ok(APPLICATION_VND_OMA_POC_DETAILED_PROGRESS_REPORT_XML)
         );
     }
@@ -85265,7 +85273,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_POC_FINAL_REPORT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcaTioN/vNd.OmA.poC.final-rEPort+XMl"),
+            crate::Mime::parse("AppLicAtiOn/VnD.omA.poc.fInAL-rePORt+XML"),
             Ok(APPLICATION_VND_OMA_POC_FINAL_REPORT_XML)
         );
     }
@@ -85287,7 +85295,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_POC_GROUPS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcatION/vnD.oMa.pOc.gROupS+xML"),
+            crate::Mime::parse("ApplICATioN/vNd.oMa.pOC.gROuPS+XmL"),
             Ok(APPLICATION_VND_OMA_POC_GROUPS_XML)
         );
     }
@@ -85312,7 +85320,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_POC_INVOCATION_DESCRIPTOR_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICAtiON/VnD.oMA.pOC.inVoCATioN-desCRiPTOr+xml"),
+            crate::Mime::parse("APPliCATIoN/vND.oMA.poC.INVocAtion-DeSCRiPtor+xMl"),
             Ok(APPLICATION_VND_OMA_POC_INVOCATION_DESCRIPTOR_XML)
         );
     }
@@ -85337,7 +85345,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_POC_OPTIMIZED_PROGRESS_REPORT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCaTioN/vNd.oMa.Poc.oPTimIzEd-PrOgREsS-RePoRT+xMl"),
+            crate::Mime::parse("aPpLicAtiOn/vNd.Oma.pOC.oPtImIZeD-PRoGrEsS-REpoRt+xmL"),
             Ok(APPLICATION_VND_OMA_POC_OPTIMIZED_PROGRESS_REPORT_XML)
         );
     }
@@ -85357,7 +85365,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_PUSH)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCaTIOn/VNd.omA.puSH"),
+            crate::Mime::parse("aPpLICaTIOn/vnD.omA.PuSH"),
             Ok(APPLICATION_VND_OMA_PUSH)
         );
     }
@@ -85381,7 +85389,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_SCIDM_MESSAGES_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCatIon/vNd.OMa.ScidM.mESsagEs+XmL"),
+            crate::Mime::parse("aPplIcatiOn/VNd.Oma.SCiDM.meSsAGeS+XML"),
             Ok(APPLICATION_VND_OMA_SCIDM_MESSAGES_XML)
         );
     }
@@ -85405,7 +85413,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMA_XCAP_DIRECTORY_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICaTION/Vnd.Oma.xcaP-dirECtOry+XMl"),
+            crate::Mime::parse("APpLICAtIon/Vnd.oma.Xcap-DiRectORy+xMl"),
             Ok(APPLICATION_VND_OMA_XCAP_DIRECTORY_XML)
         );
     }
@@ -85427,7 +85435,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMADS_EMAIL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicaTION/VNd.oMAds-eMAil+XmL"),
+            crate::Mime::parse("appLICAtIOn/vND.oMaDS-emAiL+xML"),
             Ok(APPLICATION_VND_OMADS_EMAIL_XML)
         );
     }
@@ -85449,7 +85457,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMADS_FILE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcATIon/VND.omAds-fIle+XML"),
+            crate::Mime::parse("ApPLIcatION/vnD.oMaDs-FILE+Xml"),
             Ok(APPLICATION_VND_OMADS_FILE_XML)
         );
     }
@@ -85471,7 +85479,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMADS_FOLDER_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplicaTioN/Vnd.oMAdS-fOlDEr+XML"),
+            crate::Mime::parse("appLicATIon/vND.OMaDs-FolDER+xMl"),
             Ok(APPLICATION_VND_OMADS_FOLDER_XML)
         );
     }
@@ -85493,7 +85501,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OMALOC_SUPL_INIT)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCATIon/VND.OmALoc-SuPL-iNiT"),
+            crate::Mime::parse("aPPLIcaTION/VnD.omALoC-SuPl-iNiT"),
             Ok(APPLICATION_VND_OMALOC_SUPL_INIT)
         );
     }
@@ -85513,7 +85521,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ONEPAGER)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTioN/vNd.OnEpAger"),
+            crate::Mime::parse("AppLicATiOn/VnD.OnepaGER"),
             Ok(APPLICATION_VND_ONEPAGER)
         );
     }
@@ -85533,7 +85541,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ONEPAGERTAMP)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCATion/Vnd.onEPaGerTaMP"),
+            crate::Mime::parse("aPPLicatIon/vnD.oNepAgERtAmp"),
             Ok(APPLICATION_VND_ONEPAGERTAMP)
         );
     }
@@ -85553,7 +85561,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ONEPAGERTAMX)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicaTion/VND.ONePagErTAmx"),
+            crate::Mime::parse("appLicatION/VNd.onEpAGertaMx"),
             Ok(APPLICATION_VND_ONEPAGERTAMX)
         );
     }
@@ -85573,7 +85581,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ONEPAGERTAT)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCation/vnd.onEpagertAt"),
+            crate::Mime::parse("aPplication/vnD.onepaGerTat"),
             Ok(APPLICATION_VND_ONEPAGERTAT)
         );
     }
@@ -85593,7 +85601,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ONEPAGERTATP)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtIOn/VNd.onePAgErtATP"),
+            crate::Mime::parse("ApPlICaTIOn/vnd.OnEpaGERtAtp"),
             Ok(APPLICATION_VND_ONEPAGERTATP)
         );
     }
@@ -85613,7 +85621,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ONEPAGERTATX)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCAtIOn/vNd.onepAgERtaTX"),
+            crate::Mime::parse("aPPlICaTiOn/vnd.OnEPagERtATx"),
             Ok(APPLICATION_VND_ONEPAGERTATX)
         );
     }
@@ -85635,7 +85643,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENBLOX_GAME_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcatION/Vnd.opENbLoX.gAME+XmL"),
+            crate::Mime::parse("ApplICATIon/vnD.oPeNBlOX.gAmE+XMl"),
             Ok(APPLICATION_VND_OPENBLOX_GAME_XML)
         );
     }
@@ -85657,7 +85665,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENBLOX_GAME_BINARY)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICatiON/vnd.oPENBloX.Game-bInARY"),
+            crate::Mime::parse("APpliCATion/vND.OpeNBLox.gaMe-BInAry"),
             Ok(APPLICATION_VND_OPENBLOX_GAME_BINARY)
         );
     }
@@ -85677,7 +85685,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENEYE_OEB)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtIon/vnD.OpEnEYE.oeb"),
+            crate::Mime::parse("ApPlIcatioN/VnD.OPEneye.OEB"),
             Ok(APPLICATION_VND_OPENEYE_OEB)
         );
     }
@@ -85699,7 +85707,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENOFFICEORG_EXTENSION)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicaTioN/vNd.oPENofFICEoRG.exTEnsiOn"),
+            crate::Mime::parse("appLicATiOn/vND.opENOFfICEorG.extEnSiON"),
             Ok(APPLICATION_VND_OPENOFFICEORG_EXTENSION)
         );
     }
@@ -85723,7 +85731,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENSTREETMAP_DATA_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICATiON/VND.oPENSTreETMap.daTa+xMl"),
+            crate::Mime::parse("APPLiCATION/vND.OPenSTReetmaP.DaTa+xMl"),
             Ok(APPLICATION_VND_OPENSTREETMAP_DATA_XML)
         );
     }
@@ -85745,7 +85753,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENTIMESTAMPS_OTS)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICatIOn/vND.OpenTIMesTampS.ots"),
+            crate::Mime::parse("APplICatiON/Vnd.OPEntImesTamps.otS"),
             Ok(APPLICATION_VND_OPENTIMESTAMPS_OTS)
         );
     }
@@ -85774,7 +85782,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "appLIcATIOn/vND.oPenXMlfORMatS-OfFiCedOCUmENt.CUsToM-pRoPertiES+xml"
+                "ApPLICatiON/vNd.OPenXMLfoRmAtS-OffICEdOCumENt.cUStOm-propERties+XmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_CUSTOM_PROPERTIES_XML)
         );
@@ -85804,7 +85812,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPpLicAtIOn/vND.OpENXmLFoRMAtS-ofFIceDoCUmeNt.CUstOMxmLproPeRtieS+XmL"
+                "apPlICaTiON/VnD.OpENxMLFoRMatS-ofFiCEdoCuMENt.CUstOmxmLpRopeRTIeS+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_CUSTOM_XML_PROPERTIES_XML)
         );
@@ -85830,7 +85838,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_DRAWING_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLicATiON/VnD.OPENXMLforMats-OFFICEDocUMeNt.DrawINg+XmL"),
+            crate::Mime::parse("apPLiCATIoN/VND.OPEnxmLformATS-OFFicEDoCumEnt.DRawInG+xmL"),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_DRAWING_XML)
         );
     }
@@ -85856,7 +85864,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_DRAWINGML_CHART_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLicAtIoN/VnD.oPENxMLfOrmaTs-ofFICeDOcUMEnt.DRAwiNgmL.chaRT+XmL"),
+            crate::Mime::parse("apPlIcAtIoN/vND.oPEnXmlfOrmatS-OfFIcEDOcuMENT.dRawINgml.ChArT+XML"),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_DRAWINGML_CHART_XML)
         );
     }
@@ -85885,7 +85893,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APPLiCaTioN/Vnd.opeNXMLFORMATS-OfficEdOCument.DRawINGMl.CHArtshAPES+XML"
+                "aPpLicATIon/vnd.OPENXMLFORmAts-oFfICedocuMENt.DRAWinGML.chaRTSHAPES+xMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_DRAWINGML_CHARTSHAPES_XML)
         );
@@ -85914,7 +85922,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApPliCation/vnD.OpeNxmlfORMATS-OFfICeDOcument.drAWingml.diagraMCoLOrS+xMl"
+                "aPplicaTioN/Vnd.openXMLFORMATs-OfFIcedocuMenT.drawiNgml.diAGrAMcOloRs+Xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_DRAWINGML_DIAGRAM_COLORS_XML)
         );
@@ -85943,7 +85951,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPpliCATIon/VNd.openxMLFORmATs-offiCEdoCumENT.drAwingML.dIaGrAmdAtA+Xml"
+                "aPPLIcatIOn/vnd.oPENXMlFOrmats-OFfiCedOCUmenT.draWINgMl.dIagRaMdAta+Xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_DRAWINGML_DIAGRAM_DATA_XML)
         );
@@ -85972,7 +85980,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APplicATioN/VND.OpEnxmLForMATS-oFficEdoCUment.DraWinGmL.diAGrAmLaYout+XMl"
+                "apPLicAtION/VnD.opENxmLFORmaTs-oFfiCEdocuMEnt.drAwIngmL.dIaGrAmlaYOUt+XML"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_DRAWINGML_DIAGRAM_LAYOUT_XML)
         );
@@ -86001,7 +86009,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APPLICatiOn/vNd.OPEnXmlfoRMAts-OFfiCedOCUment.drAWinGMl.diAGrAmstylE+XML"
+                "APpliCaTiOn/VND.OpenxMLFormATs-OffICEdocuMenT.drAWiNgmL.dIagramStYLE+Xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_DRAWINGML_DIAGRAM_STYLE_XML)
         );
@@ -86031,7 +86039,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPplicAtiOn/VND.opEnxMLForMAtS-OFFiCeDoCUmEnT.eXTenDED-PRoPeRTIes+xMl"
+                "apPliCatION/vnD.oPENxmLFoRMATS-OfFiCEdOcUmeNT.eXTENDEd-pROPerTiEs+xML"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_EXTENDED_PROPERTIES_XML)
         );
@@ -86060,7 +86068,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApPLicATIon/vNd.OPENxMlFormATs-OFFIcEDocumENT.PreSeNTaTIOnml.coMmEnTaUtHoRs+xML"
+                "apPLIcaTiOn/VND.oPeNxmlFOrmATS-oFFicedOCUMEnt.pREsENTationmL.CoMmEnTaUthoRS+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_COMMENT_AUTHORS_XML)
         );
@@ -86089,7 +86097,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "appLIcAtiON/vNd.OPeNXMlfOrmAtS-OFfICEDoCumEnT.pReSeNtAtioNml.CoMmENts+XML"
+                "ApPliCATiOn/VNd.OPenXmlFoRMATs-OFFiCedOcUMeNt.pReSentAtioNmL.COmmeNTS+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_COMMENTS_XML)
         );
@@ -86118,7 +86126,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "AppLIcatIOn/VNd.OpEnxmLFOrmaTs-ofFIceDOCUment.preseNtatIoNml.haNDoutmaSteR+XML"
+                "ApplICaTIOn/VnD.opENXmlfOrMatS-ofFICEdocuMent.pReseNtAtiOnmL.handoUtmAsTER+Xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_HANDOUT_MASTER_XML)
         );
@@ -86147,7 +86155,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPpliCAtIon/VNd.OPenXmlFormAtS-OFficEDOcUmeNT.presEnTATIONmL.NoTesMaster+XmL"
+                "aPPlIcatIOn/VNd.OpeNxmlFoRmATs-oFFIcEdoCUMent.PrESENTAtIONmL.nOtesmasTeR+xML"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_NOTES_MASTER_XML)
         );
@@ -86176,7 +86184,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApPLication/VnD.OPeNXMlfORMats-OfFICEdocUmEnt.PreseNTaTIOnMl.NoTessLidE+XmL"
+                "applicaTIoN/VNd.OPenXMLforMAtS-OFficEdOcumEnt.pREsENTaTioNmL.noTesSlIdE+XmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_NOTES_SLIDE_XML)
         );
@@ -86203,7 +86211,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APpLIcatiON/vND.oPeNXMLFOrmATs-offIcEdOCUmeNT.pReSeNTAtIONml.pRESENTATIoN"
+                "AppliCAtiON/vNd.OPENXmlFOrMats-oFfICEdoCUMeNt.pRESeNTAtionML.PRESENtATIoN"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION)
         );
@@ -86225,7 +86233,7 @@ pub mod constants {
     #[test]
     fn application_vnd_openxmlformats_officedocument_presentationml_presentation_main_xml_parse() {
         assert_eq!(crate::Mime::parse("application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION_MAIN_XML));
-        assert_eq!(crate::Mime::parse("APpLIcaTiOn/vNd.oPeNXMlfOrMATS-OfficeDoCUmEnt.PreseNTAtioNML.PresenTaTION.MAin+XML"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION_MAIN_XML));
+        assert_eq!(crate::Mime::parse("AppLiCaTiOn/vNd.OPenXmLFORMAts-ofFiCEdOcuMEnt.pRESentATIoNml.prEsENTAtIOn.MAIN+Xml"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION_MAIN_XML));
     }
 
     /// `application/vnd.openxmlformats-officedocument.presentationml.presProps+xml`
@@ -86251,7 +86259,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPpliCAtION/vnD.OpeNxmLForMaTS-oFFICedOCuMent.prEsentatIonml.preSPrOpS+xMl"
+                "aPPlICAtioN/Vnd.opENxmLfORmaTS-OffICeDocumenT.preseNtatiOnml.PrEsPRoPs+XMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRES_PROPS_XML)
         );
@@ -86279,7 +86287,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APPliCatioN/vnD.OPeNXmLfOrmatS-OFfIceDocUmEnt.PResENTaTIonML.SLide"
+                "aPplicAtioN/VNd.OpEnXmlfoRmATs-ofFicEdOcuMENt.PREsENtaTIoNMl.slIdE"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDE)
         );
@@ -86309,7 +86317,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPpLICATiOn/vND.OpeNXMLFORmATs-OfFIcedOcuMENT.PRESEnTatIOnml.slIDE+xML"
+                "APPLiCaTiON/Vnd.OPENXMlFOrmAtS-offIceDOCUMENT.PrEseNTatiOnmL.SliDE+xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDE_XML)
         );
@@ -86338,7 +86346,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApplICATiOn/vnd.OpeNxMlFORmATs-OffIcEdoCumeNT.pREseNTatiOnml.sliDelAyOUT+xmL"
+                "APPLiCaTion/Vnd.oPeNXMlFOrMAts-oFfiCedoCUMeNT.pREsenTationml.slIdELAYouT+xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDE_LAYOUT_XML)
         );
@@ -86367,7 +86375,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApplicATioN/VnD.oPEnxMLfoRmATS-OFfICedOCumeNt.PResenTatiONMl.SlIdEMasTeR+XMl"
+                "apPLicATIoN/vND.oPEnxMlFORMATs-OffICedoCuMENt.prEsenTATioNmL.SLidEmAsTEr+XmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDE_MASTER_XML)
         );
@@ -86395,7 +86403,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APpLICatioN/VnD.OPEnxmLFORmATs-oFficEDocumenT.PResEntATIoNml.slIDESHOw"
+                "APplicATIoN/VND.opENXMlFOrMaTs-oFFicedocUmENt.PreSENtAtiOnmL.SLIDesHOW"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDESHOW)
         );
@@ -86424,7 +86432,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPPLIcatIoN/vnd.OPENXMlfoRMAts-offICEDOcuMEnT.prEseNtatIOnmL.sliDesHow.MAIn+xmL"
+                "ApplIcAtion/VND.OPenxMLForMats-OFFIceDOcUmenT.pReseNTatIonml.slIdeSHOW.MaiN+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDESHOW_MAIN_XML)
         );
@@ -86453,7 +86461,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "appLicATION/vNd.oPenxmLFOrmaTs-officEdoCUMEnt.PResentAtIONmL.SLiDeuPdAtEiNfO+xMl"
+                "apPLICAtiOn/vNd.opENXmlfOrmats-oFfiCEDOcumENt.preSeNTAtIoNMl.slIdEuPdAtEInFo+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDE_UPDATE_INFO_XML)
         );
@@ -86482,7 +86490,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "AppLIcaTION/vnD.oPeNxMlfORMatS-OFFICEdoCumeNt.PresEntATiOnmL.taBLEStyleS+XML"
+                "AppLICAtioN/vNd.oPenXMLfoRMATS-OFfiCedoCumEnt.PreSEnTatIOnmL.TAblesTyLES+XmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_TABLE_STYLES_XML)
         );
@@ -86512,7 +86520,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPpLICATIon/vnD.OPEnXMLfORmatS-OFficEDocUmenT.PReSeNTAtioNML.TaGS+xMl"
+                "APPLIcatioN/VND.OPEnXMlfoRmATs-oFFicEdocUMENt.pRESentATIONmL.TaGs+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_TAGS_XML)
         );
@@ -86540,7 +86548,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "appLICatiOn/VnD.oPENXmlFormATs-oFFIceDocumEnt.prEsEntatiONMl.tEMPlate"
+                "APpliCaTIoN/vND.OpeNxmlFOrmaTS-ofFicedOcumenT.PresenTATionML.tempLaTE"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_TEMPLATE)
         );
@@ -86569,7 +86577,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApPLIcAtiOn/Vnd.OpeNXmLforMaTs-OFficEdoCUMeNT.preSenTatiONml.template.MaIN+XML"
+                "ApPliCatIon/Vnd.OpEnxmLfOrmATs-oFfiCEDoCUment.prEsenTAtionml.templAtE.MAIN+XmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_TEMPLATE_MAIN_XML)
         );
@@ -86598,7 +86606,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APpLIcAtIoN/vnD.OPENxMlfORMaTs-OFfiCeDocuMenT.PReSEntationmL.ViewPrOps+xML"
+                "ApPlIcAtioN/VND.oPenXMLfOrmATs-OfFiceDocUMENt.PresentatIoNml.ViEwproPS+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_VIEW_PROPS_XML)
         );
@@ -86627,7 +86635,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "AppLicATioN/VND.opEnxMLFoRMATs-oFfICEdoCumenT.spReADsHeETmL.calccHaIn+Xml"
+                "apPLicATION/vnD.oPENxMLFOrMaTs-OFfiCedocUMenT.SPrEaDShEetml.cAlCcHAin+xMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_CALC_CHAIN_XML)
         );
@@ -86656,7 +86664,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "apPlICATiOn/VND.opeNXMLFOrmAtS-OfficeDocUmEnt.sPreaDsHEetml.cHArTsHEet+XML"
+                "APPLiCaTION/vnd.OPENXmlFoRMAts-ofFicEdOcuMeNt.sPrEAdsheEtML.ChARtsHEET+Xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_CHARTSHEET_XML)
         );
@@ -86685,7 +86693,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPpliCatIOn/Vnd.OPenXMlfoRmAtS-OFFiCeDoCumenT.sPreADsheetmL.cOmMENTS+XmL"
+                "aPplICatIon/VNd.OPenxMlFoRmATS-OfFiCedocUmeNt.SPreadshEEtMl.COMMENtS+XML"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_COMMENTS_XML)
         );
@@ -86714,7 +86722,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APPLIcaTion/vNd.OPENXMlFOrmats-ofFICedOCUMENt.sPrEAdSheETMl.ConneCTionS+xML"
+                "AppLicaTiOn/VND.OPeNXmlforMatS-OffICEDOCumeNt.SpReaDSHeETml.cONnecTioNS+xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_CONNECTIONS_XML)
         );
@@ -86743,7 +86751,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "appliCAtiON/vnD.OPenXMlForMaTS-OfFiCEDoCumenT.sPreADSheETml.dIalOGShEet+XML"
+                "aPPliCATioN/VNd.OPeNxmLfORMAtS-OFFiCedocUMeNt.SPReaDSheetMl.DIAlOgsHEET+XML"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_DIALOGSHEET_XML)
         );
@@ -86772,7 +86780,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APPLicatiOn/VNd.OpEnXmLFoRMats-OfficedoCUMENT.SpreAdSHeeTml.ExteRnALLink+xML"
+                "appliCaTIOn/VnD.OpENxMLforMAts-offiCEDOCUmEnt.SpREadSheeTml.ExTERnalLiNK+XMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_EXTERNAL_LINK_XML)
         );
@@ -86790,7 +86798,7 @@ pub mod constants {
     fn application_vnd_openxmlformats_officedocument_spreadsheetml_pivot_cache_definition_xml_parse(
     ) {
         assert_eq!(crate::Mime::parse("application/vnd.openxmlformats-officedocument.spreadsheetml.pivotCacheDefinition+xml"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_PIVOT_CACHE_DEFINITION_XML));
-        assert_eq!(crate::Mime::parse("APPlicatIoN/vnd.opEnxmLFoRMATs-OFFicEdoCUment.sprEaDSHEEtML.pIVoTCaCHeDEfInItiON+xMl"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_PIVOT_CACHE_DEFINITION_XML));
+        assert_eq!(crate::Mime::parse("applIcATion/vnD.opENxMLFOrMATS-oFfiCEdocuMent.sPREADsHEetML.PIvOTcAChEdEfiNItiOn+xml"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_PIVOT_CACHE_DEFINITION_XML));
     }
 
     /// `application/vnd.openxmlformats-officedocument.spreadsheetml.pivotCacheRecords+xml`
@@ -86811,7 +86819,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "applIcaTIon/vnD.oPeNxMlfoRMatS-oFfICedOcumEnt.spReAdSheEtmL.piVoTCaChEREcORdS+xML"
+                "AppLIcatioN/vNd.oPenxMLfoRmaTs-OffIcedOcuMenT.SpReaDshEetmL.PIvOtCAChEReCorDS+XmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_PIVOT_CACHE_RECORDS_XML)
         );
@@ -86840,7 +86848,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APpLicatiOn/vNd.oPeNXmLfORMaTs-oFfIcEdoCUMEnT.SPReADshEEtML.pIvoTTABLe+Xml"
+                "appliCaTiOn/vNd.OpEnXMLfOrmaTs-oFfiCEDOcUmENT.SPreADsHEetMl.PIVOTtaBle+XmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_PIVOT_TABLE_XML)
         );
@@ -86869,7 +86877,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPpLicatION/VnD.OPENxmLfORmatS-oFFiCEdocuMENt.SPREaDshEetML.QUerYtAblE+Xml"
+                "applICAtIoN/VND.opEnXMlfoRMaTS-OFficeDOCumENT.sPreAdsHEeTMl.QuEryTaBle+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_QUERY_TABLE_XML)
         );
@@ -86898,7 +86906,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "appLicatION/vnD.OpENXMlfoRMAts-oFFIcEDoCumeNT.sPreAdSHeeTml.RevisIonheAdErS+Xml"
+                "applICATioN/VnD.OPenxMLForMaTS-oFFiCedoCUmeNt.SpREadSheETml.rEvisiOnHeADErs+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_REVISION_HEADERS_XML)
         );
@@ -86927,7 +86935,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "appLICAtioN/vNd.OPENxMLForMaTs-offIcedoCUmeNt.sPReAdshEetML.rEVISIoNlOg+xML"
+                "APPlicATiOn/VND.oPENxmLfOrMats-offiCEdoCumeNT.SpreAdsHEEtML.REvIsIonlOG+XML"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_REVISION_LOG_XML)
         );
@@ -86956,7 +86964,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPPLIcATiOn/vnD.oPeNXmlfORMATs-oFFIcEDOcUmeNt.sPreaDsHeeTMl.SHAREDstRINgS+xmL"
+                "ApPLiCaTioN/vNd.OpenXMLFOrMaTS-oFFIcEdoCuMeNt.sPrEadSHeeTML.SHarEDStRIngS+xML"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHARED_STRINGS_XML)
         );
@@ -86981,7 +86989,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicaTioN/vND.opeNxMlFOrMats-oFFICEdOcUMENT.sprEAdSheeTMl.SHeeT"),
+            crate::Mime::parse("appLicATiON/vnd.oPeNXmLformaTS-OFfIcEDOCUment.SpReadSHeeTMl.SHEEt"),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET)
         );
     }
@@ -87009,7 +87017,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APPlIcaTIoN/VnD.OPeNXMlFOrMaTs-OffIcedocument.SPREadSheEtMl.sHEeT.MaiN+XML"
+                "AppLIcATIoN/VNd.OPeNXmLfOrmAts-officedocumENT.spReaDsHeEtML.SHEet.mAIN+xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET_MAIN_XML)
         );
@@ -87038,7 +87046,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApplIcatION/VNd.OPenxMlfORmATs-oFFiCEdoCumEnT.SPREADsHeEtML.ShEeTmetaData+XmL"
+                "ApplICATIOn/VNd.oPenXMlFOrMaTS-OFfiCedOcUmENT.SPrEaDsHEeTmL.SheetMetadAtA+Xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET_METADATA_XML)
         );
@@ -87068,7 +87076,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPplIcAtiOn/vnD.opENxMLFORmats-ofFIcEDOcumenT.SpReadSheEtMl.styLES+XMl"
+                "ApPliCatioN/vnD.oPENXMlformatS-oFFIcedocUmEnT.spReaDsHeetml.STYLEs+xML"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_STYLES_XML)
         );
@@ -87098,7 +87106,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "apPLiCATiOn/vND.opEnxMLforMatS-offiCeDOcUmeNT.SPReaDSHeEtmL.TabLE+xML"
+                "aPPLiCaTiON/vnD.oPEnxmLfoRmats-OfFIcEdoCUMENT.sPREaDshEeTml.TabLE+Xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_TABLE_XML)
         );
@@ -87127,7 +87135,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APplIcATIoN/vND.OpenxmlfoRmats-ofFicEDoCument.SPReAdShEeTml.TAblesiNgLEceLls+XMl"
+                "ApPLIcAtiON/Vnd.openxMlformatS-oFFiCedocumENT.SpReAdSheeTMl.tabLeSIngLeceLLs+XmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_TABLE_SINGLE_CELLS_XML)
         );
@@ -87155,7 +87163,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APpLiCATION/VnD.OPENxMlForMatS-OfFICEdOCUMent.sprEADSHeEtMl.teMpLAte"
+                "aPPLICAtIoN/VND.oPeNxmLfoRmAtS-OFfICEDocument.SPREaDsHeEtmL.TEmplaTe"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_TEMPLATE)
         );
@@ -87184,7 +87192,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "apPlICAtioN/VNd.OPENXMLforMATS-OFFiCedoCumEnT.SpREADsHEEtmL.temPLATe.maIN+XMl"
+                "APPlicATIOn/VND.OPEnxmLFORmATS-OffiCedOcUmEnT.SPrEADshEetml.TEMpLatE.MAIn+XMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_TEMPLATE_MAIN_XML)
         );
@@ -87213,7 +87221,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APPlIcATIoN/vnD.OPenxmlFOrMATS-oFFICEDOCUMent.sPrEadSHeeTml.uSeRnaMeS+Xml"
+                "ApPLIcAtioN/VNd.opeNXmLFORmaTS-OFFICEDocuMeNt.spREadSheetMl.usErNaMes+xMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_USER_NAMES_XML)
         );
@@ -87231,7 +87239,7 @@ pub mod constants {
     fn application_vnd_openxmlformats_officedocument_spreadsheetml_volatile_dependencies_xml_parse()
     {
         assert_eq!(crate::Mime::parse("application/vnd.openxmlformats-officedocument.spreadsheetml.volatileDependencies+xml"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_VOLATILE_DEPENDENCIES_XML));
-        assert_eq!(crate::Mime::parse("ApPlICATion/VNd.opeNxMLFOrmaTS-OFfICedOCUMent.SpreaDshEEtMl.voLATiLEDePEnDEnCIES+xmL"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_VOLATILE_DEPENDENCIES_XML));
+        assert_eq!(crate::Mime::parse("APPLicatIOn/vnd.oPENXmlfORmATs-OffICEDocuMEnt.sPreADsHeEtmL.VoLATiLEdEPeNDENCieS+xml"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_VOLATILE_DEPENDENCIES_XML));
     }
 
     /// `application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml`
@@ -87257,7 +87265,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApplICAtiON/VND.OpeNXmlfORmATS-oFFICedOCUMEnt.sPreaDsHeETML.WoRKshEet+Xml"
+                "APPliCATION/Vnd.OpenXMlFORMaTS-OffICEDOcumeNt.sPrEaDSHEeTmL.woRkshEet+xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_WORKSHEET_XML)
         );
@@ -87283,7 +87291,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_THEME_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICATion/VNd.OpeNxmlFORmats-OffICEDoCumENt.theme+xml"),
+            crate::Mime::parse("APPLicaTIOn/Vnd.opeNXMlformAts-OFFiCedOCuMent.tHeme+Xml"),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_THEME_XML)
         );
     }
@@ -87309,7 +87317,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_THEME_OVERRIDE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCAtion/vNd.opENxMlformATs-OfficEdoCUMeNt.ThEmEovERRiDE+Xml"),
+            crate::Mime::parse("aPPlicatiOn/vnD.oPenxmlFOrMAts-oFfiCEDoCumEnT.TheMEOvERRIde+XmL"),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_THEME_OVERRIDE_XML)
         );
     }
@@ -87332,7 +87340,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_VML_DRAWING)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicatION/vNd.OPEnxmLFoRMats-ofFICEDOcuMeNT.VmlDRawIng"),
+            crate::Mime::parse("applICAtiOn/VND.opENxMLforMatS-OFFIceDoCUMEnt.VmlDraWiNG"),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_VML_DRAWING)
         );
     }
@@ -87360,7 +87368,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApPLICATION/vNd.opeNXmlfOrmAtS-OFfIcedOcuMENt.woRdPrOCeSsingMl.ComMeNts+Xml"
+                "APPLICATiOn/vnd.OpenXmlFoRmATs-offIceDOCumenT.WoRDpRocesSinGml.cOmmENts+xMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_COMMENTS_XML)
         );
@@ -87388,7 +87396,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "apPlIcaTiON/vnd.OpENxmlFORMatS-OffiCeDocuMeNT.WordPRocEsSiNgml.DocuMent"
+                "AppLiCATion/VnD.opeNXMLfoRMAts-OfFiceDoCUMEnt.WOrdPrOcEssiNGml.DocumENt"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT)
         );
@@ -87406,7 +87414,7 @@ pub mod constants {
     fn application_vnd_openxmlformats_officedocument_wordprocessingml_document_glossary_xml_parse()
     {
         assert_eq!(crate::Mime::parse("application/vnd.openxmlformats-officedocument.wordprocessingml.document.glossary+xml"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT_GLOSSARY_XML));
-        assert_eq!(crate::Mime::parse("aPPlIcatIon/vND.opeNXMLfORMAtS-oFFicEdoCuMeNt.worDprocEssiNgml.DoCUmeNT.glOSsAry+XmL"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT_GLOSSARY_XML));
+        assert_eq!(crate::Mime::parse("ApplIcaTiON/vnd.OPEnXMLFoRMaTS-oFfiCeDoCument.wordProcEssiNGmL.doCUmenT.gLosSArY+xMl"), Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT_GLOSSARY_XML));
     }
 
     /// `application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml`
@@ -87432,7 +87440,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApPliCaTioN/VnD.OpENXmlfoRMaTS-ofFiceDocUMEnT.wORdProCEsSingmL.DOCuMeNT.main+XMl"
+                "aPpLicAtIoN/VnD.OpenxMLfORmatS-ofFicEDOcUmeNT.WorDPrOcessInGML.DoCUMent.mAIn+XMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT_MAIN_XML)
         );
@@ -87461,7 +87469,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APPliCatIoN/VND.opeNXMlFoRmATS-OffIcEDOCumeNt.WOrdproceSSiNGmL.eNDNotEs+XMl"
+                "aPplIcAtION/vnd.OPeNxMlFORMAts-oFFICedoCuMENt.wordpROcESsINgML.enDnoTEs+xMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_ENDNOTES_XML)
         );
@@ -87490,7 +87498,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "apPlIcaTion/VNd.oPEnXmLformAtS-OFFIcedOcUMEnt.WoRdPRoCeSsINgML.fOnTtaBlE+xmL"
+                "AppLicatIOn/vND.OpEnxmlFoRMATS-offIcEDOcuMEnT.WOrDpRoCEsSIngMl.foNtTablE+xML"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_FONT_TABLE_XML)
         );
@@ -87519,7 +87527,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "apPLIcAtIOn/Vnd.opEnxMLFOrmAtS-OffiCEDocuMENT.WORDprocesSINgmL.foOter+Xml"
+                "ApPlICaTIon/vnD.oPENXmlFoRMAts-OFFiceDOCUMENT.wordprOCEssIngmL.fooTer+Xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_FOOTER_XML)
         );
@@ -87548,7 +87556,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "aPpliCaTiON/VnD.oPEnXmlformATS-offICeDoCUMent.WOrdPROCESsiNgml.FooTnOtES+xml"
+                "aPpLiCAtIoN/vND.OpenxmlFORMats-OfFiCEDocuMENt.WORDPRocEssinGml.fOoTNotes+XMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_FOOTNOTES_XML)
         );
@@ -87577,7 +87585,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "APPliCation/VnD.oPEnXMLfORmATS-OFfICeDOCuMent.wordprocESsIngmL.nUMBEriNG+xmL"
+                "aPplicaTIoN/vND.OPEnXMlFORmATs-OfFICeDocument.wordPRoCessIngML.NumBERinG+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_NUMBERING_XML)
         );
@@ -87606,7 +87614,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "appLIcatiON/vnD.OPENxMlfOrMats-oFfiCEDOcUMEnt.WORDProceSsINGml.sEtTINgS+xmL"
+                "AppliCATioN/VND.oPenXmLforMaTs-OFFIcEDOcumENT.WordpRoCESsiNgMl.SEtTingS+xMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_SETTINGS_XML)
         );
@@ -87635,7 +87643,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApPlICAtIon/VnD.oPENXmlForMaTs-OFFICedOcuMEnt.wORDprOcESSInGmL.StylES+xMl"
+                "APPlIcaTIoN/vND.OpeNxmLfOrmATS-OffIceDOcumeNT.woRdPROCeSsINGml.STylEs+xML"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_STYLES_XML)
         );
@@ -87663,7 +87671,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "apPLicATIon/VND.opENxmlfOrmATS-OFFiCEDocuMeNt.WoRDprOcessInGML.TEMpLATE"
+                "apPLIcatION/vnD.openXmlFORMATS-OFFiceDoCumEnT.woRdproCeSSINGML.TEMPLatE"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_TEMPLATE)
         );
@@ -87692,7 +87700,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "AppLIcAtiON/vnd.OpEnXMlfORmAts-offICEdoCuMent.wORDPrOCeSsiNGMl.TempLaTe.Main+xML"
+                "ApPliCAtion/VnD.OPenXMlFormats-OFfiCeDocumeNT.WoRDpRocESSiNGml.TeMplAte.maIN+xml"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_TEMPLATE_MAIN_XML)
         );
@@ -87721,7 +87729,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "AppliCAtioN/VND.OPenxMlForMAts-OffiCEDoCument.WOrDprOCEsSINgMl.WebSetTings+xml"
+                "aPPlicATION/VNd.oPeNxmLForMAts-OFFiCedocumENt.woRDPrOCEsSinGml.weBsettings+XMl"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_WEB_SETTINGS_XML)
         );
@@ -87747,7 +87755,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENXMLFORMATS_PACKAGE_CORE_PROPERTIES_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCAtIoN/vnd.OpeNxMLfORMATS-PaCKAge.corE-PRoPERTIeS+XMl"),
+            crate::Mime::parse("aPPlIcATion/Vnd.oPEnXMLFORMAtS-PacKage.cORe-PROPeRTIEs+xMl"),
             Ok(APPLICATION_VND_OPENXMLFORMATS_PACKAGE_CORE_PROPERTIES_XML)
         );
     }
@@ -87775,7 +87783,7 @@ pub mod constants {
         );
         assert_eq!(
             crate::Mime::parse(
-                "ApPliCAtIOn/Vnd.OPeNXmLFoRmATs-PAcKaGE.diGItal-SIgnaTuRe-XMlSIgnATURe+xMl"
+                "aPPlICatIon/VNd.OpENxMlFOrMATs-pACKagE.digITAl-sIgNaTURe-XmlSIGNaTuRe+xmL"
             ),
             Ok(APPLICATION_VND_OPENXMLFORMATS_PACKAGE_DIGITAL_SIGNATURE_XMLSIGNATURE_XML)
         );
@@ -87801,7 +87809,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OPENXMLFORMATS_PACKAGE_RELATIONSHIPS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCatIon/vNd.OpENXmLFORmATS-PAcKaGe.RELAtIONsHipS+xml"),
+            crate::Mime::parse("aPplIcatiOn/VnD.OpENXMlFORMATs-pAckAGE.rELAtIonSHips+xmL"),
             Ok(APPLICATION_VND_OPENXMLFORMATS_PACKAGE_RELATIONSHIPS_XML)
         );
     }
@@ -87825,7 +87833,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ORACLE_RESOURCE_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLICaTIOn/vNd.oRACLE.ResOURCE+json"),
+            crate::Mime::parse("APpLICaTiOn/vND.ORaCle.RESOurce+jSon"),
             Ok(APPLICATION_VND_ORACLE_RESOURCE_JSON)
         );
     }
@@ -87845,7 +87853,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ORANGE_INDATA)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCatION/VNd.oRANGE.INDATa"),
+            crate::Mime::parse("aPplICATIOn/vND.ORANGE.IndaTA"),
             Ok(APPLICATION_VND_ORANGE_INDATA)
         );
     }
@@ -87865,7 +87873,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OSA_NETDEPLOY)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicATIon/VND.Osa.NEtDEpLoY"),
+            crate::Mime::parse("apPLIcatION/Vnd.OSa.NeTdEPLoY"),
             Ok(APPLICATION_VND_OSA_NETDEPLOY)
         );
     }
@@ -87887,7 +87895,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OSGEO_MAPGUIDE_PACKAGE)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicATIoN/vnd.osgEo.MaPGUiDe.PAckAgE"),
+            crate::Mime::parse("apPLIcAtion/vnd.oSGeO.MaPgUIDe.PaCkaGe"),
             Ok(APPLICATION_VND_OSGEO_MAPGUIDE_PACKAGE)
         );
     }
@@ -87907,7 +87915,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OSGI_BUNDLE)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICATIon/vNd.oSGI.BUndLe"),
+            crate::Mime::parse("APPLIcaTiOn/vND.OSGi.BuNdlE"),
             Ok(APPLICATION_VND_OSGI_BUNDLE)
         );
     }
@@ -87927,7 +87935,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OSGI_DP)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicATioN/vnD.osGi.dp"),
+            crate::Mime::parse("apPLicATioN/vnD.OsgI.Dp"),
             Ok(APPLICATION_VND_OSGI_DP)
         );
     }
@@ -87949,7 +87957,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OSGI_SUBSYSTEM)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICatiON/vND.oSgI.sUBSYSteM"),
+            crate::Mime::parse("APpliCAtiON/vNd.OsGI.SUbsYStEm"),
             Ok(APPLICATION_VND_OSGI_SUBSYSTEM)
         );
     }
@@ -87971,7 +87979,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OTPS_CT_KIP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcaTIon/vnd.otps.CT-kIP+XML"),
+            crate::Mime::parse("AppLIcaTion/vnd.OTPs.CT-KIP+xML"),
             Ok(APPLICATION_VND_OTPS_CT_KIP_XML)
         );
     }
@@ -87993,7 +88001,7 @@ pub mod constants {
             Ok(APPLICATION_VND_OXLI_COUNTGRAPH)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCation/vNd.OXLI.COUntGrApH"),
+            crate::Mime::parse("aPplicatiOn/VND.oXLI.cOuNtGrapH"),
             Ok(APPLICATION_VND_OXLI_COUNTGRAPH)
         );
     }
@@ -88015,7 +88023,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PAGERDUTY_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcaTIOn/Vnd.PaGERdUTY+jsON"),
+            crate::Mime::parse("AppLICaTIon/VnD.PaGERdutY+jSoN"),
             Ok(APPLICATION_VND_PAGERDUTY_JSON)
         );
     }
@@ -88035,7 +88043,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PALM)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcaTION/Vnd.PaLm"),
+            crate::Mime::parse("AppLICAtIon/VnD.Palm"),
             Ok(APPLICATION_VND_PALM)
         );
     }
@@ -88055,7 +88063,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PANOPLY)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicatiON/vND.pAnopLY"),
+            crate::Mime::parse("appliCATiON/vNd.pANoplY"),
             Ok(APPLICATION_VND_PANOPLY)
         );
     }
@@ -88075,7 +88083,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PAOS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatiOn/vND.pAos.Xml"),
+            crate::Mime::parse("APpliCaTiON/vNd.pAos.XMl"),
             Ok(APPLICATION_VND_PAOS_XML)
         );
     }
@@ -88095,7 +88103,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PATENTDIVE)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCAtIon/VND.pateNtDivE"),
+            crate::Mime::parse("aPPlIcatION/vnd.PaTenTdiVE"),
             Ok(APPLICATION_VND_PATENTDIVE)
         );
     }
@@ -88117,7 +88125,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PATIENTECOMMSDOC)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicatIoN/VnD.pAtienteComMsDOc"),
+            crate::Mime::parse("applIcAtIoN/vNd.patiEntEcOMmsDoC"),
             Ok(APPLICATION_VND_PATIENTECOMMSDOC)
         );
     }
@@ -88137,7 +88145,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PAWAAFILE)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLication/vNd.pawAaFile"),
+            crate::Mime::parse("applicatiOn/vnd.pAwaaFILe"),
             Ok(APPLICATION_VND_PAWAAFILE)
         );
     }
@@ -88157,7 +88165,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PCOS)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICaTiOn/vND.pCOs"),
+            crate::Mime::parse("APpLiCaTiON/vND.PCOS"),
             Ok(APPLICATION_VND_PCOS)
         );
     }
@@ -88177,7 +88185,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PG_FORMAT)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcaTioN/VND.pG.foRmAT"),
+            crate::Mime::parse("AppLicATION/vND.pG.FORmAt"),
             Ok(APPLICATION_VND_PG_FORMAT)
         );
     }
@@ -88197,7 +88205,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PG_OSASLI)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcAtioN/vnD.pg.osaSLi"),
+            crate::Mime::parse("ApPlicATioN/vnD.pg.OsAsLi"),
             Ok(APPLICATION_VND_PG_OSASLI)
         );
     }
@@ -88219,7 +88227,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PIACCESS_APPLICATION_LICENCE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPliCatiOn/vnD.piACCesS.apPLiCaTIOn-liCeNcE"),
+            crate::Mime::parse("aPpliCatioN/vnD.PiaCcesS.aPpLICatioN-LiCeNcE"),
             Ok(APPLICATION_VND_PIACCESS_APPLICATION_LICENCE)
         );
     }
@@ -88239,7 +88247,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PICSEL)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICAtiON/VND.picsel"),
+            crate::Mime::parse("APPliCAtION/vnd.picseL"),
             Ok(APPLICATION_VND_PICSEL)
         );
     }
@@ -88259,7 +88267,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PMI_WIDGET)
         );
         assert_eq!(
-            crate::Mime::parse("appLicAtIOn/vnd.PMI.WIdGet"),
+            crate::Mime::parse("apPlICation/VND.PMi.widget"),
             Ok(APPLICATION_VND_PMI_WIDGET)
         );
     }
@@ -88283,7 +88291,7 @@ pub mod constants {
             Ok(APPLICATION_VND_POC_GROUP_ADVERTISEMENT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applIcATion/vNd.poc.GrOUp-ADVertiseMeNT+xmL"),
+            crate::Mime::parse("ApPLicatiOn/vnd.PoC.gROUP-adverTiSEmenT+xML"),
             Ok(APPLICATION_VND_POC_GROUP_ADVERTISEMENT_XML)
         );
     }
@@ -88303,7 +88311,7 @@ pub mod constants {
             Ok(APPLICATION_VND_POCKETLEARN)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcATiOn/Vnd.POCkEtLeARn"),
+            crate::Mime::parse("ApPLiCaTIon/VND.PoCkETleaRN"),
             Ok(APPLICATION_VND_POCKETLEARN)
         );
     }
@@ -88325,7 +88333,7 @@ pub mod constants {
             Ok(APPLICATION_VND_POWERBUILDER6)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICAtIoN/vNd.PowERBuILdEr6"),
+            crate::Mime::parse("APPlIcATiOn/Vnd.POwERbUiLDEr6"),
             Ok(APPLICATION_VND_POWERBUILDER6)
         );
     }
@@ -88347,7 +88355,7 @@ pub mod constants {
             Ok(APPLICATION_VND_POWERBUILDER6_S)
         );
         assert_eq!(
-            crate::Mime::parse("APplICatioN/VnD.powErbuilder6-s"),
+            crate::Mime::parse("APplicAtIoN/vnd.powerbuiLDer6-S"),
             Ok(APPLICATION_VND_POWERBUILDER6_S)
         );
     }
@@ -88369,7 +88377,7 @@ pub mod constants {
             Ok(APPLICATION_VND_POWERBUILDER7)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCatIoN/VNd.pOwerbuiLDeR7"),
+            crate::Mime::parse("aPplIcAtIOn/vNd.poweRBuILDER7"),
             Ok(APPLICATION_VND_POWERBUILDER7)
         );
     }
@@ -88391,7 +88399,7 @@ pub mod constants {
             Ok(APPLICATION_VND_POWERBUILDER7_S)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICATion/VNd.POWErbuilDER7-s"),
+            crate::Mime::parse("APPLicaTIOn/VND.powerBUILDeR7-s"),
             Ok(APPLICATION_VND_POWERBUILDER7_S)
         );
     }
@@ -88413,7 +88421,7 @@ pub mod constants {
             Ok(APPLICATION_VND_POWERBUILDER75)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICaTIoN/VNd.PowerbuILdeR75"),
+            crate::Mime::parse("APpLIcAtIOn/Vnd.powERbuIlDer75"),
             Ok(APPLICATION_VND_POWERBUILDER75)
         );
     }
@@ -88435,7 +88443,7 @@ pub mod constants {
             Ok(APPLICATION_VND_POWERBUILDER75_S)
         );
         assert_eq!(
-            crate::Mime::parse("appliCatiOn/VNd.poweRbuilDEr75-S"),
+            crate::Mime::parse("aPpliCatIOn/vnd.PowerBUiLdeR75-s"),
             Ok(APPLICATION_VND_POWERBUILDER75_S)
         );
     }
@@ -88455,7 +88463,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PREMINET)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICaTION/VND.PreMiNET"),
+            crate::Mime::parse("APpLICATION/Vnd.pREMInEt"),
             Ok(APPLICATION_VND_PREMINET)
         );
     }
@@ -88477,7 +88485,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PREVIEWSYSTEMS_BOX)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcatiON/vND.PrEvieWsystemS.BoX"),
+            crate::Mime::parse("AppliCAtiON/VnD.prEviewsyStEmS.Box"),
             Ok(APPLICATION_VND_PREVIEWSYSTEMS_BOX)
         );
     }
@@ -88499,7 +88507,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PROTEUS_MAGAZINE)
         );
         assert_eq!(
-            crate::Mime::parse("APplICAtion/vnD.ProtEUS.maGAzIne"),
+            crate::Mime::parse("APPlicaTioN/Vnd.PROteuS.mAgazINe"),
             Ok(APPLICATION_VND_PROTEUS_MAGAZINE)
         );
     }
@@ -88519,7 +88527,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PSFS)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICaTion/vnd.Psfs"),
+            crate::Mime::parse("APpLication/Vnd.PsFs"),
             Ok(APPLICATION_VND_PSFS)
         );
     }
@@ -88541,7 +88549,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PUBLISHARE_DELTA_TREE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcAtIoN/vnD.puBliShARe-delta-tREE"),
+            crate::Mime::parse("ApPlIcATioN/vnD.pUbLIshare-delTA-tree"),
             Ok(APPLICATION_VND_PUBLISHARE_DELTA_TREE)
         );
     }
@@ -88561,7 +88569,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PVI_PTID1)
         );
         assert_eq!(
-            crate::Mime::parse("applicaTion/vnD.PvI.ptid1"),
+            crate::Mime::parse("appLicatioN/VnD.pvi.ptID1"),
             Ok(APPLICATION_VND_PVI_PTID1)
         );
     }
@@ -88583,7 +88591,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PWG_MULTIPLEXED)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCatiON/vND.PwG-MULtIPlEXEd"),
+            crate::Mime::parse("aPpliCAtiON/VnD.PWG-MUlTIPleXEd"),
             Ok(APPLICATION_VND_PWG_MULTIPLEXED)
         );
     }
@@ -88607,7 +88615,7 @@ pub mod constants {
             Ok(APPLICATION_VND_PWG_XHTML_PRINT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcatIoN/Vnd.PwG-XHtml-PRInt+xml"),
+            crate::Mime::parse("ApplIcAtIon/VnD.PWg-xhTML-pRint+xml"),
             Ok(APPLICATION_VND_PWG_XHTML_PRINT_XML)
         );
     }
@@ -88629,7 +88637,7 @@ pub mod constants {
             Ok(APPLICATION_VND_QUALCOMM_BREW_APP_RES)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcATIOn/Vnd.qUalCOmm.bReW-aPP-RES"),
+            crate::Mime::parse("ApPLICaTIon/vNd.QUalCoMm.BrEW-APP-rES"),
             Ok(APPLICATION_VND_QUALCOMM_BREW_APP_RES)
         );
     }
@@ -88651,7 +88659,7 @@ pub mod constants {
             Ok(APPLICATION_VND_QUARANTAINENET)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcatioN/vnd.QUArAntaInenEt"),
+            crate::Mime::parse("ApplicAtion/VND.QuarAntaInENet"),
             Ok(APPLICATION_VND_QUARANTAINENET)
         );
     }
@@ -88673,7 +88681,7 @@ pub mod constants {
             Ok(APPLICATION_VND_QUARK_QUARK_X_PRESS)
         );
         assert_eq!(
-            crate::Mime::parse("APplicaTion/vND.QuARk.qUaRkxprESs"),
+            crate::Mime::parse("appLicaTiON/VnD.qUaRk.quarKXpreSs"),
             Ok(APPLICATION_VND_QUARK_QUARK_X_PRESS)
         );
     }
@@ -88695,7 +88703,7 @@ pub mod constants {
             Ok(APPLICATION_VND_QUOBJECT_QUOXDOCUMENT)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCATIOn/VND.QUObjECT-qUOxDoCumENt"),
+            crate::Mime::parse("aPPLICatION/VND.qUOBJeCT-QuOxdOCumEnT"),
             Ok(APPLICATION_VND_QUOBJECT_QUOXDOCUMENT)
         );
     }
@@ -88717,7 +88725,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MOML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicAtiON/VNd.radisyS.MoML+XMl"),
+            crate::Mime::parse("apPliCAtIOn/vnd.raDiSyS.mOMl+xML"),
             Ok(APPLICATION_VND_RADISYS_MOML_XML)
         );
     }
@@ -88739,7 +88747,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicaTioN/vNd.RadISYS.Msml+xML"),
+            crate::Mime::parse("appLicAtiOn/Vnd.RADiSys.MsML+xmL"),
             Ok(APPLICATION_VND_RADISYS_MSML_XML)
         );
     }
@@ -88763,7 +88771,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_AUDIT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCATiON/vnD.radiSYS.mSml-AudIt+xML"),
+            crate::Mime::parse("aPPLiCAtioN/vnd.RADIsYs.MSml-audIT+xML"),
             Ok(APPLICATION_VND_RADISYS_MSML_AUDIT_XML)
         );
     }
@@ -88787,7 +88795,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_AUDIT_CONF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCAtIon/vnd.rADIsYs.Msml-audit-COnf+XMl"),
+            crate::Mime::parse("aPPlIcaTion/vND.rAdiSys.Msml-aUDIt-CONf+Xml"),
             Ok(APPLICATION_VND_RADISYS_MSML_AUDIT_CONF_XML)
         );
     }
@@ -88811,7 +88819,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_AUDIT_CONN_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtION/vNd.RaDIsYs.MSML-auDiT-COnn+Xml"),
+            crate::Mime::parse("ApPlICATiOn/VnD.rAdISYS.msmL-AUDIt-COnn+XMl"),
             Ok(APPLICATION_VND_RADISYS_MSML_AUDIT_CONN_XML)
         );
     }
@@ -88835,7 +88843,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_AUDIT_DIALOG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcAtION/Vnd.RADisYS.msMl-aUdiT-dIALoG+XMl"),
+            crate::Mime::parse("ApPlICAtIon/VND.rADIsyS.MsMl-AudIT-dIALOg+Xml"),
             Ok(APPLICATION_VND_RADISYS_MSML_AUDIT_DIALOG_XML)
         );
     }
@@ -88859,7 +88867,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_AUDIT_STREAM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplicatIOn/vnd.raDiSYS.mSML-auDIT-STrEaM+Xml"),
+            crate::Mime::parse("applICaTion/vnD.RADisYS.MsmL-AuDIt-sTrEam+XmL"),
             Ok(APPLICATION_VND_RADISYS_MSML_AUDIT_STREAM_XML)
         );
     }
@@ -88883,7 +88891,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_CONF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcation/vNd.RaDiSyS.MSMl-cOnf+xML"),
+            crate::Mime::parse("ApplicatiOn/VnD.RaDISYS.MsMl-coNF+xmL"),
             Ok(APPLICATION_VND_RADISYS_MSML_CONF_XML)
         );
     }
@@ -88907,7 +88915,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicATIoN/vNd.RADiSys.MsmL-diAlOg+xmL"),
+            crate::Mime::parse("apPLIcATiOn/VND.RadiSys.msmL-DiAloG+xML"),
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_XML)
         );
     }
@@ -88931,7 +88939,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_BASE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCAtION/Vnd.rAdISys.MSmL-DIaLOg-bASe+xML"),
+            crate::Mime::parse("aPPlICATIon/vNd.RadiSYs.mSMl-DiAlOG-BaSE+xmL"),
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_BASE_XML)
         );
     }
@@ -88956,7 +88964,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_FAX_DETECT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICatIOn/vND.RaDIsYS.MSmL-DIaLOG-fAx-DETECt+xMl"),
+            crate::Mime::parse("APplICatiON/VnD.rADiSYs.MSMl-DIAlOg-FAX-DeteCt+xml"),
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_FAX_DETECT_XML)
         );
     }
@@ -88981,7 +88989,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_FAX_SENDRECV_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appliCAtion/VnD.radISYs.MSmL-diaLOG-fAx-seNdreCv+Xml"),
+            crate::Mime::parse("aPPlicatIoN/vnd.RAdiSYs.msml-DIAlOg-faX-seNdrEcv+Xml"),
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_FAX_SENDRECV_XML)
         );
     }
@@ -89005,7 +89013,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_GROUP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcatIOn/vND.rADisys.msml-dIalog-GROUp+XmL"),
+            crate::Mime::parse("ApplICatiON/vND.radIsys.MsMl-diaLOG-gROuP+xMl"),
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_GROUP_XML)
         );
     }
@@ -89029,7 +89037,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_SPEECH_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCaTIoN/VnD.RAdiSYS.MsML-DIaLoG-spEECH+XML"),
+            crate::Mime::parse("aPpLIcATIoN/VNd.RADISyS.MSMl-dIAloG-SPEECH+xML"),
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_SPEECH_XML)
         );
     }
@@ -89054,7 +89062,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_TRANSFORM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcatioN/vNd.RAdisys.MSml-DIaLOg-trANsFoRm+XMl"),
+            crate::Mime::parse("ApplicATiOn/VNd.radISYs.mSMl-DialoG-tRaNsfORm+xMl"),
             Ok(APPLICATION_VND_RADISYS_MSML_DIALOG_TRANSFORM_XML)
         );
     }
@@ -89074,7 +89082,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RAINSTOR_DATA)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcation/vnd.RAiNsTor.dATA"),
+            crate::Mime::parse("ApplicaTion/VNd.rAinStOR.DatA"),
             Ok(APPLICATION_VND_RAINSTOR_DATA)
         );
     }
@@ -89094,7 +89102,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RAPID)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtIoN/vnD.rApID"),
+            crate::Mime::parse("APPlIcATioN/vNd.RApid"),
             Ok(APPLICATION_VND_RAPID)
         );
     }
@@ -89114,7 +89122,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RAR)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCaTION/VND.raR"),
+            crate::Mime::parse("aPpLICATION/vnD.raR"),
             Ok(APPLICATION_VND_RAR)
         );
     }
@@ -89134,7 +89142,7 @@ pub mod constants {
             Ok(APPLICATION_VND_REALVNC_BED)
         );
         assert_eq!(
-            crate::Mime::parse("appLICation/VnD.rEALvNc.Bed"),
+            crate::Mime::parse("APplicatIoN/vND.rEalVnc.bEd"),
             Ok(APPLICATION_VND_REALVNC_BED)
         );
     }
@@ -89156,7 +89164,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RECORDARE_MUSICXML)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCatION/VNd.RECorDAre.MuSicXml"),
+            crate::Mime::parse("aPplICATIOn/VND.rECorDArE.mUsiCXml"),
             Ok(APPLICATION_VND_RECORDARE_MUSICXML)
         );
     }
@@ -89180,7 +89188,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RECORDARE_MUSICXML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcAtIOn/VND.REcoRDARe.MusICxMl+Xml"),
+            crate::Mime::parse("ApPlICaTION/VNd.RECOrDAre.MuSicXml+XMl"),
             Ok(APPLICATION_VND_RECORDARE_MUSICXML_XML)
         );
     }
@@ -89202,7 +89210,7 @@ pub mod constants {
             Ok(APPLICATION_VND_REN_LEARN_RLPRINT)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCAtioN/VNd.rENlEARn.rLpriNT"),
+            crate::Mime::parse("aPPlicAtIOn/vND.RENlEaRn.rLPriNT"),
             Ok(APPLICATION_VND_REN_LEARN_RLPRINT)
         );
     }
@@ -89224,7 +89232,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RESILIENT_LOGIC)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCATION/VNd.resilIeNT.lOGic"),
+            crate::Mime::parse("aPPLICATIOn/vnd.rEsILieNT.logiC"),
             Ok(APPLICATION_VND_RESILIENT_LOGIC)
         );
     }
@@ -89246,7 +89254,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RESTFUL_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLicATIOn/VNd.ReStfuL+jsoN"),
+            crate::Mime::parse("apPLICatIOn/VnD.reStful+JsON"),
             Ok(APPLICATION_VND_RESTFUL_JSON)
         );
     }
@@ -89268,7 +89276,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RIG_CRYPTONOTE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicatIOn/VNd.RiG.CRYpTOnote"),
+            crate::Mime::parse("applICatIOn/VnD.RIG.CRyptonote"),
             Ok(APPLICATION_VND_RIG_CRYPTONOTE)
         );
     }
@@ -89288,7 +89296,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RIM_COD)
         );
         assert_eq!(
-            crate::Mime::parse("applICaTiON/Vnd.rIM.cOd"),
+            crate::Mime::parse("APpLiCATIon/vND.rIm.CoD"),
             Ok(APPLICATION_VND_RIM_COD)
         );
     }
@@ -89312,7 +89320,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ROUTE66_LINK66_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicAtION/vnD.RoutE66.LINk66+xml"),
+            crate::Mime::parse("apPlICATioN/Vnd.RoUtE66.liNk66+xML"),
             Ok(APPLICATION_VND_ROUTE66_LINK66_XML)
         );
     }
@@ -89332,7 +89340,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RS_274X)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicatiON/vNd.rs-274x"),
+            crate::Mime::parse("appliCATiOn/vnd.rs-274x"),
             Ok(APPLICATION_VND_RS_274X)
         );
     }
@@ -89354,7 +89362,7 @@ pub mod constants {
             Ok(APPLICATION_VND_RUCKUS_DOWNLOAD)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCATIOn/vNd.ruCkUS.DOwnLoAd"),
+            crate::Mime::parse("aPPLICatiOn/vnD.RUCKUs.DoWnLOAD"),
             Ok(APPLICATION_VND_RUCKUS_DOWNLOAD)
         );
     }
@@ -89374,7 +89382,7 @@ pub mod constants {
             Ok(APPLICATION_VND_S3SMS)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCation/VND.s3smS"),
+            crate::Mime::parse("aPplicatION/vnd.S3SMs"),
             Ok(APPLICATION_VND_S3SMS)
         );
     }
@@ -89396,7 +89404,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SAILINGTRACKER_TRACK)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicatIOn/Vnd.sailinGtRackER.tRaCK"),
+            crate::Mime::parse("applICatIon/vnd.saIlIngtRACkEr.TrAcK"),
             Ok(APPLICATION_VND_SAILINGTRACKER_TRACK)
         );
     }
@@ -89416,7 +89424,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SAR)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCatiOn/vnd.Sar"),
+            crate::Mime::parse("aPpliCaTion/Vnd.SAR"),
             Ok(APPLICATION_VND_SAR)
         );
     }
@@ -89436,7 +89444,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SBM_CID)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCATIon/VNd.SBM.CId"),
+            crate::Mime::parse("aPPLIcatIOn/VND.SBm.CID"),
             Ok(APPLICATION_VND_SBM_CID)
         );
     }
@@ -89456,7 +89464,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SBM_MID2)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcATIOn/vnd.SbM.mId2"),
+            crate::Mime::parse("ApPLICation/VnD.sBm.mid2"),
             Ok(APPLICATION_VND_SBM_MID2)
         );
     }
@@ -89476,7 +89484,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SCRIBUS)
         );
         assert_eq!(
-            crate::Mime::parse("applICAtION/Vnd.ScriBuS"),
+            crate::Mime::parse("APPlICAtIon/Vnd.ScRIbus"),
             Ok(APPLICATION_VND_SCRIBUS)
         );
     }
@@ -89496,7 +89504,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALED_3DF)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicATION/Vnd.sealed.3df"),
+            crate::Mime::parse("apPLICATIon/vnd.seaLed.3df"),
             Ok(APPLICATION_VND_SEALED_3DF)
         );
     }
@@ -89516,7 +89524,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALED_CSF)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCAtION/vNd.SeALed.Csf"),
+            crate::Mime::parse("aPPlICATiOn/VnD.seALed.csf"),
             Ok(APPLICATION_VND_SEALED_CSF)
         );
     }
@@ -89536,7 +89544,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALED_DOC)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicatIOn/VNd.seAleD.DoC"),
+            crate::Mime::parse("applICaTIOn/vnD.sEaLeD.doC"),
             Ok(APPLICATION_VND_SEALED_DOC)
         );
     }
@@ -89556,7 +89564,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALED_EML)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcatIon/vnD.sealEd.Eml"),
+            crate::Mime::parse("ApplIcaTioN/vnd.SeaLed.EML"),
             Ok(APPLICATION_VND_SEALED_EML)
         );
     }
@@ -89576,7 +89584,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALED_MHT)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICATION/vnD.seALEd.mHt"),
+            crate::Mime::parse("APPLICAtioN/vnD.SealEd.MhT"),
             Ok(APPLICATION_VND_SEALED_MHT)
         );
     }
@@ -89596,7 +89604,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALED_NET)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcatIoN/VNd.sealed.neT"),
+            crate::Mime::parse("ApplIcAtIOn/vnd.sealeD.Net"),
             Ok(APPLICATION_VND_SEALED_NET)
         );
     }
@@ -89616,7 +89624,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALED_PPT)
         );
         assert_eq!(
-            crate::Mime::parse("APplICAtion/VNd.SEaled.ppT"),
+            crate::Mime::parse("APPlicaTIOn/VNd.seAleD.PpT"),
             Ok(APPLICATION_VND_SEALED_PPT)
         );
     }
@@ -89636,7 +89644,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALED_TIFF)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCaTiON/VnD.SeAlED.TiFF"),
+            crate::Mime::parse("aPpLiCAtIoN/VnD.SEALeD.tIFF"),
             Ok(APPLICATION_VND_SEALED_TIFF)
         );
     }
@@ -89656,7 +89664,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALED_XLS)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtIOn/VnD.sealeD.xls"),
+            crate::Mime::parse("aPPlICatIoN/vnd.sEAled.XLs"),
             Ok(APPLICATION_VND_SEALED_XLS)
         );
     }
@@ -89678,7 +89686,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALEDMEDIA_SOFTSEAL_HTML)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCaTION/VND.sEaLEDmEDiA.SofTSeAl.HtMl"),
+            crate::Mime::parse("aPpLICATION/vNd.SEaLEdMEDia.SoFtSEaL.HTML"),
             Ok(APPLICATION_VND_SEALEDMEDIA_SOFTSEAL_HTML)
         );
     }
@@ -89700,7 +89708,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEALEDMEDIA_SOFTSEAL_PDF)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicATiON/vND.sEALedmedIA.SoFTSeAL.pdF"),
+            crate::Mime::parse("apPLiCAtiON/vND.sealeDMEDiA.SoFTSeaL.pDf"),
             Ok(APPLICATION_VND_SEALEDMEDIA_SOFTSEAL_PDF)
         );
     }
@@ -89720,7 +89728,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEEMAIL)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCaTIoN/vnD.SeemAiL"),
+            crate::Mime::parse("aPpLIcATioN/Vnd.SeEMaIl"),
             Ok(APPLICATION_VND_SEEMAIL)
         );
     }
@@ -89742,7 +89750,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEIS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcaTion/VnD.seIS+json"),
+            crate::Mime::parse("AppLicatIoN/vnD.Seis+JSOn"),
             Ok(APPLICATION_VND_SEIS_JSON)
         );
     }
@@ -89762,7 +89770,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEMA)
         );
         assert_eq!(
-            crate::Mime::parse("APPliCatiON/vnD.SEMA"),
+            crate::Mime::parse("aPpliCATioN/VND.SeMa"),
             Ok(APPLICATION_VND_SEMA)
         );
     }
@@ -89782,7 +89790,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEMD)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICaTIon/vnD.Semd"),
+            crate::Mime::parse("APpLIcaTioN/Vnd.SEMd"),
             Ok(APPLICATION_VND_SEMD)
         );
     }
@@ -89802,7 +89810,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SEMF)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicaTIoN/VND.SeMf"),
+            crate::Mime::parse("appLIcAtION/VnD.seMf"),
             Ok(APPLICATION_VND_SEMF)
         );
     }
@@ -89824,7 +89832,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SHADE_SAVE_FILE)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICAtIon/vND.sHADE-SavE-fiLe"),
+            crate::Mime::parse("APPlIcaTiON/vND.ShAde-savE-file"),
             Ok(APPLICATION_VND_SHADE_SAVE_FILE)
         );
     }
@@ -89846,7 +89854,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SHANA_INFORMED_FORMDATA)
         );
         assert_eq!(
-            crate::Mime::parse("applicAtIon/Vnd.sHanA.INFormED.FormDAta"),
+            crate::Mime::parse("apPlIcaTIon/vNd.SHANA.inFOrMed.FOrmDAta"),
             Ok(APPLICATION_VND_SHANA_INFORMED_FORMDATA)
         );
     }
@@ -89868,7 +89876,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SHANA_INFORMED_FORMTEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCatiON/VNd.shAna.InfoRmEd.foRmTEmplate"),
+            crate::Mime::parse("aPpliCATIOn/vnD.sHAna.InFoRmeD.FOrmtemplAte"),
             Ok(APPLICATION_VND_SHANA_INFORMED_FORMTEMPLATE)
         );
     }
@@ -89890,7 +89898,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SHANA_INFORMED_INTERCHANGE)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcatioN/vnD.ShAna.INfOrMeD.inTERCHANge"),
+            crate::Mime::parse("ApplicATioN/VnD.shANa.iNfOrmeD.INTERchaNGE"),
             Ok(APPLICATION_VND_SHANA_INFORMED_INTERCHANGE)
         );
     }
@@ -89912,7 +89920,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SHANA_INFORMED_PACKAGE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCaTIoN/Vnd.ShAna.infOrMED.PACkage"),
+            crate::Mime::parse("aPpLIcATIon/VnD.shana.iNFOrMED.packAgE"),
             Ok(APPLICATION_VND_SHANA_INFORMED_PACKAGE)
         );
     }
@@ -89934,7 +89942,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SHOOTPROOF_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICaTioN/VNd.shOOtPROoF+jsON"),
+            crate::Mime::parse("APpLicATIOn/vnD.sHOOtProoF+JSON"),
             Ok(APPLICATION_VND_SHOOTPROOF_JSON)
         );
     }
@@ -89956,7 +89964,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SHOPKICK_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICATiOn/VNd.SHOpkIcK+JsoN"),
+            crate::Mime::parse("APPLiCatIOn/VND.sHoPkIck+jSON"),
             Ok(APPLICATION_VND_SHOPKICK_JSON)
         );
     }
@@ -89976,7 +89984,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SHP)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICaTiON/vnd.sHp"),
+            crate::Mime::parse("APpLiCAtion/vNd.SHp"),
             Ok(APPLICATION_VND_SHP)
         );
     }
@@ -89996,7 +90004,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SHX)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCatioN/VND.Shx"),
+            crate::Mime::parse("aPplicAtION/Vnd.shX"),
             Ok(APPLICATION_VND_SHX)
         );
     }
@@ -90018,7 +90026,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SIGROK_SESSION)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCATiON/vNd.sigroK.sesSioN"),
+            crate::Mime::parse("aPPLiCAtiOn/vnd.sIgrok.seSsION"),
             Ok(APPLICATION_VND_SIGROK_SESSION)
         );
     }
@@ -90040,7 +90048,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SIM_TECH_MIND_MAPPER)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLIcaTion/VND.sImtECH-MinDmAPper"),
+            crate::Mime::parse("AppLicaTION/vNd.SIMTEch-mINdmapPEr"),
             Ok(APPLICATION_VND_SIM_TECH_MIND_MAPPER)
         );
     }
@@ -90062,7 +90070,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SIREN_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicATIon/VNd.sIREn+JSOn"),
+            crate::Mime::parse("apPLIcatIOn/vND.siREN+jsON"),
             Ok(APPLICATION_VND_SIREN_JSON)
         );
     }
@@ -90082,7 +90090,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SMAF)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCAtIon/VND.SmaF"),
+            crate::Mime::parse("aPPlIcaTION/Vnd.SmaF"),
             Ok(APPLICATION_VND_SMAF)
         );
     }
@@ -90104,7 +90112,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SMART_NOTEBOOK)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicatIoN/vNd.sMaRT.NotEbOok"),
+            crate::Mime::parse("applIcATiOn/vNd.SmArt.nOteBOok"),
             Ok(APPLICATION_VND_SMART_NOTEBOOK)
         );
     }
@@ -90124,7 +90132,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SMART_TEACHER)
         );
         assert_eq!(
-            crate::Mime::parse("APplicaTiON/Vnd.sMarT.tEAcHEr"),
+            crate::Mime::parse("appLiCAtIon/vNd.SMaRT.TEaCHEr"),
             Ok(APPLICATION_VND_SMART_TEACHER)
         );
     }
@@ -90146,7 +90154,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SNESDEV_PAGE_TABLE)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcAtION/vnd.sNESdev-page-TAblE"),
+            crate::Mime::parse("ApPlICAtion/vND.snesdev-pAGe-TABLe"),
             Ok(APPLICATION_VND_SNESDEV_PAGE_TABLE)
         );
     }
@@ -90170,7 +90178,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SOFTWARE602_FILLER_FORM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicATiON/VnD.softWAre602.FIller.foRm+XML"),
+            crate::Mime::parse("apPLiCATIoN/vnd.SOftWAre602.filleR.fORM+xML"),
             Ok(APPLICATION_VND_SOFTWARE602_FILLER_FORM_XML)
         );
     }
@@ -90192,7 +90200,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SOFTWARE602_FILLER_FORM_XML_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicatION/Vnd.SOfTware602.FiLLeR.foRM-XML-zIp"),
+            crate::Mime::parse("applICAtIon/VNd.softwaRe602.fILleR.FORM-xMl-Zip"),
             Ok(APPLICATION_VND_SOFTWARE602_FILLER_FORM_XML_ZIP)
         );
     }
@@ -90214,7 +90222,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SOLENT_SDKM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcation/Vnd.soLEnT.sDKM+xmL"),
+            crate::Mime::parse("ApplicaTIon/vnD.sOLeNT.SdkM+Xml"),
             Ok(APPLICATION_VND_SOLENT_SDKM_XML)
         );
     }
@@ -90234,7 +90242,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SPOTFIRE_DXP)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCaTIoN/vND.SpOTFiRe.dxP"),
+            crate::Mime::parse("aPpLIcATiON/VnD.SpOtFirE.Dxp"),
             Ok(APPLICATION_VND_SPOTFIRE_DXP)
         );
     }
@@ -90254,7 +90262,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SPOTFIRE_SFS)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICatIOn/VND.SPOtfire.SFs"),
+            crate::Mime::parse("APplICaTION/VND.spotfIRe.Sfs"),
             Ok(APPLICATION_VND_SPOTFIRE_SFS)
         );
     }
@@ -90274,7 +90282,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SQLITE3)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicaTIon/Vnd.SQLiTE3"),
+            crate::Mime::parse("appLIcaTIon/VND.SQLitE3"),
             Ok(APPLICATION_VND_SQLITE3)
         );
     }
@@ -90294,7 +90302,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SSS_COD)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicaTION/vND.SSS-COD"),
+            crate::Mime::parse("appLICATiON/VND.SSS-coD"),
             Ok(APPLICATION_VND_SSS_COD)
         );
     }
@@ -90314,7 +90322,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SSS_DTF)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCATIon/VND.sSS-dtF"),
+            crate::Mime::parse("aPPLIcatION/vND.ssS-DTf"),
             Ok(APPLICATION_VND_SSS_DTF)
         );
     }
@@ -90334,7 +90342,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SSS_NTF)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcation/Vnd.sss-ntF"),
+            crate::Mime::parse("ApplicaTIon/vnd.ssS-ntF"),
             Ok(APPLICATION_VND_SSS_NTF)
         );
     }
@@ -90356,7 +90364,7 @@ pub mod constants {
             Ok(APPLICATION_VND_STARDIVISION_CALC)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtiON/vnd.STarDivIsion.caLc"),
+            crate::Mime::parse("APPliCAtion/VNd.StaRdivisioN.CAlc"),
             Ok(APPLICATION_VND_STARDIVISION_CALC)
         );
     }
@@ -90378,7 +90386,7 @@ pub mod constants {
             Ok(APPLICATION_VND_STARDIVISION_CHART)
         );
         assert_eq!(
-            crate::Mime::parse("APplICATioN/VND.STArdiviSIoN.ChaRt"),
+            crate::Mime::parse("APPLicATION/VND.starDIvIsIon.cHaRT"),
             Ok(APPLICATION_VND_STARDIVISION_CHART)
         );
     }
@@ -90400,7 +90408,7 @@ pub mod constants {
             Ok(APPLICATION_VND_STARDIVISION_DRAW)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICATion/VNd.staRdiVISIon.Draw"),
+            crate::Mime::parse("APPLicatIOn/vnd.stARDIviSIon.dRAw"),
             Ok(APPLICATION_VND_STARDIVISION_DRAW)
         );
     }
@@ -90422,7 +90430,7 @@ pub mod constants {
             Ok(APPLICATION_VND_STARDIVISION_IMPRESS)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicATion/vNd.StarDIVISIon.IMPresS"),
+            crate::Mime::parse("apPLicaTiOn/Vnd.STARDIviSION.imPreSS"),
             Ok(APPLICATION_VND_STARDIVISION_IMPRESS)
         );
     }
@@ -90444,7 +90452,7 @@ pub mod constants {
             Ok(APPLICATION_VND_STARDIVISION_MATH)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicatIOn/Vnd.stArdivIsioN.mAth"),
+            crate::Mime::parse("applICaTIon/vnD.staRdivISiOn.matH"),
             Ok(APPLICATION_VND_STARDIVISION_MATH)
         );
     }
@@ -90466,7 +90474,7 @@ pub mod constants {
             Ok(APPLICATION_VND_STARDIVISION_WRITER)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcaTioN/VnD.STArdiViSioN.wRiTer"),
+            crate::Mime::parse("AppLicAtIoN/VND.stArDivIsiOn.wrIter"),
             Ok(APPLICATION_VND_STARDIVISION_WRITER)
         );
     }
@@ -90488,7 +90496,7 @@ pub mod constants {
             Ok(APPLICATION_VND_STARDIVISION_WRITER_GLOBAL)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCatIOn/VND.STaRDivIsioN.wrItEr-GLoBAL"),
+            crate::Mime::parse("aPplICaTION/VNd.StaRdivIsioN.WrITEr-GLObaL"),
             Ok(APPLICATION_VND_STARDIVISION_WRITER_GLOBAL)
         );
     }
@@ -90510,7 +90518,7 @@ pub mod constants {
             Ok(APPLICATION_VND_STEPMANIA_PACKAGE)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcATioN/vNd.stEpMANia.PAckAGE"),
+            crate::Mime::parse("ApPLicAtiOn/vnD.STEpmANIa.PACkage"),
             Ok(APPLICATION_VND_STEPMANIA_PACKAGE)
         );
     }
@@ -90532,7 +90540,7 @@ pub mod constants {
             Ok(APPLICATION_VND_STEPMANIA_STEPCHART)
         );
         assert_eq!(
-            crate::Mime::parse("applicATIon/VND.stEpmaniA.StEpchart"),
+            crate::Mime::parse("apPLIcatION/vnD.stepMaNiA.stepcHART"),
             Ok(APPLICATION_VND_STEPMANIA_STEPCHART)
         );
     }
@@ -90552,7 +90560,7 @@ pub mod constants {
             Ok(APPLICATION_VND_STREET_STREAM)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicaTION/vNd.STreet-sTrEaM"),
+            crate::Mime::parse("appLICATiOn/VNd.stReEt-sTrEAM"),
             Ok(APPLICATION_VND_STREET_STREAM)
         );
     }
@@ -90574,7 +90582,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_WADL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtiOn/vnD.sUN.Wadl+xML"),
+            crate::Mime::parse("aPPliCaTioN/vND.Sun.WaDL+XmL"),
             Ok(APPLICATION_VND_SUN_WADL_XML)
         );
     }
@@ -90594,7 +90602,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_XML_CALC)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicaTIoN/VND.suN.Xml.cAlc"),
+            crate::Mime::parse("appLIcATION/vnD.Sun.xMl.CalC"),
             Ok(APPLICATION_VND_SUN_XML_CALC)
         );
     }
@@ -90616,7 +90624,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_XML_CALC_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcAtiOn/vnD.sUn.Xml.cALc.TEMPLate"),
+            crate::Mime::parse("ApPliCatioN/vNd.Sun.xML.CALC.TemplatE"),
             Ok(APPLICATION_VND_SUN_XML_CALC_TEMPLATE)
         );
     }
@@ -90636,7 +90644,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_XML_DRAW)
         );
         assert_eq!(
-            crate::Mime::parse("appLICAtioN/vNd.sUN.xMl.dRAW"),
+            crate::Mime::parse("APPlicATiOn/vND.sUn.xML.DrAw"),
             Ok(APPLICATION_VND_SUN_XML_DRAW)
         );
     }
@@ -90658,7 +90666,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_XML_DRAW_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicAtiOn/vNd.Sun.XmL.DRAW.tEmplAtE"),
+            crate::Mime::parse("apPliCaTiOn/Vnd.SuN.XML.DrAw.tEmPLAte"),
             Ok(APPLICATION_VND_SUN_XML_DRAW_TEMPLATE)
         );
     }
@@ -90680,7 +90688,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_XML_IMPRESS)
         );
         assert_eq!(
-            crate::Mime::parse("APplicatIoN/vNd.suN.xmL.IMPrEsS"),
+            crate::Mime::parse("applIcAtiOn/vnD.suN.XML.ImPReSs"),
             Ok(APPLICATION_VND_SUN_XML_IMPRESS)
         );
     }
@@ -90702,7 +90710,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_XML_IMPRESS_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicATion/VNd.Sun.xMl.iMprESS.tEmplaTe"),
+            crate::Mime::parse("apPLicatIOn/Vnd.sUn.xMl.IMPreSs.teMplaTe"),
             Ok(APPLICATION_VND_SUN_XML_IMPRESS_TEMPLATE)
         );
     }
@@ -90722,7 +90730,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_XML_MATH)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCATIoN/vnD.sUN.Xml.MaTH"),
+            crate::Mime::parse("aPPLIcAtioN/vND.Sun.XmL.MAtH"),
             Ok(APPLICATION_VND_SUN_XML_MATH)
         );
     }
@@ -90742,7 +90750,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_XML_WRITER)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCatiON/VnD.SUn.Xml.wRiTer"),
+            crate::Mime::parse("aPpliCATIoN/VNd.Sun.xMl.wrITeR"),
             Ok(APPLICATION_VND_SUN_XML_WRITER)
         );
     }
@@ -90764,7 +90772,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_XML_WRITER_GLOBAL)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICaTIOn/vNd.SuN.XmL.wRiter.glObAl"),
+            crate::Mime::parse("APpLICaTiOn/VnD.SuN.xMl.writeR.GlObAl"),
             Ok(APPLICATION_VND_SUN_XML_WRITER_GLOBAL)
         );
     }
@@ -90786,7 +90794,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUN_XML_WRITER_TEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcation/VnD.SUN.xmL.wRitEr.TEmplAtE"),
+            crate::Mime::parse("ApplicaTIoN/VND.suN.xMl.WriTEr.tEmPLaTE"),
             Ok(APPLICATION_VND_SUN_XML_WRITER_TEMPLATE)
         );
     }
@@ -90806,7 +90814,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SUS_CALENDAR)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcaTioN/vND.sus-cALeNdaR"),
+            crate::Mime::parse("AppLicAtiON/vnd.sUS-CalEndAR"),
             Ok(APPLICATION_VND_SUS_CALENDAR)
         );
     }
@@ -90826,7 +90834,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SVD)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCaTion/VND.SvD"),
+            crate::Mime::parse("aPpLicatION/VnD.SVD"),
             Ok(APPLICATION_VND_SVD)
         );
     }
@@ -90846,7 +90854,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SWIFTVIEW_ICS)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICAtIOn/vND.SWiftVieW-iCS"),
+            crate::Mime::parse("APPlICatiON/VNd.sWifTViEW-IcS"),
             Ok(APPLICATION_VND_SWIFTVIEW_ICS)
         );
     }
@@ -90868,7 +90876,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYCLE_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICAtION/VNd.Sycle+xmL"),
+            crate::Mime::parse("APPlICAtIOn/Vnd.sYclE+xML"),
             Ok(APPLICATION_VND_SYCLE_XML)
         );
     }
@@ -90890,7 +90898,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYFT_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicatIoN/VND.SYFt+json"),
+            crate::Mime::parse("applIcAtION/VND.Syft+JsoN"),
             Ok(APPLICATION_VND_SYFT_JSON)
         );
     }
@@ -90912,7 +90920,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYMBIAN_INSTALL)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicATiOn/vNd.SyMBian.InStALl"),
+            crate::Mime::parse("apPLiCaTiOn/VnD.symBIaN.INstALL"),
             Ok(APPLICATION_VND_SYMBIAN_INSTALL)
         );
     }
@@ -90934,7 +90942,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYNCML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicATion/VnD.sYNCmL+xmL"),
+            crate::Mime::parse("apPLicaTIoN/vND.sYncmL+xmL"),
             Ok(APPLICATION_VND_SYNCML_XML)
         );
     }
@@ -90956,7 +90964,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYNCML_DM_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCaTiON/vNd.SYNcml.Dm+WBXML"),
+            crate::Mime::parse("aPpLiCATiOn/VND.synCml.DM+WBxmL"),
             Ok(APPLICATION_VND_SYNCML_DM_WBXML)
         );
     }
@@ -90978,7 +90986,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYNCML_DM_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcATion/VnD.synCmL.dm+Xml"),
+            crate::Mime::parse("ApPLicaTIoN/vnd.sYncmL.dm+xml"),
             Ok(APPLICATION_VND_SYNCML_DM_XML)
         );
     }
@@ -91000,7 +91008,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYNCML_DM_NOTIFICATION)
         );
         assert_eq!(
-            crate::Mime::parse("applICATIon/VNd.SYnCmL.dm.NOtifICAtioN"),
+            crate::Mime::parse("APPLIcatIOn/VNd.sYncml.Dm.nOTIficATioN"),
             Ok(APPLICATION_VND_SYNCML_DM_NOTIFICATION)
         );
     }
@@ -91022,7 +91030,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYNCML_DMDDF_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicatiOn/vNd.SynCML.dmDDF+WbXMl"),
+            crate::Mime::parse("appliCatiOn/Vnd.SYNcmL.DMDdF+wbxmL"),
             Ok(APPLICATION_VND_SYNCML_DMDDF_WBXML)
         );
     }
@@ -91044,7 +91052,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYNCML_DMDDF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatIOn/vND.sYnCmL.Dmddf+xMl"),
+            crate::Mime::parse("APplICatiON/vNd.sYNCml.dmdDf+XmL"),
             Ok(APPLICATION_VND_SYNCML_DMDDF_XML)
         );
     }
@@ -91066,7 +91074,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYNCML_DMTNDS_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCAtIon/Vnd.sYnCMl.dmTnds+WbXMl"),
+            crate::Mime::parse("aPPlIcaTIon/vNd.SyncmL.dmTNdS+wbXMl"),
             Ok(APPLICATION_VND_SYNCML_DMTNDS_WBXML)
         );
     }
@@ -91088,7 +91096,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYNCML_DMTNDS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcAtIon/VNd.sYNcMl.dMtndS+XML"),
+            crate::Mime::parse("ApPlIcaTIOn/vND.SyNcMl.dMTNDS+xMl"),
             Ok(APPLICATION_VND_SYNCML_DMTNDS_XML)
         );
     }
@@ -91110,7 +91118,7 @@ pub mod constants {
             Ok(APPLICATION_VND_SYNCML_DS_NOTIFICATION)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicatiON/Vnd.sYNcML.ds.NoTiFICatiOn"),
+            crate::Mime::parse("appliCAtIon/vND.SYNcmL.dS.NOTifiCaTION"),
             Ok(APPLICATION_VND_SYNCML_DS_NOTIFICATION)
         );
     }
@@ -91132,7 +91140,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TABLESCHEMA_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCaTIoN/VNd.tABLEschEma+jSON"),
+            crate::Mime::parse("aPpLIcATIOn/vND.TablEscheMA+JSon"),
             Ok(APPLICATION_VND_TABLESCHEMA_JSON)
         );
     }
@@ -91154,7 +91162,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TAO_INTENT_MODULE_ARCHIVE)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcatIon/VNd.Tao.InTEnT-MODulE-ArchiVE"),
+            crate::Mime::parse("ApplIcatIOn/Vnd.TaO.iNTENT-mODUle-aRChive"),
             Ok(APPLICATION_VND_TAO_INTENT_MODULE_ARCHIVE)
         );
     }
@@ -91174,7 +91182,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TCPDUMP_PCAP)
         );
         assert_eq!(
-            crate::Mime::parse("applICAtiOn/vND.tCpdUmp.PCap"),
+            crate::Mime::parse("APPliCatiON/vNd.TcpDUMp.pcaP"),
             Ok(APPLICATION_VND_TCPDUMP_PCAP)
         );
     }
@@ -91194,7 +91202,7 @@ pub mod constants {
             Ok(APPLICATION_VND_THEQVD)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCATIOn/Vnd.TheqVd"),
+            crate::Mime::parse("aPPLICaTIon/Vnd.TheQvd"),
             Ok(APPLICATION_VND_THEQVD)
         );
     }
@@ -91218,7 +91226,7 @@ pub mod constants {
             Ok(APPLICATION_VND_THINK_CELL_PPTTC_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICAtIoN/vND.THINK-Cell.PpttC+JSoN"),
+            crate::Mime::parse("APPlIcAtiON/VND.ThInk-cEll.PpTTc+JSOn"),
             Ok(APPLICATION_VND_THINK_CELL_PPTTC_JSON)
         );
     }
@@ -91242,7 +91250,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TMD_MEDIAFLEX_API_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICAtIoN/vnD.tmD.mEDIaFlEx.Api+XMl"),
+            crate::Mime::parse("APPlIcATioN/vnD.tMD.mEdIafLex.APi+xml"),
             Ok(APPLICATION_VND_TMD_MEDIAFLEX_API_XML)
         );
     }
@@ -91262,7 +91270,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICatiOn/vnd.Tml"),
+            crate::Mime::parse("APpliCaTion/Vnd.tML"),
             Ok(APPLICATION_VND_TML)
         );
     }
@@ -91284,7 +91292,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TMOBILE_LIVETV)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCaTIOn/vnD.TMObiLe-LivEtv"),
+            crate::Mime::parse("aPpLICaTioN/VND.tMobIle-liVEtV"),
             Ok(APPLICATION_VND_TMOBILE_LIVETV)
         );
     }
@@ -91304,7 +91312,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TRI_ONESOURCE)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCatiON/vnd.Tri.ONEsOURcE"),
+            crate::Mime::parse("aPpliCAtion/Vnd.TRI.ONEsOurcE"),
             Ok(APPLICATION_VND_TRI_ONESOURCE)
         );
     }
@@ -91324,7 +91332,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TRID_TPT)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatIoN/VnD.tRid.tpT"),
+            crate::Mime::parse("APplIcAtIoN/vNd.TriD.tPT"),
             Ok(APPLICATION_VND_TRID_TPT)
         );
     }
@@ -91344,7 +91352,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TRISCAPE_MXS)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcAtiOn/vnd.tRIsCape.Mxs"),
+            crate::Mime::parse("ApPliCation/vND.TrisCApe.mXs"),
             Ok(APPLICATION_VND_TRISCAPE_MXS)
         );
     }
@@ -91364,7 +91372,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TRUEAPP)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICAtIon/VnD.TrueAPp"),
+            crate::Mime::parse("APPlIcatIoN/Vnd.TRuEAPp"),
             Ok(APPLICATION_VND_TRUEAPP)
         );
     }
@@ -91384,7 +91392,7 @@ pub mod constants {
             Ok(APPLICATION_VND_TRUEDOC)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICaTion/vNd.TRUEdoc"),
+            crate::Mime::parse("APpLicaTiOn/VND.truEDOC"),
             Ok(APPLICATION_VND_TRUEDOC)
         );
     }
@@ -91406,7 +91414,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UBISOFT_WEBPLAYER)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICaTioN/VNd.uBIsoFt.webpLayER"),
+            crate::Mime::parse("APpLicAtIOn/vND.uBiSoft.WebPLaYer"),
             Ok(APPLICATION_VND_UBISOFT_WEBPLAYER)
         );
     }
@@ -91426,7 +91434,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UFDL)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICAtioN/VND.uFdL"),
+            crate::Mime::parse("APPlicATION/vNd.ufdl"),
             Ok(APPLICATION_VND_UFDL)
         );
     }
@@ -91446,7 +91454,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UIQ_THEME)
         );
         assert_eq!(
-            crate::Mime::parse("applICatION/vnd.uIq.themE"),
+            crate::Mime::parse("APplICAtion/vNd.uiq.THemE"),
             Ok(APPLICATION_VND_UIQ_THEME)
         );
     }
@@ -91466,7 +91474,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UMAJIN)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtIOn/vnD.umAJIN"),
+            crate::Mime::parse("APPlICatioN/vnD.UMaJin"),
             Ok(APPLICATION_VND_UMAJIN)
         );
     }
@@ -91486,7 +91494,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UNITY)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCAtiON/VND.UnItY"),
+            crate::Mime::parse("aPPliCATION/VnD.UNiTY"),
             Ok(APPLICATION_VND_UNITY)
         );
     }
@@ -91508,7 +91516,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UOML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCAtiOn/vnD.UOmL+XML"),
+            crate::Mime::parse("aPPliCatioN/VNd.uOML+xMl"),
             Ok(APPLICATION_VND_UOML_XML)
         );
     }
@@ -91528,7 +91536,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_ALERT)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcation/vnD.UplaNEt.alErt"),
+            crate::Mime::parse("ApplicaTioN/Vnd.UPlAneT.aLErT"),
             Ok(APPLICATION_VND_UPLANET_ALERT)
         );
     }
@@ -91550,7 +91558,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_ALERT_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICaTIoN/VNd.uPlAnet.Alert-WbXml"),
+            crate::Mime::parse("APpLIcATIOn/vNd.uplANet.alErT-wbxmL"),
             Ok(APPLICATION_VND_UPLANET_ALERT_WBXML)
         );
     }
@@ -91572,7 +91580,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_BEARER_CHOICE)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatioN/vnd.UPLaNEt.bEarER-cHOice"),
+            crate::Mime::parse("APplicATion/VND.UPlanEt.BEarER-choicE"),
             Ok(APPLICATION_VND_UPLANET_BEARER_CHOICE)
         );
     }
@@ -91594,7 +91602,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_BEARER_CHOICE_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcAtIoN/vND.uplanet.BeAreR-cHoiCe-WBxMl"),
+            crate::Mime::parse("ApPlIcAtiON/vnd.uplaNeT.bEarEr-ChOICe-wbxml"),
             Ok(APPLICATION_VND_UPLANET_BEARER_CHOICE_WBXML)
         );
     }
@@ -91616,7 +91624,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_CACHEOP)
         );
         assert_eq!(
-            crate::Mime::parse("applicATIoN/Vnd.UpLANEt.CACheOP"),
+            crate::Mime::parse("apPLIcAtIon/VnD.UPlANET.cAChEOp"),
             Ok(APPLICATION_VND_UPLANET_CACHEOP)
         );
     }
@@ -91638,7 +91646,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_CACHEOP_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICatION/VNd.UpLAnET.CachEop-wBxml"),
+            crate::Mime::parse("APplICAtIOn/VnD.uPLANet.CacheOp-wBXmL"),
             Ok(APPLICATION_VND_UPLANET_CACHEOP_WBXML)
         );
     }
@@ -91660,7 +91668,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_CHANNEL)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICaTiOn/Vnd.upLANet.channel"),
+            crate::Mime::parse("APpLiCaTIon/vnD.Uplanet.channeL"),
             Ok(APPLICATION_VND_UPLANET_CHANNEL)
         );
     }
@@ -91682,7 +91690,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_CHANNEL_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("appLicATiOn/vnD.UplANEt.ChanNEL-wBxMl"),
+            crate::Mime::parse("apPLiCaTioN/Vnd.UPlaNet.CHAnnEl-wbXmL"),
             Ok(APPLICATION_VND_UPLANET_CHANNEL_WBXML)
         );
     }
@@ -91702,7 +91710,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_LIST)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcatiOn/VND.uPlaNeT.List"),
+            crate::Mime::parse("AppliCaTION/vNd.UpLANet.lIsT"),
             Ok(APPLICATION_VND_UPLANET_LIST)
         );
     }
@@ -91724,7 +91732,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_LIST_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcATION/VnD.upLaNEt.lIst-wBxML"),
+            crate::Mime::parse("ApPLICAtIoN/vnD.UPlanEt.LiSt-Wbxml"),
             Ok(APPLICATION_VND_UPLANET_LIST_WBXML)
         );
     }
@@ -91746,7 +91754,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_LISTCMD)
         );
         assert_eq!(
-            crate::Mime::parse("appliCatioN/vnD.uPLANet.lIsTCmD"),
+            crate::Mime::parse("aPplicAtioN/vND.UplAnEt.LiSTCMd"),
             Ok(APPLICATION_VND_UPLANET_LISTCMD)
         );
     }
@@ -91768,7 +91776,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_LISTCMD_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicatION/VnD.UPlANet.listCmD-WBXml"),
+            crate::Mime::parse("applICATIoN/VNd.UplAnet.LiSTCMD-wbxmL"),
             Ok(APPLICATION_VND_UPLANET_LISTCMD_WBXML)
         );
     }
@@ -91790,7 +91798,7 @@ pub mod constants {
             Ok(APPLICATION_VND_UPLANET_SIGNAL)
         );
         assert_eq!(
-            crate::Mime::parse("appLicaTION/VNd.uplANet.SIgnAL"),
+            crate::Mime::parse("appLICAtIOn/vnd.UplANEt.SIgNaL"),
             Ok(APPLICATION_VND_UPLANET_SIGNAL)
         );
     }
@@ -91810,7 +91818,7 @@ pub mod constants {
             Ok(APPLICATION_VND_URI_MAP)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicAtiOn/VND.uri-maP"),
+            crate::Mime::parse("apPliCatION/vnd.urI-map"),
             Ok(APPLICATION_VND_URI_MAP)
         );
     }
@@ -91832,7 +91840,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VALVE_SOURCE_MATERIAL)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCatioN/Vnd.VALVe.soUrCe.mATERiAl"),
+            crate::Mime::parse("aPplicATIon/VND.valvE.SourCE.MaTeRIAl"),
             Ok(APPLICATION_VND_VALVE_SOURCE_MATERIAL)
         );
     }
@@ -91852,7 +91860,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VCX)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicAtiON/Vnd.vcX"),
+            crate::Mime::parse("apPliCAtIon/vnD.VcX"),
             Ok(APPLICATION_VND_VCX)
         );
     }
@@ -91872,7 +91880,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VD_STUDY)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicATioN/vNd.vd-STUDY"),
+            crate::Mime::parse("apPLicAtiOn/vnd.VD-Study"),
             Ok(APPLICATION_VND_VD_STUDY)
         );
     }
@@ -91892,7 +91900,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VECTORWORKS)
         );
         assert_eq!(
-            crate::Mime::parse("applicATION/VND.VEctOrWORKS"),
+            crate::Mime::parse("apPLICATION/VNd.VeCTORWorkS"),
             Ok(APPLICATION_VND_VECTORWORKS)
         );
     }
@@ -91914,7 +91922,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VEL_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLICation/vNd.Vel+jsoN"),
+            crate::Mime::parse("APplicaTiOn/Vnd.vel+JsOn"),
             Ok(APPLICATION_VND_VEL_JSON)
         );
     }
@@ -91936,7 +91944,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VERIMATRIX_VCAS)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcatiON/VnD.VERImaTrix.VcAs"),
+            crate::Mime::parse("AppliCAtIoN/VND.veRimatRiX.VCas"),
             Ok(APPLICATION_VND_VERIMATRIX_VCAS)
         );
     }
@@ -91958,7 +91966,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VERITONE_AION_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APplICatiOn/vnD.VERITonE.aiOn+JSoN"),
+            crate::Mime::parse("APpliCatioN/VND.VerItonE.AIOn+jsOn"),
             Ok(APPLICATION_VND_VERITONE_AION_JSON)
         );
     }
@@ -91978,7 +91986,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VERYANT_THIN)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcAtiOn/vnd.vERyAnt.tHin"),
+            crate::Mime::parse("ApPliCation/vND.VerYaNt.ThIn"),
             Ok(APPLICATION_VND_VERYANT_THIN)
         );
     }
@@ -91998,7 +92006,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VES_ENCRYPTED)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcAtIon/VnD.vES.eNCryPtED"),
+            crate::Mime::parse("ApPlIcatIoN/vND.vES.eNcRYPted"),
             Ok(APPLICATION_VND_VES_ENCRYPTED)
         );
     }
@@ -92020,7 +92028,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VIDSOFT_VIDCONFERENCE)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicAtIOn/vnD.ViDSoft.VIDCoNfErENCe"),
+            crate::Mime::parse("apPlICatioN/VnD.vidsOFT.vIdCoNFErEnCE"),
             Ok(APPLICATION_VND_VIDSOFT_VIDCONFERENCE)
         );
     }
@@ -92040,7 +92048,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VISIO)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicaTION/vNd.VISiO"),
+            crate::Mime::parse("appLICATiOn/VND.ViSIO"),
             Ok(APPLICATION_VND_VISIO)
         );
     }
@@ -92060,7 +92068,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VISIONARY)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCAtiOn/VND.ViSIOnarY"),
+            crate::Mime::parse("aPPliCatION/VnD.VisiONarY"),
             Ok(APPLICATION_VND_VISIONARY)
         );
     }
@@ -92082,7 +92090,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VIVIDENCE_SCRIPTFILE)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICatIon/VnD.viViDEnce.SCriPTfiLE"),
+            crate::Mime::parse("APplIcaTIoN/vnD.VIvideNCe.SCriPTFILe"),
             Ok(APPLICATION_VND_VIVIDENCE_SCRIPTFILE)
         );
     }
@@ -92102,7 +92110,7 @@ pub mod constants {
             Ok(APPLICATION_VND_VSF)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicaTiON/vnD.Vsf"),
+            crate::Mime::parse("appLiCAtioN/Vnd.vsF"),
             Ok(APPLICATION_VND_VSF)
         );
     }
@@ -92122,7 +92130,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WAP_SIC)
         );
         assert_eq!(
-            crate::Mime::parse("appLicaTIoN/vND.waP.sIC"),
+            crate::Mime::parse("appLIcAtiON/vnD.wAP.SiC"),
             Ok(APPLICATION_VND_WAP_SIC)
         );
     }
@@ -92142,7 +92150,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WAP_SLC)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCATIOn/vnd.WAp.slC"),
+            crate::Mime::parse("aPPLICaTion/VNd.waP.sLc"),
             Ok(APPLICATION_VND_WAP_SLC)
         );
     }
@@ -92162,7 +92170,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WAP_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcAtiON/VNd.WAP.wbxMl"),
+            crate::Mime::parse("ApPliCATIOn/VND.wap.wBXML"),
             Ok(APPLICATION_VND_WAP_WBXML)
         );
     }
@@ -92182,7 +92190,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WAP_WMLC)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicATIOn/Vnd.WAp.wMlc"),
+            crate::Mime::parse("apPLICatIon/VNd.wAp.WMLC"),
             Ok(APPLICATION_VND_WAP_WMLC)
         );
     }
@@ -92204,7 +92212,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WAP_WMLSCRIPTC)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicAtIoN/VND.wAp.wmLscRIPtC"),
+            crate::Mime::parse("apPlIcAtION/vNd.waP.wMLScRIPTc"),
             Ok(APPLICATION_VND_WAP_WMLSCRIPTC)
         );
     }
@@ -92224,7 +92232,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WEBTURBO)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicAtIon/vNd.wEbtUrBO"),
+            crate::Mime::parse("apPlIcatiOn/vNd.WeBTuRBo"),
             Ok(APPLICATION_VND_WEBTURBO)
         );
     }
@@ -92244,7 +92252,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WFA_DPP)
         );
         assert_eq!(
-            crate::Mime::parse("aPPliCAtioN/vnD.WfA.DPP"),
+            crate::Mime::parse("aPPlicAtioN/VnD.WFA.dpP"),
             Ok(APPLICATION_VND_WFA_DPP)
         );
     }
@@ -92264,7 +92272,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WFA_P2P)
         );
         assert_eq!(
-            crate::Mime::parse("appLICaTIon/VNd.WFa.p2p"),
+            crate::Mime::parse("APpLIcatIOn/VNd.wfa.P2p"),
             Ok(APPLICATION_VND_WFA_P2P)
         );
     }
@@ -92284,7 +92292,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WFA_WSC)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicATION/VND.Wfa.wSC"),
+            crate::Mime::parse("apPLICATION/Vnd.wFA.WSC"),
             Ok(APPLICATION_VND_WFA_WSC)
         );
     }
@@ -92306,7 +92314,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WINDOWS_DEVICEPAIRING)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcATIOn/Vnd.wiNdowS.deVICEPAiriNg"),
+            crate::Mime::parse("ApPLICaTIon/vnD.wiNdowS.DEVIcepAiriNG"),
             Ok(APPLICATION_VND_WINDOWS_DEVICEPAIRING)
         );
     }
@@ -92326,7 +92334,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WMC)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcATION/vND.WMc"),
+            crate::Mime::parse("ApPLICATiON/VNd.wMC"),
             Ok(APPLICATION_VND_WMC)
         );
     }
@@ -92346,7 +92354,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WMF_BOOTSTRAP)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicAtION/VnD.wMF.bOOTstrap"),
+            crate::Mime::parse("apPlICAtIoN/vND.wMF.bootsTraP"),
             Ok(APPLICATION_VND_WMF_BOOTSTRAP)
         );
     }
@@ -92368,7 +92376,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WOLFRAM_MATHEMATICA)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICATIon/vNd.wolfRam.matHeMaTicA"),
+            crate::Mime::parse("APPLIcaTiOn/vnd.Wolfram.mAtHemATiCA"),
             Ok(APPLICATION_VND_WOLFRAM_MATHEMATICA)
         );
     }
@@ -92390,7 +92398,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WOLFRAM_MATHEMATICA_PACKAGE)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCAtIoN/vNd.WolfRaM.maTheMATiCA.Package"),
+            crate::Mime::parse("aPPlIcAtiOn/Vnd.WoLFraM.mATHeMATIca.packaGe"),
             Ok(APPLICATION_VND_WOLFRAM_MATHEMATICA_PACKAGE)
         );
     }
@@ -92412,7 +92420,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WOLFRAM_PLAYER)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcaTion/vnD.wOLFrAm.PlayEr"),
+            crate::Mime::parse("AppLicatioN/vND.wOlFRam.PlAyER"),
             Ok(APPLICATION_VND_WOLFRAM_PLAYER)
         );
     }
@@ -92432,7 +92440,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WORDPERFECT)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcatIon/VNd.wordpERfecT"),
+            crate::Mime::parse("ApplIcaTIOn/vnd.wORdpeRFECT"),
             Ok(APPLICATION_VND_WORDPERFECT)
         );
     }
@@ -92454,7 +92462,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WORDPERFECT5_1)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCatIon/VNd.WOrDpErFecT5.1"),
+            crate::Mime::parse("aPplIcatIOn/VNd.wOrDpeRfecT5.1"),
             Ok(APPLICATION_VND_WORDPERFECT5_1)
         );
     }
@@ -92474,7 +92482,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WQD)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicAtiON/VNd.wQD"),
+            crate::Mime::parse("apPliCAtIOn/vND.WQD"),
             Ok(APPLICATION_VND_WQD)
         );
     }
@@ -92496,7 +92504,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WRQ_HP3000_LABELLED)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicatiOn/vNd.WRq-hp3000-LabeLlEd"),
+            crate::Mime::parse("appliCaTiOn/VNd.wrQ-Hp3000-LaBelLeD"),
             Ok(APPLICATION_VND_WRQ_HP3000_LABELLED)
         );
     }
@@ -92516,7 +92524,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WT_STF)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLicAtioN/VNd.wt.sTf"),
+            crate::Mime::parse("apPlicATIOn/vnd.Wt.StF"),
             Ok(APPLICATION_VND_WT_STF)
         );
     }
@@ -92538,7 +92546,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WV_CSP_WBXML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLIcatIOn/vND.WV.csP+wbxmL"),
+            crate::Mime::parse("ApplICaTiON/VND.wV.csp+WbxmL"),
             Ok(APPLICATION_VND_WV_CSP_WBXML)
         );
     }
@@ -92560,7 +92568,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WV_CSP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLICatION/vnd.WV.csP+xMl"),
+            crate::Mime::parse("APplICAtion/VNd.wV.cSp+xml"),
             Ok(APPLICATION_VND_WV_CSP_XML)
         );
     }
@@ -92582,7 +92590,7 @@ pub mod constants {
             Ok(APPLICATION_VND_WV_SSP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applICATiON/Vnd.wV.sSp+xml"),
+            crate::Mime::parse("APPLiCAtIon/vND.Wv.ssp+XML"),
             Ok(APPLICATION_VND_WV_SSP_XML)
         );
     }
@@ -92604,7 +92612,7 @@ pub mod constants {
             Ok(APPLICATION_VND_XACML_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("APPLicAtiOn/VNd.xacML+jsON"),
+            crate::Mime::parse("apPliCatIOn/vnd.XAcmL+jSON"),
             Ok(APPLICATION_VND_XACML_JSON)
         );
     }
@@ -92624,7 +92632,7 @@ pub mod constants {
             Ok(APPLICATION_VND_XARA)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICaTion/VNd.xaRa"),
+            crate::Mime::parse("APpLicaTIOn/vnD.xara"),
             Ok(APPLICATION_VND_XARA)
         );
     }
@@ -92644,7 +92652,7 @@ pub mod constants {
             Ok(APPLICATION_VND_XFDL)
         );
         assert_eq!(
-            crate::Mime::parse("applIcAtIon/VNd.Xfdl"),
+            crate::Mime::parse("ApPlIcaTIOn/Vnd.xFdl"),
             Ok(APPLICATION_VND_XFDL)
         );
     }
@@ -92664,7 +92672,7 @@ pub mod constants {
             Ok(APPLICATION_VND_XFDL_WEBFORM)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCaTion/vnD.xFDl.WebFoRM"),
+            crate::Mime::parse("aPpLicatioN/vND.XFdl.wEBfOrm"),
             Ok(APPLICATION_VND_XFDL_WEBFORM)
         );
     }
@@ -92686,7 +92694,7 @@ pub mod constants {
             Ok(APPLICATION_VND_XMI_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcaTiOn/Vnd.XMi+XmL"),
+            crate::Mime::parse("AppLiCatIon/VNd.XmI+Xml"),
             Ok(APPLICATION_VND_XMI_XML)
         );
     }
@@ -92706,7 +92714,7 @@ pub mod constants {
             Ok(APPLICATION_VND_XMPIE_CPKG)
         );
         assert_eq!(
-            crate::Mime::parse("APplICATIOn/VNd.XmPIe.cPkg"),
+            crate::Mime::parse("APPLICaTIOn/VnD.xMpIe.cpKg"),
             Ok(APPLICATION_VND_XMPIE_CPKG)
         );
     }
@@ -92726,7 +92734,7 @@ pub mod constants {
             Ok(APPLICATION_VND_XMPIE_DPKG)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcAtIOn/VNd.xMPie.DPkg"),
+            crate::Mime::parse("ApPlICaTIOn/vND.xmPIe.dpKG"),
             Ok(APPLICATION_VND_XMPIE_DPKG)
         );
     }
@@ -92746,7 +92754,7 @@ pub mod constants {
             Ok(APPLICATION_VND_XMPIE_PLAN)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCaTiOn/VnD.XmPie.plAn"),
+            crate::Mime::parse("aPpLiCatIoN/VnD.xmpiE.pLAn"),
             Ok(APPLICATION_VND_XMPIE_PLAN)
         );
     }
@@ -92766,7 +92774,7 @@ pub mod constants {
             Ok(APPLICATION_VND_XMPIE_PPKG)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlICATioN/Vnd.XMpiE.ppkg"),
+            crate::Mime::parse("APPLicATIon/VNd.Xmpie.pPkg"),
             Ok(APPLICATION_VND_XMPIE_PPKG)
         );
     }
@@ -92786,7 +92794,7 @@ pub mod constants {
             Ok(APPLICATION_VND_XMPIE_XLIM)
         );
         assert_eq!(
-            crate::Mime::parse("aPplIcAtiON/VNd.XMPie.XlIm"),
+            crate::Mime::parse("ApPliCAtIOn/VND.xMPiE.XlIM"),
             Ok(APPLICATION_VND_XMPIE_XLIM)
         );
     }
@@ -92806,7 +92814,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAMAHA_HV_DIC)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicATIoN/vND.YAMAhA.hV-dic"),
+            crate::Mime::parse("apPLIcAtiON/VND.yAmaHa.hv-DIC"),
             Ok(APPLICATION_VND_YAMAHA_HV_DIC)
         );
     }
@@ -92828,7 +92836,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAMAHA_HV_SCRIPT)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCATiON/vnD.YAMAhA.Hv-scRIPT"),
+            crate::Mime::parse("aPPLiCAtioN/VND.yAmAhA.hV-SCriPT"),
             Ok(APPLICATION_VND_YAMAHA_HV_SCRIPT)
         );
     }
@@ -92850,7 +92858,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAMAHA_HV_VOICE)
         );
         assert_eq!(
-            crate::Mime::parse("apPLiCAtIOn/VnD.yAMAHa.hV-voICE"),
+            crate::Mime::parse("aPPlICatIoN/vND.YaMaHA.hV-VoICe"),
             Ok(APPLICATION_VND_YAMAHA_HV_VOICE)
         );
     }
@@ -92872,7 +92880,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAMAHA_OPENSCOREFORMAT)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcATIOn/vnd.yaMaHA.oPeNScoReFoRmAt"),
+            crate::Mime::parse("ApPLICation/vnD.YAMaHa.OpeNsCoReForMAT"),
             Ok(APPLICATION_VND_YAMAHA_OPENSCOREFORMAT)
         );
     }
@@ -92897,7 +92905,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAMAHA_OPENSCOREFORMAT_OSFPVG_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICATION/VNd.yAmaHA.oPENSCOREFORMat.osfPVg+xMl"),
+            crate::Mime::parse("APPLICATIOn/vNd.YAMaHA.OPENSCOREfoRmat.OsFpVg+xml"),
             Ok(APPLICATION_VND_YAMAHA_OPENSCOREFORMAT_OSFPVG_XML)
         );
     }
@@ -92919,7 +92927,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAMAHA_REMOTE_SETUP)
         );
         assert_eq!(
-            crate::Mime::parse("applICaTION/vNd.YaMaHa.RemoTe-SetUP"),
+            crate::Mime::parse("APpLICAtiOn/VnD.YamAha.ReMOte-SETuP"),
             Ok(APPLICATION_VND_YAMAHA_REMOTE_SETUP)
         );
     }
@@ -92941,7 +92949,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAMAHA_SMAF_AUDIO)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicAtIoN/vNd.yaMAHA.SMaF-AuDIO"),
+            crate::Mime::parse("apPlIcATiOn/vnD.YAmAHa.SMaF-AUDio"),
             Ok(APPLICATION_VND_YAMAHA_SMAF_AUDIO)
         );
     }
@@ -92963,7 +92971,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAMAHA_SMAF_PHRASE)
         );
         assert_eq!(
-            crate::Mime::parse("APpliCATIOn/vNd.yaMAhA.sMaF-PHraSe"),
+            crate::Mime::parse("aPPLICaTiOn/vnD.yAMaHa.sMAf-PhRaSE"),
             Ok(APPLICATION_VND_YAMAHA_SMAF_PHRASE)
         );
     }
@@ -92985,7 +92993,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAMAHA_THROUGH_NGN)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicATIon/vnd.yaMaha.tHrOUgH-NGN"),
+            crate::Mime::parse("apPLIcaTion/vnD.yaMaHa.ThROUGH-NGn"),
             Ok(APPLICATION_VND_YAMAHA_THROUGH_NGN)
         );
     }
@@ -93007,7 +93015,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAMAHA_TUNNEL_UDPENCAP)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicatiON/vnd.yamAHa.tUNNel-UDpEncap"),
+            crate::Mime::parse("appliCATion/vnd.YamaHA.tuNNEl-udpenCap"),
             Ok(APPLICATION_VND_YAMAHA_TUNNEL_UDPENCAP)
         );
     }
@@ -93027,7 +93035,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YAOWEME)
         );
         assert_eq!(
-            crate::Mime::parse("aPpliCaTIon/vNd.YaOwEME"),
+            crate::Mime::parse("aPpLIcatiOn/VnD.YAOweMe"),
             Ok(APPLICATION_VND_YAOWEME)
         );
     }
@@ -93049,7 +93057,7 @@ pub mod constants {
             Ok(APPLICATION_VND_YELLOWRIVER_CUSTOM_MENU)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicaTION/vND.YELLoWRIVEr-custoM-MENu"),
+            crate::Mime::parse("appLICAtiON/VND.yELLOWriver-cUSTOM-mENU"),
             Ok(APPLICATION_VND_YELLOWRIVER_CUSTOM_MENU)
         );
     }
@@ -93069,7 +93077,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ZUL)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLICATiON/VNd.ZUl"),
+            crate::Mime::parse("APPLiCAtIOn/VNd.ZuL"),
             Ok(APPLICATION_VND_ZUL)
         );
     }
@@ -93091,7 +93099,7 @@ pub mod constants {
             Ok(APPLICATION_VND_ZZAZZ_DECK_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APpLicatioN/vnd.zzAzz.dEck+XML"),
+            crate::Mime::parse("applicATion/vnD.zzaZz.DECK+xML"),
             Ok(APPLICATION_VND_ZZAZZ_DECK_XML)
         );
     }
@@ -93113,7 +93121,7 @@ pub mod constants {
             Ok(APPLICATION_VOICEXML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLicAtion/vOIcExMl+xmL"),
+            crate::Mime::parse("apPlicatiON/VoIcExmL+XmL"),
             Ok(APPLICATION_VOICEXML_XML)
         );
     }
@@ -93135,7 +93143,7 @@ pub mod constants {
             Ok(APPLICATION_VOUCHER_CMS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICaTIon/voUChER-CMS+JSOn"),
+            crate::Mime::parse("APpLIcatioN/vOUCHER-CMS+JSON"),
             Ok(APPLICATION_VOUCHER_CMS_JSON)
         );
     }
@@ -93155,7 +93163,7 @@ pub mod constants {
             Ok(APPLICATION_VQ_RTCPXR)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICaTIoN/VQ-RTcPxR"),
+            crate::Mime::parse("APpLIcATIOn/Vq-rTCpxr"),
             Ok(APPLICATION_VQ_RTCPXR)
         );
     }
@@ -93171,7 +93179,7 @@ pub mod constants {
     #[test]
     fn application_wasm_parse() {
         assert_eq!(crate::Mime::parse("application/wasm"), Ok(APPLICATION_WASM));
-        assert_eq!(crate::Mime::parse("ApplICatION/wAsm"), Ok(APPLICATION_WASM));
+        assert_eq!(crate::Mime::parse("APplICATiOn/WaSM"), Ok(APPLICATION_WASM));
     }
 
     /// `application/watcherinfo+xml`
@@ -93191,7 +93199,7 @@ pub mod constants {
             Ok(APPLICATION_WATCHERINFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLIcaTIon/WATChEriNfO+Xml"),
+            crate::Mime::parse("AppLIcatION/wAtcHeRiNfo+XMl"),
             Ok(APPLICATION_WATCHERINFO_XML)
         );
     }
@@ -93213,7 +93221,7 @@ pub mod constants {
             Ok(APPLICATION_WEBPUSH_OPTIONS_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicatIOn/wEBpUSH-oPTionS+jsON"),
+            crate::Mime::parse("applICatiON/WEBPuSH-opTionS+jSon"),
             Ok(APPLICATION_WEBPUSH_OPTIONS_JSON)
         );
     }
@@ -93233,7 +93241,7 @@ pub mod constants {
             Ok(APPLICATION_WHOISPP_QUERY)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICaTIOn/wHoisPP-qUery"),
+            crate::Mime::parse("APpLICatiOn/wHOisPp-qUERy"),
             Ok(APPLICATION_WHOISPP_QUERY)
         );
     }
@@ -93253,7 +93261,7 @@ pub mod constants {
             Ok(APPLICATION_WHOISPP_RESPONSE)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicAtIon/whOispP-RESPONsE"),
+            crate::Mime::parse("apPlIcatioN/whOISPP-REsPONSe"),
             Ok(APPLICATION_WHOISPP_RESPONSE)
         );
     }
@@ -93273,7 +93281,7 @@ pub mod constants {
             Ok(APPLICATION_WIDGET)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicaTiON/WidGet"),
+            crate::Mime::parse("appLiCAtIon/widGet"),
             Ok(APPLICATION_WIDGET)
         );
     }
@@ -93289,7 +93297,7 @@ pub mod constants {
     #[test]
     fn application_wita_parse() {
         assert_eq!(crate::Mime::parse("application/wita"), Ok(APPLICATION_WITA));
-        assert_eq!(crate::Mime::parse("aPplIcatION/WITA"), Ok(APPLICATION_WITA));
+        assert_eq!(crate::Mime::parse("ApplICATION/WITA"), Ok(APPLICATION_WITA));
     }
 
     /// `application/wordperfect5.1`
@@ -93307,7 +93315,7 @@ pub mod constants {
             Ok(APPLICATION_WORDPERFECT5_1)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcATIon/wordPErFECT5.1"),
+            crate::Mime::parse("ApPLIcaTion/WOrDPERFECt5.1"),
             Ok(APPLICATION_WORDPERFECT5_1)
         );
     }
@@ -93329,7 +93337,7 @@ pub mod constants {
             Ok(APPLICATION_WSDL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCAtIon/Wsdl+xmL"),
+            crate::Mime::parse("aPPlIcaTIon/wsdL+XML"),
             Ok(APPLICATION_WSDL_XML)
         );
     }
@@ -93351,7 +93359,7 @@ pub mod constants {
             Ok(APPLICATION_WSPOLICY_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLICatiOn/WspOLicy+Xml"),
+            crate::Mime::parse("APpliCatIon/WspolIcy+xmL"),
             Ok(APPLICATION_WSPOLICY_XML)
         );
     }
@@ -93371,7 +93379,7 @@ pub mod constants {
             Ok(APPLICATION_X_123)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcatioN/x-123"),
+            crate::Mime::parse("ApplicAtiON/X-123"),
             Ok(APPLICATION_X_123)
         );
     }
@@ -93391,7 +93399,7 @@ pub mod constants {
             Ok(APPLICATION_X_7Z_COMPRESSED)
         );
         assert_eq!(
-            crate::Mime::parse("AppliCaTiOn/X-7Z-CompReSsed"),
+            crate::Mime::parse("aPpLiCatIOn/X-7z-CoMpreSSed"),
             Ok(APPLICATION_X_7Z_COMPRESSED)
         );
     }
@@ -93411,7 +93419,7 @@ pub mod constants {
             Ok(APPLICATION_X_ABIWORD)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcAtION/x-ABiwOrD"),
+            crate::Mime::parse("ApPlICAtioN/x-AbIWORd"),
             Ok(APPLICATION_X_ABIWORD)
         );
     }
@@ -93431,7 +93439,7 @@ pub mod constants {
             Ok(APPLICATION_X_APPLE_DISKIMAGE)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicaTiON/X-aPPLe-dISkIMAGE"),
+            crate::Mime::parse("appLiCAtIOn/X-appLE-DISKImage"),
             Ok(APPLICATION_X_APPLE_DISKIMAGE)
         );
     }
@@ -93451,7 +93459,7 @@ pub mod constants {
             Ok(APPLICATION_X_BCPIO)
         );
         assert_eq!(
-            crate::Mime::parse("applIcAtIon/X-BCpio"),
+            crate::Mime::parse("ApPlIcaTIoN/x-bcpIO"),
             Ok(APPLICATION_X_BCPIO)
         );
     }
@@ -93471,7 +93479,7 @@ pub mod constants {
             Ok(APPLICATION_X_BITTORRENT)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcAtION/x-BITtORrENt"),
+            crate::Mime::parse("ApPlICAtiON/X-BItTOrREnT"),
             Ok(APPLICATION_X_BITTORRENT)
         );
     }
@@ -93491,7 +93499,7 @@ pub mod constants {
             Ok(APPLICATION_X_CDF)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICaTiOn/x-cDf"),
+            crate::Mime::parse("APpLiCaTion/x-cDF"),
             Ok(APPLICATION_X_CDF)
         );
     }
@@ -93511,7 +93519,7 @@ pub mod constants {
             Ok(APPLICATION_X_CDLINK)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICaTiON/x-CdLink"),
+            crate::Mime::parse("APpLiCATiON/X-cdlink"),
             Ok(APPLICATION_X_CDLINK)
         );
     }
@@ -93531,7 +93539,7 @@ pub mod constants {
             Ok(APPLICATION_X_COMSOL)
         );
         assert_eq!(
-            crate::Mime::parse("applICAtion/X-CoMsoL"),
+            crate::Mime::parse("APPlicatION/X-cOmSOl"),
             Ok(APPLICATION_X_COMSOL)
         );
     }
@@ -93551,7 +93559,7 @@ pub mod constants {
             Ok(APPLICATION_X_CPIO)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcAtioN/x-CPIo"),
+            crate::Mime::parse("ApPlicAtioN/X-cpiO"),
             Ok(APPLICATION_X_CPIO)
         );
     }
@@ -93571,7 +93579,7 @@ pub mod constants {
             Ok(APPLICATION_X_CSH)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcAtiOn/x-CSH"),
+            crate::Mime::parse("ApPliCatioN/X-CSh"),
             Ok(APPLICATION_X_CSH)
         );
     }
@@ -93591,7 +93599,7 @@ pub mod constants {
             Ok(APPLICATION_X_DIRECTOR)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcATiON/X-direCtor"),
+            crate::Mime::parse("ApPLiCATIOn/x-DirecTor"),
             Ok(APPLICATION_X_DIRECTOR)
         );
     }
@@ -93611,7 +93619,7 @@ pub mod constants {
             Ok(APPLICATION_X_DOOM)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICaTioN/X-dooM"),
+            crate::Mime::parse("APpLicAtIon/x-DOom"),
             Ok(APPLICATION_X_DOOM)
         );
     }
@@ -93631,7 +93639,7 @@ pub mod constants {
             Ok(APPLICATION_X_DVI)
         );
         assert_eq!(
-            crate::Mime::parse("APplicatIOn/x-DvI"),
+            crate::Mime::parse("applICaTioN/X-Dvi"),
             Ok(APPLICATION_X_DVI)
         );
     }
@@ -93651,7 +93659,7 @@ pub mod constants {
             Ok(APPLICATION_X_FONT)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcATIoN/X-foNT"),
+            crate::Mime::parse("ApPLIcAtIOn/X-FoNT"),
             Ok(APPLICATION_X_FONT)
         );
     }
@@ -93671,7 +93679,7 @@ pub mod constants {
             Ok(APPLICATION_X_FONT_PCF)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicatioN/x-FOnT-pCF"),
+            crate::Mime::parse("applicAtioN/x-foNT-PcF"),
             Ok(APPLICATION_X_FONT_PCF)
         );
     }
@@ -93691,7 +93699,7 @@ pub mod constants {
             Ok(APPLICATION_X_FREEMIND)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLiCatIon/X-FREEmIND"),
+            crate::Mime::parse("aPplIcaTIoN/X-fREEmiND"),
             Ok(APPLICATION_X_FREEMIND)
         );
     }
@@ -93711,7 +93719,7 @@ pub mod constants {
             Ok(APPLICATION_X_GANTTPROJECT)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcatiOn/x-gaNTtPROjeCT"),
+            crate::Mime::parse("AppliCaTiOn/X-gANTtpROjeCT"),
             Ok(APPLICATION_X_GANTTPROJECT)
         );
     }
@@ -93731,7 +93739,7 @@ pub mod constants {
             Ok(APPLICATION_X_GNUMERIC)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcation/X-GNUmERIc"),
+            crate::Mime::parse("ApplicatIoN/X-GNUmEric"),
             Ok(APPLICATION_X_GNUMERIC)
         );
     }
@@ -93751,7 +93759,7 @@ pub mod constants {
             Ok(APPLICATION_X_GO_SGF)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicatiOn/X-gO-sGF"),
+            crate::Mime::parse("appliCaTIOn/x-GO-sgF"),
             Ok(APPLICATION_X_GO_SGF)
         );
     }
@@ -93773,7 +93781,7 @@ pub mod constants {
             Ok(APPLICATION_X_GRAPHING_CALCULATOR)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtion/X-graphinG-caLCulatOR"),
+            crate::Mime::parse("APPlicaTIOn/x-graPHinG-calcULatoR"),
             Ok(APPLICATION_X_GRAPHING_CALCULATOR)
         );
     }
@@ -93793,7 +93801,7 @@ pub mod constants {
             Ok(APPLICATION_X_GTAR)
         );
         assert_eq!(
-            crate::Mime::parse("appLicAtiON/X-GTAR"),
+            crate::Mime::parse("apPliCATION/X-gtar"),
             Ok(APPLICATION_X_GTAR)
         );
     }
@@ -93813,7 +93821,7 @@ pub mod constants {
             Ok(APPLICATION_X_GTAR_COMPRESSED)
         );
         assert_eq!(
-            crate::Mime::parse("applicaTioN/X-gtar-coMpREssED"),
+            crate::Mime::parse("appLicAtIon/x-GtaR-COmpRESseD"),
             Ok(APPLICATION_X_GTAR_COMPRESSED)
         );
     }
@@ -93833,7 +93841,7 @@ pub mod constants {
             Ok(APPLICATION_X_HDF)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCatION/x-HDf"),
+            crate::Mime::parse("aPplICATiON/x-HDf"),
             Ok(APPLICATION_X_HDF)
         );
     }
@@ -93853,7 +93861,7 @@ pub mod constants {
             Ok(APPLICATION_X_HWP)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicATION/X-HWp"),
+            crate::Mime::parse("apPLICATION/x-Hwp"),
             Ok(APPLICATION_X_HWP)
         );
     }
@@ -93873,7 +93881,7 @@ pub mod constants {
             Ok(APPLICATION_X_ICA)
         );
         assert_eq!(
-            crate::Mime::parse("APplICATiON/x-ica"),
+            crate::Mime::parse("APPLiCATion/x-Ica"),
             Ok(APPLICATION_X_ICA)
         );
     }
@@ -93893,7 +93901,7 @@ pub mod constants {
             Ok(APPLICATION_X_INFO)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicATIon/X-iNFo"),
+            crate::Mime::parse("apPLIcaTIon/X-INFo"),
             Ok(APPLICATION_X_INFO)
         );
     }
@@ -93913,7 +93921,7 @@ pub mod constants {
             Ok(APPLICATION_X_INTERNET_SIGNUP)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicaTIOn/X-inTeRnEt-SIgNUp"),
+            crate::Mime::parse("appLICatIOn/X-InTerNEt-SignUp"),
             Ok(APPLICATION_X_INTERNET_SIGNUP)
         );
     }
@@ -93933,7 +93941,7 @@ pub mod constants {
             Ok(APPLICATION_X_IPHONE)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcAtion/x-iphOne"),
+            crate::Mime::parse("ApPlication/x-iphonE"),
             Ok(APPLICATION_X_IPHONE)
         );
     }
@@ -93953,7 +93961,7 @@ pub mod constants {
             Ok(APPLICATION_X_ISO9660_IMAGE)
         );
         assert_eq!(
-            crate::Mime::parse("appLICAtiOn/X-isO9660-IMAGe"),
+            crate::Mime::parse("APPliCaTIOn/X-iSO9660-iMagE"),
             Ok(APPLICATION_X_ISO9660_IMAGE)
         );
     }
@@ -93973,7 +93981,7 @@ pub mod constants {
             Ok(APPLICATION_X_JAVA_JNLP_FILE)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicatIOn/X-jaVA-JNLP-FiLE"),
+            crate::Mime::parse("applICatIon/X-JAVA-jNlP-fIlE"),
             Ok(APPLICATION_X_JAVA_JNLP_FILE)
         );
     }
@@ -93993,7 +94001,7 @@ pub mod constants {
             Ok(APPLICATION_X_JMOL)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLIcatION/x-jMOL"),
+            crate::Mime::parse("ApplICAtiOn/X-jmOl"),
             Ok(APPLICATION_X_JMOL)
         );
     }
@@ -94013,7 +94021,7 @@ pub mod constants {
             Ok(APPLICATION_X_KILLUSTRATOR)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICAtIoN/x-KILluSTRatOr"),
+            crate::Mime::parse("APPlIcATioN/X-kILLusTrAtOr"),
             Ok(APPLICATION_X_KILLUSTRATOR)
         );
     }
@@ -94033,7 +94041,7 @@ pub mod constants {
             Ok(APPLICATION_X_LATEX)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcaTiOn/X-LaTEX"),
+            crate::Mime::parse("AppLiCatION/X-LateX"),
             Ok(APPLICATION_X_LATEX)
         );
     }
@@ -94053,7 +94061,7 @@ pub mod constants {
             Ok(APPLICATION_X_LHA)
         );
         assert_eq!(
-            crate::Mime::parse("appLIcATion/X-lHA"),
+            crate::Mime::parse("ApPLicatIon/X-lha"),
             Ok(APPLICATION_X_LHA)
         );
     }
@@ -94073,7 +94081,7 @@ pub mod constants {
             Ok(APPLICATION_X_LYX)
         );
         assert_eq!(
-            crate::Mime::parse("applICATioN/X-LyX"),
+            crate::Mime::parse("APPLicAtION/X-lYX"),
             Ok(APPLICATION_X_LYX)
         );
     }
@@ -94093,7 +94101,7 @@ pub mod constants {
             Ok(APPLICATION_X_LZH)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICaTIon/x-lzH"),
+            crate::Mime::parse("APpLIcation/X-Lzh"),
             Ok(APPLICATION_X_LZH)
         );
     }
@@ -94113,7 +94121,7 @@ pub mod constants {
             Ok(APPLICATION_X_LZX)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcATIoN/X-Lzx"),
+            crate::Mime::parse("ApPLIcAtIoN/x-lzx"),
             Ok(APPLICATION_X_LZX)
         );
     }
@@ -94133,7 +94141,7 @@ pub mod constants {
             Ok(APPLICATION_X_MAKER)
         );
         assert_eq!(
-            crate::Mime::parse("applIcATIoN/X-MaKer"),
+            crate::Mime::parse("ApPLIcAtION/X-makEr"),
             Ok(APPLICATION_X_MAKER)
         );
     }
@@ -94153,7 +94161,7 @@ pub mod constants {
             Ok(APPLICATION_X_MS_WMD)
         );
         assert_eq!(
-            crate::Mime::parse("apPlICAtIoN/x-Ms-WmD"),
+            crate::Mime::parse("APPlIcATioN/X-mS-wmD"),
             Ok(APPLICATION_X_MS_WMD)
         );
     }
@@ -94173,7 +94181,7 @@ pub mod constants {
             Ok(APPLICATION_X_MS_WMZ)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICATIon/X-mS-Wmz"),
+            crate::Mime::parse("APPLIcaTIOn/x-ms-wMz"),
             Ok(APPLICATION_X_MS_WMZ)
         );
     }
@@ -94193,7 +94201,7 @@ pub mod constants {
             Ok(APPLICATION_X_MSDOS_PROGRAM)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicatIon/x-mSdos-ProGRaM"),
+            crate::Mime::parse("applIcatiOn/x-msDos-PrOgrAm"),
             Ok(APPLICATION_X_MSDOS_PROGRAM)
         );
     }
@@ -94213,7 +94221,7 @@ pub mod constants {
             Ok(APPLICATION_X_MSI)
         );
         assert_eq!(
-            crate::Mime::parse("apPlicAtiOn/x-MSi"),
+            crate::Mime::parse("apPliCaTiON/x-MSI"),
             Ok(APPLICATION_X_MSI)
         );
     }
@@ -94233,7 +94241,7 @@ pub mod constants {
             Ok(APPLICATION_X_NETCDF)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicatIon/x-neTCDF"),
+            crate::Mime::parse("applIcaTiOn/X-NEtcdF"),
             Ok(APPLICATION_X_NETCDF)
         );
     }
@@ -94255,7 +94263,7 @@ pub mod constants {
             Ok(APPLICATION_X_NS_PROXY_AUTOCONFIG)
         );
         assert_eq!(
-            crate::Mime::parse("appLicaTiON/x-nS-PRoxY-AUTOcOnfiG"),
+            crate::Mime::parse("appLiCATiOn/X-Ns-PROXY-aUtocOnfIG"),
             Ok(APPLICATION_X_NS_PROXY_AUTOCONFIG)
         );
     }
@@ -94275,7 +94283,7 @@ pub mod constants {
             Ok(APPLICATION_X_NWC)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICaTiON/X-nwc"),
+            crate::Mime::parse("APpLiCATIOn/x-NWC"),
             Ok(APPLICATION_X_NWC)
         );
     }
@@ -94295,7 +94303,7 @@ pub mod constants {
             Ok(APPLICATION_X_OBJECT)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCaTIOn/x-ObJECT"),
+            crate::Mime::parse("aPpLICatiON/X-OBjECT"),
             Ok(APPLICATION_X_OBJECT)
         );
     }
@@ -94315,7 +94323,7 @@ pub mod constants {
             Ok(APPLICATION_X_OZ_APPLICATION)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCATIoN/X-OZ-ApPlicATIoN"),
+            crate::Mime::parse("aPPLIcAtION/x-oZ-apPLIcAtion"),
             Ok(APPLICATION_X_OZ_APPLICATION)
         );
     }
@@ -94337,7 +94345,7 @@ pub mod constants {
             Ok(APPLICATION_X_PKCS7_CERTREQRESP)
         );
         assert_eq!(
-            crate::Mime::parse("appliCATIoN/X-Pkcs7-cErTreQrEsp"),
+            crate::Mime::parse("aPPLIcAtIoN/x-PkcS7-ceRtReqreSp"),
             Ok(APPLICATION_X_PKCS7_CERTREQRESP)
         );
     }
@@ -94357,7 +94365,7 @@ pub mod constants {
             Ok(APPLICATION_X_PYTHON_CODE)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcatIon/X-PytHon-coDe"),
+            crate::Mime::parse("ApplIcatION/x-pythoN-cODe"),
             Ok(APPLICATION_X_PYTHON_CODE)
         );
     }
@@ -94377,7 +94385,7 @@ pub mod constants {
             Ok(APPLICATION_X_QGIS)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlicATion/X-Qgis"),
+            crate::Mime::parse("apPLicaTIoN/x-QGIS"),
             Ok(APPLICATION_X_QGIS)
         );
     }
@@ -94399,7 +94407,7 @@ pub mod constants {
             Ok(APPLICATION_X_QUICKTIMEPLAYER)
         );
         assert_eq!(
-            crate::Mime::parse("APPLiCAtION/X-qUICktImeplAYeR"),
+            crate::Mime::parse("aPPlICAtIon/X-quIcktiMEpLAyER"),
             Ok(APPLICATION_X_QUICKTIMEPLAYER)
         );
     }
@@ -94419,7 +94427,7 @@ pub mod constants {
             Ok(APPLICATION_X_RDP)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLicaTIon/x-RdP"),
+            crate::Mime::parse("appLIcatioN/X-Rdp"),
             Ok(APPLICATION_X_RDP)
         );
     }
@@ -94441,7 +94449,7 @@ pub mod constants {
             Ok(APPLICATION_X_REDHAT_PACKAGE_MANAGER)
         );
         assert_eq!(
-            crate::Mime::parse("aPplICaTIon/X-REdhat-PACkaGE-MANagER"),
+            crate::Mime::parse("APpLIcaTION/x-reDHAT-pACkAGE-mANAGER"),
             Ok(APPLICATION_X_REDHAT_PACKAGE_MANAGER)
         );
     }
@@ -94463,7 +94471,7 @@ pub mod constants {
             Ok(APPLICATION_X_RSS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcAtioN/x-rsS+XML"),
+            crate::Mime::parse("ApPlicATion/X-RSS+xmL"),
             Ok(APPLICATION_X_RSS_XML)
         );
     }
@@ -94483,7 +94491,7 @@ pub mod constants {
             Ok(APPLICATION_X_RUBY)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcaTiOn/x-RUby"),
+            crate::Mime::parse("AppLiCatiON/x-RUBY"),
             Ok(APPLICATION_X_RUBY)
         );
     }
@@ -94503,7 +94511,7 @@ pub mod constants {
             Ok(APPLICATION_X_SCILAB)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcaTIOn/x-ScILAB"),
+            crate::Mime::parse("AppLICatioN/X-SCILab"),
             Ok(APPLICATION_X_SCILAB)
         );
     }
@@ -94523,7 +94531,7 @@ pub mod constants {
             Ok(APPLICATION_X_SCILAB_XCOS)
         );
         assert_eq!(
-            crate::Mime::parse("APplicatIoN/X-ScIlab-xcOs"),
+            crate::Mime::parse("applIcATIoN/X-scilaB-XCOs"),
             Ok(APPLICATION_X_SCILAB_XCOS)
         );
     }
@@ -94539,7 +94547,7 @@ pub mod constants {
     #[test]
     fn application_x_sh_parse() {
         assert_eq!(crate::Mime::parse("application/x-sh"), Ok(APPLICATION_X_SH));
-        assert_eq!(crate::Mime::parse("APPlicaTiON/x-sh"), Ok(APPLICATION_X_SH));
+        assert_eq!(crate::Mime::parse("appLiCAtion/x-SH"), Ok(APPLICATION_X_SH));
     }
 
     /// `application/x-shar`
@@ -94557,7 +94565,7 @@ pub mod constants {
             Ok(APPLICATION_X_SHAR)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCaTIoN/x-Shar"),
+            crate::Mime::parse("aPpLIcATioN/x-SHar"),
             Ok(APPLICATION_X_SHAR)
         );
     }
@@ -94577,7 +94585,7 @@ pub mod constants {
             Ok(APPLICATION_X_SILVERLIGHT)
         );
         assert_eq!(
-            crate::Mime::parse("APplICAtIoN/x-SILvERLIgHt"),
+            crate::Mime::parse("APPlIcAtioN/X-SILVeRlIgHt"),
             Ok(APPLICATION_X_SILVERLIGHT)
         );
     }
@@ -94597,7 +94605,7 @@ pub mod constants {
             Ok(APPLICATION_X_STUFFIT)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlicatiON/X-StuFFiT"),
+            crate::Mime::parse("appliCAtION/x-StUFfIT"),
             Ok(APPLICATION_X_STUFFIT)
         );
     }
@@ -94617,7 +94625,7 @@ pub mod constants {
             Ok(APPLICATION_X_SV4CPIO)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLICaTIOn/X-Sv4CpIO"),
+            crate::Mime::parse("APpLICaTIoN/x-sV4cpIo"),
             Ok(APPLICATION_X_SV4CPIO)
         );
     }
@@ -94637,7 +94645,7 @@ pub mod constants {
             Ok(APPLICATION_X_SV4CRC)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCatioN/X-SV4CRc"),
+            crate::Mime::parse("aPplicAtION/x-Sv4crC"),
             Ok(APPLICATION_X_SV4CRC)
         );
     }
@@ -94657,7 +94665,7 @@ pub mod constants {
             Ok(APPLICATION_X_TAR)
         );
         assert_eq!(
-            crate::Mime::parse("AppLicaTioN/X-Tar"),
+            crate::Mime::parse("appLicATION/x-TaR"),
             Ok(APPLICATION_X_TAR)
         );
     }
@@ -94677,7 +94685,7 @@ pub mod constants {
             Ok(APPLICATION_X_TCL)
         );
         assert_eq!(
-            crate::Mime::parse("APpLiCatioN/X-tCl"),
+            crate::Mime::parse("aPplicAtIOn/x-TCL"),
             Ok(APPLICATION_X_TCL)
         );
     }
@@ -94697,7 +94705,7 @@ pub mod constants {
             Ok(APPLICATION_X_TEX_GF)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicaTIoN/X-teX-gf"),
+            crate::Mime::parse("appLIcAtIOn/X-tex-GF"),
             Ok(APPLICATION_X_TEX_GF)
         );
     }
@@ -94717,7 +94725,7 @@ pub mod constants {
             Ok(APPLICATION_X_TEX_PK)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCaTIon/x-TEX-pK"),
+            crate::Mime::parse("aPpLIcatioN/X-tEx-pk"),
             Ok(APPLICATION_X_TEX_PK)
         );
     }
@@ -94737,7 +94745,7 @@ pub mod constants {
             Ok(APPLICATION_X_TEXINFO)
         );
         assert_eq!(
-            crate::Mime::parse("aPplicATiOn/X-Texinfo"),
+            crate::Mime::parse("apPLiCatIoN/x-texINFo"),
             Ok(APPLICATION_X_TEXINFO)
         );
     }
@@ -94757,7 +94765,7 @@ pub mod constants {
             Ok(APPLICATION_X_TRASH)
         );
         assert_eq!(
-            crate::Mime::parse("APPlicAtion/x-TrAsh"),
+            crate::Mime::parse("apPlicaTioN/X-traSh"),
             Ok(APPLICATION_X_TRASH)
         );
     }
@@ -94777,7 +94785,7 @@ pub mod constants {
             Ok(APPLICATION_X_TROFF_MAN)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCaTiOn/X-tROff-MAN"),
+            crate::Mime::parse("aPpLiCaTIon/X-trOFF-maN"),
             Ok(APPLICATION_X_TROFF_MAN)
         );
     }
@@ -94797,7 +94805,7 @@ pub mod constants {
             Ok(APPLICATION_X_TROFF_ME)
         );
         assert_eq!(
-            crate::Mime::parse("AppLICAtIOn/x-Troff-mE"),
+            crate::Mime::parse("APPlICaTiON/x-tRoFf-Me"),
             Ok(APPLICATION_X_TROFF_ME)
         );
     }
@@ -94817,7 +94825,7 @@ pub mod constants {
             Ok(APPLICATION_X_TROFF_MS)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCATioN/X-troFf-ms"),
+            crate::Mime::parse("aPPLicAtIOn/x-tRofF-ms"),
             Ok(APPLICATION_X_TROFF_MS)
         );
     }
@@ -94837,7 +94845,7 @@ pub mod constants {
             Ok(APPLICATION_X_USTAR)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICATiOn/X-uStar"),
+            crate::Mime::parse("APPLiCaTIon/x-usTAr"),
             Ok(APPLICATION_X_USTAR)
         );
     }
@@ -94857,7 +94865,7 @@ pub mod constants {
             Ok(APPLICATION_X_WAIS_SOURCE)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcaTIoN/x-WAIS-SouRcE"),
+            crate::Mime::parse("AppLIcAtioN/X-wAis-sOUrce"),
             Ok(APPLICATION_X_WAIS_SOURCE)
         );
     }
@@ -94877,7 +94885,7 @@ pub mod constants {
             Ok(APPLICATION_X_WINGZ)
         );
         assert_eq!(
-            crate::Mime::parse("ApplICAtIon/X-wiNGZ"),
+            crate::Mime::parse("APPlIcaTIon/X-WINgz"),
             Ok(APPLICATION_X_WINGZ)
         );
     }
@@ -94897,7 +94905,7 @@ pub mod constants {
             Ok(APPLICATION_X_X509_CA_CERT)
         );
         assert_eq!(
-            crate::Mime::parse("APplICATIoN/x-x509-CA-ceRT"),
+            crate::Mime::parse("APPLIcATiOn/x-x509-cA-CErT"),
             Ok(APPLICATION_X_X509_CA_CERT)
         );
     }
@@ -94917,7 +94925,7 @@ pub mod constants {
             Ok(APPLICATION_X_XFIG)
         );
         assert_eq!(
-            crate::Mime::parse("APpLICatIOn/x-xFIG"),
+            crate::Mime::parse("APplICation/X-XFIg"),
             Ok(APPLICATION_X_XFIG)
         );
     }
@@ -94937,7 +94945,7 @@ pub mod constants {
             Ok(APPLICATION_X_XPINSTALL)
         );
         assert_eq!(
-            crate::Mime::parse("APPlICatiOn/x-xPInsTaLL"),
+            crate::Mime::parse("APpliCaTion/X-xPiNStAll"),
             Ok(APPLICATION_X_XPINSTALL)
         );
     }
@@ -94953,7 +94961,7 @@ pub mod constants {
     #[test]
     fn application_x_xz_parse() {
         assert_eq!(crate::Mime::parse("application/x-xz"), Ok(APPLICATION_X_XZ));
-        assert_eq!(crate::Mime::parse("aPplicAtION/x-xZ"), Ok(APPLICATION_X_XZ));
+        assert_eq!(crate::Mime::parse("apPlICAtiOn/x-Xz"), Ok(APPLICATION_X_XZ));
     }
 
     /// `application/x400-bp`
@@ -94971,7 +94979,7 @@ pub mod constants {
             Ok(APPLICATION_X400_BP)
         );
         assert_eq!(
-            crate::Mime::parse("apPlIcAtIon/x400-bP"),
+            crate::Mime::parse("ApPlIcaTiON/X400-bp"),
             Ok(APPLICATION_X400_BP)
         );
     }
@@ -94993,7 +95001,7 @@ pub mod constants {
             Ok(APPLICATION_XACML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applicAtIon/xACmL+xmL"),
+            crate::Mime::parse("apPlIcatiON/XacmL+xMl"),
             Ok(APPLICATION_XACML_XML)
         );
     }
@@ -95015,7 +95023,7 @@ pub mod constants {
             Ok(APPLICATION_XCAP_ATT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCaTIOn/XCAP-aTt+XmL"),
+            crate::Mime::parse("aPpLICatION/xcAp-AtT+Xml"),
             Ok(APPLICATION_XCAP_ATT_XML)
         );
     }
@@ -95037,7 +95045,7 @@ pub mod constants {
             Ok(APPLICATION_XCAP_CAPS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APplIcAtION/XCAP-cApS+xml"),
+            crate::Mime::parse("ApPlICATION/xcAp-caps+xML"),
             Ok(APPLICATION_XCAP_CAPS_XML)
         );
     }
@@ -95059,7 +95067,7 @@ pub mod constants {
             Ok(APPLICATION_XCAP_DIFF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPLiCaTiOn/xcaP-dIff+xML"),
+            crate::Mime::parse("aPpLiCation/XcAp-DiFF+xmL"),
             Ok(APPLICATION_XCAP_DIFF_XML)
         );
     }
@@ -95081,7 +95089,7 @@ pub mod constants {
             Ok(APPLICATION_XCAP_EL_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLicaTIOn/XCAP-El+xmL"),
+            crate::Mime::parse("appLICatION/xCaP-eL+xml"),
             Ok(APPLICATION_XCAP_EL_XML)
         );
     }
@@ -95103,7 +95111,7 @@ pub mod constants {
             Ok(APPLICATION_XCAP_ERROR_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplIcAtION/xcap-erROR+XmL"),
+            crate::Mime::parse("ApPlICAtion/xcaP-ErRoR+XML"),
             Ok(APPLICATION_XCAP_ERROR_XML)
         );
     }
@@ -95125,7 +95133,7 @@ pub mod constants {
             Ok(APPLICATION_XCAP_NS_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLicATiON/XcAp-nS+Xml"),
+            crate::Mime::parse("apPLiCAtIoN/xcAP-ns+xml"),
             Ok(APPLICATION_XCAP_NS_XML)
         );
     }
@@ -95149,7 +95157,7 @@ pub mod constants {
             Ok(APPLICATION_XCON_CONFERENCE_INFO_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applIcatiOn/xCON-coNFEREncE-INFO+xML"),
+            crate::Mime::parse("AppliCaTiON/XcoN-CONfeRENCE-inFO+xml"),
             Ok(APPLICATION_XCON_CONFERENCE_INFO_XML)
         );
     }
@@ -95173,7 +95181,7 @@ pub mod constants {
             Ok(APPLICATION_XCON_CONFERENCE_INFO_DIFF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("applICatiON/xcoN-cOnFeRENce-Info-Diff+xmL"),
+            crate::Mime::parse("APpliCATion/XcOn-cONFerENce-iNfo-DifF+XmL"),
             Ok(APPLICATION_XCON_CONFERENCE_INFO_DIFF_XML)
         );
     }
@@ -95195,7 +95203,7 @@ pub mod constants {
             Ok(APPLICATION_XENC_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPpLICatION/XENc+Xml"),
+            crate::Mime::parse("APplICATION/XEnc+XMl"),
             Ok(APPLICATION_XENC_XML)
         );
     }
@@ -95217,7 +95225,7 @@ pub mod constants {
             Ok(APPLICATION_XHTML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("APPlIcATion/xhTML+xmL"),
+            crate::Mime::parse("ApPLicaTioN/XHtmL+XML"),
             Ok(APPLICATION_XHTML_XML)
         );
     }
@@ -95239,7 +95247,7 @@ pub mod constants {
             Ok(APPLICATION_XLIFF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPLiCATIOn/xliff+XmL"),
+            crate::Mime::parse("aPPLICation/xlIfF+xml"),
             Ok(APPLICATION_XLIFF_XML)
         );
     }
@@ -95255,7 +95263,7 @@ pub mod constants {
     #[test]
     fn application_xml_parse() {
         assert_eq!(crate::Mime::parse("application/xml"), Ok(APPLICATION_XML));
-        assert_eq!(crate::Mime::parse("ApplICatiOn/xml"), Ok(APPLICATION_XML));
+        assert_eq!(crate::Mime::parse("APpliCaTion/XML"), Ok(APPLICATION_XML));
     }
 
     /// `application/xml-dtd`
@@ -95273,7 +95281,7 @@ pub mod constants {
             Ok(APPLICATION_XML_DTD)
         );
         assert_eq!(
-            crate::Mime::parse("APPLIcaTiOn/XML-dTD"),
+            crate::Mime::parse("AppLiCatION/xML-dTd"),
             Ok(APPLICATION_XML_DTD)
         );
     }
@@ -95295,7 +95303,7 @@ pub mod constants {
             Ok(APPLICATION_XML_EXTERNAL_PARSED_ENTITY)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlIcATIon/XML-EXTerNAl-pARSED-entiTY"),
+            crate::Mime::parse("ApPLIcaTION/XML-eXTernAL-PARsed-ENtiTy"),
             Ok(APPLICATION_XML_EXTERNAL_PARSED_ENTITY)
         );
     }
@@ -95317,7 +95325,7 @@ pub mod constants {
             Ok(APPLICATION_XML_PATCH_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPliCAtION/xmL-pAtcH+XMl"),
+            crate::Mime::parse("aPPlICAtioN/xMl-PaTCh+xmL"),
             Ok(APPLICATION_XML_PATCH_XML)
         );
     }
@@ -95339,7 +95347,7 @@ pub mod constants {
             Ok(APPLICATION_XMPP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLIcaTIon/XMpP+xML"),
+            crate::Mime::parse("AppLIcatIOn/XmPP+xML"),
             Ok(APPLICATION_XMPP_XML)
         );
     }
@@ -95361,7 +95369,7 @@ pub mod constants {
             Ok(APPLICATION_XOP_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLICaTIOn/Xop+xMl"),
+            crate::Mime::parse("APpLICatIon/xOp+XMl"),
             Ok(APPLICATION_XOP_XML)
         );
     }
@@ -95383,7 +95391,7 @@ pub mod constants {
             Ok(APPLICATION_XSLT_XML)
         );
         assert_eq!(
-            crate::Mime::parse("aPPlIcATIon/XSLT+xml"),
+            crate::Mime::parse("ApPLIcaTION/xslt+xmL"),
             Ok(APPLICATION_XSLT_XML)
         );
     }
@@ -95405,7 +95413,7 @@ pub mod constants {
             Ok(APPLICATION_XSPF_XML)
         );
         assert_eq!(
-            crate::Mime::parse("AppLiCatION/xSpf+xML"),
+            crate::Mime::parse("aPplICATiOn/xsPF+xML"),
             Ok(APPLICATION_XSPF_XML)
         );
     }
@@ -95427,7 +95435,7 @@ pub mod constants {
             Ok(APPLICATION_XV_XML)
         );
         assert_eq!(
-            crate::Mime::parse("apPLIcaTIon/xv+xmL"),
+            crate::Mime::parse("AppLIcaTioN/xV+XMl"),
             Ok(APPLICATION_XV_XML)
         );
     }
@@ -95443,7 +95451,7 @@ pub mod constants {
     #[test]
     fn application_yang_parse() {
         assert_eq!(crate::Mime::parse("application/yang"), Ok(APPLICATION_YANG));
-        assert_eq!(crate::Mime::parse("aPPlicaTIoN/YAnG"), Ok(APPLICATION_YANG));
+        assert_eq!(crate::Mime::parse("appLIcATIOn/yanG"), Ok(APPLICATION_YANG));
     }
 
     /// `application/yang-data+json`
@@ -95463,7 +95471,7 @@ pub mod constants {
             Ok(APPLICATION_YANG_DATA_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("appLiCAtiOn/Yang-DATA+JsON"),
+            crate::Mime::parse("aPPliCatIon/yANG-dAtA+jsoN"),
             Ok(APPLICATION_YANG_DATA_JSON)
         );
     }
@@ -95485,7 +95493,7 @@ pub mod constants {
             Ok(APPLICATION_YANG_DATA_XML)
         );
         assert_eq!(
-            crate::Mime::parse("appLicatioN/yANG-DaTa+XmL"),
+            crate::Mime::parse("applicAtiON/YAnG-DAtA+xMl"),
             Ok(APPLICATION_YANG_DATA_XML)
         );
     }
@@ -95507,7 +95515,7 @@ pub mod constants {
             Ok(APPLICATION_YANG_PATCH_JSON)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICATION/YanG-PAtcH+jSoN"),
+            crate::Mime::parse("APPLICATIon/yANg-PatCh+JsOn"),
             Ok(APPLICATION_YANG_PATCH_JSON)
         );
     }
@@ -95529,7 +95537,7 @@ pub mod constants {
             Ok(APPLICATION_YANG_PATCH_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApPlICaTION/YAng-pATcH+XmL"),
+            crate::Mime::parse("APpLICAtIOn/yaNG-PATcH+xml"),
             Ok(APPLICATION_YANG_PATCH_XML)
         );
     }
@@ -95551,7 +95559,7 @@ pub mod constants {
             Ok(APPLICATION_YIN_XML)
         );
         assert_eq!(
-            crate::Mime::parse("ApplicaTion/YIN+XMl"),
+            crate::Mime::parse("appLicatION/YIn+XmL"),
             Ok(APPLICATION_YIN_XML)
         );
     }
@@ -95567,7 +95575,7 @@ pub mod constants {
     #[test]
     fn application_zip_parse() {
         assert_eq!(crate::Mime::parse("application/zip"), Ok(APPLICATION_ZIP));
-        assert_eq!(crate::Mime::parse("aPpLIcAtiOn/zIp"), Ok(APPLICATION_ZIP));
+        assert_eq!(crate::Mime::parse("ApPliCaTiOn/ZIP"), Ok(APPLICATION_ZIP));
     }
 
     /// `application/zlib`
@@ -95581,7 +95589,7 @@ pub mod constants {
     #[test]
     fn application_zlib_parse() {
         assert_eq!(crate::Mime::parse("application/zlib"), Ok(APPLICATION_ZLIB));
-        assert_eq!(crate::Mime::parse("APPLICaTION/zLiB"), Ok(APPLICATION_ZLIB));
+        assert_eq!(crate::Mime::parse("APpLICAtiOn/zLiB"), Ok(APPLICATION_ZLIB));
     }
 
     /// `application/zstd`
@@ -95595,7 +95603,7 @@ pub mod constants {
     #[test]
     fn application_zstd_parse() {
         assert_eq!(crate::Mime::parse("application/zstd"), Ok(APPLICATION_ZSTD));
-        assert_eq!(crate::Mime::parse("aPpLICATion/ZSTd"), Ok(APPLICATION_ZSTD));
+        assert_eq!(crate::Mime::parse("APPLicaTION/zsTd"), Ok(APPLICATION_ZSTD));
     }
 
     /// `audio/aac`
@@ -95609,7 +95617,7 @@ pub mod constants {
     #[test]
     fn audio_aac_parse() {
         assert_eq!(crate::Mime::parse("audio/aac"), Ok(AUDIO_AAC));
-        assert_eq!(crate::Mime::parse("auDiO/Aac"), Ok(AUDIO_AAC));
+        assert_eq!(crate::Mime::parse("AuDio/AAc"), Ok(AUDIO_AAC));
     }
 
     /// `audio/ac3`
@@ -95623,7 +95631,7 @@ pub mod constants {
     #[test]
     fn audio_ac3_parse() {
         assert_eq!(crate::Mime::parse("audio/ac3"), Ok(AUDIO_AC3));
-        assert_eq!(crate::Mime::parse("aUDiO/aC3"), Ok(AUDIO_AC3));
+        assert_eq!(crate::Mime::parse("AudIO/ac3"), Ok(AUDIO_AC3));
     }
 
     /// `audio/AMR`
@@ -95637,7 +95645,7 @@ pub mod constants {
     #[test]
     fn audio_amr_parse() {
         assert_eq!(crate::Mime::parse("audio/AMR"), Ok(AUDIO_AMR));
-        assert_eq!(crate::Mime::parse("Audio/Amr"), Ok(AUDIO_AMR));
+        assert_eq!(crate::Mime::parse("auDio/Amr"), Ok(AUDIO_AMR));
     }
 
     /// `audio/AMR-WB`
@@ -95651,7 +95659,7 @@ pub mod constants {
     #[test]
     fn audio_amr_wb_parse() {
         assert_eq!(crate::Mime::parse("audio/AMR-WB"), Ok(AUDIO_AMR_WB));
-        assert_eq!(crate::Mime::parse("aUdio/amr-wB"), Ok(AUDIO_AMR_WB));
+        assert_eq!(crate::Mime::parse("audio/aMr-wb"), Ok(AUDIO_AMR_WB));
     }
 
     /// `audio/annodex`
@@ -95665,7 +95673,7 @@ pub mod constants {
     #[test]
     fn audio_annodex_parse() {
         assert_eq!(crate::Mime::parse("audio/annodex"), Ok(AUDIO_ANNODEX));
-        assert_eq!(crate::Mime::parse("aUdio/AnNodex"), Ok(AUDIO_ANNODEX));
+        assert_eq!(crate::Mime::parse("auDiO/annOdEx"), Ok(AUDIO_ANNODEX));
     }
 
     /// `audio/aptx`
@@ -95679,7 +95687,7 @@ pub mod constants {
     #[test]
     fn audio_aptx_parse() {
         assert_eq!(crate::Mime::parse("audio/aptx"), Ok(AUDIO_APTX));
-        assert_eq!(crate::Mime::parse("AuDiO/aPTX"), Ok(AUDIO_APTX));
+        assert_eq!(crate::Mime::parse("AUdIO/AptX"), Ok(AUDIO_APTX));
     }
 
     /// `audio/asc`
@@ -95693,7 +95701,7 @@ pub mod constants {
     #[test]
     fn audio_asc_parse() {
         assert_eq!(crate::Mime::parse("audio/asc"), Ok(AUDIO_ASC));
-        assert_eq!(crate::Mime::parse("AudIO/asc"), Ok(AUDIO_ASC));
+        assert_eq!(crate::Mime::parse("Audio/asC"), Ok(AUDIO_ASC));
     }
 
     /// `audio/ATRAC-ADVANCED-LOSSLESS`
@@ -95713,7 +95721,7 @@ pub mod constants {
             Ok(AUDIO_ATRAC_ADVANCED_LOSSLESS)
         );
         assert_eq!(
-            crate::Mime::parse("AudIo/atrAC-ADVAnceD-lOSsLEss"),
+            crate::Mime::parse("audio/ATRAC-advAncED-LOsslESs"),
             Ok(AUDIO_ATRAC_ADVANCED_LOSSLESS)
         );
     }
@@ -95729,7 +95737,7 @@ pub mod constants {
     #[test]
     fn audio_atrac_x_parse() {
         assert_eq!(crate::Mime::parse("audio/ATRAC-X"), Ok(AUDIO_ATRAC_X));
-        assert_eq!(crate::Mime::parse("aUDio/ATrAC-X"), Ok(AUDIO_ATRAC_X));
+        assert_eq!(crate::Mime::parse("aUDIo/AtRAc-X"), Ok(AUDIO_ATRAC_X));
     }
 
     /// `audio/ATRAC3`
@@ -95743,7 +95751,7 @@ pub mod constants {
     #[test]
     fn audio_atrac3_parse() {
         assert_eq!(crate::Mime::parse("audio/ATRAC3"), Ok(AUDIO_ATRAC3));
-        assert_eq!(crate::Mime::parse("AudIo/AtrAc3"), Ok(AUDIO_ATRAC3));
+        assert_eq!(crate::Mime::parse("aUDio/atRAc3"), Ok(AUDIO_ATRAC3));
     }
 
     /// `audio/basic`
@@ -95757,7 +95765,7 @@ pub mod constants {
     #[test]
     fn audio_basic_parse() {
         assert_eq!(crate::Mime::parse("audio/basic"), Ok(AUDIO_BASIC));
-        assert_eq!(crate::Mime::parse("AUdIo/baSIc"), Ok(AUDIO_BASIC));
+        assert_eq!(crate::Mime::parse("audiO/basic"), Ok(AUDIO_BASIC));
     }
 
     /// `audio/BV16`
@@ -95771,7 +95779,7 @@ pub mod constants {
     #[test]
     fn audio_bv16_parse() {
         assert_eq!(crate::Mime::parse("audio/BV16"), Ok(AUDIO_BV16));
-        assert_eq!(crate::Mime::parse("audio/bV16"), Ok(AUDIO_BV16));
+        assert_eq!(crate::Mime::parse("aUdIO/BV16"), Ok(AUDIO_BV16));
     }
 
     /// `audio/BV32`
@@ -95785,7 +95793,7 @@ pub mod constants {
     #[test]
     fn audio_bv32_parse() {
         assert_eq!(crate::Mime::parse("audio/BV32"), Ok(AUDIO_BV32));
-        assert_eq!(crate::Mime::parse("AUDIO/bV32"), Ok(AUDIO_BV32));
+        assert_eq!(crate::Mime::parse("AUdIO/Bv32"), Ok(AUDIO_BV32));
     }
 
     /// `audio/clearmode`
@@ -95799,7 +95807,7 @@ pub mod constants {
     #[test]
     fn audio_clearmode_parse() {
         assert_eq!(crate::Mime::parse("audio/clearmode"), Ok(AUDIO_CLEARMODE));
-        assert_eq!(crate::Mime::parse("AudIO/clEarMode"), Ok(AUDIO_CLEARMODE));
+        assert_eq!(crate::Mime::parse("AUdiO/cLearMoDe"), Ok(AUDIO_CLEARMODE));
     }
 
     /// `audio/CN`
@@ -95813,7 +95821,7 @@ pub mod constants {
     #[test]
     fn audio_cn_parse() {
         assert_eq!(crate::Mime::parse("audio/CN"), Ok(AUDIO_CN));
-        assert_eq!(crate::Mime::parse("AuDio/cn"), Ok(AUDIO_CN));
+        assert_eq!(crate::Mime::parse("aUdio/Cn"), Ok(AUDIO_CN));
     }
 
     /// `audio/csound`
@@ -95827,7 +95835,7 @@ pub mod constants {
     #[test]
     fn audio_csound_parse() {
         assert_eq!(crate::Mime::parse("audio/csound"), Ok(AUDIO_CSOUND));
-        assert_eq!(crate::Mime::parse("auDio/CsOund"), Ok(AUDIO_CSOUND));
+        assert_eq!(crate::Mime::parse("auDiO/csoUNd"), Ok(AUDIO_CSOUND));
     }
 
     /// `audio/DAT12`
@@ -95841,7 +95849,7 @@ pub mod constants {
     #[test]
     fn audio_dat12_parse() {
         assert_eq!(crate::Mime::parse("audio/DAT12"), Ok(AUDIO_DAT12));
-        assert_eq!(crate::Mime::parse("aUDiO/Dat12"), Ok(AUDIO_DAT12));
+        assert_eq!(crate::Mime::parse("AUDio/dAT12"), Ok(AUDIO_DAT12));
     }
 
     /// `audio/dls`
@@ -95855,7 +95863,7 @@ pub mod constants {
     #[test]
     fn audio_dls_parse() {
         assert_eq!(crate::Mime::parse("audio/dls"), Ok(AUDIO_DLS));
-        assert_eq!(crate::Mime::parse("AUDiO/dLS"), Ok(AUDIO_DLS));
+        assert_eq!(crate::Mime::parse("AUdIO/Dls"), Ok(AUDIO_DLS));
     }
 
     /// `audio/dsr-es201108`
@@ -95873,7 +95881,7 @@ pub mod constants {
             Ok(AUDIO_DSR_ES201108)
         );
         assert_eq!(
-            crate::Mime::parse("AUdiO/dSR-es201108"),
+            crate::Mime::parse("AudIO/dsR-eS201108"),
             Ok(AUDIO_DSR_ES201108)
         );
     }
@@ -95893,7 +95901,7 @@ pub mod constants {
             Ok(AUDIO_DSR_ES202050)
         );
         assert_eq!(
-            crate::Mime::parse("auDiO/dSR-ES202050"),
+            crate::Mime::parse("AUdIO/DSR-es202050"),
             Ok(AUDIO_DSR_ES202050)
         );
     }
@@ -95913,7 +95921,7 @@ pub mod constants {
             Ok(AUDIO_DSR_ES202211)
         );
         assert_eq!(
-            crate::Mime::parse("audIO/DSr-ES202211"),
+            crate::Mime::parse("AUDIo/DSR-ES202211"),
             Ok(AUDIO_DSR_ES202211)
         );
     }
@@ -95933,7 +95941,7 @@ pub mod constants {
             Ok(AUDIO_DSR_ES202212)
         );
         assert_eq!(
-            crate::Mime::parse("AUDiO/dsR-Es202212"),
+            crate::Mime::parse("AudiO/DsR-es202212"),
             Ok(AUDIO_DSR_ES202212)
         );
     }
@@ -95949,7 +95957,7 @@ pub mod constants {
     #[test]
     fn audio_dv_parse() {
         assert_eq!(crate::Mime::parse("audio/DV"), Ok(AUDIO_DV));
-        assert_eq!(crate::Mime::parse("AudIO/dv"), Ok(AUDIO_DV));
+        assert_eq!(crate::Mime::parse("AUdiO/dv"), Ok(AUDIO_DV));
     }
 
     /// `audio/DVI4`
@@ -95963,7 +95971,7 @@ pub mod constants {
     #[test]
     fn audio_dvi4_parse() {
         assert_eq!(crate::Mime::parse("audio/DVI4"), Ok(AUDIO_DVI4));
-        assert_eq!(crate::Mime::parse("AUdiO/dvi4"), Ok(AUDIO_DVI4));
+        assert_eq!(crate::Mime::parse("AUdio/dVI4"), Ok(AUDIO_DVI4));
     }
 
     /// `audio/eac3`
@@ -95977,7 +95985,7 @@ pub mod constants {
     #[test]
     fn audio_eac3_parse() {
         assert_eq!(crate::Mime::parse("audio/eac3"), Ok(AUDIO_EAC3));
-        assert_eq!(crate::Mime::parse("aUDiO/EAc3"), Ok(AUDIO_EAC3));
+        assert_eq!(crate::Mime::parse("AUDIo/eac3"), Ok(AUDIO_EAC3));
     }
 
     /// `audio/encaprtp`
@@ -95991,7 +95999,7 @@ pub mod constants {
     #[test]
     fn audio_encaprtp_parse() {
         assert_eq!(crate::Mime::parse("audio/encaprtp"), Ok(AUDIO_ENCAPRTP));
-        assert_eq!(crate::Mime::parse("audIo/eNcaPRtp"), Ok(AUDIO_ENCAPRTP));
+        assert_eq!(crate::Mime::parse("aUdIo/ENcaPRtp"), Ok(AUDIO_ENCAPRTP));
     }
 
     /// `audio/EVRC`
@@ -96005,7 +96013,7 @@ pub mod constants {
     #[test]
     fn audio_evrc_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRC"), Ok(AUDIO_EVRC));
-        assert_eq!(crate::Mime::parse("AUdio/EVrC"), Ok(AUDIO_EVRC));
+        assert_eq!(crate::Mime::parse("auDIo/evRC"), Ok(AUDIO_EVRC));
     }
 
     /// `audio/EVRC-QCP`
@@ -96019,7 +96027,7 @@ pub mod constants {
     #[test]
     fn audio_evrc_qcp_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRC-QCP"), Ok(AUDIO_EVRC_QCP));
-        assert_eq!(crate::Mime::parse("auDIO/EVRC-QCp"), Ok(AUDIO_EVRC_QCP));
+        assert_eq!(crate::Mime::parse("AuDIO/eVRc-qCp"), Ok(AUDIO_EVRC_QCP));
     }
 
     /// `audio/EVRC0`
@@ -96033,7 +96041,7 @@ pub mod constants {
     #[test]
     fn audio_evrc0_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRC0"), Ok(AUDIO_EVRC0));
-        assert_eq!(crate::Mime::parse("AuDiO/evRC0"), Ok(AUDIO_EVRC0));
+        assert_eq!(crate::Mime::parse("AudiO/eVrc0"), Ok(AUDIO_EVRC0));
     }
 
     /// `audio/EVRC1`
@@ -96047,7 +96055,7 @@ pub mod constants {
     #[test]
     fn audio_evrc1_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRC1"), Ok(AUDIO_EVRC1));
-        assert_eq!(crate::Mime::parse("AudiO/evRC1"), Ok(AUDIO_EVRC1));
+        assert_eq!(crate::Mime::parse("AudiO/EVrC1"), Ok(AUDIO_EVRC1));
     }
 
     /// `audio/EVRCB`
@@ -96061,7 +96069,7 @@ pub mod constants {
     #[test]
     fn audio_evrcb_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRCB"), Ok(AUDIO_EVRCB));
-        assert_eq!(crate::Mime::parse("AuDiO/evrcB"), Ok(AUDIO_EVRCB));
+        assert_eq!(crate::Mime::parse("Audio/EVrcB"), Ok(AUDIO_EVRCB));
     }
 
     /// `audio/EVRCB0`
@@ -96075,7 +96083,7 @@ pub mod constants {
     #[test]
     fn audio_evrcb0_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRCB0"), Ok(AUDIO_EVRCB0));
-        assert_eq!(crate::Mime::parse("AudIO/EVrcb0"), Ok(AUDIO_EVRCB0));
+        assert_eq!(crate::Mime::parse("AUDIo/evrcB0"), Ok(AUDIO_EVRCB0));
     }
 
     /// `audio/EVRCB1`
@@ -96089,7 +96097,7 @@ pub mod constants {
     #[test]
     fn audio_evrcb1_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRCB1"), Ok(AUDIO_EVRCB1));
-        assert_eq!(crate::Mime::parse("auDiO/evRCb1"), Ok(AUDIO_EVRCB1));
+        assert_eq!(crate::Mime::parse("AudiO/eVrCb1"), Ok(AUDIO_EVRCB1));
     }
 
     /// `audio/EVRCNW`
@@ -96103,7 +96111,7 @@ pub mod constants {
     #[test]
     fn audio_evrcnw_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRCNW"), Ok(AUDIO_EVRCNW));
-        assert_eq!(crate::Mime::parse("aUdIO/EvrCnW"), Ok(AUDIO_EVRCNW));
+        assert_eq!(crate::Mime::parse("AUDio/eVRcNw"), Ok(AUDIO_EVRCNW));
     }
 
     /// `audio/EVRCNW0`
@@ -96117,7 +96125,7 @@ pub mod constants {
     #[test]
     fn audio_evrcnw0_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRCNW0"), Ok(AUDIO_EVRCNW0));
-        assert_eq!(crate::Mime::parse("AuDio/eVrCnw0"), Ok(AUDIO_EVRCNW0));
+        assert_eq!(crate::Mime::parse("aUdIo/evRcnW0"), Ok(AUDIO_EVRCNW0));
     }
 
     /// `audio/EVRCNW1`
@@ -96131,7 +96139,7 @@ pub mod constants {
     #[test]
     fn audio_evrcnw1_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRCNW1"), Ok(AUDIO_EVRCNW1));
-        assert_eq!(crate::Mime::parse("auDiO/EvrCNW1"), Ok(AUDIO_EVRCNW1));
+        assert_eq!(crate::Mime::parse("AUDio/EVrcNw1"), Ok(AUDIO_EVRCNW1));
     }
 
     /// `audio/EVRCWB`
@@ -96145,7 +96153,7 @@ pub mod constants {
     #[test]
     fn audio_evrcwb_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRCWB"), Ok(AUDIO_EVRCWB));
-        assert_eq!(crate::Mime::parse("aUdIo/eVrcWb"), Ok(AUDIO_EVRCWB));
+        assert_eq!(crate::Mime::parse("aUdIo/EvRcwb"), Ok(AUDIO_EVRCWB));
     }
 
     /// `audio/EVRCWB0`
@@ -96159,7 +96167,7 @@ pub mod constants {
     #[test]
     fn audio_evrcwb0_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRCWB0"), Ok(AUDIO_EVRCWB0));
-        assert_eq!(crate::Mime::parse("AudiO/evrcWb0"), Ok(AUDIO_EVRCWB0));
+        assert_eq!(crate::Mime::parse("AUdio/EvrcWb0"), Ok(AUDIO_EVRCWB0));
     }
 
     /// `audio/EVRCWB1`
@@ -96173,7 +96181,7 @@ pub mod constants {
     #[test]
     fn audio_evrcwb1_parse() {
         assert_eq!(crate::Mime::parse("audio/EVRCWB1"), Ok(AUDIO_EVRCWB1));
-        assert_eq!(crate::Mime::parse("aUdIo/EVrcwB1"), Ok(AUDIO_EVRCWB1));
+        assert_eq!(crate::Mime::parse("aUDIo/eVrCwb1"), Ok(AUDIO_EVRCWB1));
     }
 
     /// `audio/EVS`
@@ -96187,7 +96195,7 @@ pub mod constants {
     #[test]
     fn audio_evs_parse() {
         assert_eq!(crate::Mime::parse("audio/EVS"), Ok(AUDIO_EVS));
-        assert_eq!(crate::Mime::parse("Audio/Evs"), Ok(AUDIO_EVS));
+        assert_eq!(crate::Mime::parse("auDio/EVs"), Ok(AUDIO_EVS));
     }
 
     /// `audio/example`
@@ -96201,7 +96209,7 @@ pub mod constants {
     #[test]
     fn audio_example_parse() {
         assert_eq!(crate::Mime::parse("audio/example"), Ok(AUDIO_EXAMPLE));
-        assert_eq!(crate::Mime::parse("aUDio/eXAmPLe"), Ok(AUDIO_EXAMPLE));
+        assert_eq!(crate::Mime::parse("audIO/EXaMpLe"), Ok(AUDIO_EXAMPLE));
     }
 
     /// `audio/flac`
@@ -96215,7 +96223,7 @@ pub mod constants {
     #[test]
     fn audio_flac_parse() {
         assert_eq!(crate::Mime::parse("audio/flac"), Ok(AUDIO_FLAC));
-        assert_eq!(crate::Mime::parse("AuDio/fLaC"), Ok(AUDIO_FLAC));
+        assert_eq!(crate::Mime::parse("aUdIo/flac"), Ok(AUDIO_FLAC));
     }
 
     /// `audio/flexfec`
@@ -96229,7 +96237,7 @@ pub mod constants {
     #[test]
     fn audio_flexfec_parse() {
         assert_eq!(crate::Mime::parse("audio/flexfec"), Ok(AUDIO_FLEXFEC));
-        assert_eq!(crate::Mime::parse("audio/fleXfeC"), Ok(AUDIO_FLEXFEC));
+        assert_eq!(crate::Mime::parse("aUdio/flEXfEC"), Ok(AUDIO_FLEXFEC));
     }
 
     /// `audio/fwdred`
@@ -96243,7 +96251,7 @@ pub mod constants {
     #[test]
     fn audio_fwdred_parse() {
         assert_eq!(crate::Mime::parse("audio/fwdred"), Ok(AUDIO_FWDRED));
-        assert_eq!(crate::Mime::parse("AuDIo/fwDRED"), Ok(AUDIO_FWDRED));
+        assert_eq!(crate::Mime::parse("aUdiO/FWdrEd"), Ok(AUDIO_FWDRED));
     }
 
     /// `audio/G711-0`
@@ -96257,7 +96265,7 @@ pub mod constants {
     #[test]
     fn audio_g711_0_parse() {
         assert_eq!(crate::Mime::parse("audio/G711-0"), Ok(AUDIO_G711_0));
-        assert_eq!(crate::Mime::parse("auDiO/g711-0"), Ok(AUDIO_G711_0));
+        assert_eq!(crate::Mime::parse("AUdIo/G711-0"), Ok(AUDIO_G711_0));
     }
 
     /// `audio/G719`
@@ -96271,7 +96279,7 @@ pub mod constants {
     #[test]
     fn audio_g719_parse() {
         assert_eq!(crate::Mime::parse("audio/G719"), Ok(AUDIO_G719));
-        assert_eq!(crate::Mime::parse("AUdio/g719"), Ok(AUDIO_G719));
+        assert_eq!(crate::Mime::parse("aUdIo/G719"), Ok(AUDIO_G719));
     }
 
     /// `audio/G722`
@@ -96285,7 +96293,7 @@ pub mod constants {
     #[test]
     fn audio_g722_parse() {
         assert_eq!(crate::Mime::parse("audio/G722"), Ok(AUDIO_G722));
-        assert_eq!(crate::Mime::parse("AUDIo/g722"), Ok(AUDIO_G722));
+        assert_eq!(crate::Mime::parse("aUdiO/G722"), Ok(AUDIO_G722));
     }
 
     /// `audio/G7221`
@@ -96299,7 +96307,7 @@ pub mod constants {
     #[test]
     fn audio_g7221_parse() {
         assert_eq!(crate::Mime::parse("audio/G7221"), Ok(AUDIO_G7221));
-        assert_eq!(crate::Mime::parse("AuDIO/G7221"), Ok(AUDIO_G7221));
+        assert_eq!(crate::Mime::parse("AuDio/G7221"), Ok(AUDIO_G7221));
     }
 
     /// `audio/G723`
@@ -96313,7 +96321,7 @@ pub mod constants {
     #[test]
     fn audio_g723_parse() {
         assert_eq!(crate::Mime::parse("audio/G723"), Ok(AUDIO_G723));
-        assert_eq!(crate::Mime::parse("AUDIo/g723"), Ok(AUDIO_G723));
+        assert_eq!(crate::Mime::parse("aUdio/G723"), Ok(AUDIO_G723));
     }
 
     /// `audio/G726-16`
@@ -96327,7 +96335,7 @@ pub mod constants {
     #[test]
     fn audio_g726_16_parse() {
         assert_eq!(crate::Mime::parse("audio/G726-16"), Ok(AUDIO_G726_16));
-        assert_eq!(crate::Mime::parse("AudIO/G726-16"), Ok(AUDIO_G726_16));
+        assert_eq!(crate::Mime::parse("AUDio/G726-16"), Ok(AUDIO_G726_16));
     }
 
     /// `audio/G726-24`
@@ -96341,7 +96349,7 @@ pub mod constants {
     #[test]
     fn audio_g726_24_parse() {
         assert_eq!(crate::Mime::parse("audio/G726-24"), Ok(AUDIO_G726_24));
-        assert_eq!(crate::Mime::parse("aUdIo/g726-24"), Ok(AUDIO_G726_24));
+        assert_eq!(crate::Mime::parse("audIo/G726-24"), Ok(AUDIO_G726_24));
     }
 
     /// `audio/G726-32`
@@ -96355,7 +96363,7 @@ pub mod constants {
     #[test]
     fn audio_g726_32_parse() {
         assert_eq!(crate::Mime::parse("audio/G726-32"), Ok(AUDIO_G726_32));
-        assert_eq!(crate::Mime::parse("AUDiO/G726-32"), Ok(AUDIO_G726_32));
+        assert_eq!(crate::Mime::parse("AuDIo/g726-32"), Ok(AUDIO_G726_32));
     }
 
     /// `audio/G726-40`
@@ -96383,7 +96391,7 @@ pub mod constants {
     #[test]
     fn audio_g728_parse() {
         assert_eq!(crate::Mime::parse("audio/G728"), Ok(AUDIO_G728));
-        assert_eq!(crate::Mime::parse("auDiO/g728"), Ok(AUDIO_G728));
+        assert_eq!(crate::Mime::parse("AUdIo/G728"), Ok(AUDIO_G728));
     }
 
     /// `audio/G729`
@@ -96397,7 +96405,7 @@ pub mod constants {
     #[test]
     fn audio_g729_parse() {
         assert_eq!(crate::Mime::parse("audio/G729"), Ok(AUDIO_G729));
-        assert_eq!(crate::Mime::parse("AUdIO/G729"), Ok(AUDIO_G729));
+        assert_eq!(crate::Mime::parse("AUDiO/g729"), Ok(AUDIO_G729));
     }
 
     /// `audio/G7291`
@@ -96411,7 +96419,7 @@ pub mod constants {
     #[test]
     fn audio_g7291_parse() {
         assert_eq!(crate::Mime::parse("audio/G7291"), Ok(AUDIO_G7291));
-        assert_eq!(crate::Mime::parse("audIo/g7291"), Ok(AUDIO_G7291));
+        assert_eq!(crate::Mime::parse("audiO/G7291"), Ok(AUDIO_G7291));
     }
 
     /// `audio/G729D`
@@ -96425,7 +96433,7 @@ pub mod constants {
     #[test]
     fn audio_g729d_parse() {
         assert_eq!(crate::Mime::parse("audio/G729D"), Ok(AUDIO_G729D));
-        assert_eq!(crate::Mime::parse("audIo/g729d"), Ok(AUDIO_G729D));
+        assert_eq!(crate::Mime::parse("aUdIo/g729D"), Ok(AUDIO_G729D));
     }
 
     /// `audio/G729E`
@@ -96439,7 +96447,7 @@ pub mod constants {
     #[test]
     fn audio_g729e_parse() {
         assert_eq!(crate::Mime::parse("audio/G729E"), Ok(AUDIO_G729E));
-        assert_eq!(crate::Mime::parse("auDIo/G729e"), Ok(AUDIO_G729E));
+        assert_eq!(crate::Mime::parse("auDIO/g729E"), Ok(AUDIO_G729E));
     }
 
     /// `audio/GSM`
@@ -96453,7 +96461,7 @@ pub mod constants {
     #[test]
     fn audio_gsm_parse() {
         assert_eq!(crate::Mime::parse("audio/GSM"), Ok(AUDIO_GSM));
-        assert_eq!(crate::Mime::parse("AuDIo/GsM"), Ok(AUDIO_GSM));
+        assert_eq!(crate::Mime::parse("auDiO/GsM"), Ok(AUDIO_GSM));
     }
 
     /// `audio/GSM-EFR`
@@ -96467,7 +96475,7 @@ pub mod constants {
     #[test]
     fn audio_gsm_efr_parse() {
         assert_eq!(crate::Mime::parse("audio/GSM-EFR"), Ok(AUDIO_GSM_EFR));
-        assert_eq!(crate::Mime::parse("aUdIo/Gsm-eFr"), Ok(AUDIO_GSM_EFR));
+        assert_eq!(crate::Mime::parse("auDio/gSm-eFr"), Ok(AUDIO_GSM_EFR));
     }
 
     /// `audio/GSM-HR-08`
@@ -96481,7 +96489,7 @@ pub mod constants {
     #[test]
     fn audio_gsm_hr_08_parse() {
         assert_eq!(crate::Mime::parse("audio/GSM-HR-08"), Ok(AUDIO_GSM_HR_08));
-        assert_eq!(crate::Mime::parse("auDiO/Gsm-Hr-08"), Ok(AUDIO_GSM_HR_08));
+        assert_eq!(crate::Mime::parse("AuDio/Gsm-hr-08"), Ok(AUDIO_GSM_HR_08));
     }
 
     /// `audio/iLBC`
@@ -96495,7 +96503,7 @@ pub mod constants {
     #[test]
     fn audio_i_lbc_parse() {
         assert_eq!(crate::Mime::parse("audio/iLBC"), Ok(AUDIO_I_LBC));
-        assert_eq!(crate::Mime::parse("audio/ILbc"), Ok(AUDIO_I_LBC));
+        assert_eq!(crate::Mime::parse("aUDIo/iLBC"), Ok(AUDIO_I_LBC));
     }
 
     /// `audio/ip-mr_v2.5`
@@ -96509,7 +96517,7 @@ pub mod constants {
     #[test]
     fn audio_ip_mr_v2_5_parse() {
         assert_eq!(crate::Mime::parse("audio/ip-mr_v2.5"), Ok(AUDIO_IP_MR_V2_5));
-        assert_eq!(crate::Mime::parse("aUDIO/iP-Mr_v2.5"), Ok(AUDIO_IP_MR_V2_5));
+        assert_eq!(crate::Mime::parse("AUdIO/iP-Mr_V2.5"), Ok(AUDIO_IP_MR_V2_5));
     }
 
     /// `audio/L16`
@@ -96523,7 +96531,7 @@ pub mod constants {
     #[test]
     fn audio_l16_parse() {
         assert_eq!(crate::Mime::parse("audio/L16"), Ok(AUDIO_L16));
-        assert_eq!(crate::Mime::parse("AuDio/L16"), Ok(AUDIO_L16));
+        assert_eq!(crate::Mime::parse("aUDio/l16"), Ok(AUDIO_L16));
     }
 
     /// `audio/L20`
@@ -96537,7 +96545,7 @@ pub mod constants {
     #[test]
     fn audio_l20_parse() {
         assert_eq!(crate::Mime::parse("audio/L20"), Ok(AUDIO_L20));
-        assert_eq!(crate::Mime::parse("AuDIo/l20"), Ok(AUDIO_L20));
+        assert_eq!(crate::Mime::parse("audio/L20"), Ok(AUDIO_L20));
     }
 
     /// `audio/L24`
@@ -96551,7 +96559,7 @@ pub mod constants {
     #[test]
     fn audio_l24_parse() {
         assert_eq!(crate::Mime::parse("audio/L24"), Ok(AUDIO_L24));
-        assert_eq!(crate::Mime::parse("AUdIo/L24"), Ok(AUDIO_L24));
+        assert_eq!(crate::Mime::parse("aUDiO/L24"), Ok(AUDIO_L24));
     }
 
     /// `audio/L8`
@@ -96565,7 +96573,7 @@ pub mod constants {
     #[test]
     fn audio_l8_parse() {
         assert_eq!(crate::Mime::parse("audio/L8"), Ok(AUDIO_L8));
-        assert_eq!(crate::Mime::parse("aUDIO/L8"), Ok(AUDIO_L8));
+        assert_eq!(crate::Mime::parse("AUDIO/l8"), Ok(AUDIO_L8));
     }
 
     /// `audio/LPC`
@@ -96579,7 +96587,7 @@ pub mod constants {
     #[test]
     fn audio_lpc_parse() {
         assert_eq!(crate::Mime::parse("audio/LPC"), Ok(AUDIO_LPC));
-        assert_eq!(crate::Mime::parse("AudIo/lpc"), Ok(AUDIO_LPC));
+        assert_eq!(crate::Mime::parse("aUdio/lPc"), Ok(AUDIO_LPC));
     }
 
     /// `audio/MELP`
@@ -96593,7 +96601,7 @@ pub mod constants {
     #[test]
     fn audio_melp_parse() {
         assert_eq!(crate::Mime::parse("audio/MELP"), Ok(AUDIO_MELP));
-        assert_eq!(crate::Mime::parse("auDio/mELP"), Ok(AUDIO_MELP));
+        assert_eq!(crate::Mime::parse("audIO/MElP"), Ok(AUDIO_MELP));
     }
 
     /// `audio/MELP1200`
@@ -96607,7 +96615,7 @@ pub mod constants {
     #[test]
     fn audio_melp1200_parse() {
         assert_eq!(crate::Mime::parse("audio/MELP1200"), Ok(AUDIO_MELP1200));
-        assert_eq!(crate::Mime::parse("AUdIo/mELP1200"), Ok(AUDIO_MELP1200));
+        assert_eq!(crate::Mime::parse("aUdIO/MeLp1200"), Ok(AUDIO_MELP1200));
     }
 
     /// `audio/MELP2400`
@@ -96621,7 +96629,7 @@ pub mod constants {
     #[test]
     fn audio_melp2400_parse() {
         assert_eq!(crate::Mime::parse("audio/MELP2400"), Ok(AUDIO_MELP2400));
-        assert_eq!(crate::Mime::parse("AuDiO/melP2400"), Ok(AUDIO_MELP2400));
+        assert_eq!(crate::Mime::parse("AUdio/MeLp2400"), Ok(AUDIO_MELP2400));
     }
 
     /// `audio/MELP600`
@@ -96635,7 +96643,7 @@ pub mod constants {
     #[test]
     fn audio_melp600_parse() {
         assert_eq!(crate::Mime::parse("audio/MELP600"), Ok(AUDIO_MELP600));
-        assert_eq!(crate::Mime::parse("AUdiO/melp600"), Ok(AUDIO_MELP600));
+        assert_eq!(crate::Mime::parse("Audio/mElP600"), Ok(AUDIO_MELP600));
     }
 
     /// `audio/mhas`
@@ -96649,7 +96657,7 @@ pub mod constants {
     #[test]
     fn audio_mhas_parse() {
         assert_eq!(crate::Mime::parse("audio/mhas"), Ok(AUDIO_MHAS));
-        assert_eq!(crate::Mime::parse("AUDiO/MHAS"), Ok(AUDIO_MHAS));
+        assert_eq!(crate::Mime::parse("AUDIO/mHaS"), Ok(AUDIO_MHAS));
     }
 
     /// `audio/mobile-xmf`
@@ -96663,7 +96671,7 @@ pub mod constants {
     #[test]
     fn audio_mobile_xmf_parse() {
         assert_eq!(crate::Mime::parse("audio/mobile-xmf"), Ok(AUDIO_MOBILE_XMF));
-        assert_eq!(crate::Mime::parse("aUdIO/mOBiLE-xmF"), Ok(AUDIO_MOBILE_XMF));
+        assert_eq!(crate::Mime::parse("AudIO/MObilE-xMF"), Ok(AUDIO_MOBILE_XMF));
     }
 
     /// `audio/mp4`
@@ -96677,7 +96685,7 @@ pub mod constants {
     #[test]
     fn audio_mp4_parse() {
         assert_eq!(crate::Mime::parse("audio/mp4"), Ok(AUDIO_MP4));
-        assert_eq!(crate::Mime::parse("auDIo/mp4"), Ok(AUDIO_MP4));
+        assert_eq!(crate::Mime::parse("aUdiO/mP4"), Ok(AUDIO_MP4));
     }
 
     /// `audio/MP4A-LATM`
@@ -96691,7 +96699,7 @@ pub mod constants {
     #[test]
     fn audio_mp4a_latm_parse() {
         assert_eq!(crate::Mime::parse("audio/MP4A-LATM"), Ok(AUDIO_MP4A_LATM));
-        assert_eq!(crate::Mime::parse("auDIo/mp4A-LaTM"), Ok(AUDIO_MP4A_LATM));
+        assert_eq!(crate::Mime::parse("audiO/MP4A-latM"), Ok(AUDIO_MP4A_LATM));
     }
 
     /// `audio/MPA`
@@ -96705,7 +96713,7 @@ pub mod constants {
     #[test]
     fn audio_mpa_parse() {
         assert_eq!(crate::Mime::parse("audio/MPA"), Ok(AUDIO_MPA));
-        assert_eq!(crate::Mime::parse("audIo/mpA"), Ok(AUDIO_MPA));
+        assert_eq!(crate::Mime::parse("aUdiO/mpa"), Ok(AUDIO_MPA));
     }
 
     /// `audio/mpa-robust`
@@ -96719,7 +96727,7 @@ pub mod constants {
     #[test]
     fn audio_mpa_robust_parse() {
         assert_eq!(crate::Mime::parse("audio/mpa-robust"), Ok(AUDIO_MPA_ROBUST));
-        assert_eq!(crate::Mime::parse("AudiO/MpA-ROBUSt"), Ok(AUDIO_MPA_ROBUST));
+        assert_eq!(crate::Mime::parse("AUDiO/MPA-RobuSt"), Ok(AUDIO_MPA_ROBUST));
     }
 
     /// `audio/mpeg`
@@ -96733,7 +96741,7 @@ pub mod constants {
     #[test]
     fn audio_mpeg_parse() {
         assert_eq!(crate::Mime::parse("audio/mpeg"), Ok(AUDIO_MPEG));
-        assert_eq!(crate::Mime::parse("auDio/MPEg"), Ok(AUDIO_MPEG));
+        assert_eq!(crate::Mime::parse("aUDIO/mpeG"), Ok(AUDIO_MPEG));
     }
 
     /// `audio/mpeg4-generic`
@@ -96751,7 +96759,7 @@ pub mod constants {
             Ok(AUDIO_MPEG4_GENERIC)
         );
         assert_eq!(
-            crate::Mime::parse("audIo/MPeg4-GENerIC"),
+            crate::Mime::parse("auDIo/mPEG4-gENeRiC"),
             Ok(AUDIO_MPEG4_GENERIC)
         );
     }
@@ -96767,7 +96775,7 @@ pub mod constants {
     #[test]
     fn audio_mpegurl_parse() {
         assert_eq!(crate::Mime::parse("audio/mpegurl"), Ok(AUDIO_MPEGURL));
-        assert_eq!(crate::Mime::parse("aUdIO/MPEGUrL"), Ok(AUDIO_MPEGURL));
+        assert_eq!(crate::Mime::parse("AuDIO/MpEGURl"), Ok(AUDIO_MPEGURL));
     }
 
     /// `audio/ogg`
@@ -96781,7 +96789,7 @@ pub mod constants {
     #[test]
     fn audio_ogg_parse() {
         assert_eq!(crate::Mime::parse("audio/ogg"), Ok(AUDIO_OGG));
-        assert_eq!(crate::Mime::parse("AUDiO/OGg"), Ok(AUDIO_OGG));
+        assert_eq!(crate::Mime::parse("AuDIo/oGg"), Ok(AUDIO_OGG));
     }
 
     /// `audio/opus`
@@ -96795,7 +96803,7 @@ pub mod constants {
     #[test]
     fn audio_opus_parse() {
         assert_eq!(crate::Mime::parse("audio/opus"), Ok(AUDIO_OPUS));
-        assert_eq!(crate::Mime::parse("auDio/opUS"), Ok(AUDIO_OPUS));
+        assert_eq!(crate::Mime::parse("audiO/OPus"), Ok(AUDIO_OPUS));
     }
 
     /// `audio/parityfec`
@@ -96809,7 +96817,7 @@ pub mod constants {
     #[test]
     fn audio_parityfec_parse() {
         assert_eq!(crate::Mime::parse("audio/parityfec"), Ok(AUDIO_PARITYFEC));
-        assert_eq!(crate::Mime::parse("AUdio/pAriTyfeC"), Ok(AUDIO_PARITYFEC));
+        assert_eq!(crate::Mime::parse("aUdIo/PariTYfec"), Ok(AUDIO_PARITYFEC));
     }
 
     /// `audio/PCMA`
@@ -96823,7 +96831,7 @@ pub mod constants {
     #[test]
     fn audio_pcma_parse() {
         assert_eq!(crate::Mime::parse("audio/PCMA"), Ok(AUDIO_PCMA));
-        assert_eq!(crate::Mime::parse("AudiO/PCmA"), Ok(AUDIO_PCMA));
+        assert_eq!(crate::Mime::parse("AuDIo/pCMA"), Ok(AUDIO_PCMA));
     }
 
     /// `audio/PCMA-WB`
@@ -96837,7 +96845,7 @@ pub mod constants {
     #[test]
     fn audio_pcma_wb_parse() {
         assert_eq!(crate::Mime::parse("audio/PCMA-WB"), Ok(AUDIO_PCMA_WB));
-        assert_eq!(crate::Mime::parse("aUDIo/PcMa-wB"), Ok(AUDIO_PCMA_WB));
+        assert_eq!(crate::Mime::parse("aUDiO/pcMA-wb"), Ok(AUDIO_PCMA_WB));
     }
 
     /// `audio/PCMU`
@@ -96851,7 +96859,7 @@ pub mod constants {
     #[test]
     fn audio_pcmu_parse() {
         assert_eq!(crate::Mime::parse("audio/PCMU"), Ok(AUDIO_PCMU));
-        assert_eq!(crate::Mime::parse("AUdio/PCmu"), Ok(AUDIO_PCMU));
+        assert_eq!(crate::Mime::parse("aUDIo/PCmu"), Ok(AUDIO_PCMU));
     }
 
     /// `audio/PCMU-WB`
@@ -96865,7 +96873,7 @@ pub mod constants {
     #[test]
     fn audio_pcmu_wb_parse() {
         assert_eq!(crate::Mime::parse("audio/PCMU-WB"), Ok(AUDIO_PCMU_WB));
-        assert_eq!(crate::Mime::parse("AUdio/pCmU-WB"), Ok(AUDIO_PCMU_WB));
+        assert_eq!(crate::Mime::parse("audIo/PCMU-WB"), Ok(AUDIO_PCMU_WB));
     }
 
     /// `audio/prs.sid`
@@ -96879,7 +96887,7 @@ pub mod constants {
     #[test]
     fn audio_prs_sid_parse() {
         assert_eq!(crate::Mime::parse("audio/prs.sid"), Ok(AUDIO_PRS_SID));
-        assert_eq!(crate::Mime::parse("AuDIo/pRS.SiD"), Ok(AUDIO_PRS_SID));
+        assert_eq!(crate::Mime::parse("aUdIO/PrS.Sid"), Ok(AUDIO_PRS_SID));
     }
 
     /// `audio/QCELP`
@@ -96893,7 +96901,7 @@ pub mod constants {
     #[test]
     fn audio_qcelp_parse() {
         assert_eq!(crate::Mime::parse("audio/QCELP"), Ok(AUDIO_QCELP));
-        assert_eq!(crate::Mime::parse("aUdio/qCElp"), Ok(AUDIO_QCELP));
+        assert_eq!(crate::Mime::parse("aUdIO/qcelp"), Ok(AUDIO_QCELP));
     }
 
     /// `audio/raptorfec`
@@ -96907,7 +96915,7 @@ pub mod constants {
     #[test]
     fn audio_raptorfec_parse() {
         assert_eq!(crate::Mime::parse("audio/raptorfec"), Ok(AUDIO_RAPTORFEC));
-        assert_eq!(crate::Mime::parse("audio/raPTORFEc"), Ok(AUDIO_RAPTORFEC));
+        assert_eq!(crate::Mime::parse("aUdiO/RAPToRfEc"), Ok(AUDIO_RAPTORFEC));
     }
 
     /// `audio/RED`
@@ -96921,7 +96929,7 @@ pub mod constants {
     #[test]
     fn audio_red_parse() {
         assert_eq!(crate::Mime::parse("audio/RED"), Ok(AUDIO_RED));
-        assert_eq!(crate::Mime::parse("AuDio/REd"), Ok(AUDIO_RED));
+        assert_eq!(crate::Mime::parse("auDIo/reD"), Ok(AUDIO_RED));
     }
 
     /// `audio/rtp-enc-aescm128`
@@ -96939,7 +96947,7 @@ pub mod constants {
             Ok(AUDIO_RTP_ENC_AESCM128)
         );
         assert_eq!(
-            crate::Mime::parse("audIO/rTp-enc-AEscm128"),
+            crate::Mime::parse("AUdIo/rtp-ENc-aescM128"),
             Ok(AUDIO_RTP_ENC_AESCM128)
         );
     }
@@ -96955,7 +96963,7 @@ pub mod constants {
     #[test]
     fn audio_rtp_midi_parse() {
         assert_eq!(crate::Mime::parse("audio/rtp-midi"), Ok(AUDIO_RTP_MIDI));
-        assert_eq!(crate::Mime::parse("AuDiO/rTp-Midi"), Ok(AUDIO_RTP_MIDI));
+        assert_eq!(crate::Mime::parse("AudIo/Rtp-midI"), Ok(AUDIO_RTP_MIDI));
     }
 
     /// `audio/rtploopback`
@@ -96973,7 +96981,7 @@ pub mod constants {
             Ok(AUDIO_RTPLOOPBACK)
         );
         assert_eq!(
-            crate::Mime::parse("audIO/rtplOoPbacK"),
+            crate::Mime::parse("Audio/RtPlooPbaCk"),
             Ok(AUDIO_RTPLOOPBACK)
         );
     }
@@ -96989,7 +96997,7 @@ pub mod constants {
     #[test]
     fn audio_rtx_parse() {
         assert_eq!(crate::Mime::parse("audio/rtx"), Ok(AUDIO_RTX));
-        assert_eq!(crate::Mime::parse("auDiO/RTX"), Ok(AUDIO_RTX));
+        assert_eq!(crate::Mime::parse("AuDIO/rtx"), Ok(AUDIO_RTX));
     }
 
     /// `audio/scip`
@@ -97003,7 +97011,7 @@ pub mod constants {
     #[test]
     fn audio_scip_parse() {
         assert_eq!(crate::Mime::parse("audio/scip"), Ok(AUDIO_SCIP));
-        assert_eq!(crate::Mime::parse("AudiO/sCIp"), Ok(AUDIO_SCIP));
+        assert_eq!(crate::Mime::parse("AudIO/sCiP"), Ok(AUDIO_SCIP));
     }
 
     /// `audio/SMV`
@@ -97017,7 +97025,7 @@ pub mod constants {
     #[test]
     fn audio_smv_parse() {
         assert_eq!(crate::Mime::parse("audio/SMV"), Ok(AUDIO_SMV));
-        assert_eq!(crate::Mime::parse("aUdIO/SmV"), Ok(AUDIO_SMV));
+        assert_eq!(crate::Mime::parse("AUDiO/SmV"), Ok(AUDIO_SMV));
     }
 
     /// `audio/SMV-QCP`
@@ -97031,7 +97039,7 @@ pub mod constants {
     #[test]
     fn audio_smv_qcp_parse() {
         assert_eq!(crate::Mime::parse("audio/SMV-QCP"), Ok(AUDIO_SMV_QCP));
-        assert_eq!(crate::Mime::parse("aUdIo/Smv-QCp"), Ok(AUDIO_SMV_QCP));
+        assert_eq!(crate::Mime::parse("aUDio/SMv-qCP"), Ok(AUDIO_SMV_QCP));
     }
 
     /// `audio/SMV0`
@@ -97045,7 +97053,7 @@ pub mod constants {
     #[test]
     fn audio_smv0_parse() {
         assert_eq!(crate::Mime::parse("audio/SMV0"), Ok(AUDIO_SMV0));
-        assert_eq!(crate::Mime::parse("AuDIO/sMv0"), Ok(AUDIO_SMV0));
+        assert_eq!(crate::Mime::parse("AUdIo/SMV0"), Ok(AUDIO_SMV0));
     }
 
     /// `audio/sofa`
@@ -97059,7 +97067,7 @@ pub mod constants {
     #[test]
     fn audio_sofa_parse() {
         assert_eq!(crate::Mime::parse("audio/sofa"), Ok(AUDIO_SOFA));
-        assert_eq!(crate::Mime::parse("AUDiO/SofA"), Ok(AUDIO_SOFA));
+        assert_eq!(crate::Mime::parse("AuDio/Sofa"), Ok(AUDIO_SOFA));
     }
 
     /// `audio/sp-midi`
@@ -97073,7 +97081,7 @@ pub mod constants {
     #[test]
     fn audio_sp_midi_parse() {
         assert_eq!(crate::Mime::parse("audio/sp-midi"), Ok(AUDIO_SP_MIDI));
-        assert_eq!(crate::Mime::parse("AudiO/sP-midI"), Ok(AUDIO_SP_MIDI));
+        assert_eq!(crate::Mime::parse("AudIO/sp-MIdI"), Ok(AUDIO_SP_MIDI));
     }
 
     /// `audio/speex`
@@ -97087,7 +97095,7 @@ pub mod constants {
     #[test]
     fn audio_speex_parse() {
         assert_eq!(crate::Mime::parse("audio/speex"), Ok(AUDIO_SPEEX));
-        assert_eq!(crate::Mime::parse("AUdIO/speeX"), Ok(AUDIO_SPEEX));
+        assert_eq!(crate::Mime::parse("Audio/SpeeX"), Ok(AUDIO_SPEEX));
     }
 
     /// `audio/t140c`
@@ -97101,7 +97109,7 @@ pub mod constants {
     #[test]
     fn audio_t140c_parse() {
         assert_eq!(crate::Mime::parse("audio/t140c"), Ok(AUDIO_T140C));
-        assert_eq!(crate::Mime::parse("audIO/t140c"), Ok(AUDIO_T140C));
+        assert_eq!(crate::Mime::parse("AUdIO/t140c"), Ok(AUDIO_T140C));
     }
 
     /// `audio/t38`
@@ -97115,7 +97123,7 @@ pub mod constants {
     #[test]
     fn audio_t38_parse() {
         assert_eq!(crate::Mime::parse("audio/t38"), Ok(AUDIO_T38));
-        assert_eq!(crate::Mime::parse("AUdio/T38"), Ok(AUDIO_T38));
+        assert_eq!(crate::Mime::parse("auDio/T38"), Ok(AUDIO_T38));
     }
 
     /// `audio/telephone-event`
@@ -97133,7 +97141,7 @@ pub mod constants {
             Ok(AUDIO_TELEPHONE_EVENT)
         );
         assert_eq!(
-            crate::Mime::parse("aUDiO/TeLePhonE-EVEnt"),
+            crate::Mime::parse("AuDiO/TelePhONE-eVent"),
             Ok(AUDIO_TELEPHONE_EVENT)
         );
     }
@@ -97153,7 +97161,7 @@ pub mod constants {
             Ok(AUDIO_TETRA_ACELP)
         );
         assert_eq!(
-            crate::Mime::parse("AudiO/TetrA_acelp"),
+            crate::Mime::parse("AUDio/TEtra_aCelp"),
             Ok(AUDIO_TETRA_ACELP)
         );
     }
@@ -97173,7 +97181,7 @@ pub mod constants {
             Ok(AUDIO_TETRA_ACELP_BB)
         );
         assert_eq!(
-            crate::Mime::parse("Audio/TeTRA_ACELp_bB"),
+            crate::Mime::parse("aUDiO/TETRA_aceLP_bB"),
             Ok(AUDIO_TETRA_ACELP_BB)
         );
     }
@@ -97189,7 +97197,7 @@ pub mod constants {
     #[test]
     fn audio_tone_parse() {
         assert_eq!(crate::Mime::parse("audio/tone"), Ok(AUDIO_TONE));
-        assert_eq!(crate::Mime::parse("AudIO/TONE"), Ok(AUDIO_TONE));
+        assert_eq!(crate::Mime::parse("AUDIO/TOne"), Ok(AUDIO_TONE));
     }
 
     /// `audio/TSVCIS`
@@ -97203,7 +97211,7 @@ pub mod constants {
     #[test]
     fn audio_tsvcis_parse() {
         assert_eq!(crate::Mime::parse("audio/TSVCIS"), Ok(AUDIO_TSVCIS));
-        assert_eq!(crate::Mime::parse("AUdio/tSvCIs"), Ok(AUDIO_TSVCIS));
+        assert_eq!(crate::Mime::parse("audIo/TsVcIs"), Ok(AUDIO_TSVCIS));
     }
 
     /// `audio/UEMCLIP`
@@ -97217,7 +97225,7 @@ pub mod constants {
     #[test]
     fn audio_uemclip_parse() {
         assert_eq!(crate::Mime::parse("audio/UEMCLIP"), Ok(AUDIO_UEMCLIP));
-        assert_eq!(crate::Mime::parse("AuDio/UEmcliP"), Ok(AUDIO_UEMCLIP));
+        assert_eq!(crate::Mime::parse("auDIo/ueMcLIP"), Ok(AUDIO_UEMCLIP));
     }
 
     /// `audio/ulpfec`
@@ -97231,7 +97239,7 @@ pub mod constants {
     #[test]
     fn audio_ulpfec_parse() {
         assert_eq!(crate::Mime::parse("audio/ulpfec"), Ok(AUDIO_ULPFEC));
-        assert_eq!(crate::Mime::parse("aUDIO/ULpFEC"), Ok(AUDIO_ULPFEC));
+        assert_eq!(crate::Mime::parse("AuDIo/ULPFEC"), Ok(AUDIO_ULPFEC));
     }
 
     /// `audio/usac`
@@ -97245,7 +97253,7 @@ pub mod constants {
     #[test]
     fn audio_usac_parse() {
         assert_eq!(crate::Mime::parse("audio/usac"), Ok(AUDIO_USAC));
-        assert_eq!(crate::Mime::parse("AUDIo/USac"), Ok(AUDIO_USAC));
+        assert_eq!(crate::Mime::parse("auDIo/usaC"), Ok(AUDIO_USAC));
     }
 
     /// `audio/VDVI`
@@ -97259,7 +97267,7 @@ pub mod constants {
     #[test]
     fn audio_vdvi_parse() {
         assert_eq!(crate::Mime::parse("audio/VDVI"), Ok(AUDIO_VDVI));
-        assert_eq!(crate::Mime::parse("audIo/vdVi"), Ok(AUDIO_VDVI));
+        assert_eq!(crate::Mime::parse("aUdiO/vDvI"), Ok(AUDIO_VDVI));
     }
 
     /// `audio/VMR-WB`
@@ -97273,7 +97281,7 @@ pub mod constants {
     #[test]
     fn audio_vmr_wb_parse() {
         assert_eq!(crate::Mime::parse("audio/VMR-WB"), Ok(AUDIO_VMR_WB));
-        assert_eq!(crate::Mime::parse("aUdIO/vmr-Wb"), Ok(AUDIO_VMR_WB));
+        assert_eq!(crate::Mime::parse("AUdio/VmR-Wb"), Ok(AUDIO_VMR_WB));
     }
 
     /// `audio/vnd.3gpp.iufp`
@@ -97291,7 +97299,7 @@ pub mod constants {
             Ok(AUDIO_VND_3GPP_IUFP)
         );
         assert_eq!(
-            crate::Mime::parse("AuDio/vNd.3Gpp.iUfP"),
+            crate::Mime::parse("aUdIo/VNd.3gPp.iUfp"),
             Ok(AUDIO_VND_3GPP_IUFP)
         );
     }
@@ -97307,7 +97315,7 @@ pub mod constants {
     #[test]
     fn audio_vnd_4sb_parse() {
         assert_eq!(crate::Mime::parse("audio/vnd.4SB"), Ok(AUDIO_VND_4SB));
-        assert_eq!(crate::Mime::parse("aUdiO/vnD.4Sb"), Ok(AUDIO_VND_4SB));
+        assert_eq!(crate::Mime::parse("AUdiO/vNd.4SB"), Ok(AUDIO_VND_4SB));
     }
 
     /// `audio/vnd.audiokoz`
@@ -97325,7 +97333,7 @@ pub mod constants {
             Ok(AUDIO_VND_AUDIOKOZ)
         );
         assert_eq!(
-            crate::Mime::parse("AUDIo/Vnd.AUdiokoZ"),
+            crate::Mime::parse("aUDio/VNd.audIOkOz"),
             Ok(AUDIO_VND_AUDIOKOZ)
         );
     }
@@ -97341,7 +97349,7 @@ pub mod constants {
     #[test]
     fn audio_vnd_celp_parse() {
         assert_eq!(crate::Mime::parse("audio/vnd.CELP"), Ok(AUDIO_VND_CELP));
-        assert_eq!(crate::Mime::parse("AuDio/vnd.Celp"), Ok(AUDIO_VND_CELP));
+        assert_eq!(crate::Mime::parse("aUdio/Vnd.CeLP"), Ok(AUDIO_VND_CELP));
     }
 
     /// `audio/vnd.cisco.nse`
@@ -97359,7 +97367,7 @@ pub mod constants {
             Ok(AUDIO_VND_CISCO_NSE)
         );
         assert_eq!(
-            crate::Mime::parse("AuDIo/vNd.cISCO.NSe"),
+            crate::Mime::parse("aUdIo/vND.CISCo.nse"),
             Ok(AUDIO_VND_CISCO_NSE)
         );
     }
@@ -97381,7 +97389,7 @@ pub mod constants {
             Ok(AUDIO_VND_CMLES_RADIO_EVENTS)
         );
         assert_eq!(
-            crate::Mime::parse("Audio/Vnd.CMLEs.RAdiO-eveNTs"),
+            crate::Mime::parse("aUDio/VND.cmLEs.Radio-EventS"),
             Ok(AUDIO_VND_CMLES_RADIO_EVENTS)
         );
     }
@@ -97401,7 +97409,7 @@ pub mod constants {
             Ok(AUDIO_VND_CNS_ANP1)
         );
         assert_eq!(
-            crate::Mime::parse("audIO/vNd.CnS.Anp1"),
+            crate::Mime::parse("AudIo/VnD.Cns.anP1"),
             Ok(AUDIO_VND_CNS_ANP1)
         );
     }
@@ -97421,7 +97429,7 @@ pub mod constants {
             Ok(AUDIO_VND_CNS_INF1)
         );
         assert_eq!(
-            crate::Mime::parse("auDIo/vnd.CNS.INf1"),
+            crate::Mime::parse("audio/VND.CNs.iNf1"),
             Ok(AUDIO_VND_CNS_INF1)
         );
     }
@@ -97441,7 +97449,7 @@ pub mod constants {
             Ok(AUDIO_VND_DECE_AUDIO)
         );
         assert_eq!(
-            crate::Mime::parse("aUdio/vnd.deCe.AudiO"),
+            crate::Mime::parse("audio/vnD.dEce.AUdio"),
             Ok(AUDIO_VND_DECE_AUDIO)
         );
     }
@@ -97461,7 +97469,7 @@ pub mod constants {
             Ok(AUDIO_VND_DIGITAL_WINDS)
         );
         assert_eq!(
-            crate::Mime::parse("AudiO/Vnd.digital-wiNds"),
+            crate::Mime::parse("AUDio/vnd.digitaL-wInDS"),
             Ok(AUDIO_VND_DIGITAL_WINDS)
         );
     }
@@ -97481,7 +97489,7 @@ pub mod constants {
             Ok(AUDIO_VND_DLNA_ADTS)
         );
         assert_eq!(
-            crate::Mime::parse("AuDIO/Vnd.dLnA.ADts"),
+            crate::Mime::parse("AUDio/vNd.DLNa.adTS"),
             Ok(AUDIO_VND_DLNA_ADTS)
         );
     }
@@ -97501,7 +97509,7 @@ pub mod constants {
             Ok(AUDIO_VND_DOLBY_HEAAC_1)
         );
         assert_eq!(
-            crate::Mime::parse("auDIo/Vnd.dOlby.heaaC.1"),
+            crate::Mime::parse("auDio/vNd.dOlby.HEAAC.1"),
             Ok(AUDIO_VND_DOLBY_HEAAC_1)
         );
     }
@@ -97521,7 +97529,7 @@ pub mod constants {
             Ok(AUDIO_VND_DOLBY_HEAAC_2)
         );
         assert_eq!(
-            crate::Mime::parse("AUDio/VND.DolBy.HEaac.2"),
+            crate::Mime::parse("aUDIO/Vnd.doLBy.heaaC.2"),
             Ok(AUDIO_VND_DOLBY_HEAAC_2)
         );
     }
@@ -97541,7 +97549,7 @@ pub mod constants {
             Ok(AUDIO_VND_DOLBY_MLP)
         );
         assert_eq!(
-            crate::Mime::parse("aUDIo/VnD.DolBY.mLp"),
+            crate::Mime::parse("auDiO/Vnd.DolBy.mLp"),
             Ok(AUDIO_VND_DOLBY_MLP)
         );
     }
@@ -97561,7 +97569,7 @@ pub mod constants {
             Ok(AUDIO_VND_DOLBY_MPS)
         );
         assert_eq!(
-            crate::Mime::parse("AuDio/VND.dOlby.MPS"),
+            crate::Mime::parse("aUDIO/vNd.doLBY.mPs"),
             Ok(AUDIO_VND_DOLBY_MPS)
         );
     }
@@ -97581,7 +97589,7 @@ pub mod constants {
             Ok(AUDIO_VND_DOLBY_PL2)
         );
         assert_eq!(
-            crate::Mime::parse("auDiO/vNd.dolBY.pL2"),
+            crate::Mime::parse("AudIo/vnd.DOlBY.pL2"),
             Ok(AUDIO_VND_DOLBY_PL2)
         );
     }
@@ -97601,7 +97609,7 @@ pub mod constants {
             Ok(AUDIO_VND_DOLBY_PL2X)
         );
         assert_eq!(
-            crate::Mime::parse("auDio/Vnd.Dolby.pl2x"),
+            crate::Mime::parse("aUDio/Vnd.dolbY.pl2X"),
             Ok(AUDIO_VND_DOLBY_PL2X)
         );
     }
@@ -97621,7 +97629,7 @@ pub mod constants {
             Ok(AUDIO_VND_DOLBY_PL2Z)
         );
         assert_eq!(
-            crate::Mime::parse("auDIo/vND.DoLbY.PL2z"),
+            crate::Mime::parse("aUdIO/VnD.DoLBY.pl2Z"),
             Ok(AUDIO_VND_DOLBY_PL2Z)
         );
     }
@@ -97641,7 +97649,7 @@ pub mod constants {
             Ok(AUDIO_VND_DOLBY_PULSE_1)
         );
         assert_eq!(
-            crate::Mime::parse("auDIo/vND.dOlBY.pUlsE.1"),
+            crate::Mime::parse("aUdIO/vNd.DOlBy.PULSE.1"),
             Ok(AUDIO_VND_DOLBY_PULSE_1)
         );
     }
@@ -97657,7 +97665,7 @@ pub mod constants {
     #[test]
     fn audio_vnd_dra_parse() {
         assert_eq!(crate::Mime::parse("audio/vnd.dra"), Ok(AUDIO_VND_DRA));
-        assert_eq!(crate::Mime::parse("AUdIo/vND.Dra"), Ok(AUDIO_VND_DRA));
+        assert_eq!(crate::Mime::parse("aUdIO/Vnd.DRA"), Ok(AUDIO_VND_DRA));
     }
 
     /// `audio/vnd.dts`
@@ -97671,7 +97679,7 @@ pub mod constants {
     #[test]
     fn audio_vnd_dts_parse() {
         assert_eq!(crate::Mime::parse("audio/vnd.dts"), Ok(AUDIO_VND_DTS));
-        assert_eq!(crate::Mime::parse("AUDIo/vNd.dTS"), Ok(AUDIO_VND_DTS));
+        assert_eq!(crate::Mime::parse("aUdIo/vND.dtS"), Ok(AUDIO_VND_DTS));
     }
 
     /// `audio/vnd.dts.hd`
@@ -97685,7 +97693,7 @@ pub mod constants {
     #[test]
     fn audio_vnd_dts_hd_parse() {
         assert_eq!(crate::Mime::parse("audio/vnd.dts.hd"), Ok(AUDIO_VND_DTS_HD));
-        assert_eq!(crate::Mime::parse("AudIO/VnD.DTs.hd"), Ok(AUDIO_VND_DTS_HD));
+        assert_eq!(crate::Mime::parse("AUDiO/VNd.dts.hd"), Ok(AUDIO_VND_DTS_HD));
     }
 
     /// `audio/vnd.dts.uhd`
@@ -97703,7 +97711,7 @@ pub mod constants {
             Ok(AUDIO_VND_DTS_UHD)
         );
         assert_eq!(
-            crate::Mime::parse("audio/vnd.dtS.Uhd"),
+            crate::Mime::parse("audio/vnD.Dts.uhD"),
             Ok(AUDIO_VND_DTS_UHD)
         );
     }
@@ -97723,7 +97731,7 @@ pub mod constants {
             Ok(AUDIO_VND_DVB_FILE)
         );
         assert_eq!(
-            crate::Mime::parse("AudIo/VND.dvb.FiLE"),
+            crate::Mime::parse("auDIO/vnd.DvB.fIlE"),
             Ok(AUDIO_VND_DVB_FILE)
         );
     }
@@ -97743,7 +97751,7 @@ pub mod constants {
             Ok(AUDIO_VND_EVERAD_PLJ)
         );
         assert_eq!(
-            crate::Mime::parse("aUdIo/Vnd.EVERAd.plj"),
+            crate::Mime::parse("auDio/VND.Everad.PlJ"),
             Ok(AUDIO_VND_EVERAD_PLJ)
         );
     }
@@ -97763,7 +97771,7 @@ pub mod constants {
             Ok(AUDIO_VND_HNS_AUDIO)
         );
         assert_eq!(
-            crate::Mime::parse("aUdIO/vnd.hNS.aUdiO"),
+            crate::Mime::parse("Audio/vND.hNs.AUDiO"),
             Ok(AUDIO_VND_HNS_AUDIO)
         );
     }
@@ -97783,7 +97791,7 @@ pub mod constants {
             Ok(AUDIO_VND_LUCENT_VOICE)
         );
         assert_eq!(
-            crate::Mime::parse("AUdIO/vND.luCENt.VOIcE"),
+            crate::Mime::parse("AUdIO/vnD.LuCENT.VoiCE"),
             Ok(AUDIO_VND_LUCENT_VOICE)
         );
     }
@@ -97805,7 +97813,7 @@ pub mod constants {
             Ok(AUDIO_VND_MS_PLAYREADY_MEDIA_PYA)
         );
         assert_eq!(
-            crate::Mime::parse("auDIO/vnd.MS-PLAYREADY.mEDiA.PyA"),
+            crate::Mime::parse("AUdio/VND.MS-PLAYREaDY.MeDiA.PYA"),
             Ok(AUDIO_VND_MS_PLAYREADY_MEDIA_PYA)
         );
     }
@@ -97827,7 +97835,7 @@ pub mod constants {
             Ok(AUDIO_VND_NOKIA_MOBILE_XMF)
         );
         assert_eq!(
-            crate::Mime::parse("AUDIo/vNd.NoKIa.mOBILe-Xmf"),
+            crate::Mime::parse("audIo/VnD.nOkIA.MoBIle-XMf"),
             Ok(AUDIO_VND_NOKIA_MOBILE_XMF)
         );
     }
@@ -97847,7 +97855,7 @@ pub mod constants {
             Ok(AUDIO_VND_NORTEL_VBK)
         );
         assert_eq!(
-            crate::Mime::parse("aUDio/Vnd.NORTel.vbk"),
+            crate::Mime::parse("auDio/VND.nortel.VBk"),
             Ok(AUDIO_VND_NORTEL_VBK)
         );
     }
@@ -97869,7 +97877,7 @@ pub mod constants {
             Ok(AUDIO_VND_NUERA_ECELP4800)
         );
         assert_eq!(
-            crate::Mime::parse("AUDio/VND.NuEra.eCeLP4800"),
+            crate::Mime::parse("aUDIO/VnD.nUeRa.Ecelp4800"),
             Ok(AUDIO_VND_NUERA_ECELP4800)
         );
     }
@@ -97891,7 +97899,7 @@ pub mod constants {
             Ok(AUDIO_VND_NUERA_ECELP7470)
         );
         assert_eq!(
-            crate::Mime::parse("auDIo/vnd.NUera.ECELP7470"),
+            crate::Mime::parse("audio/VNd.nuERA.EcELP7470"),
             Ok(AUDIO_VND_NUERA_ECELP7470)
         );
     }
@@ -97913,7 +97921,7 @@ pub mod constants {
             Ok(AUDIO_VND_NUERA_ECELP9600)
         );
         assert_eq!(
-            crate::Mime::parse("auDIO/Vnd.nUerA.EcelP9600"),
+            crate::Mime::parse("AUDio/vNd.NUEra.ECelp9600"),
             Ok(AUDIO_VND_NUERA_ECELP9600)
         );
     }
@@ -97933,7 +97941,7 @@ pub mod constants {
             Ok(AUDIO_VND_OCTEL_SBC)
         );
         assert_eq!(
-            crate::Mime::parse("AUDiO/Vnd.OCTeL.SbC"),
+            crate::Mime::parse("AuDio/VND.OcTeL.sbC"),
             Ok(AUDIO_VND_OCTEL_SBC)
         );
     }
@@ -97955,7 +97963,7 @@ pub mod constants {
             Ok(AUDIO_VND_PRESONUS_MULTITRACK)
         );
         assert_eq!(
-            crate::Mime::parse("AudIo/vnd.preSoNUS.MUltiTrACK"),
+            crate::Mime::parse("aUdio/vnd.pRESONUs.mUlTITRaCk"),
             Ok(AUDIO_VND_PRESONUS_MULTITRACK)
         );
     }
@@ -97977,7 +97985,7 @@ pub mod constants {
             Ok(AUDIO_VND_RHETOREX_32KADPCM)
         );
         assert_eq!(
-            crate::Mime::parse("AuDiO/VnD.RhETorex.32KADpCm"),
+            crate::Mime::parse("AuDiO/VnD.rhetOrEX.32KaDPCM"),
             Ok(AUDIO_VND_RHETOREX_32KADPCM)
         );
     }
@@ -97993,7 +98001,7 @@ pub mod constants {
     #[test]
     fn audio_vnd_rip_parse() {
         assert_eq!(crate::Mime::parse("audio/vnd.rip"), Ok(AUDIO_VND_RIP));
-        assert_eq!(crate::Mime::parse("AUDIO/VND.rip"), Ok(AUDIO_VND_RIP));
+        assert_eq!(crate::Mime::parse("AuDIO/vnd.rIp"), Ok(AUDIO_VND_RIP));
     }
 
     /// `audio/vnd.sealedmedia.softseal.mpeg`
@@ -98013,7 +98021,7 @@ pub mod constants {
             Ok(AUDIO_VND_SEALEDMEDIA_SOFTSEAL_MPEG)
         );
         assert_eq!(
-            crate::Mime::parse("AuDiO/vnD.SEALEdMeDia.SofTseAl.mpEg"),
+            crate::Mime::parse("AUdiO/VND.SeAlEdmEDia.soFtSeaL.Mpeg"),
             Ok(AUDIO_VND_SEALEDMEDIA_SOFTSEAL_MPEG)
         );
     }
@@ -98033,7 +98041,7 @@ pub mod constants {
             Ok(AUDIO_VND_VMX_CVSD)
         );
         assert_eq!(
-            crate::Mime::parse("Audio/vND.VmX.CvSd"),
+            crate::Mime::parse("aUdIO/VnD.VmX.cvSd"),
             Ok(AUDIO_VND_VMX_CVSD)
         );
     }
@@ -98049,7 +98057,7 @@ pub mod constants {
     #[test]
     fn audio_vorbis_parse() {
         assert_eq!(crate::Mime::parse("audio/vorbis"), Ok(AUDIO_VORBIS));
-        assert_eq!(crate::Mime::parse("auDio/VorBiS"), Ok(AUDIO_VORBIS));
+        assert_eq!(crate::Mime::parse("aUDio/vORbIs"), Ok(AUDIO_VORBIS));
     }
 
     /// `audio/vorbis-config`
@@ -98067,7 +98075,7 @@ pub mod constants {
             Ok(AUDIO_VORBIS_CONFIG)
         );
         assert_eq!(
-            crate::Mime::parse("AuDio/VorbIs-COnfIg"),
+            crate::Mime::parse("aUDio/VoRBIs-CoNFiG"),
             Ok(AUDIO_VORBIS_CONFIG)
         );
     }
@@ -98083,7 +98091,7 @@ pub mod constants {
     #[test]
     fn audio_x_aiff_parse() {
         assert_eq!(crate::Mime::parse("audio/x-aiff"), Ok(AUDIO_X_AIFF));
-        assert_eq!(crate::Mime::parse("AUdIO/X-aIff"), Ok(AUDIO_X_AIFF));
+        assert_eq!(crate::Mime::parse("AUDio/x-AiFf"), Ok(AUDIO_X_AIFF));
     }
 
     /// `audio/x-gsm`
@@ -98097,7 +98105,7 @@ pub mod constants {
     #[test]
     fn audio_x_gsm_parse() {
         assert_eq!(crate::Mime::parse("audio/x-gsm"), Ok(AUDIO_X_GSM));
-        assert_eq!(crate::Mime::parse("AuDiO/X-GsM"), Ok(AUDIO_X_GSM));
+        assert_eq!(crate::Mime::parse("AuDiO/X-GSM"), Ok(AUDIO_X_GSM));
     }
 
     /// `audio/x-ms-wax`
@@ -98111,7 +98119,7 @@ pub mod constants {
     #[test]
     fn audio_x_ms_wax_parse() {
         assert_eq!(crate::Mime::parse("audio/x-ms-wax"), Ok(AUDIO_X_MS_WAX));
-        assert_eq!(crate::Mime::parse("aUDIo/X-Ms-WaX"), Ok(AUDIO_X_MS_WAX));
+        assert_eq!(crate::Mime::parse("auDIO/x-mS-wax"), Ok(AUDIO_X_MS_WAX));
     }
 
     /// `audio/x-ms-wma`
@@ -98125,7 +98133,7 @@ pub mod constants {
     #[test]
     fn audio_x_ms_wma_parse() {
         assert_eq!(crate::Mime::parse("audio/x-ms-wma"), Ok(AUDIO_X_MS_WMA));
-        assert_eq!(crate::Mime::parse("audio/X-Ms-wMa"), Ok(AUDIO_X_MS_WMA));
+        assert_eq!(crate::Mime::parse("auDiO/X-Ms-wMa"), Ok(AUDIO_X_MS_WMA));
     }
 
     /// `audio/x-pn-realaudio`
@@ -98143,7 +98151,7 @@ pub mod constants {
             Ok(AUDIO_X_PN_REALAUDIO)
         );
         assert_eq!(
-            crate::Mime::parse("auDio/x-pN-reALaUDIO"),
+            crate::Mime::parse("audIo/x-pN-rEALAUDio"),
             Ok(AUDIO_X_PN_REALAUDIO)
         );
     }
@@ -98159,7 +98167,7 @@ pub mod constants {
     #[test]
     fn audio_x_scpls_parse() {
         assert_eq!(crate::Mime::parse("audio/x-scpls"), Ok(AUDIO_X_SCPLS));
-        assert_eq!(crate::Mime::parse("AUdio/x-ScpLS"), Ok(AUDIO_X_SCPLS));
+        assert_eq!(crate::Mime::parse("aUdIO/x-ScPlS"), Ok(AUDIO_X_SCPLS));
     }
 
     /// `audio/x-sd2`
@@ -98173,7 +98181,7 @@ pub mod constants {
     #[test]
     fn audio_x_sd2_parse() {
         assert_eq!(crate::Mime::parse("audio/x-sd2"), Ok(AUDIO_X_SD2));
-        assert_eq!(crate::Mime::parse("aUdIO/X-SD2"), Ok(AUDIO_X_SD2));
+        assert_eq!(crate::Mime::parse("AUDIO/X-sd2"), Ok(AUDIO_X_SD2));
     }
 
     /// `audio/x-wav`
@@ -98187,7 +98195,7 @@ pub mod constants {
     #[test]
     fn audio_x_wav_parse() {
         assert_eq!(crate::Mime::parse("audio/x-wav"), Ok(AUDIO_X_WAV));
-        assert_eq!(crate::Mime::parse("audIo/X-WAV"), Ok(AUDIO_X_WAV));
+        assert_eq!(crate::Mime::parse("aUDiO/X-wAv"), Ok(AUDIO_X_WAV));
     }
 
     /// `chemical/x-alchemy`
@@ -98205,7 +98213,7 @@ pub mod constants {
             Ok(CHEMICAL_X_ALCHEMY)
         );
         assert_eq!(
-            crate::Mime::parse("chEmIcaL/x-alchemY"),
+            crate::Mime::parse("CheMicAl/x-alChEmY"),
             Ok(CHEMICAL_X_ALCHEMY)
         );
     }
@@ -98221,7 +98229,7 @@ pub mod constants {
     #[test]
     fn chemical_x_cache_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-cache"), Ok(CHEMICAL_X_CACHE));
-        assert_eq!(crate::Mime::parse("cHeMIcAL/X-cache"), Ok(CHEMICAL_X_CACHE));
+        assert_eq!(crate::Mime::parse("ChEMICAl/x-cachE"), Ok(CHEMICAL_X_CACHE));
     }
 
     /// `chemical/x-cache-csf`
@@ -98239,7 +98247,7 @@ pub mod constants {
             Ok(CHEMICAL_X_CACHE_CSF)
         );
         assert_eq!(
-            crate::Mime::parse("cheMIcaL/X-CAcHE-Csf"),
+            crate::Mime::parse("CheMICAL/x-CaChe-cSF"),
             Ok(CHEMICAL_X_CACHE_CSF)
         );
     }
@@ -98259,7 +98267,7 @@ pub mod constants {
             Ok(CHEMICAL_X_CACTVS_BINARY)
         );
         assert_eq!(
-            crate::Mime::parse("chEMICal/x-cacTvS-BinARY"),
+            crate::Mime::parse("CHemIcal/x-cACTvs-BInArY"),
             Ok(CHEMICAL_X_CACTVS_BINARY)
         );
     }
@@ -98275,7 +98283,7 @@ pub mod constants {
     #[test]
     fn chemical_x_cdx_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-cdx"), Ok(CHEMICAL_X_CDX));
-        assert_eq!(crate::Mime::parse("cHeMICAl/x-cdX"), Ok(CHEMICAL_X_CDX));
+        assert_eq!(crate::Mime::parse("CHEmicAl/X-CDx"), Ok(CHEMICAL_X_CDX));
     }
 
     /// `chemical/x-cerius`
@@ -98293,7 +98301,7 @@ pub mod constants {
             Ok(CHEMICAL_X_CERIUS)
         );
         assert_eq!(
-            crate::Mime::parse("cHEmicAL/x-cerius"),
+            crate::Mime::parse("chEMical/x-cerIus"),
             Ok(CHEMICAL_X_CERIUS)
         );
     }
@@ -98313,7 +98321,7 @@ pub mod constants {
             Ok(CHEMICAL_X_CHEM3D)
         );
         assert_eq!(
-            crate::Mime::parse("cHemIcaL/X-Chem3d"),
+            crate::Mime::parse("CheMiCaL/x-chEM3D"),
             Ok(CHEMICAL_X_CHEM3D)
         );
     }
@@ -98333,7 +98341,7 @@ pub mod constants {
             Ok(CHEMICAL_X_CHEMDRAW)
         );
         assert_eq!(
-            crate::Mime::parse("CHeMICaL/X-cHeMDrAw"),
+            crate::Mime::parse("CHeMiCAl/x-ChEmDrAW"),
             Ok(CHEMICAL_X_CHEMDRAW)
         );
     }
@@ -98349,7 +98357,7 @@ pub mod constants {
     #[test]
     fn chemical_x_cif_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-cif"), Ok(CHEMICAL_X_CIF));
-        assert_eq!(crate::Mime::parse("ChEMIcal/X-ciF"), Ok(CHEMICAL_X_CIF));
+        assert_eq!(crate::Mime::parse("ChemICAl/X-cif"), Ok(CHEMICAL_X_CIF));
     }
 
     /// `chemical/x-cmdf`
@@ -98363,7 +98371,7 @@ pub mod constants {
     #[test]
     fn chemical_x_cmdf_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-cmdf"), Ok(CHEMICAL_X_CMDF));
-        assert_eq!(crate::Mime::parse("ChemIcal/x-CmdF"), Ok(CHEMICAL_X_CMDF));
+        assert_eq!(crate::Mime::parse("ChemicAL/x-Cmdf"), Ok(CHEMICAL_X_CMDF));
     }
 
     /// `chemical/x-cml`
@@ -98377,7 +98385,7 @@ pub mod constants {
     #[test]
     fn chemical_x_cml_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-cml"), Ok(CHEMICAL_X_CML));
-        assert_eq!(crate::Mime::parse("Chemical/X-cML"), Ok(CHEMICAL_X_CML));
+        assert_eq!(crate::Mime::parse("chemiCal/X-cMl"), Ok(CHEMICAL_X_CML));
     }
 
     /// `chemical/x-compass`
@@ -98395,7 +98403,7 @@ pub mod constants {
             Ok(CHEMICAL_X_COMPASS)
         );
         assert_eq!(
-            crate::Mime::parse("ChEmICal/x-COmPAss"),
+            crate::Mime::parse("CHemicAL/x-CompAss"),
             Ok(CHEMICAL_X_COMPASS)
         );
     }
@@ -98415,7 +98423,7 @@ pub mod constants {
             Ok(CHEMICAL_X_CROSSFIRE)
         );
         assert_eq!(
-            crate::Mime::parse("cHemical/X-cRoSsfIre"),
+            crate::Mime::parse("chemICAl/x-crOssfirE"),
             Ok(CHEMICAL_X_CROSSFIRE)
         );
     }
@@ -98431,7 +98439,7 @@ pub mod constants {
     #[test]
     fn chemical_x_csml_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-csml"), Ok(CHEMICAL_X_CSML));
-        assert_eq!(crate::Mime::parse("cheMIcAl/x-CsML"), Ok(CHEMICAL_X_CSML));
+        assert_eq!(crate::Mime::parse("ChEmicAL/X-cSml"), Ok(CHEMICAL_X_CSML));
     }
 
     /// `chemical/x-ctx`
@@ -98445,7 +98453,7 @@ pub mod constants {
     #[test]
     fn chemical_x_ctx_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-ctx"), Ok(CHEMICAL_X_CTX));
-        assert_eq!(crate::Mime::parse("cHemICAL/x-cTX"), Ok(CHEMICAL_X_CTX));
+        assert_eq!(crate::Mime::parse("CHEMIcAl/X-CTX"), Ok(CHEMICAL_X_CTX));
     }
 
     /// `chemical/x-cxf`
@@ -98459,7 +98467,7 @@ pub mod constants {
     #[test]
     fn chemical_x_cxf_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-cxf"), Ok(CHEMICAL_X_CXF));
-        assert_eq!(crate::Mime::parse("cHEMiCAl/X-CxF"), Ok(CHEMICAL_X_CXF));
+        assert_eq!(crate::Mime::parse("cHEmICaL/X-cxf"), Ok(CHEMICAL_X_CXF));
     }
 
     /// `chemical/x-embl-dl-nucleotide`
@@ -98479,7 +98487,7 @@ pub mod constants {
             Ok(CHEMICAL_X_EMBL_DL_NUCLEOTIDE)
         );
         assert_eq!(
-            crate::Mime::parse("chemICaL/X-EMBl-Dl-NuClEotiDE"),
+            crate::Mime::parse("CHeMICaL/X-EMbL-dL-NuclEOtidE"),
             Ok(CHEMICAL_X_EMBL_DL_NUCLEOTIDE)
         );
     }
@@ -98499,7 +98507,7 @@ pub mod constants {
             Ok(CHEMICAL_X_GALACTIC_SPC)
         );
         assert_eq!(
-            crate::Mime::parse("cheMICaL/x-GALaCtIC-sPc"),
+            crate::Mime::parse("CHeMIcAL/X-GaLActIc-SPC"),
             Ok(CHEMICAL_X_GALACTIC_SPC)
         );
     }
@@ -98519,7 +98527,7 @@ pub mod constants {
             Ok(CHEMICAL_X_GAMESS_INPUT)
         );
         assert_eq!(
-            crate::Mime::parse("cHEMIcAL/x-GAmeSS-INpuT"),
+            crate::Mime::parse("ChEMIcaL/x-GAmESs-INPUT"),
             Ok(CHEMICAL_X_GAMESS_INPUT)
         );
     }
@@ -98541,7 +98549,7 @@ pub mod constants {
             Ok(CHEMICAL_X_GAUSSIAN_CHECKPOINT)
         );
         assert_eq!(
-            crate::Mime::parse("CHEMIcaL/x-GAussiaN-chECkpoInT"),
+            crate::Mime::parse("CheMIcAL/x-gauSSiaN-cheCkPoInt"),
             Ok(CHEMICAL_X_GAUSSIAN_CHECKPOINT)
         );
     }
@@ -98561,7 +98569,7 @@ pub mod constants {
             Ok(CHEMICAL_X_GAUSSIAN_CUBE)
         );
         assert_eq!(
-            crate::Mime::parse("cHemIcal/X-GAuSsiAN-cuBe"),
+            crate::Mime::parse("ChemiCAL/x-gaUSSiaN-Cube"),
             Ok(CHEMICAL_X_GAUSSIAN_CUBE)
         );
     }
@@ -98581,7 +98589,7 @@ pub mod constants {
             Ok(CHEMICAL_X_GAUSSIAN_INPUT)
         );
         assert_eq!(
-            crate::Mime::parse("ChemICal/x-gaUsSIAn-inpUT"),
+            crate::Mime::parse("CHemicAl/X-GAUsSian-INpUt"),
             Ok(CHEMICAL_X_GAUSSIAN_INPUT)
         );
     }
@@ -98601,7 +98609,7 @@ pub mod constants {
             Ok(CHEMICAL_X_GAUSSIAN_LOG)
         );
         assert_eq!(
-            crate::Mime::parse("ChEmicaL/x-GaUSsian-lOg"),
+            crate::Mime::parse("cheMicAL/X-gausSiAn-LoG"),
             Ok(CHEMICAL_X_GAUSSIAN_LOG)
         );
     }
@@ -98621,7 +98629,7 @@ pub mod constants {
             Ok(CHEMICAL_X_GCG8_SEQUENCE)
         );
         assert_eq!(
-            crate::Mime::parse("cHeMiCAL/X-GcG8-seqUEnCE"),
+            crate::Mime::parse("cHEMiCaL/X-Gcg8-SeQUENcE"),
             Ok(CHEMICAL_X_GCG8_SEQUENCE)
         );
     }
@@ -98641,7 +98649,7 @@ pub mod constants {
             Ok(CHEMICAL_X_GENBANK)
         );
         assert_eq!(
-            crate::Mime::parse("CHeMICAl/x-GeNbANK"),
+            crate::Mime::parse("CHEmicAL/X-GENbAnK"),
             Ok(CHEMICAL_X_GENBANK)
         );
     }
@@ -98657,7 +98665,7 @@ pub mod constants {
     #[test]
     fn chemical_x_hin_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-hin"), Ok(CHEMICAL_X_HIN));
-        assert_eq!(crate::Mime::parse("cHeMIcAl/x-hin"), Ok(CHEMICAL_X_HIN));
+        assert_eq!(crate::Mime::parse("ChEmical/x-hIn"), Ok(CHEMICAL_X_HIN));
     }
 
     /// `chemical/x-isostar`
@@ -98675,7 +98683,7 @@ pub mod constants {
             Ok(CHEMICAL_X_ISOSTAR)
         );
         assert_eq!(
-            crate::Mime::parse("ChEmicAL/x-iSoSTAr"),
+            crate::Mime::parse("chEMicAl/x-ISoSTAr"),
             Ok(CHEMICAL_X_ISOSTAR)
         );
     }
@@ -98695,7 +98703,7 @@ pub mod constants {
             Ok(CHEMICAL_X_JCAMP_DX)
         );
         assert_eq!(
-            crate::Mime::parse("CHEmical/X-JCAMP-DX"),
+            crate::Mime::parse("chemICAL/X-JcAMP-dx"),
             Ok(CHEMICAL_X_JCAMP_DX)
         );
     }
@@ -98715,7 +98723,7 @@ pub mod constants {
             Ok(CHEMICAL_X_KINEMAGE)
         );
         assert_eq!(
-            crate::Mime::parse("CHemicAL/X-kInEmagE"),
+            crate::Mime::parse("chEMICAl/x-kinEmAGe"),
             Ok(CHEMICAL_X_KINEMAGE)
         );
     }
@@ -98735,7 +98743,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MACMOLECULE)
         );
         assert_eq!(
-            crate::Mime::parse("cHEmIcaL/x-maCMOleculE"),
+            crate::Mime::parse("CheMIcal/X-MacmolEcuLe"),
             Ok(CHEMICAL_X_MACMOLECULE)
         );
     }
@@ -98757,7 +98765,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MACROMODEL_INPUT)
         );
         assert_eq!(
-            crate::Mime::parse("chEmicAl/x-maCroMoDeL-inPUt"),
+            crate::Mime::parse("chEmical/X-mAcRoMOdeL-iNpUT"),
             Ok(CHEMICAL_X_MACROMODEL_INPUT)
         );
     }
@@ -98777,7 +98785,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MDL_MOLFILE)
         );
         assert_eq!(
-            crate::Mime::parse("ChEMICAl/x-mDl-MolFiLe"),
+            crate::Mime::parse("CHEmicAl/x-Mdl-mOlfilE"),
             Ok(CHEMICAL_X_MDL_MOLFILE)
         );
     }
@@ -98797,7 +98805,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MDL_RDFILE)
         );
         assert_eq!(
-            crate::Mime::parse("cheMical/X-mdl-rDfIlE"),
+            crate::Mime::parse("chemiCal/x-mDl-rDfILE"),
             Ok(CHEMICAL_X_MDL_RDFILE)
         );
     }
@@ -98817,7 +98825,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MDL_RXNFILE)
         );
         assert_eq!(
-            crate::Mime::parse("cHEMicAL/X-MDL-rxnfILe"),
+            crate::Mime::parse("chEMICAL/X-mdl-RXnfIle"),
             Ok(CHEMICAL_X_MDL_RXNFILE)
         );
     }
@@ -98837,7 +98845,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MDL_SDFILE)
         );
         assert_eq!(
-            crate::Mime::parse("cHemiCaL/X-mdL-sDFiLe"),
+            crate::Mime::parse("cHeMICAl/X-mDL-SdfiLe"),
             Ok(CHEMICAL_X_MDL_SDFILE)
         );
     }
@@ -98857,7 +98865,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MDL_TGF)
         );
         assert_eq!(
-            crate::Mime::parse("chEmiCaL/x-mdl-tGF"),
+            crate::Mime::parse("cHeMicAl/x-mDL-TGf"),
             Ok(CHEMICAL_X_MDL_TGF)
         );
     }
@@ -98873,7 +98881,7 @@ pub mod constants {
     #[test]
     fn chemical_x_mmcif_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-mmcif"), Ok(CHEMICAL_X_MMCIF));
-        assert_eq!(crate::Mime::parse("CHEmical/x-MmCIF"), Ok(CHEMICAL_X_MMCIF));
+        assert_eq!(crate::Mime::parse("chemicAL/X-MMCiF"), Ok(CHEMICAL_X_MMCIF));
     }
 
     /// `chemical/x-mol2`
@@ -98887,7 +98895,7 @@ pub mod constants {
     #[test]
     fn chemical_x_mol2_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-mol2"), Ok(CHEMICAL_X_MOL2));
-        assert_eq!(crate::Mime::parse("CHeMIcaL/x-mOl2"), Ok(CHEMICAL_X_MOL2));
+        assert_eq!(crate::Mime::parse("CheMical/x-MOl2"), Ok(CHEMICAL_X_MOL2));
     }
 
     /// `chemical/x-molconn-Z`
@@ -98905,7 +98913,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MOLCONN_Z)
         );
         assert_eq!(
-            crate::Mime::parse("CHeMicAl/X-moLconn-z"),
+            crate::Mime::parse("chEmiCAl/X-molCoNN-Z"),
             Ok(CHEMICAL_X_MOLCONN_Z)
         );
     }
@@ -98925,7 +98933,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MOPAC_GRAPH)
         );
         assert_eq!(
-            crate::Mime::parse("CHeMIcal/X-mopaC-GRAph"),
+            crate::Mime::parse("ChemICal/x-MoPAC-graph"),
             Ok(CHEMICAL_X_MOPAC_GRAPH)
         );
     }
@@ -98945,7 +98953,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MOPAC_INPUT)
         );
         assert_eq!(
-            crate::Mime::parse("chemiCAl/x-MOPac-INPUt"),
+            crate::Mime::parse("cHEmIcaL/X-moPAC-iNPUt"),
             Ok(CHEMICAL_X_MOPAC_INPUT)
         );
     }
@@ -98965,7 +98973,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MOPAC_OUT)
         );
         assert_eq!(
-            crate::Mime::parse("CHEmicAl/X-MopAC-ouT"),
+            crate::Mime::parse("chEmiCaL/x-MopaC-ouT"),
             Ok(CHEMICAL_X_MOPAC_OUT)
         );
     }
@@ -98985,7 +98993,7 @@ pub mod constants {
             Ok(CHEMICAL_X_MOPAC_VIB)
         );
         assert_eq!(
-            crate::Mime::parse("CheMICaL/X-mOPaC-viB"),
+            crate::Mime::parse("CHeMICal/X-MopaC-vIb"),
             Ok(CHEMICAL_X_MOPAC_VIB)
         );
     }
@@ -99005,7 +99013,7 @@ pub mod constants {
             Ok(CHEMICAL_X_NCBI_ASN1)
         );
         assert_eq!(
-            crate::Mime::parse("chEmIcAl/X-NCbi-Asn1"),
+            crate::Mime::parse("ChEmICAL/x-nCbi-asN1"),
             Ok(CHEMICAL_X_NCBI_ASN1)
         );
     }
@@ -99025,7 +99033,7 @@ pub mod constants {
             Ok(CHEMICAL_X_NCBI_ASN1_ASCII)
         );
         assert_eq!(
-            crate::Mime::parse("chEMical/x-nCbI-AsN1-asCII"),
+            crate::Mime::parse("chemical/x-NCbI-asn1-AsCIi"),
             Ok(CHEMICAL_X_NCBI_ASN1_ASCII)
         );
     }
@@ -99045,7 +99053,7 @@ pub mod constants {
             Ok(CHEMICAL_X_NCBI_ASN1_BINARY)
         );
         assert_eq!(
-            crate::Mime::parse("cHEmICAl/X-Ncbi-aSN1-BinarY"),
+            crate::Mime::parse("CHEmICaL/x-NcBI-ASn1-bINaRy"),
             Ok(CHEMICAL_X_NCBI_ASN1_BINARY)
         );
     }
@@ -99065,7 +99073,7 @@ pub mod constants {
             Ok(CHEMICAL_X_NCBI_ASN1_SPEC)
         );
         assert_eq!(
-            crate::Mime::parse("ChEmIcAl/X-NCbi-ASn1-speC"),
+            crate::Mime::parse("ChEmICaL/x-NCBi-asn1-speC"),
             Ok(CHEMICAL_X_NCBI_ASN1_SPEC)
         );
     }
@@ -99081,7 +99089,7 @@ pub mod constants {
     #[test]
     fn chemical_x_pdb_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-pdb"), Ok(CHEMICAL_X_PDB));
-        assert_eq!(crate::Mime::parse("cheMicaL/x-pdB"), Ok(CHEMICAL_X_PDB));
+        assert_eq!(crate::Mime::parse("cheMical/X-Pdb"), Ok(CHEMICAL_X_PDB));
     }
 
     /// `chemical/x-rosdal`
@@ -99099,7 +99107,7 @@ pub mod constants {
             Ok(CHEMICAL_X_ROSDAL)
         );
         assert_eq!(
-            crate::Mime::parse("cHemical/X-RoSdAl"),
+            crate::Mime::parse("chemiCAL/X-RosDAL"),
             Ok(CHEMICAL_X_ROSDAL)
         );
     }
@@ -99119,7 +99127,7 @@ pub mod constants {
             Ok(CHEMICAL_X_SWISSPROT)
         );
         assert_eq!(
-            crate::Mime::parse("cHEMiCAl/X-sWISsPRot"),
+            crate::Mime::parse("cHEmiCAl/X-sWIsspRot"),
             Ok(CHEMICAL_X_SWISSPROT)
         );
     }
@@ -99139,7 +99147,7 @@ pub mod constants {
             Ok(CHEMICAL_X_VAMAS_ISO14976)
         );
         assert_eq!(
-            crate::Mime::parse("cHemiCAL/x-VaMas-isO14976"),
+            crate::Mime::parse("cHEMIcaL/X-vamaS-iso14976"),
             Ok(CHEMICAL_X_VAMAS_ISO14976)
         );
     }
@@ -99155,7 +99163,7 @@ pub mod constants {
     #[test]
     fn chemical_x_vmd_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-vmd"), Ok(CHEMICAL_X_VMD));
-        assert_eq!(crate::Mime::parse("ChEMIcal/x-vmd"), Ok(CHEMICAL_X_VMD));
+        assert_eq!(crate::Mime::parse("Chemical/x-vmd"), Ok(CHEMICAL_X_VMD));
     }
 
     /// `chemical/x-xtel`
@@ -99169,7 +99177,7 @@ pub mod constants {
     #[test]
     fn chemical_x_xtel_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-xtel"), Ok(CHEMICAL_X_XTEL));
-        assert_eq!(crate::Mime::parse("ChemiCAL/X-xTeL"), Ok(CHEMICAL_X_XTEL));
+        assert_eq!(crate::Mime::parse("cHEMICAl/x-XTel"), Ok(CHEMICAL_X_XTEL));
     }
 
     /// `chemical/x-xyz`
@@ -99183,7 +99191,7 @@ pub mod constants {
     #[test]
     fn chemical_x_xyz_parse() {
         assert_eq!(crate::Mime::parse("chemical/x-xyz"), Ok(CHEMICAL_X_XYZ));
-        assert_eq!(crate::Mime::parse("CHemiCaL/x-XYZ"), Ok(CHEMICAL_X_XYZ));
+        assert_eq!(crate::Mime::parse("cHeMicaL/X-XYZ"), Ok(CHEMICAL_X_XYZ));
     }
 
     /// `font/collection`
@@ -99197,7 +99205,7 @@ pub mod constants {
     #[test]
     fn font_collection_parse() {
         assert_eq!(crate::Mime::parse("font/collection"), Ok(FONT_COLLECTION));
-        assert_eq!(crate::Mime::parse("fONT/collECTioN"), Ok(FONT_COLLECTION));
+        assert_eq!(crate::Mime::parse("Font/COLleCTIOn"), Ok(FONT_COLLECTION));
     }
 
     /// `font/otf`
@@ -99211,7 +99219,7 @@ pub mod constants {
     #[test]
     fn font_otf_parse() {
         assert_eq!(crate::Mime::parse("font/otf"), Ok(FONT_OTF));
-        assert_eq!(crate::Mime::parse("FONt/oTF"), Ok(FONT_OTF));
+        assert_eq!(crate::Mime::parse("FoNT/Otf"), Ok(FONT_OTF));
     }
 
     /// `font/sfnt`
@@ -99225,7 +99233,7 @@ pub mod constants {
     #[test]
     fn font_sfnt_parse() {
         assert_eq!(crate::Mime::parse("font/sfnt"), Ok(FONT_SFNT));
-        assert_eq!(crate::Mime::parse("FOnt/SfNt"), Ok(FONT_SFNT));
+        assert_eq!(crate::Mime::parse("FOnT/sfnt"), Ok(FONT_SFNT));
     }
 
     /// `font/ttf`
@@ -99239,7 +99247,7 @@ pub mod constants {
     #[test]
     fn font_ttf_parse() {
         assert_eq!(crate::Mime::parse("font/ttf"), Ok(FONT_TTF));
-        assert_eq!(crate::Mime::parse("font/Ttf"), Ok(FONT_TTF));
+        assert_eq!(crate::Mime::parse("fOnt/TTF"), Ok(FONT_TTF));
     }
 
     /// `font/woff`
@@ -99253,7 +99261,7 @@ pub mod constants {
     #[test]
     fn font_woff_parse() {
         assert_eq!(crate::Mime::parse("font/woff"), Ok(FONT_WOFF));
-        assert_eq!(crate::Mime::parse("FONT/woFf"), Ok(FONT_WOFF));
+        assert_eq!(crate::Mime::parse("FonT/WoFF"), Ok(FONT_WOFF));
     }
 
     /// `font/woff2`
@@ -99267,7 +99275,7 @@ pub mod constants {
     #[test]
     fn font_woff2_parse() {
         assert_eq!(crate::Mime::parse("font/woff2"), Ok(FONT_WOFF2));
-        assert_eq!(crate::Mime::parse("FoNT/woFf2"), Ok(FONT_WOFF2));
+        assert_eq!(crate::Mime::parse("FonT/wOfF2"), Ok(FONT_WOFF2));
     }
 
     /// `image/aces`
@@ -99281,7 +99289,7 @@ pub mod constants {
     #[test]
     fn image_aces_parse() {
         assert_eq!(crate::Mime::parse("image/aces"), Ok(IMAGE_ACES));
-        assert_eq!(crate::Mime::parse("ImAge/Aces"), Ok(IMAGE_ACES));
+        assert_eq!(crate::Mime::parse("iMAge/acES"), Ok(IMAGE_ACES));
     }
 
     /// `image/avci`
@@ -99295,7 +99303,7 @@ pub mod constants {
     #[test]
     fn image_avci_parse() {
         assert_eq!(crate::Mime::parse("image/avci"), Ok(IMAGE_AVCI));
-        assert_eq!(crate::Mime::parse("imAGE/AvCi"), Ok(IMAGE_AVCI));
+        assert_eq!(crate::Mime::parse("IMAgE/avcI"), Ok(IMAGE_AVCI));
     }
 
     /// `image/avcs`
@@ -99309,7 +99317,7 @@ pub mod constants {
     #[test]
     fn image_avcs_parse() {
         assert_eq!(crate::Mime::parse("image/avcs"), Ok(IMAGE_AVCS));
-        assert_eq!(crate::Mime::parse("imaGE/AVcs"), Ok(IMAGE_AVCS));
+        assert_eq!(crate::Mime::parse("IMAGe/AVCS"), Ok(IMAGE_AVCS));
     }
 
     /// `image/avif`
@@ -99323,7 +99331,7 @@ pub mod constants {
     #[test]
     fn image_avif_parse() {
         assert_eq!(crate::Mime::parse("image/avif"), Ok(IMAGE_AVIF));
-        assert_eq!(crate::Mime::parse("IMAGe/AVIf"), Ok(IMAGE_AVIF));
+        assert_eq!(crate::Mime::parse("iMAGE/avIf"), Ok(IMAGE_AVIF));
     }
 
     /// `image/bmp`
@@ -99337,7 +99345,7 @@ pub mod constants {
     #[test]
     fn image_bmp_parse() {
         assert_eq!(crate::Mime::parse("image/bmp"), Ok(IMAGE_BMP));
-        assert_eq!(crate::Mime::parse("imAge/Bmp"), Ok(IMAGE_BMP));
+        assert_eq!(crate::Mime::parse("imAge/BmP"), Ok(IMAGE_BMP));
     }
 
     /// `image/cgm`
@@ -99351,7 +99359,7 @@ pub mod constants {
     #[test]
     fn image_cgm_parse() {
         assert_eq!(crate::Mime::parse("image/cgm"), Ok(IMAGE_CGM));
-        assert_eq!(crate::Mime::parse("IMaGe/CgM"), Ok(IMAGE_CGM));
+        assert_eq!(crate::Mime::parse("imAgE/cgm"), Ok(IMAGE_CGM));
     }
 
     /// `image/dicom-rle`
@@ -99365,7 +99373,7 @@ pub mod constants {
     #[test]
     fn image_dicom_rle_parse() {
         assert_eq!(crate::Mime::parse("image/dicom-rle"), Ok(IMAGE_DICOM_RLE));
-        assert_eq!(crate::Mime::parse("image/DiCOM-RLe"), Ok(IMAGE_DICOM_RLE));
+        assert_eq!(crate::Mime::parse("iMAgE/DiCOm-RLe"), Ok(IMAGE_DICOM_RLE));
     }
 
     /// `image/emf`
@@ -99379,7 +99387,7 @@ pub mod constants {
     #[test]
     fn image_emf_parse() {
         assert_eq!(crate::Mime::parse("image/emf"), Ok(IMAGE_EMF));
-        assert_eq!(crate::Mime::parse("iMAge/emf"), Ok(IMAGE_EMF));
+        assert_eq!(crate::Mime::parse("iMage/EMf"), Ok(IMAGE_EMF));
     }
 
     /// `image/example`
@@ -99393,7 +99401,7 @@ pub mod constants {
     #[test]
     fn image_example_parse() {
         assert_eq!(crate::Mime::parse("image/example"), Ok(IMAGE_EXAMPLE));
-        assert_eq!(crate::Mime::parse("iMAgE/eXAMple"), Ok(IMAGE_EXAMPLE));
+        assert_eq!(crate::Mime::parse("IMaGE/exaMPlE"), Ok(IMAGE_EXAMPLE));
     }
 
     /// `image/fits`
@@ -99407,7 +99415,7 @@ pub mod constants {
     #[test]
     fn image_fits_parse() {
         assert_eq!(crate::Mime::parse("image/fits"), Ok(IMAGE_FITS));
-        assert_eq!(crate::Mime::parse("IMaGe/Fits"), Ok(IMAGE_FITS));
+        assert_eq!(crate::Mime::parse("imAge/FIts"), Ok(IMAGE_FITS));
     }
 
     /// `image/g3fax`
@@ -99421,7 +99429,7 @@ pub mod constants {
     #[test]
     fn image_g3fax_parse() {
         assert_eq!(crate::Mime::parse("image/g3fax"), Ok(IMAGE_G3FAX));
-        assert_eq!(crate::Mime::parse("IMagE/g3faX"), Ok(IMAGE_G3FAX));
+        assert_eq!(crate::Mime::parse("ImaGe/G3FAX"), Ok(IMAGE_G3FAX));
     }
 
     /// `image/gif`
@@ -99435,7 +99443,7 @@ pub mod constants {
     #[test]
     fn image_gif_parse() {
         assert_eq!(crate::Mime::parse("image/gif"), Ok(IMAGE_GIF));
-        assert_eq!(crate::Mime::parse("iMAGE/GIF"), Ok(IMAGE_GIF));
+        assert_eq!(crate::Mime::parse("IMAGE/giF"), Ok(IMAGE_GIF));
     }
 
     /// `image/heic`
@@ -99449,7 +99457,7 @@ pub mod constants {
     #[test]
     fn image_heic_parse() {
         assert_eq!(crate::Mime::parse("image/heic"), Ok(IMAGE_HEIC));
-        assert_eq!(crate::Mime::parse("ImaGE/Heic"), Ok(IMAGE_HEIC));
+        assert_eq!(crate::Mime::parse("ImAge/HEiC"), Ok(IMAGE_HEIC));
     }
 
     /// `image/heic-sequence`
@@ -99467,7 +99475,7 @@ pub mod constants {
             Ok(IMAGE_HEIC_SEQUENCE)
         );
         assert_eq!(
-            crate::Mime::parse("IMaGE/HeIc-SEqueNce"),
+            crate::Mime::parse("ImAgE/hEIc-sEquENce"),
             Ok(IMAGE_HEIC_SEQUENCE)
         );
     }
@@ -99483,7 +99491,7 @@ pub mod constants {
     #[test]
     fn image_heif_parse() {
         assert_eq!(crate::Mime::parse("image/heif"), Ok(IMAGE_HEIF));
-        assert_eq!(crate::Mime::parse("IMagE/HeIF"), Ok(IMAGE_HEIF));
+        assert_eq!(crate::Mime::parse("IMAgE/heIF"), Ok(IMAGE_HEIF));
     }
 
     /// `image/heif-sequence`
@@ -99501,7 +99509,7 @@ pub mod constants {
             Ok(IMAGE_HEIF_SEQUENCE)
         );
         assert_eq!(
-            crate::Mime::parse("imAGe/HeIf-sEquENce"),
+            crate::Mime::parse("iMAgE/HeIf-SEquENcE"),
             Ok(IMAGE_HEIF_SEQUENCE)
         );
     }
@@ -99517,7 +99525,7 @@ pub mod constants {
     #[test]
     fn image_hej2k_parse() {
         assert_eq!(crate::Mime::parse("image/hej2k"), Ok(IMAGE_HEJ2K));
-        assert_eq!(crate::Mime::parse("IMaGe/HEJ2k"), Ok(IMAGE_HEJ2K));
+        assert_eq!(crate::Mime::parse("iMAGE/hEJ2K"), Ok(IMAGE_HEJ2K));
     }
 
     /// `image/hsj2`
@@ -99531,7 +99539,7 @@ pub mod constants {
     #[test]
     fn image_hsj2_parse() {
         assert_eq!(crate::Mime::parse("image/hsj2"), Ok(IMAGE_HSJ2));
-        assert_eq!(crate::Mime::parse("IMAGe/HSJ2"), Ok(IMAGE_HSJ2));
+        assert_eq!(crate::Mime::parse("iMAGE/HsJ2"), Ok(IMAGE_HSJ2));
     }
 
     /// `image/ief`
@@ -99545,7 +99553,7 @@ pub mod constants {
     #[test]
     fn image_ief_parse() {
         assert_eq!(crate::Mime::parse("image/ief"), Ok(IMAGE_IEF));
-        assert_eq!(crate::Mime::parse("ImAGe/Ief"), Ok(IMAGE_IEF));
+        assert_eq!(crate::Mime::parse("imAge/iEf"), Ok(IMAGE_IEF));
     }
 
     /// `image/jls`
@@ -99559,7 +99567,7 @@ pub mod constants {
     #[test]
     fn image_jls_parse() {
         assert_eq!(crate::Mime::parse("image/jls"), Ok(IMAGE_JLS));
-        assert_eq!(crate::Mime::parse("ImAgE/JLs"), Ok(IMAGE_JLS));
+        assert_eq!(crate::Mime::parse("ImAGe/jlS"), Ok(IMAGE_JLS));
     }
 
     /// `image/jp2`
@@ -99573,7 +99581,7 @@ pub mod constants {
     #[test]
     fn image_jp2_parse() {
         assert_eq!(crate::Mime::parse("image/jp2"), Ok(IMAGE_JP2));
-        assert_eq!(crate::Mime::parse("ImaGe/jp2"), Ok(IMAGE_JP2));
+        assert_eq!(crate::Mime::parse("iMagE/JP2"), Ok(IMAGE_JP2));
     }
 
     /// `image/jpeg`
@@ -99587,7 +99595,7 @@ pub mod constants {
     #[test]
     fn image_jpeg_parse() {
         assert_eq!(crate::Mime::parse("image/jpeg"), Ok(IMAGE_JPEG));
-        assert_eq!(crate::Mime::parse("IMAgE/JpEG"), Ok(IMAGE_JPEG));
+        assert_eq!(crate::Mime::parse("ImAgE/JPEG"), Ok(IMAGE_JPEG));
     }
 
     /// `image/jph`
@@ -99601,7 +99609,7 @@ pub mod constants {
     #[test]
     fn image_jph_parse() {
         assert_eq!(crate::Mime::parse("image/jph"), Ok(IMAGE_JPH));
-        assert_eq!(crate::Mime::parse("IMAGE/JPH"), Ok(IMAGE_JPH));
+        assert_eq!(crate::Mime::parse("ImAGE/JPh"), Ok(IMAGE_JPH));
     }
 
     /// `image/jphc`
@@ -99615,7 +99623,7 @@ pub mod constants {
     #[test]
     fn image_jphc_parse() {
         assert_eq!(crate::Mime::parse("image/jphc"), Ok(IMAGE_JPHC));
-        assert_eq!(crate::Mime::parse("IMAgE/JPhc"), Ok(IMAGE_JPHC));
+        assert_eq!(crate::Mime::parse("IMAGe/JpHc"), Ok(IMAGE_JPHC));
     }
 
     /// `image/jpm`
@@ -99629,7 +99637,7 @@ pub mod constants {
     #[test]
     fn image_jpm_parse() {
         assert_eq!(crate::Mime::parse("image/jpm"), Ok(IMAGE_JPM));
-        assert_eq!(crate::Mime::parse("ImAgE/JPm"), Ok(IMAGE_JPM));
+        assert_eq!(crate::Mime::parse("ImAGe/JPm"), Ok(IMAGE_JPM));
     }
 
     /// `image/jpx`
@@ -99643,7 +99651,7 @@ pub mod constants {
     #[test]
     fn image_jpx_parse() {
         assert_eq!(crate::Mime::parse("image/jpx"), Ok(IMAGE_JPX));
-        assert_eq!(crate::Mime::parse("iMAge/jpX"), Ok(IMAGE_JPX));
+        assert_eq!(crate::Mime::parse("imagE/JpX"), Ok(IMAGE_JPX));
     }
 
     /// `image/jxl`
@@ -99657,7 +99665,7 @@ pub mod constants {
     #[test]
     fn image_jxl_parse() {
         assert_eq!(crate::Mime::parse("image/jxl"), Ok(IMAGE_JXL));
-        assert_eq!(crate::Mime::parse("iMaGe/JXl"), Ok(IMAGE_JXL));
+        assert_eq!(crate::Mime::parse("imAGe/Jxl"), Ok(IMAGE_JXL));
     }
 
     /// `image/jxr`
@@ -99671,7 +99679,7 @@ pub mod constants {
     #[test]
     fn image_jxr_parse() {
         assert_eq!(crate::Mime::parse("image/jxr"), Ok(IMAGE_JXR));
-        assert_eq!(crate::Mime::parse("IMage/jxr"), Ok(IMAGE_JXR));
+        assert_eq!(crate::Mime::parse("iMage/jxr"), Ok(IMAGE_JXR));
     }
 
     /// `image/jxrA`
@@ -99685,7 +99693,7 @@ pub mod constants {
     #[test]
     fn image_jxr_a_parse() {
         assert_eq!(crate::Mime::parse("image/jxrA"), Ok(IMAGE_JXR_A));
-        assert_eq!(crate::Mime::parse("Image/jxRa"), Ok(IMAGE_JXR_A));
+        assert_eq!(crate::Mime::parse("iMagE/jxRa"), Ok(IMAGE_JXR_A));
     }
 
     /// `image/jxrS`
@@ -99699,7 +99707,7 @@ pub mod constants {
     #[test]
     fn image_jxr_s_parse() {
         assert_eq!(crate::Mime::parse("image/jxrS"), Ok(IMAGE_JXR_S));
-        assert_eq!(crate::Mime::parse("imAgE/jxRS"), Ok(IMAGE_JXR_S));
+        assert_eq!(crate::Mime::parse("IMagE/jXRs"), Ok(IMAGE_JXR_S));
     }
 
     /// `image/jxs`
@@ -99713,7 +99721,7 @@ pub mod constants {
     #[test]
     fn image_jxs_parse() {
         assert_eq!(crate::Mime::parse("image/jxs"), Ok(IMAGE_JXS));
-        assert_eq!(crate::Mime::parse("iMAge/JXs"), Ok(IMAGE_JXS));
+        assert_eq!(crate::Mime::parse("imAGe/JxS"), Ok(IMAGE_JXS));
     }
 
     /// `image/jxsc`
@@ -99727,7 +99735,7 @@ pub mod constants {
     #[test]
     fn image_jxsc_parse() {
         assert_eq!(crate::Mime::parse("image/jxsc"), Ok(IMAGE_JXSC));
-        assert_eq!(crate::Mime::parse("iMaGE/jXsc"), Ok(IMAGE_JXSC));
+        assert_eq!(crate::Mime::parse("IMaGe/JxsC"), Ok(IMAGE_JXSC));
     }
 
     /// `image/jxsi`
@@ -99741,7 +99749,7 @@ pub mod constants {
     #[test]
     fn image_jxsi_parse() {
         assert_eq!(crate::Mime::parse("image/jxsi"), Ok(IMAGE_JXSI));
-        assert_eq!(crate::Mime::parse("ImaGe/jXSi"), Ok(IMAGE_JXSI));
+        assert_eq!(crate::Mime::parse("iMaGE/Jxsi"), Ok(IMAGE_JXSI));
     }
 
     /// `image/jxss`
@@ -99755,7 +99763,7 @@ pub mod constants {
     #[test]
     fn image_jxss_parse() {
         assert_eq!(crate::Mime::parse("image/jxss"), Ok(IMAGE_JXSS));
-        assert_eq!(crate::Mime::parse("Image/JxsS"), Ok(IMAGE_JXSS));
+        assert_eq!(crate::Mime::parse("iMAge/JxsS"), Ok(IMAGE_JXSS));
     }
 
     /// `image/ktx`
@@ -99769,7 +99777,7 @@ pub mod constants {
     #[test]
     fn image_ktx_parse() {
         assert_eq!(crate::Mime::parse("image/ktx"), Ok(IMAGE_KTX));
-        assert_eq!(crate::Mime::parse("ImaGe/Ktx"), Ok(IMAGE_KTX));
+        assert_eq!(crate::Mime::parse("iMAge/KTX"), Ok(IMAGE_KTX));
     }
 
     /// `image/ktx2`
@@ -99783,7 +99791,7 @@ pub mod constants {
     #[test]
     fn image_ktx2_parse() {
         assert_eq!(crate::Mime::parse("image/ktx2"), Ok(IMAGE_KTX2));
-        assert_eq!(crate::Mime::parse("iMAGe/KTx2"), Ok(IMAGE_KTX2));
+        assert_eq!(crate::Mime::parse("iMAGe/ktX2"), Ok(IMAGE_KTX2));
     }
 
     /// `image/naplps`
@@ -99797,7 +99805,7 @@ pub mod constants {
     #[test]
     fn image_naplps_parse() {
         assert_eq!(crate::Mime::parse("image/naplps"), Ok(IMAGE_NAPLPS));
-        assert_eq!(crate::Mime::parse("imAge/naplpS"), Ok(IMAGE_NAPLPS));
+        assert_eq!(crate::Mime::parse("iMage/nAPlPs"), Ok(IMAGE_NAPLPS));
     }
 
     /// `image/png`
@@ -99811,7 +99819,7 @@ pub mod constants {
     #[test]
     fn image_png_parse() {
         assert_eq!(crate::Mime::parse("image/png"), Ok(IMAGE_PNG));
-        assert_eq!(crate::Mime::parse("ImAge/PNg"), Ok(IMAGE_PNG));
+        assert_eq!(crate::Mime::parse("iMAGe/PnG"), Ok(IMAGE_PNG));
     }
 
     /// `image/prs.btif`
@@ -99825,7 +99833,7 @@ pub mod constants {
     #[test]
     fn image_prs_btif_parse() {
         assert_eq!(crate::Mime::parse("image/prs.btif"), Ok(IMAGE_PRS_BTIF));
-        assert_eq!(crate::Mime::parse("IMaGE/pRs.BTIF"), Ok(IMAGE_PRS_BTIF));
+        assert_eq!(crate::Mime::parse("IMaGe/PRS.BtIf"), Ok(IMAGE_PRS_BTIF));
     }
 
     /// `image/prs.pti`
@@ -99839,7 +99847,7 @@ pub mod constants {
     #[test]
     fn image_prs_pti_parse() {
         assert_eq!(crate::Mime::parse("image/prs.pti"), Ok(IMAGE_PRS_PTI));
-        assert_eq!(crate::Mime::parse("ImAge/prS.pTI"), Ok(IMAGE_PRS_PTI));
+        assert_eq!(crate::Mime::parse("imagE/pRS.PTi"), Ok(IMAGE_PRS_PTI));
     }
 
     /// `image/pwg-raster`
@@ -99853,7 +99861,7 @@ pub mod constants {
     #[test]
     fn image_pwg_raster_parse() {
         assert_eq!(crate::Mime::parse("image/pwg-raster"), Ok(IMAGE_PWG_RASTER));
-        assert_eq!(crate::Mime::parse("iMAgE/pWG-raSTeR"), Ok(IMAGE_PWG_RASTER));
+        assert_eq!(crate::Mime::parse("IMaGE/pwG-rAStEr"), Ok(IMAGE_PWG_RASTER));
     }
 
     /// `image/svg+xml`
@@ -99869,7 +99877,7 @@ pub mod constants {
     #[test]
     fn image_svg_xml_parse() {
         assert_eq!(crate::Mime::parse("image/svg+xml"), Ok(IMAGE_SVG_XML));
-        assert_eq!(crate::Mime::parse("ImAge/svG+XML"), Ok(IMAGE_SVG_XML));
+        assert_eq!(crate::Mime::parse("imagE/SVG+XML"), Ok(IMAGE_SVG_XML));
     }
 
     /// `image/t38`
@@ -99883,7 +99891,7 @@ pub mod constants {
     #[test]
     fn image_t38_parse() {
         assert_eq!(crate::Mime::parse("image/t38"), Ok(IMAGE_T38));
-        assert_eq!(crate::Mime::parse("iMAGE/T38"), Ok(IMAGE_T38));
+        assert_eq!(crate::Mime::parse("ImAGE/t38"), Ok(IMAGE_T38));
     }
 
     /// `image/tiff`
@@ -99897,7 +99905,7 @@ pub mod constants {
     #[test]
     fn image_tiff_parse() {
         assert_eq!(crate::Mime::parse("image/tiff"), Ok(IMAGE_TIFF));
-        assert_eq!(crate::Mime::parse("ImAgE/TIFf"), Ok(IMAGE_TIFF));
+        assert_eq!(crate::Mime::parse("ImAGE/TIFf"), Ok(IMAGE_TIFF));
     }
 
     /// `image/tiff-fx`
@@ -99911,7 +99919,7 @@ pub mod constants {
     #[test]
     fn image_tiff_fx_parse() {
         assert_eq!(crate::Mime::parse("image/tiff-fx"), Ok(IMAGE_TIFF_FX));
-        assert_eq!(crate::Mime::parse("IMAge/TIFf-fX"), Ok(IMAGE_TIFF_FX));
+        assert_eq!(crate::Mime::parse("iMAGE/TiFF-fx"), Ok(IMAGE_TIFF_FX));
     }
 
     /// `image/vnd.adobe.photoshop`
@@ -99931,7 +99939,7 @@ pub mod constants {
             Ok(IMAGE_VND_ADOBE_PHOTOSHOP)
         );
         assert_eq!(
-            crate::Mime::parse("ImagE/VnD.aDobE.pHOtosHop"),
+            crate::Mime::parse("IMAgE/vNd.ADoBE.phOtoShOp"),
             Ok(IMAGE_VND_ADOBE_PHOTOSHOP)
         );
     }
@@ -99953,7 +99961,7 @@ pub mod constants {
             Ok(IMAGE_VND_AIRZIP_ACCELERATOR_AZV)
         );
         assert_eq!(
-            crate::Mime::parse("ImAge/vnd.AIrZIp.aCCeLerATor.aZv"),
+            crate::Mime::parse("iMage/VNd.AiRzIP.AccELeratOr.Azv"),
             Ok(IMAGE_VND_AIRZIP_ACCELERATOR_AZV)
         );
     }
@@ -99973,7 +99981,7 @@ pub mod constants {
             Ok(IMAGE_VND_CNS_INF2)
         );
         assert_eq!(
-            crate::Mime::parse("IMage/VND.CNS.iNF2"),
+            crate::Mime::parse("iMAGE/VND.cNS.inf2"),
             Ok(IMAGE_VND_CNS_INF2)
         );
     }
@@ -99993,7 +100001,7 @@ pub mod constants {
             Ok(IMAGE_VND_DECE_GRAPHIC)
         );
         assert_eq!(
-            crate::Mime::parse("imaGE/vnd.DeCe.GRAphIc"),
+            crate::Mime::parse("IMage/VnD.DECE.gRaphIC"),
             Ok(IMAGE_VND_DECE_GRAPHIC)
         );
     }
@@ -100009,7 +100017,7 @@ pub mod constants {
     #[test]
     fn image_vnd_djvu_parse() {
         assert_eq!(crate::Mime::parse("image/vnd.djvu"), Ok(IMAGE_VND_DJVU));
-        assert_eq!(crate::Mime::parse("imAGe/VNd.DjVU"), Ok(IMAGE_VND_DJVU));
+        assert_eq!(crate::Mime::parse("imAGe/VnD.dJVu"), Ok(IMAGE_VND_DJVU));
     }
 
     /// `image/vnd.dvb.subtitle`
@@ -100027,7 +100035,7 @@ pub mod constants {
             Ok(IMAGE_VND_DVB_SUBTITLE)
         );
         assert_eq!(
-            crate::Mime::parse("iMAge/VnD.DVb.SUbtItlE"),
+            crate::Mime::parse("imAgE/VNd.DVb.SubTitle"),
             Ok(IMAGE_VND_DVB_SUBTITLE)
         );
     }
@@ -100043,7 +100051,7 @@ pub mod constants {
     #[test]
     fn image_vnd_dwg_parse() {
         assert_eq!(crate::Mime::parse("image/vnd.dwg"), Ok(IMAGE_VND_DWG));
-        assert_eq!(crate::Mime::parse("imagE/vnD.Dwg"), Ok(IMAGE_VND_DWG));
+        assert_eq!(crate::Mime::parse("ImagE/Vnd.Dwg"), Ok(IMAGE_VND_DWG));
     }
 
     /// `image/vnd.dxf`
@@ -100057,7 +100065,7 @@ pub mod constants {
     #[test]
     fn image_vnd_dxf_parse() {
         assert_eq!(crate::Mime::parse("image/vnd.dxf"), Ok(IMAGE_VND_DXF));
-        assert_eq!(crate::Mime::parse("iMage/VND.dxF"), Ok(IMAGE_VND_DXF));
+        assert_eq!(crate::Mime::parse("imAGE/vnD.dXf"), Ok(IMAGE_VND_DXF));
     }
 
     /// `image/vnd.fastbidsheet`
@@ -100075,7 +100083,7 @@ pub mod constants {
             Ok(IMAGE_VND_FASTBIDSHEET)
         );
         assert_eq!(
-            crate::Mime::parse("imAgE/vnd.FasTbIDsHEet"),
+            crate::Mime::parse("Image/Vnd.fAStBIdsHEET"),
             Ok(IMAGE_VND_FASTBIDSHEET)
         );
     }
@@ -100091,7 +100099,7 @@ pub mod constants {
     #[test]
     fn image_vnd_fpx_parse() {
         assert_eq!(crate::Mime::parse("image/vnd.fpx"), Ok(IMAGE_VND_FPX));
-        assert_eq!(crate::Mime::parse("IMAGe/VNd.fPx"), Ok(IMAGE_VND_FPX));
+        assert_eq!(crate::Mime::parse("iMAGe/vNd.fpx"), Ok(IMAGE_VND_FPX));
     }
 
     /// `image/vnd.fst`
@@ -100105,7 +100113,7 @@ pub mod constants {
     #[test]
     fn image_vnd_fst_parse() {
         assert_eq!(crate::Mime::parse("image/vnd.fst"), Ok(IMAGE_VND_FST));
-        assert_eq!(crate::Mime::parse("image/vnD.fsT"), Ok(IMAGE_VND_FST));
+        assert_eq!(crate::Mime::parse("imagE/vnD.FSt"), Ok(IMAGE_VND_FST));
     }
 
     /// `image/vnd.fujixerox.edmics-mmr`
@@ -100125,7 +100133,7 @@ pub mod constants {
             Ok(IMAGE_VND_FUJIXEROX_EDMICS_MMR)
         );
         assert_eq!(
-            crate::Mime::parse("iMAgE/VnD.FUjixERox.EdmiCs-MMR"),
+            crate::Mime::parse("ImAgE/VNd.fUJixERox.EdmICS-mmr"),
             Ok(IMAGE_VND_FUJIXEROX_EDMICS_MMR)
         );
     }
@@ -100147,7 +100155,7 @@ pub mod constants {
             Ok(IMAGE_VND_FUJIXEROX_EDMICS_RLC)
         );
         assert_eq!(
-            crate::Mime::parse("image/VnD.FujiXeROX.edMics-rLC"),
+            crate::Mime::parse("iMAgE/Vnd.FuJIXeroX.edMiCS-rlc"),
             Ok(IMAGE_VND_FUJIXEROX_EDMICS_RLC)
         );
     }
@@ -100169,7 +100177,7 @@ pub mod constants {
             Ok(IMAGE_VND_GLOBALGRAPHICS_PGB)
         );
         assert_eq!(
-            crate::Mime::parse("imagE/vnd.gLObALgRaphiCS.PGB"),
+            crate::Mime::parse("Image/vND.GLoBalgrAPHICS.pGb"),
             Ok(IMAGE_VND_GLOBALGRAPHICS_PGB)
         );
     }
@@ -100191,7 +100199,7 @@ pub mod constants {
             Ok(IMAGE_VND_MICROSOFT_ICON)
         );
         assert_eq!(
-            crate::Mime::parse("ImAge/vnD.microSoFt.ICON"),
+            crate::Mime::parse("imagE/vnd.mIcRosOFT.icon"),
             Ok(IMAGE_VND_MICROSOFT_ICON)
         );
     }
@@ -100207,7 +100215,7 @@ pub mod constants {
     #[test]
     fn image_vnd_mix_parse() {
         assert_eq!(crate::Mime::parse("image/vnd.mix"), Ok(IMAGE_VND_MIX));
-        assert_eq!(crate::Mime::parse("image/VNd.mix"), Ok(IMAGE_VND_MIX));
+        assert_eq!(crate::Mime::parse("iMAGe/vnd.mIX"), Ok(IMAGE_VND_MIX));
     }
 
     /// `image/vnd.mozilla.apng`
@@ -100225,7 +100233,7 @@ pub mod constants {
             Ok(IMAGE_VND_MOZILLA_APNG)
         );
         assert_eq!(
-            crate::Mime::parse("ImAGe/vnD.mOZiLlA.ApNg"),
+            crate::Mime::parse("imagE/vND.MoZiLlA.aPng"),
             Ok(IMAGE_VND_MOZILLA_APNG)
         );
     }
@@ -100245,7 +100253,7 @@ pub mod constants {
             Ok(IMAGE_VND_MS_MODI)
         );
         assert_eq!(
-            crate::Mime::parse("iMagE/VND.Ms-mOdi"),
+            crate::Mime::parse("ImAGE/Vnd.Ms-moDi"),
             Ok(IMAGE_VND_MS_MODI)
         );
     }
@@ -100265,7 +100273,7 @@ pub mod constants {
             Ok(IMAGE_VND_NET_FPX)
         );
         assert_eq!(
-            crate::Mime::parse("imAge/vnd.nET-FpX"),
+            crate::Mime::parse("iMage/vND.NeT-FPx"),
             Ok(IMAGE_VND_NET_FPX)
         );
     }
@@ -100285,7 +100293,7 @@ pub mod constants {
             Ok(IMAGE_VND_PCO_B16)
         );
         assert_eq!(
-            crate::Mime::parse("iMAgE/Vnd.PCO.b16"),
+            crate::Mime::parse("ImAge/VND.pCO.B16"),
             Ok(IMAGE_VND_PCO_B16)
         );
     }
@@ -100305,7 +100313,7 @@ pub mod constants {
             Ok(IMAGE_VND_RADIANCE)
         );
         assert_eq!(
-            crate::Mime::parse("IMagE/vnd.RADiAnce"),
+            crate::Mime::parse("IMage/VND.RadianCE"),
             Ok(IMAGE_VND_RADIANCE)
         );
     }
@@ -100325,7 +100333,7 @@ pub mod constants {
             Ok(IMAGE_VND_SEALED_PNG)
         );
         assert_eq!(
-            crate::Mime::parse("imAGE/VNd.SEALed.pNg"),
+            crate::Mime::parse("IMAGe/VND.sealEd.pnG"),
             Ok(IMAGE_VND_SEALED_PNG)
         );
     }
@@ -100347,7 +100355,7 @@ pub mod constants {
             Ok(IMAGE_VND_SEALEDMEDIA_SOFTSEAL_GIF)
         );
         assert_eq!(
-            crate::Mime::parse("imaGE/VNd.SeAleDmeDiA.sOftseAL.Gif"),
+            crate::Mime::parse("IMAGe/VnD.sEalEdMedIa.soFTsEal.Gif"),
             Ok(IMAGE_VND_SEALEDMEDIA_SOFTSEAL_GIF)
         );
     }
@@ -100369,7 +100377,7 @@ pub mod constants {
             Ok(IMAGE_VND_SEALEDMEDIA_SOFTSEAL_JPG)
         );
         assert_eq!(
-            crate::Mime::parse("iMagE/vnD.SeaLEdMeDIA.sOfTsEal.jPG"),
+            crate::Mime::parse("ImagE/Vnd.SeAlEDMedIa.sOftseAL.JpG"),
             Ok(IMAGE_VND_SEALEDMEDIA_SOFTSEAL_JPG)
         );
     }
@@ -100385,7 +100393,7 @@ pub mod constants {
     #[test]
     fn image_vnd_svf_parse() {
         assert_eq!(crate::Mime::parse("image/vnd.svf"), Ok(IMAGE_VND_SVF));
-        assert_eq!(crate::Mime::parse("iMaGe/vnD.SvF"), Ok(IMAGE_VND_SVF));
+        assert_eq!(crate::Mime::parse("imagE/VnD.sVF"), Ok(IMAGE_VND_SVF));
     }
 
     /// `image/vnd.tencent.tap`
@@ -100403,7 +100411,7 @@ pub mod constants {
             Ok(IMAGE_VND_TENCENT_TAP)
         );
         assert_eq!(
-            crate::Mime::parse("ImAGe/vnd.TEncENt.TaP"),
+            crate::Mime::parse("image/VNd.TEncEnT.Tap"),
             Ok(IMAGE_VND_TENCENT_TAP)
         );
     }
@@ -100425,7 +100433,7 @@ pub mod constants {
             Ok(IMAGE_VND_VALVE_SOURCE_TEXTURE)
         );
         assert_eq!(
-            crate::Mime::parse("iMage/vNd.VaLVE.soURcE.TExTUrE"),
+            crate::Mime::parse("iMaGe/VnD.VAlvE.sOuRCe.TeXtURe"),
             Ok(IMAGE_VND_VALVE_SOURCE_TEXTURE)
         );
     }
@@ -100445,7 +100453,7 @@ pub mod constants {
             Ok(IMAGE_VND_WAP_WBMP)
         );
         assert_eq!(
-            crate::Mime::parse("iMAge/VND.wap.wBmP"),
+            crate::Mime::parse("iMAGE/vnd.wAp.wbmp"),
             Ok(IMAGE_VND_WAP_WBMP)
         );
     }
@@ -100461,7 +100469,7 @@ pub mod constants {
     #[test]
     fn image_vnd_xiff_parse() {
         assert_eq!(crate::Mime::parse("image/vnd.xiff"), Ok(IMAGE_VND_XIFF));
-        assert_eq!(crate::Mime::parse("imagE/Vnd.xIFF"), Ok(IMAGE_VND_XIFF));
+        assert_eq!(crate::Mime::parse("ImAge/vND.xiff"), Ok(IMAGE_VND_XIFF));
     }
 
     /// `image/vnd.zbrush.pcx`
@@ -100479,9 +100487,23 @@ pub mod constants {
             Ok(IMAGE_VND_ZBRUSH_PCX)
         );
         assert_eq!(
-            crate::Mime::parse("image/vnD.ZBrUSH.pcx"),
+            crate::Mime::parse("iMagE/VNd.ZBRush.PCX"),
             Ok(IMAGE_VND_ZBRUSH_PCX)
         );
+    }
+
+    /// `image/webp`
+    pub const IMAGE_WEBP: crate::Mime<'static> = crate::Mime {
+        ty: crate::Type(crate::Name::Interned(super::TypeIntern::Image)),
+        subtype: crate::Subtype(crate::Name::Interned(super::SubtypeIntern::Webp)),
+        suffix: None,
+        parameters: crate::Parameters::Slice(&[]),
+    };
+
+    #[test]
+    fn image_webp_parse() {
+        assert_eq!(crate::Mime::parse("image/webp"), Ok(IMAGE_WEBP));
+        assert_eq!(crate::Mime::parse("imagE/WEbp"), Ok(IMAGE_WEBP));
     }
 
     /// `image/wmf`
@@ -100495,7 +100517,7 @@ pub mod constants {
     #[test]
     fn image_wmf_parse() {
         assert_eq!(crate::Mime::parse("image/wmf"), Ok(IMAGE_WMF));
-        assert_eq!(crate::Mime::parse("iMAGe/wmF"), Ok(IMAGE_WMF));
+        assert_eq!(crate::Mime::parse("IMaGE/wMf"), Ok(IMAGE_WMF));
     }
 
     /// `image/x-canon-cr2`
@@ -100513,7 +100535,7 @@ pub mod constants {
             Ok(IMAGE_X_CANON_CR2)
         );
         assert_eq!(
-            crate::Mime::parse("IMAge/X-CANoN-cr2"),
+            crate::Mime::parse("imagE/x-CaNon-cr2"),
             Ok(IMAGE_X_CANON_CR2)
         );
     }
@@ -100533,7 +100555,7 @@ pub mod constants {
             Ok(IMAGE_X_CANON_CRW)
         );
         assert_eq!(
-            crate::Mime::parse("iMAge/x-caNon-CRw"),
+            crate::Mime::parse("IMagE/x-CANoN-CrW"),
             Ok(IMAGE_X_CANON_CRW)
         );
     }
@@ -100553,7 +100575,7 @@ pub mod constants {
             Ok(IMAGE_X_CMU_RASTER)
         );
         assert_eq!(
-            crate::Mime::parse("iMagE/X-cMU-rAStER"),
+            crate::Mime::parse("ImAGe/X-cMU-RAStEr"),
             Ok(IMAGE_X_CMU_RASTER)
         );
     }
@@ -100573,7 +100595,7 @@ pub mod constants {
             Ok(IMAGE_X_CORELDRAW)
         );
         assert_eq!(
-            crate::Mime::parse("imAge/X-COReLdRaW"),
+            crate::Mime::parse("ImAge/x-CorEldRAW"),
             Ok(IMAGE_X_CORELDRAW)
         );
     }
@@ -100595,7 +100617,7 @@ pub mod constants {
             Ok(IMAGE_X_CORELDRAWPATTERN)
         );
         assert_eq!(
-            crate::Mime::parse("imAge/x-CorELDRawPATTerN"),
+            crate::Mime::parse("ImaGE/X-cORELDraWpAtTeRN"),
             Ok(IMAGE_X_CORELDRAWPATTERN)
         );
     }
@@ -100617,7 +100639,7 @@ pub mod constants {
             Ok(IMAGE_X_CORELDRAWTEMPLATE)
         );
         assert_eq!(
-            crate::Mime::parse("IMAGe/X-CoReLDraWTEmplate"),
+            crate::Mime::parse("imAGE/x-coreLDrawTeMpLatE"),
             Ok(IMAGE_X_CORELDRAWTEMPLATE)
         );
     }
@@ -100639,7 +100661,7 @@ pub mod constants {
             Ok(IMAGE_X_CORELPHOTOPAINT)
         );
         assert_eq!(
-            crate::Mime::parse("iMAge/X-CoRelPhotOPaInt"),
+            crate::Mime::parse("imaGE/X-cOrELPHOTOPaInt"),
             Ok(IMAGE_X_CORELPHOTOPAINT)
         );
     }
@@ -100659,7 +100681,7 @@ pub mod constants {
             Ok(IMAGE_X_EPSON_ERF)
         );
         assert_eq!(
-            crate::Mime::parse("ImAGE/X-EPsOn-eRF"),
+            crate::Mime::parse("iMAge/X-EpSon-eRF"),
             Ok(IMAGE_X_EPSON_ERF)
         );
     }
@@ -100675,7 +100697,7 @@ pub mod constants {
     #[test]
     fn image_x_jg_parse() {
         assert_eq!(crate::Mime::parse("image/x-jg"), Ok(IMAGE_X_JG));
-        assert_eq!(crate::Mime::parse("imAGE/x-jg"), Ok(IMAGE_X_JG));
+        assert_eq!(crate::Mime::parse("IMaGe/X-jg"), Ok(IMAGE_X_JG));
     }
 
     /// `image/x-jng`
@@ -100689,7 +100711,7 @@ pub mod constants {
     #[test]
     fn image_x_jng_parse() {
         assert_eq!(crate::Mime::parse("image/x-jng"), Ok(IMAGE_X_JNG));
-        assert_eq!(crate::Mime::parse("imAGE/x-jNG"), Ok(IMAGE_X_JNG));
+        assert_eq!(crate::Mime::parse("ImAge/x-jNg"), Ok(IMAGE_X_JNG));
     }
 
     /// `image/x-nikon-nef`
@@ -100707,7 +100729,7 @@ pub mod constants {
             Ok(IMAGE_X_NIKON_NEF)
         );
         assert_eq!(
-            crate::Mime::parse("imaGe/x-NiKoN-nEf"),
+            crate::Mime::parse("iMage/x-NiKon-nEf"),
             Ok(IMAGE_X_NIKON_NEF)
         );
     }
@@ -100727,7 +100749,7 @@ pub mod constants {
             Ok(IMAGE_X_OLYMPUS_ORF)
         );
         assert_eq!(
-            crate::Mime::parse("imagE/x-olYmPuS-oRF"),
+            crate::Mime::parse("ImaGE/X-OlympuS-orF"),
             Ok(IMAGE_X_OLYMPUS_ORF)
         );
     }
@@ -100747,7 +100769,7 @@ pub mod constants {
             Ok(IMAGE_X_PORTABLE_ANYMAP)
         );
         assert_eq!(
-            crate::Mime::parse("iMaGe/x-pOrtaBlE-AnyMAP"),
+            crate::Mime::parse("iMAGe/X-Portable-aNymAP"),
             Ok(IMAGE_X_PORTABLE_ANYMAP)
         );
     }
@@ -100767,7 +100789,7 @@ pub mod constants {
             Ok(IMAGE_X_PORTABLE_BITMAP)
         );
         assert_eq!(
-            crate::Mime::parse("image/x-pOrtABlE-BitMAp"),
+            crate::Mime::parse("iMAGe/X-pOrtABLe-BITMAP"),
             Ok(IMAGE_X_PORTABLE_BITMAP)
         );
     }
@@ -100789,7 +100811,7 @@ pub mod constants {
             Ok(IMAGE_X_PORTABLE_GRAYMAP)
         );
         assert_eq!(
-            crate::Mime::parse("ImaGE/x-PORTABlE-gRayMAp"),
+            crate::Mime::parse("iMagE/x-PoRTablE-gRAymAP"),
             Ok(IMAGE_X_PORTABLE_GRAYMAP)
         );
     }
@@ -100809,7 +100831,7 @@ pub mod constants {
             Ok(IMAGE_X_PORTABLE_PIXMAP)
         );
         assert_eq!(
-            crate::Mime::parse("IMage/X-POrtABlE-PIxmAp"),
+            crate::Mime::parse("iMaGE/x-pORTABLe-PiXmaP"),
             Ok(IMAGE_X_PORTABLE_PIXMAP)
         );
     }
@@ -100825,7 +100847,7 @@ pub mod constants {
     #[test]
     fn image_x_rgb_parse() {
         assert_eq!(crate::Mime::parse("image/x-rgb"), Ok(IMAGE_X_RGB));
-        assert_eq!(crate::Mime::parse("IMAGE/x-RgB"), Ok(IMAGE_X_RGB));
+        assert_eq!(crate::Mime::parse("imAge/x-rGB"), Ok(IMAGE_X_RGB));
     }
 
     /// `image/x-xbitmap`
@@ -100839,7 +100861,7 @@ pub mod constants {
     #[test]
     fn image_x_xbitmap_parse() {
         assert_eq!(crate::Mime::parse("image/x-xbitmap"), Ok(IMAGE_X_XBITMAP));
-        assert_eq!(crate::Mime::parse("imAge/x-xbitMAp"), Ok(IMAGE_X_XBITMAP));
+        assert_eq!(crate::Mime::parse("iMaGe/x-xbITmAP"), Ok(IMAGE_X_XBITMAP));
     }
 
     /// `image/x-xcf`
@@ -100853,7 +100875,7 @@ pub mod constants {
     #[test]
     fn image_x_xcf_parse() {
         assert_eq!(crate::Mime::parse("image/x-xcf"), Ok(IMAGE_X_XCF));
-        assert_eq!(crate::Mime::parse("ImAgE/X-xCF"), Ok(IMAGE_X_XCF));
+        assert_eq!(crate::Mime::parse("iMage/x-XCF"), Ok(IMAGE_X_XCF));
     }
 
     /// `image/x-xpixmap`
@@ -100867,7 +100889,7 @@ pub mod constants {
     #[test]
     fn image_x_xpixmap_parse() {
         assert_eq!(crate::Mime::parse("image/x-xpixmap"), Ok(IMAGE_X_XPIXMAP));
-        assert_eq!(crate::Mime::parse("iMAgE/x-xpIXMAp"), Ok(IMAGE_X_XPIXMAP));
+        assert_eq!(crate::Mime::parse("iMagE/x-XpixmAp"), Ok(IMAGE_X_XPIXMAP));
     }
 
     /// `image/x-xwindowdump`
@@ -100885,7 +100907,7 @@ pub mod constants {
             Ok(IMAGE_X_XWINDOWDUMP)
         );
         assert_eq!(
-            crate::Mime::parse("ImaGE/X-xwinDowDUmP"),
+            crate::Mime::parse("iMAgE/x-XwiNDowDUmP"),
             Ok(IMAGE_X_XWINDOWDUMP)
         );
     }
@@ -100905,7 +100927,7 @@ pub mod constants {
             Ok(INODE_BLOCKDEVICE)
         );
         assert_eq!(
-            crate::Mime::parse("InODe/BLocKDeViCE"),
+            crate::Mime::parse("iNODe/blOckDEvIce"),
             Ok(INODE_BLOCKDEVICE)
         );
     }
@@ -100921,7 +100943,7 @@ pub mod constants {
     #[test]
     fn inode_chardevice_parse() {
         assert_eq!(crate::Mime::parse("inode/chardevice"), Ok(INODE_CHARDEVICE));
-        assert_eq!(crate::Mime::parse("InOde/chARdEvice"), Ok(INODE_CHARDEVICE));
+        assert_eq!(crate::Mime::parse("inODe/ChARDEVicE"), Ok(INODE_CHARDEVICE));
     }
 
     /// `inode/directory`
@@ -100935,7 +100957,7 @@ pub mod constants {
     #[test]
     fn inode_directory_parse() {
         assert_eq!(crate::Mime::parse("inode/directory"), Ok(INODE_DIRECTORY));
-        assert_eq!(crate::Mime::parse("INodE/DIRECtoRy"), Ok(INODE_DIRECTORY));
+        assert_eq!(crate::Mime::parse("iNodE/DirECtoRy"), Ok(INODE_DIRECTORY));
     }
 
     /// `inode/directory-locked`
@@ -100953,7 +100975,7 @@ pub mod constants {
             Ok(INODE_DIRECTORY_LOCKED)
         );
         assert_eq!(
-            crate::Mime::parse("InoDE/diREctOry-LOCKED"),
+            crate::Mime::parse("iNODE/DIREctory-LOckeD"),
             Ok(INODE_DIRECTORY_LOCKED)
         );
     }
@@ -100969,7 +100991,7 @@ pub mod constants {
     #[test]
     fn inode_fifo_parse() {
         assert_eq!(crate::Mime::parse("inode/fifo"), Ok(INODE_FIFO));
-        assert_eq!(crate::Mime::parse("INode/fiFO"), Ok(INODE_FIFO));
+        assert_eq!(crate::Mime::parse("InoDE/fifo"), Ok(INODE_FIFO));
     }
 
     /// `inode/socket`
@@ -100983,7 +101005,7 @@ pub mod constants {
     #[test]
     fn inode_socket_parse() {
         assert_eq!(crate::Mime::parse("inode/socket"), Ok(INODE_SOCKET));
-        assert_eq!(crate::Mime::parse("inoDE/sOCket"), Ok(INODE_SOCKET));
+        assert_eq!(crate::Mime::parse("InOdE/SOCkET"), Ok(INODE_SOCKET));
     }
 
     /// `message/CPIM`
@@ -100997,7 +101019,7 @@ pub mod constants {
     #[test]
     fn message_cpim_parse() {
         assert_eq!(crate::Mime::parse("message/CPIM"), Ok(MESSAGE_CPIM));
-        assert_eq!(crate::Mime::parse("meSsAgE/CPIm"), Ok(MESSAGE_CPIM));
+        assert_eq!(crate::Mime::parse("mEssAGE/cPIM"), Ok(MESSAGE_CPIM));
     }
 
     /// `message/delivery-status`
@@ -101015,7 +101037,7 @@ pub mod constants {
             Ok(MESSAGE_DELIVERY_STATUS)
         );
         assert_eq!(
-            crate::Mime::parse("MEsSagE/DElIVERy-STaTus"),
+            crate::Mime::parse("MeSSAgE/dEliVeRY-stAtUS"),
             Ok(MESSAGE_DELIVERY_STATUS)
         );
     }
@@ -101037,7 +101059,7 @@ pub mod constants {
             Ok(MESSAGE_DISPOSITION_NOTIFICATION)
         );
         assert_eq!(
-            crate::Mime::parse("MesSaGE/diSpOSITioN-NotifICatIOn"),
+            crate::Mime::parse("MEssAGE/disPOsiTIon-nOTIfIcAtIoN"),
             Ok(MESSAGE_DISPOSITION_NOTIFICATION)
         );
     }
@@ -101053,7 +101075,7 @@ pub mod constants {
     #[test]
     fn message_example_parse() {
         assert_eq!(crate::Mime::parse("message/example"), Ok(MESSAGE_EXAMPLE));
-        assert_eq!(crate::Mime::parse("mEsSAGe/eXaMpLe"), Ok(MESSAGE_EXAMPLE));
+        assert_eq!(crate::Mime::parse("mEsSaGE/eXample"), Ok(MESSAGE_EXAMPLE));
     }
 
     /// `message/external-body`
@@ -101071,7 +101093,7 @@ pub mod constants {
             Ok(MESSAGE_EXTERNAL_BODY)
         );
         assert_eq!(
-            crate::Mime::parse("MeSsAGe/External-BODy"),
+            crate::Mime::parse("mesSAGe/exTeRNal-BoDY"),
             Ok(MESSAGE_EXTERNAL_BODY)
         );
     }
@@ -101091,7 +101113,7 @@ pub mod constants {
             Ok(MESSAGE_FEEDBACK_REPORT)
         );
         assert_eq!(
-            crate::Mime::parse("mesSaGE/feEdBACk-RePOrt"),
+            crate::Mime::parse("MeSSaGE/feEdbACK-RePort"),
             Ok(MESSAGE_FEEDBACK_REPORT)
         );
     }
@@ -101107,7 +101129,7 @@ pub mod constants {
     #[test]
     fn message_global_parse() {
         assert_eq!(crate::Mime::parse("message/global"), Ok(MESSAGE_GLOBAL));
-        assert_eq!(crate::Mime::parse("mEssAGE/GlObal"), Ok(MESSAGE_GLOBAL));
+        assert_eq!(crate::Mime::parse("mEssagE/gLoBAl"), Ok(MESSAGE_GLOBAL));
     }
 
     /// `message/global-delivery-status`
@@ -101127,7 +101149,7 @@ pub mod constants {
             Ok(MESSAGE_GLOBAL_DELIVERY_STATUS)
         );
         assert_eq!(
-            crate::Mime::parse("mEssagE/gLoBAl-dElIverY-STAtuS"),
+            crate::Mime::parse("MeSsAge/GlOBAl-DELIVERY-sTatUS"),
             Ok(MESSAGE_GLOBAL_DELIVERY_STATUS)
         );
     }
@@ -101149,7 +101171,7 @@ pub mod constants {
             Ok(MESSAGE_GLOBAL_DISPOSITION_NOTIFICATION)
         );
         assert_eq!(
-            crate::Mime::parse("MESSAGE/gLobAL-DisPoSiTIon-nOTIfIcaTioN"),
+            crate::Mime::parse("mEssAgE/GLobAl-DIsPosItiON-nOtIficAtION"),
             Ok(MESSAGE_GLOBAL_DISPOSITION_NOTIFICATION)
         );
     }
@@ -101169,7 +101191,7 @@ pub mod constants {
             Ok(MESSAGE_GLOBAL_HEADERS)
         );
         assert_eq!(
-            crate::Mime::parse("MesSaGe/gLoBAL-HeAders"),
+            crate::Mime::parse("mEsSage/GLoBAl-HEaDErs"),
             Ok(MESSAGE_GLOBAL_HEADERS)
         );
     }
@@ -101185,7 +101207,7 @@ pub mod constants {
     #[test]
     fn message_http_parse() {
         assert_eq!(crate::Mime::parse("message/http"), Ok(MESSAGE_HTTP));
-        assert_eq!(crate::Mime::parse("MEsSAgE/HtTP"), Ok(MESSAGE_HTTP));
+        assert_eq!(crate::Mime::parse("mesSAge/hTTp"), Ok(MESSAGE_HTTP));
     }
 
     /// `message/imdn+xml`
@@ -101201,7 +101223,7 @@ pub mod constants {
     #[test]
     fn message_imdn_xml_parse() {
         assert_eq!(crate::Mime::parse("message/imdn+xml"), Ok(MESSAGE_IMDN_XML));
-        assert_eq!(crate::Mime::parse("messaGE/iMdN+xml"), Ok(MESSAGE_IMDN_XML));
+        assert_eq!(crate::Mime::parse("meSsage/iMdn+XML"), Ok(MESSAGE_IMDN_XML));
     }
 
     /// `message/partial`
@@ -101215,7 +101237,7 @@ pub mod constants {
     #[test]
     fn message_partial_parse() {
         assert_eq!(crate::Mime::parse("message/partial"), Ok(MESSAGE_PARTIAL));
-        assert_eq!(crate::Mime::parse("MessaGe/paRTIAL"), Ok(MESSAGE_PARTIAL));
+        assert_eq!(crate::Mime::parse("MeSSAGE/paRTIal"), Ok(MESSAGE_PARTIAL));
     }
 
     /// `message/rfc822`
@@ -101229,7 +101251,7 @@ pub mod constants {
     #[test]
     fn message_rfc822_parse() {
         assert_eq!(crate::Mime::parse("message/rfc822"), Ok(MESSAGE_RFC822));
-        assert_eq!(crate::Mime::parse("mESSAGE/rFC822"), Ok(MESSAGE_RFC822));
+        assert_eq!(crate::Mime::parse("MesSAGE/Rfc822"), Ok(MESSAGE_RFC822));
     }
 
     /// `message/s-http`
@@ -101243,7 +101265,7 @@ pub mod constants {
     #[test]
     fn message_s_http_parse() {
         assert_eq!(crate::Mime::parse("message/s-http"), Ok(MESSAGE_S_HTTP));
-        assert_eq!(crate::Mime::parse("MesSAGE/S-hTtP"), Ok(MESSAGE_S_HTTP));
+        assert_eq!(crate::Mime::parse("mEssagE/S-htTp"), Ok(MESSAGE_S_HTTP));
     }
 
     /// `message/sip`
@@ -101257,7 +101279,7 @@ pub mod constants {
     #[test]
     fn message_sip_parse() {
         assert_eq!(crate::Mime::parse("message/sip"), Ok(MESSAGE_SIP));
-        assert_eq!(crate::Mime::parse("mEssagE/SIp"), Ok(MESSAGE_SIP));
+        assert_eq!(crate::Mime::parse("MEssAge/SiP"), Ok(MESSAGE_SIP));
     }
 
     /// `message/sipfrag`
@@ -101271,7 +101293,7 @@ pub mod constants {
     #[test]
     fn message_sipfrag_parse() {
         assert_eq!(crate::Mime::parse("message/sipfrag"), Ok(MESSAGE_SIPFRAG));
-        assert_eq!(crate::Mime::parse("mEsSAge/sipFrAg"), Ok(MESSAGE_SIPFRAG));
+        assert_eq!(crate::Mime::parse("mEsSaGe/SIpFraG"), Ok(MESSAGE_SIPFRAG));
     }
 
     /// `message/tracking-status`
@@ -101289,7 +101311,7 @@ pub mod constants {
             Ok(MESSAGE_TRACKING_STATUS)
         );
         assert_eq!(
-            crate::Mime::parse("MeSsAgE/TrAckInG-staTUS"),
+            crate::Mime::parse("mEssagE/TracKIng-STATUS"),
             Ok(MESSAGE_TRACKING_STATUS)
         );
     }
@@ -101309,7 +101331,7 @@ pub mod constants {
             Ok(MESSAGE_VND_WFA_WSC)
         );
         assert_eq!(
-            crate::Mime::parse("mesSAge/VND.WFA.wsC"),
+            crate::Mime::parse("MessAgE/VnD.Wfa.wSC"),
             Ok(MESSAGE_VND_WFA_WSC)
         );
     }
@@ -101325,7 +101347,7 @@ pub mod constants {
     #[test]
     fn model_e57_parse() {
         assert_eq!(crate::Mime::parse("model/e57"), Ok(MODEL_E57));
-        assert_eq!(crate::Mime::parse("mOdEl/e57"), Ok(MODEL_E57));
+        assert_eq!(crate::Mime::parse("MoDeL/E57"), Ok(MODEL_E57));
     }
 
     /// `model/example`
@@ -101339,7 +101361,7 @@ pub mod constants {
     #[test]
     fn model_example_parse() {
         assert_eq!(crate::Mime::parse("model/example"), Ok(MODEL_EXAMPLE));
-        assert_eq!(crate::Mime::parse("modEL/eXaMpLE"), Ok(MODEL_EXAMPLE));
+        assert_eq!(crate::Mime::parse("MODEL/eXamplE"), Ok(MODEL_EXAMPLE));
     }
 
     /// `model/gltf+json`
@@ -101355,7 +101377,7 @@ pub mod constants {
     #[test]
     fn model_gltf_json_parse() {
         assert_eq!(crate::Mime::parse("model/gltf+json"), Ok(MODEL_GLTF_JSON));
-        assert_eq!(crate::Mime::parse("mODEL/GlTf+jsOn"), Ok(MODEL_GLTF_JSON));
+        assert_eq!(crate::Mime::parse("mOdEL/GlTF+jSoN"), Ok(MODEL_GLTF_JSON));
     }
 
     /// `model/gltf-binary`
@@ -101373,7 +101395,7 @@ pub mod constants {
             Ok(MODEL_GLTF_BINARY)
         );
         assert_eq!(
-            crate::Mime::parse("MoDEl/gLTf-BiNarY"),
+            crate::Mime::parse("moDeL/Gltf-biNaRy"),
             Ok(MODEL_GLTF_BINARY)
         );
     }
@@ -101389,7 +101411,7 @@ pub mod constants {
     #[test]
     fn model_iges_parse() {
         assert_eq!(crate::Mime::parse("model/iges"), Ok(MODEL_IGES));
-        assert_eq!(crate::Mime::parse("mOdEl/iges"), Ok(MODEL_IGES));
+        assert_eq!(crate::Mime::parse("ModEl/Iges"), Ok(MODEL_IGES));
     }
 
     /// `model/mesh`
@@ -101403,7 +101425,7 @@ pub mod constants {
     #[test]
     fn model_mesh_parse() {
         assert_eq!(crate::Mime::parse("model/mesh"), Ok(MODEL_MESH));
-        assert_eq!(crate::Mime::parse("MoDeL/mEsH"), Ok(MODEL_MESH));
+        assert_eq!(crate::Mime::parse("MOdEl/MesH"), Ok(MODEL_MESH));
     }
 
     /// `model/mtl`
@@ -101417,7 +101439,7 @@ pub mod constants {
     #[test]
     fn model_mtl_parse() {
         assert_eq!(crate::Mime::parse("model/mtl"), Ok(MODEL_MTL));
-        assert_eq!(crate::Mime::parse("ModeL/mTl"), Ok(MODEL_MTL));
+        assert_eq!(crate::Mime::parse("mOdeL/MTL"), Ok(MODEL_MTL));
     }
 
     /// `model/obj`
@@ -101431,7 +101453,7 @@ pub mod constants {
     #[test]
     fn model_obj_parse() {
         assert_eq!(crate::Mime::parse("model/obj"), Ok(MODEL_OBJ));
-        assert_eq!(crate::Mime::parse("mOdeL/Obj"), Ok(MODEL_OBJ));
+        assert_eq!(crate::Mime::parse("mODEl/oBJ"), Ok(MODEL_OBJ));
     }
 
     /// `model/prc`
@@ -101445,7 +101467,7 @@ pub mod constants {
     #[test]
     fn model_prc_parse() {
         assert_eq!(crate::Mime::parse("model/prc"), Ok(MODEL_PRC));
-        assert_eq!(crate::Mime::parse("MODEL/PRC"), Ok(MODEL_PRC));
+        assert_eq!(crate::Mime::parse("Model/PRc"), Ok(MODEL_PRC));
     }
 
     /// `model/step`
@@ -101459,7 +101481,7 @@ pub mod constants {
     #[test]
     fn model_step_parse() {
         assert_eq!(crate::Mime::parse("model/step"), Ok(MODEL_STEP));
-        assert_eq!(crate::Mime::parse("mOdEL/step"), Ok(MODEL_STEP));
+        assert_eq!(crate::Mime::parse("mODEl/STEP"), Ok(MODEL_STEP));
     }
 
     /// `model/step+xml`
@@ -101475,7 +101497,7 @@ pub mod constants {
     #[test]
     fn model_step_xml_parse() {
         assert_eq!(crate::Mime::parse("model/step+xml"), Ok(MODEL_STEP_XML));
-        assert_eq!(crate::Mime::parse("MODel/STep+XML"), Ok(MODEL_STEP_XML));
+        assert_eq!(crate::Mime::parse("mODeL/stEP+xML"), Ok(MODEL_STEP_XML));
     }
 
     /// `model/step+zip`
@@ -101491,7 +101513,7 @@ pub mod constants {
     #[test]
     fn model_step_zip_parse() {
         assert_eq!(crate::Mime::parse("model/step+zip"), Ok(MODEL_STEP_ZIP));
-        assert_eq!(crate::Mime::parse("mODeL/stEP+zIP"), Ok(MODEL_STEP_ZIP));
+        assert_eq!(crate::Mime::parse("MoDeL/StEp+ZiP"), Ok(MODEL_STEP_ZIP));
     }
 
     /// `model/step-xml+zip`
@@ -101511,7 +101533,7 @@ pub mod constants {
             Ok(MODEL_STEP_XML_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("MoDeL/StEp-XmL+ZIp"),
+            crate::Mime::parse("MODel/stEp-XmL+ZIp"),
             Ok(MODEL_STEP_XML_ZIP)
         );
     }
@@ -101527,7 +101549,7 @@ pub mod constants {
     #[test]
     fn model_stl_parse() {
         assert_eq!(crate::Mime::parse("model/stl"), Ok(MODEL_STL));
-        assert_eq!(crate::Mime::parse("mOdeL/sTl"), Ok(MODEL_STL));
+        assert_eq!(crate::Mime::parse("MOdEL/stl"), Ok(MODEL_STL));
     }
 
     /// `model/u3d`
@@ -101541,7 +101563,7 @@ pub mod constants {
     #[test]
     fn model_u3d_parse() {
         assert_eq!(crate::Mime::parse("model/u3d"), Ok(MODEL_U3D));
-        assert_eq!(crate::Mime::parse("MODEl/U3D"), Ok(MODEL_U3D));
+        assert_eq!(crate::Mime::parse("moDel/U3D"), Ok(MODEL_U3D));
     }
 
     /// `model/vnd.collada+xml`
@@ -101561,7 +101583,7 @@ pub mod constants {
             Ok(MODEL_VND_COLLADA_XML)
         );
         assert_eq!(
-            crate::Mime::parse("MOdel/vNd.COlLAda+xmL"),
+            crate::Mime::parse("ModEl/Vnd.collaDa+xMl"),
             Ok(MODEL_VND_COLLADA_XML)
         );
     }
@@ -101577,7 +101599,7 @@ pub mod constants {
     #[test]
     fn model_vnd_dwf_parse() {
         assert_eq!(crate::Mime::parse("model/vnd.dwf"), Ok(MODEL_VND_DWF));
-        assert_eq!(crate::Mime::parse("model/vnD.dwF"), Ok(MODEL_VND_DWF));
+        assert_eq!(crate::Mime::parse("mODEl/VNd.dwF"), Ok(MODEL_VND_DWF));
     }
 
     /// `model/vnd.flatland.3dml`
@@ -101595,7 +101617,7 @@ pub mod constants {
             Ok(MODEL_VND_FLATLAND_3DML)
         );
         assert_eq!(
-            crate::Mime::parse("moDEL/VND.flaTland.3dml"),
+            crate::Mime::parse("model/vnd.FlaTLaNd.3dML"),
             Ok(MODEL_VND_FLATLAND_3DML)
         );
     }
@@ -101611,7 +101633,7 @@ pub mod constants {
     #[test]
     fn model_vnd_gdl_parse() {
         assert_eq!(crate::Mime::parse("model/vnd.gdl"), Ok(MODEL_VND_GDL));
-        assert_eq!(crate::Mime::parse("MOdeL/vNd.GdL"), Ok(MODEL_VND_GDL));
+        assert_eq!(crate::Mime::parse("mOdeL/vnD.gDL"), Ok(MODEL_VND_GDL));
     }
 
     /// `model/vnd.gs-gdl`
@@ -101625,7 +101647,7 @@ pub mod constants {
     #[test]
     fn model_vnd_gs_gdl_parse() {
         assert_eq!(crate::Mime::parse("model/vnd.gs-gdl"), Ok(MODEL_VND_GS_GDL));
-        assert_eq!(crate::Mime::parse("MoDel/vnd.gs-GDL"), Ok(MODEL_VND_GS_GDL));
+        assert_eq!(crate::Mime::parse("MOdel/Vnd.Gs-gdl"), Ok(MODEL_VND_GS_GDL));
     }
 
     /// `model/vnd.gtw`
@@ -101639,7 +101661,7 @@ pub mod constants {
     #[test]
     fn model_vnd_gtw_parse() {
         assert_eq!(crate::Mime::parse("model/vnd.gtw"), Ok(MODEL_VND_GTW));
-        assert_eq!(crate::Mime::parse("modeL/vnD.Gtw"), Ok(MODEL_VND_GTW));
+        assert_eq!(crate::Mime::parse("MOdel/vnd.GTW"), Ok(MODEL_VND_GTW));
     }
 
     /// `model/vnd.moml+xml`
@@ -101659,7 +101681,7 @@ pub mod constants {
             Ok(MODEL_VND_MOML_XML)
         );
         assert_eq!(
-            crate::Mime::parse("mODel/vnd.MOML+xmL"),
+            crate::Mime::parse("ModEL/vnd.moMl+xMl"),
             Ok(MODEL_VND_MOML_XML)
         );
     }
@@ -101675,7 +101697,7 @@ pub mod constants {
     #[test]
     fn model_vnd_mts_parse() {
         assert_eq!(crate::Mime::parse("model/vnd.mts"), Ok(MODEL_VND_MTS));
-        assert_eq!(crate::Mime::parse("Model/vnD.mtS"), Ok(MODEL_VND_MTS));
+        assert_eq!(crate::Mime::parse("mOdel/VnD.MTs"), Ok(MODEL_VND_MTS));
     }
 
     /// `model/vnd.opengex`
@@ -101693,7 +101715,7 @@ pub mod constants {
             Ok(MODEL_VND_OPENGEX)
         );
         assert_eq!(
-            crate::Mime::parse("moDel/vNd.OPEnGEX"),
+            crate::Mime::parse("MODeL/Vnd.oPeNGeX"),
             Ok(MODEL_VND_OPENGEX)
         );
     }
@@ -101715,7 +101737,7 @@ pub mod constants {
             Ok(MODEL_VND_PARASOLID_TRANSMIT_BINARY)
         );
         assert_eq!(
-            crate::Mime::parse("mOdEl/VnD.PArAsOlid.tRansMiT.bInAry"),
+            crate::Mime::parse("mOdel/vNd.pArASoLiD.trANSMit.biNarY"),
             Ok(MODEL_VND_PARASOLID_TRANSMIT_BINARY)
         );
     }
@@ -101737,7 +101759,7 @@ pub mod constants {
             Ok(MODEL_VND_PARASOLID_TRANSMIT_TEXT)
         );
         assert_eq!(
-            crate::Mime::parse("mODEL/vNd.ParAsoLid.tRaNSMIt.Text"),
+            crate::Mime::parse("moDel/vNd.PARaSOlid.tRaNsmIt.TExt"),
             Ok(MODEL_VND_PARASOLID_TRANSMIT_TEXT)
         );
     }
@@ -101757,7 +101779,7 @@ pub mod constants {
             Ok(MODEL_VND_PYTHA_PYOX)
         );
         assert_eq!(
-            crate::Mime::parse("MoDeL/vNd.PYthA.pyOX"),
+            crate::Mime::parse("MOdeL/VnD.PYThA.PYOX"),
             Ok(MODEL_VND_PYTHA_PYOX)
         );
     }
@@ -101779,7 +101801,7 @@ pub mod constants {
             Ok(MODEL_VND_ROSETTE_ANNOTATED_DATA_MODEL)
         );
         assert_eq!(
-            crate::Mime::parse("MoDeL/VnD.ROSETte.aNnotaTED-DATA-MoDEl"),
+            crate::Mime::parse("Model/vnd.ROSeTTE.ANnOTated-DATA-mOdEl"),
             Ok(MODEL_VND_ROSETTE_ANNOTATED_DATA_MODEL)
         );
     }
@@ -101799,7 +101821,7 @@ pub mod constants {
             Ok(MODEL_VND_SAP_VDS)
         );
         assert_eq!(
-            crate::Mime::parse("modEL/VND.SaP.VDs"),
+            crate::Mime::parse("MOdEL/vnD.sAp.Vds"),
             Ok(MODEL_VND_SAP_VDS)
         );
     }
@@ -101821,7 +101843,7 @@ pub mod constants {
             Ok(MODEL_VND_USDZ_ZIP)
         );
         assert_eq!(
-            crate::Mime::parse("MOdel/vnD.uSdz+Zip"),
+            crate::Mime::parse("MOdeL/vnd.USdz+ZIp"),
             Ok(MODEL_VND_USDZ_ZIP)
         );
     }
@@ -101843,7 +101865,7 @@ pub mod constants {
             Ok(MODEL_VND_VALVE_SOURCE_COMPILED_MAP)
         );
         assert_eq!(
-            crate::Mime::parse("MOdel/VNd.VALve.sOURCE.COmpIlED-Map"),
+            crate::Mime::parse("modEL/VND.ValVe.SOUrce.cOmPILed-MAP"),
             Ok(MODEL_VND_VALVE_SOURCE_COMPILED_MAP)
         );
     }
@@ -101859,7 +101881,7 @@ pub mod constants {
     #[test]
     fn model_vnd_vtu_parse() {
         assert_eq!(crate::Mime::parse("model/vnd.vtu"), Ok(MODEL_VND_VTU));
-        assert_eq!(crate::Mime::parse("modEl/VNd.VTU"), Ok(MODEL_VND_VTU));
+        assert_eq!(crate::Mime::parse("model/VNd.VTu"), Ok(MODEL_VND_VTU));
     }
 
     /// `model/vrml`
@@ -101873,7 +101895,7 @@ pub mod constants {
     #[test]
     fn model_vrml_parse() {
         assert_eq!(crate::Mime::parse("model/vrml"), Ok(MODEL_VRML));
-        assert_eq!(crate::Mime::parse("Model/VRMl"), Ok(MODEL_VRML));
+        assert_eq!(crate::Mime::parse("mODEl/VrML"), Ok(MODEL_VRML));
     }
 
     /// `model/x3d+fastinfoset`
@@ -101893,7 +101915,7 @@ pub mod constants {
             Ok(MODEL_X3D_FASTINFOSET)
         );
         assert_eq!(
-            crate::Mime::parse("mODel/X3d+FaSTiNfOSEt"),
+            crate::Mime::parse("mOdEL/x3d+fAsTiNFosET"),
             Ok(MODEL_X3D_FASTINFOSET)
         );
     }
@@ -101911,7 +101933,7 @@ pub mod constants {
     #[test]
     fn model_x3d_xml_parse() {
         assert_eq!(crate::Mime::parse("model/x3d+xml"), Ok(MODEL_X3D_XML));
-        assert_eq!(crate::Mime::parse("modeL/X3D+xmL"), Ok(MODEL_X3D_XML));
+        assert_eq!(crate::Mime::parse("mODEL/x3d+Xml"), Ok(MODEL_X3D_XML));
     }
 
     /// `model/x3d-vrml`
@@ -101925,7 +101947,7 @@ pub mod constants {
     #[test]
     fn model_x3d_vrml_parse() {
         assert_eq!(crate::Mime::parse("model/x3d-vrml"), Ok(MODEL_X3D_VRML));
-        assert_eq!(crate::Mime::parse("MoDEL/x3D-vRml"), Ok(MODEL_X3D_VRML));
+        assert_eq!(crate::Mime::parse("MODEl/X3d-vrMl"), Ok(MODEL_X3D_VRML));
     }
 
     /// `multipart/alternative`
@@ -101943,7 +101965,7 @@ pub mod constants {
             Ok(MULTIPART_ALTERNATIVE)
         );
         assert_eq!(
-            crate::Mime::parse("MULTiPARt/alTernATIvE"),
+            crate::Mime::parse("muLTIpArT/ALTERnAtiVe"),
             Ok(MULTIPART_ALTERNATIVE)
         );
     }
@@ -101963,7 +101985,7 @@ pub mod constants {
             Ok(MULTIPART_APPLEDOUBLE)
         );
         assert_eq!(
-            crate::Mime::parse("mUlTIPARt/apPlEdoUble"),
+            crate::Mime::parse("MulTipart/apPlEdOUblE"),
             Ok(MULTIPART_APPLEDOUBLE)
         );
     }
@@ -101983,7 +102005,7 @@ pub mod constants {
             Ok(MULTIPART_BYTERANGES)
         );
         assert_eq!(
-            crate::Mime::parse("muLtiPaRt/BytERangeS"),
+            crate::Mime::parse("MultiPARt/bYTeRaNGeS"),
             Ok(MULTIPART_BYTERANGES)
         );
     }
@@ -101999,7 +102021,7 @@ pub mod constants {
     #[test]
     fn multipart_digest_parse() {
         assert_eq!(crate::Mime::parse("multipart/digest"), Ok(MULTIPART_DIGEST));
-        assert_eq!(crate::Mime::parse("MUltiPArT/DIgEST"), Ok(MULTIPART_DIGEST));
+        assert_eq!(crate::Mime::parse("MUlTIparT/DIgeST"), Ok(MULTIPART_DIGEST));
     }
 
     /// `multipart/encrypted`
@@ -102017,7 +102039,7 @@ pub mod constants {
             Ok(MULTIPART_ENCRYPTED)
         );
         assert_eq!(
-            crate::Mime::parse("mULtipART/enCRyptEd"),
+            crate::Mime::parse("mulTipaRt/ENCrYPtEd"),
             Ok(MULTIPART_ENCRYPTED)
         );
     }
@@ -102037,7 +102059,7 @@ pub mod constants {
             Ok(MULTIPART_EXAMPLE)
         );
         assert_eq!(
-            crate::Mime::parse("muLtiPARt/ExAmplE"),
+            crate::Mime::parse("muLtIpArt/eXAMPle"),
             Ok(MULTIPART_EXAMPLE)
         );
     }
@@ -102057,7 +102079,7 @@ pub mod constants {
             Ok(MULTIPART_FORM_DATA)
         );
         assert_eq!(
-            crate::Mime::parse("mUlTipArT/FOrm-DAtA"),
+            crate::Mime::parse("MULtIpArT/Form-DATa"),
             Ok(MULTIPART_FORM_DATA)
         );
     }
@@ -102077,7 +102099,7 @@ pub mod constants {
             Ok(MULTIPART_HEADER_SET)
         );
         assert_eq!(
-            crate::Mime::parse("mUlTiPart/HEAder-set"),
+            crate::Mime::parse("multipaRt/hEaDER-sET"),
             Ok(MULTIPART_HEADER_SET)
         );
     }
@@ -102093,7 +102115,7 @@ pub mod constants {
     #[test]
     fn multipart_mixed_parse() {
         assert_eq!(crate::Mime::parse("multipart/mixed"), Ok(MULTIPART_MIXED));
-        assert_eq!(crate::Mime::parse("mUlTiPaRT/miXED"), Ok(MULTIPART_MIXED));
+        assert_eq!(crate::Mime::parse("MultIPARt/MiXed"), Ok(MULTIPART_MIXED));
     }
 
     /// `multipart/multilingual`
@@ -102111,7 +102133,7 @@ pub mod constants {
             Ok(MULTIPART_MULTILINGUAL)
         );
         assert_eq!(
-            crate::Mime::parse("mulTIPArt/mUltilINgUAL"),
+            crate::Mime::parse("muLTiPART/muLtIliNgUaL"),
             Ok(MULTIPART_MULTILINGUAL)
         );
     }
@@ -102131,7 +102153,7 @@ pub mod constants {
             Ok(MULTIPART_PARALLEL)
         );
         assert_eq!(
-            crate::Mime::parse("MultIpArt/pArALlEL"),
+            crate::Mime::parse("MuLTIpArT/PARAlLeL"),
             Ok(MULTIPART_PARALLEL)
         );
     }
@@ -102151,7 +102173,7 @@ pub mod constants {
             Ok(MULTIPART_RELATED)
         );
         assert_eq!(
-            crate::Mime::parse("MuLtIPART/rElAted"),
+            crate::Mime::parse("multiParT/reLATeD"),
             Ok(MULTIPART_RELATED)
         );
     }
@@ -102167,7 +102189,7 @@ pub mod constants {
     #[test]
     fn multipart_report_parse() {
         assert_eq!(crate::Mime::parse("multipart/report"), Ok(MULTIPART_REPORT));
-        assert_eq!(crate::Mime::parse("muLtiPart/REpORT"), Ok(MULTIPART_REPORT));
+        assert_eq!(crate::Mime::parse("MUltipARt/rePorT"), Ok(MULTIPART_REPORT));
     }
 
     /// `multipart/signed`
@@ -102181,7 +102203,7 @@ pub mod constants {
     #[test]
     fn multipart_signed_parse() {
         assert_eq!(crate::Mime::parse("multipart/signed"), Ok(MULTIPART_SIGNED));
-        assert_eq!(crate::Mime::parse("multIPaRt/SigNED"), Ok(MULTIPART_SIGNED));
+        assert_eq!(crate::Mime::parse("MUlTIpArT/SiGNED"), Ok(MULTIPART_SIGNED));
     }
 
     /// `multipart/vnd.bint.med-plus`
@@ -102199,7 +102221,7 @@ pub mod constants {
             Ok(MULTIPART_VND_BINT_MED_PLUS)
         );
         assert_eq!(
-            crate::Mime::parse("mULtIpArT/VND.BinT.MED-Plus"),
+            crate::Mime::parse("MulTIPARt/vnd.BINT.MEd-PLus"),
             Ok(MULTIPART_VND_BINT_MED_PLUS)
         );
     }
@@ -102219,7 +102241,7 @@ pub mod constants {
             Ok(MULTIPART_VOICE_MESSAGE)
         );
         assert_eq!(
-            crate::Mime::parse("MULTIpARt/VOice-MEsSaGE"),
+            crate::Mime::parse("mULTiPaRT/vOIcE-message"),
             Ok(MULTIPART_VOICE_MESSAGE)
         );
     }
@@ -102239,7 +102261,7 @@ pub mod constants {
             Ok(MULTIPART_X_MIXED_REPLACE)
         );
         assert_eq!(
-            crate::Mime::parse("MuLTiPart/x-mixed-REPlAce"),
+            crate::Mime::parse("multIPArT/x-MixED-RepLACe"),
             Ok(MULTIPART_X_MIXED_REPLACE)
         );
     }
@@ -102259,7 +102281,7 @@ pub mod constants {
             Ok(TEXT_CACHE_MANIFEST)
         );
         assert_eq!(
-            crate::Mime::parse("TExt/CaChe-MAnifest"),
+            crate::Mime::parse("text/cAChE-manIfesT"),
             Ok(TEXT_CACHE_MANIFEST)
         );
     }
@@ -102275,7 +102297,7 @@ pub mod constants {
     #[test]
     fn text_calendar_parse() {
         assert_eq!(crate::Mime::parse("text/calendar"), Ok(TEXT_CALENDAR));
-        assert_eq!(crate::Mime::parse("tEXt/CaleNdar"), Ok(TEXT_CALENDAR));
+        assert_eq!(crate::Mime::parse("tExt/caLENDAR"), Ok(TEXT_CALENDAR));
     }
 
     /// `text/cql`
@@ -102289,7 +102311,7 @@ pub mod constants {
     #[test]
     fn text_cql_parse() {
         assert_eq!(crate::Mime::parse("text/cql"), Ok(TEXT_CQL));
-        assert_eq!(crate::Mime::parse("TeXt/cql"), Ok(TEXT_CQL));
+        assert_eq!(crate::Mime::parse("TeXT/CqL"), Ok(TEXT_CQL));
     }
 
     /// `text/cql-extension`
@@ -102307,7 +102329,7 @@ pub mod constants {
             Ok(TEXT_CQL_EXTENSION)
         );
         assert_eq!(
-            crate::Mime::parse("TEXT/CQl-EXTeNsion"),
+            crate::Mime::parse("text/Cql-EXtensIOn"),
             Ok(TEXT_CQL_EXTENSION)
         );
     }
@@ -102327,7 +102349,7 @@ pub mod constants {
             Ok(TEXT_CQL_IDENTIFIER)
         );
         assert_eq!(
-            crate::Mime::parse("TExt/CQl-idENtifier"),
+            crate::Mime::parse("text/cql-iDEntIFiER"),
             Ok(TEXT_CQL_IDENTIFIER)
         );
     }
@@ -102343,7 +102365,7 @@ pub mod constants {
     #[test]
     fn text_css_parse() {
         assert_eq!(crate::Mime::parse("text/css"), Ok(TEXT_CSS));
-        assert_eq!(crate::Mime::parse("texT/CSs"), Ok(TEXT_CSS));
+        assert_eq!(crate::Mime::parse("TExT/CSs"), Ok(TEXT_CSS));
     }
 
     /// `text/csv`
@@ -102357,7 +102379,7 @@ pub mod constants {
     #[test]
     fn text_csv_parse() {
         assert_eq!(crate::Mime::parse("text/csv"), Ok(TEXT_CSV));
-        assert_eq!(crate::Mime::parse("tEXt/CSV"), Ok(TEXT_CSV));
+        assert_eq!(crate::Mime::parse("TeXT/Csv"), Ok(TEXT_CSV));
     }
 
     /// `text/csv-schema`
@@ -102371,7 +102393,7 @@ pub mod constants {
     #[test]
     fn text_csv_schema_parse() {
         assert_eq!(crate::Mime::parse("text/csv-schema"), Ok(TEXT_CSV_SCHEMA));
-        assert_eq!(crate::Mime::parse("tEXT/cSv-ScHema"), Ok(TEXT_CSV_SCHEMA));
+        assert_eq!(crate::Mime::parse("text/CSv-ScHeMa"), Ok(TEXT_CSV_SCHEMA));
     }
 
     /// `text/dns`
@@ -102385,7 +102407,7 @@ pub mod constants {
     #[test]
     fn text_dns_parse() {
         assert_eq!(crate::Mime::parse("text/dns"), Ok(TEXT_DNS));
-        assert_eq!(crate::Mime::parse("text/Dns"), Ok(TEXT_DNS));
+        assert_eq!(crate::Mime::parse("TExt/DNS"), Ok(TEXT_DNS));
     }
 
     /// `text/encaprtp`
@@ -102399,7 +102421,7 @@ pub mod constants {
     #[test]
     fn text_encaprtp_parse() {
         assert_eq!(crate::Mime::parse("text/encaprtp"), Ok(TEXT_ENCAPRTP));
-        assert_eq!(crate::Mime::parse("TeXt/eNCapRTP"), Ok(TEXT_ENCAPRTP));
+        assert_eq!(crate::Mime::parse("TExt/EncaPrTP"), Ok(TEXT_ENCAPRTP));
     }
 
     /// `text/enriched`
@@ -102413,7 +102435,7 @@ pub mod constants {
     #[test]
     fn text_enriched_parse() {
         assert_eq!(crate::Mime::parse("text/enriched"), Ok(TEXT_ENRICHED));
-        assert_eq!(crate::Mime::parse("TEXt/eNricHeD"), Ok(TEXT_ENRICHED));
+        assert_eq!(crate::Mime::parse("TEXT/eNRIChEd"), Ok(TEXT_ENRICHED));
     }
 
     /// `text/example`
@@ -102427,7 +102449,7 @@ pub mod constants {
     #[test]
     fn text_example_parse() {
         assert_eq!(crate::Mime::parse("text/example"), Ok(TEXT_EXAMPLE));
-        assert_eq!(crate::Mime::parse("TEXT/ExAMPLe"), Ok(TEXT_EXAMPLE));
+        assert_eq!(crate::Mime::parse("Text/eXAmpLe"), Ok(TEXT_EXAMPLE));
     }
 
     /// `text/fhirpath`
@@ -102441,7 +102463,7 @@ pub mod constants {
     #[test]
     fn text_fhirpath_parse() {
         assert_eq!(crate::Mime::parse("text/fhirpath"), Ok(TEXT_FHIRPATH));
-        assert_eq!(crate::Mime::parse("TeXt/fHiRPatH"), Ok(TEXT_FHIRPATH));
+        assert_eq!(crate::Mime::parse("text/FhIRpATH"), Ok(TEXT_FHIRPATH));
     }
 
     /// `text/flexfec`
@@ -102455,7 +102477,7 @@ pub mod constants {
     #[test]
     fn text_flexfec_parse() {
         assert_eq!(crate::Mime::parse("text/flexfec"), Ok(TEXT_FLEXFEC));
-        assert_eq!(crate::Mime::parse("text/FLeXFeC"), Ok(TEXT_FLEXFEC));
+        assert_eq!(crate::Mime::parse("teXT/flexFEc"), Ok(TEXT_FLEXFEC));
     }
 
     /// `text/fwdred`
@@ -102469,7 +102491,7 @@ pub mod constants {
     #[test]
     fn text_fwdred_parse() {
         assert_eq!(crate::Mime::parse("text/fwdred"), Ok(TEXT_FWDRED));
-        assert_eq!(crate::Mime::parse("TExt/FWdred"), Ok(TEXT_FWDRED));
+        assert_eq!(crate::Mime::parse("TExt/fWDreD"), Ok(TEXT_FWDRED));
     }
 
     /// `text/gff3`
@@ -102483,7 +102505,7 @@ pub mod constants {
     #[test]
     fn text_gff3_parse() {
         assert_eq!(crate::Mime::parse("text/gff3"), Ok(TEXT_GFF3));
-        assert_eq!(crate::Mime::parse("TExT/gff3"), Ok(TEXT_GFF3));
+        assert_eq!(crate::Mime::parse("text/gff3"), Ok(TEXT_GFF3));
     }
 
     /// `text/grammar-ref-list`
@@ -102501,7 +102523,7 @@ pub mod constants {
             Ok(TEXT_GRAMMAR_REF_LIST)
         );
         assert_eq!(
-            crate::Mime::parse("TExt/grammar-reF-lIst"),
+            crate::Mime::parse("tExt/grAmmar-rEF-liST"),
             Ok(TEXT_GRAMMAR_REF_LIST)
         );
     }
@@ -102517,7 +102539,7 @@ pub mod constants {
     #[test]
     fn text_html_parse() {
         assert_eq!(crate::Mime::parse("text/html"), Ok(TEXT_HTML));
-        assert_eq!(crate::Mime::parse("Text/HtML"), Ok(TEXT_HTML));
+        assert_eq!(crate::Mime::parse("texT/HTml"), Ok(TEXT_HTML));
     }
 
     /// `text/javascript`
@@ -102531,7 +102553,7 @@ pub mod constants {
     #[test]
     fn text_javascript_parse() {
         assert_eq!(crate::Mime::parse("text/javascript"), Ok(TEXT_JAVASCRIPT));
-        assert_eq!(crate::Mime::parse("TexT/javAsCRipT"), Ok(TEXT_JAVASCRIPT));
+        assert_eq!(crate::Mime::parse("TexT/jAvAsCRIpT"), Ok(TEXT_JAVASCRIPT));
     }
 
     /// `text/jcr-cnd`
@@ -102545,7 +102567,7 @@ pub mod constants {
     #[test]
     fn text_jcr_cnd_parse() {
         assert_eq!(crate::Mime::parse("text/jcr-cnd"), Ok(TEXT_JCR_CND));
-        assert_eq!(crate::Mime::parse("teXt/JcR-CND"), Ok(TEXT_JCR_CND));
+        assert_eq!(crate::Mime::parse("tExt/JCr-cnD"), Ok(TEXT_JCR_CND));
     }
 
     /// `text/markdown`
@@ -102559,7 +102581,7 @@ pub mod constants {
     #[test]
     fn text_markdown_parse() {
         assert_eq!(crate::Mime::parse("text/markdown"), Ok(TEXT_MARKDOWN));
-        assert_eq!(crate::Mime::parse("tExT/mARKdOwn"), Ok(TEXT_MARKDOWN));
+        assert_eq!(crate::Mime::parse("TExT/MArKdoWn"), Ok(TEXT_MARKDOWN));
     }
 
     /// `text/mizar`
@@ -102573,7 +102595,7 @@ pub mod constants {
     #[test]
     fn text_mizar_parse() {
         assert_eq!(crate::Mime::parse("text/mizar"), Ok(TEXT_MIZAR));
-        assert_eq!(crate::Mime::parse("TEXt/MIZaR"), Ok(TEXT_MIZAR));
+        assert_eq!(crate::Mime::parse("TeXt/MiZAR"), Ok(TEXT_MIZAR));
     }
 
     /// `text/n3`
@@ -102587,7 +102609,7 @@ pub mod constants {
     #[test]
     fn text_n3_parse() {
         assert_eq!(crate::Mime::parse("text/n3"), Ok(TEXT_N3));
-        assert_eq!(crate::Mime::parse("teXt/n3"), Ok(TEXT_N3));
+        assert_eq!(crate::Mime::parse("TExT/n3"), Ok(TEXT_N3));
     }
 
     /// `text/parameters`
@@ -102601,7 +102623,7 @@ pub mod constants {
     #[test]
     fn text_parameters_parse() {
         assert_eq!(crate::Mime::parse("text/parameters"), Ok(TEXT_PARAMETERS));
-        assert_eq!(crate::Mime::parse("tEXt/PARAmETerS"), Ok(TEXT_PARAMETERS));
+        assert_eq!(crate::Mime::parse("Text/pAraMetErS"), Ok(TEXT_PARAMETERS));
     }
 
     /// `text/parityfec`
@@ -102615,7 +102637,7 @@ pub mod constants {
     #[test]
     fn text_parityfec_parse() {
         assert_eq!(crate::Mime::parse("text/parityfec"), Ok(TEXT_PARITYFEC));
-        assert_eq!(crate::Mime::parse("text/ParItyFeC"), Ok(TEXT_PARITYFEC));
+        assert_eq!(crate::Mime::parse("text/PArITYFEC"), Ok(TEXT_PARITYFEC));
     }
 
     /// `text/plain`
@@ -102629,7 +102651,7 @@ pub mod constants {
     #[test]
     fn text_plain_parse() {
         assert_eq!(crate::Mime::parse("text/plain"), Ok(TEXT_PLAIN));
-        assert_eq!(crate::Mime::parse("text/PLaIN"), Ok(TEXT_PLAIN));
+        assert_eq!(crate::Mime::parse("TEXt/Plain"), Ok(TEXT_PLAIN));
     }
 
     /// `text/provenance-notation`
@@ -102649,7 +102671,7 @@ pub mod constants {
             Ok(TEXT_PROVENANCE_NOTATION)
         );
         assert_eq!(
-            crate::Mime::parse("TEXT/PRovEnance-NoTaTion"),
+            crate::Mime::parse("tEXt/pRovenANCe-NotatIOn"),
             Ok(TEXT_PROVENANCE_NOTATION)
         );
     }
@@ -102671,7 +102693,7 @@ pub mod constants {
             Ok(TEXT_PRS_FALLENSTEIN_RST)
         );
         assert_eq!(
-            crate::Mime::parse("tEXT/pRs.faLLenSteIn.rSt"),
+            crate::Mime::parse("tExt/prs.faLLeNSteiN.Rst"),
             Ok(TEXT_PRS_FALLENSTEIN_RST)
         );
     }
@@ -102691,7 +102713,7 @@ pub mod constants {
             Ok(TEXT_PRS_LINES_TAG)
         );
         assert_eq!(
-            crate::Mime::parse("tEXt/Prs.LiNes.Tag"),
+            crate::Mime::parse("tExt/pRs.LiNeS.TaG"),
             Ok(TEXT_PRS_LINES_TAG)
         );
     }
@@ -102711,7 +102733,7 @@ pub mod constants {
             Ok(TEXT_PRS_PROP_LOGIC)
         );
         assert_eq!(
-            crate::Mime::parse("TeXt/PrS.PrOp.logiC"),
+            crate::Mime::parse("text/PrS.proP.LogiC"),
             Ok(TEXT_PRS_PROP_LOGIC)
         );
     }
@@ -102727,7 +102749,7 @@ pub mod constants {
     #[test]
     fn text_raptorfec_parse() {
         assert_eq!(crate::Mime::parse("text/raptorfec"), Ok(TEXT_RAPTORFEC));
-        assert_eq!(crate::Mime::parse("TeXT/raPtOrfeC"), Ok(TEXT_RAPTORFEC));
+        assert_eq!(crate::Mime::parse("TexT/RAPtORFEC"), Ok(TEXT_RAPTORFEC));
     }
 
     /// `text/RED`
@@ -102741,7 +102763,7 @@ pub mod constants {
     #[test]
     fn text_red_parse() {
         assert_eq!(crate::Mime::parse("text/RED"), Ok(TEXT_RED));
-        assert_eq!(crate::Mime::parse("TexT/RED"), Ok(TEXT_RED));
+        assert_eq!(crate::Mime::parse("TExT/RED"), Ok(TEXT_RED));
     }
 
     /// `text/rfc822-headers`
@@ -102759,7 +102781,7 @@ pub mod constants {
             Ok(TEXT_RFC822_HEADERS)
         );
         assert_eq!(
-            crate::Mime::parse("tEXT/RFC822-HEADerS"),
+            crate::Mime::parse("TExt/rFC822-HeADErs"),
             Ok(TEXT_RFC822_HEADERS)
         );
     }
@@ -102775,7 +102797,7 @@ pub mod constants {
     #[test]
     fn text_rtf_parse() {
         assert_eq!(crate::Mime::parse("text/rtf"), Ok(TEXT_RTF));
-        assert_eq!(crate::Mime::parse("tEXT/rtF"), Ok(TEXT_RTF));
+        assert_eq!(crate::Mime::parse("tEXt/rtF"), Ok(TEXT_RTF));
     }
 
     /// `text/rtp-enc-aescm128`
@@ -102793,7 +102815,7 @@ pub mod constants {
             Ok(TEXT_RTP_ENC_AESCM128)
         );
         assert_eq!(
-            crate::Mime::parse("tEXT/rtP-enc-AESCm128"),
+            crate::Mime::parse("TEXt/rtP-eNC-aEsCm128"),
             Ok(TEXT_RTP_ENC_AESCM128)
         );
     }
@@ -102809,7 +102831,7 @@ pub mod constants {
     #[test]
     fn text_rtploopback_parse() {
         assert_eq!(crate::Mime::parse("text/rtploopback"), Ok(TEXT_RTPLOOPBACK));
-        assert_eq!(crate::Mime::parse("TexT/rtPlOoPBacK"), Ok(TEXT_RTPLOOPBACK));
+        assert_eq!(crate::Mime::parse("tEXT/RTPLOOpbAck"), Ok(TEXT_RTPLOOPBACK));
     }
 
     /// `text/rtx`
@@ -102823,7 +102845,7 @@ pub mod constants {
     #[test]
     fn text_rtx_parse() {
         assert_eq!(crate::Mime::parse("text/rtx"), Ok(TEXT_RTX));
-        assert_eq!(crate::Mime::parse("TEXT/RTX"), Ok(TEXT_RTX));
+        assert_eq!(crate::Mime::parse("Text/rTX"), Ok(TEXT_RTX));
     }
 
     /// `text/SGML`
@@ -102837,7 +102859,7 @@ pub mod constants {
     #[test]
     fn text_sgml_parse() {
         assert_eq!(crate::Mime::parse("text/SGML"), Ok(TEXT_SGML));
-        assert_eq!(crate::Mime::parse("TexT/sGml"), Ok(TEXT_SGML));
+        assert_eq!(crate::Mime::parse("tExt/Sgml"), Ok(TEXT_SGML));
     }
 
     /// `text/shaclc`
@@ -102851,7 +102873,7 @@ pub mod constants {
     #[test]
     fn text_shaclc_parse() {
         assert_eq!(crate::Mime::parse("text/shaclc"), Ok(TEXT_SHACLC));
-        assert_eq!(crate::Mime::parse("texT/sHacLC"), Ok(TEXT_SHACLC));
+        assert_eq!(crate::Mime::parse("TeXt/ShaclC"), Ok(TEXT_SHACLC));
     }
 
     /// `text/shex`
@@ -102865,7 +102887,7 @@ pub mod constants {
     #[test]
     fn text_shex_parse() {
         assert_eq!(crate::Mime::parse("text/shex"), Ok(TEXT_SHEX));
-        assert_eq!(crate::Mime::parse("texT/SheX"), Ok(TEXT_SHEX));
+        assert_eq!(crate::Mime::parse("TexT/SHEX"), Ok(TEXT_SHEX));
     }
 
     /// `text/spdx`
@@ -102879,7 +102901,7 @@ pub mod constants {
     #[test]
     fn text_spdx_parse() {
         assert_eq!(crate::Mime::parse("text/spdx"), Ok(TEXT_SPDX));
-        assert_eq!(crate::Mime::parse("text/SpdX"), Ok(TEXT_SPDX));
+        assert_eq!(crate::Mime::parse("teXT/Spdx"), Ok(TEXT_SPDX));
     }
 
     /// `text/strings`
@@ -102893,7 +102915,7 @@ pub mod constants {
     #[test]
     fn text_strings_parse() {
         assert_eq!(crate::Mime::parse("text/strings"), Ok(TEXT_STRINGS));
-        assert_eq!(crate::Mime::parse("TEXT/stRInGs"), Ok(TEXT_STRINGS));
+        assert_eq!(crate::Mime::parse("teXT/StRinGs"), Ok(TEXT_STRINGS));
     }
 
     /// `text/t140`
@@ -102907,7 +102929,7 @@ pub mod constants {
     #[test]
     fn text_t140_parse() {
         assert_eq!(crate::Mime::parse("text/t140"), Ok(TEXT_T140));
-        assert_eq!(crate::Mime::parse("text/T140"), Ok(TEXT_T140));
+        assert_eq!(crate::Mime::parse("TeXT/t140"), Ok(TEXT_T140));
     }
 
     /// `text/tab-separated-values`
@@ -102927,7 +102949,7 @@ pub mod constants {
             Ok(TEXT_TAB_SEPARATED_VALUES)
         );
         assert_eq!(
-            crate::Mime::parse("TexT/TaB-sepARAted-vALUEs"),
+            crate::Mime::parse("Text/tAB-Separated-vaLUes"),
             Ok(TEXT_TAB_SEPARATED_VALUES)
         );
     }
@@ -102943,7 +102965,7 @@ pub mod constants {
     #[test]
     fn text_texmacs_parse() {
         assert_eq!(crate::Mime::parse("text/texmacs"), Ok(TEXT_TEXMACS));
-        assert_eq!(crate::Mime::parse("text/teXmaCS"), Ok(TEXT_TEXMACS));
+        assert_eq!(crate::Mime::parse("tExT/TeXMACs"), Ok(TEXT_TEXMACS));
     }
 
     /// `text/troff`
@@ -102957,7 +102979,7 @@ pub mod constants {
     #[test]
     fn text_troff_parse() {
         assert_eq!(crate::Mime::parse("text/troff"), Ok(TEXT_TROFF));
-        assert_eq!(crate::Mime::parse("texT/TrOfF"), Ok(TEXT_TROFF));
+        assert_eq!(crate::Mime::parse("tEXT/tROFf"), Ok(TEXT_TROFF));
     }
 
     /// `text/turtle`
@@ -102971,7 +102993,7 @@ pub mod constants {
     #[test]
     fn text_turtle_parse() {
         assert_eq!(crate::Mime::parse("text/turtle"), Ok(TEXT_TURTLE));
-        assert_eq!(crate::Mime::parse("TEXt/TURtlE"), Ok(TEXT_TURTLE));
+        assert_eq!(crate::Mime::parse("teXT/Turtle"), Ok(TEXT_TURTLE));
     }
 
     /// `text/ulpfec`
@@ -102985,7 +103007,7 @@ pub mod constants {
     #[test]
     fn text_ulpfec_parse() {
         assert_eq!(crate::Mime::parse("text/ulpfec"), Ok(TEXT_ULPFEC));
-        assert_eq!(crate::Mime::parse("TExt/ULpFec"), Ok(TEXT_ULPFEC));
+        assert_eq!(crate::Mime::parse("TexT/ULpfEC"), Ok(TEXT_ULPFEC));
     }
 
     /// `text/uri-list`
@@ -102999,7 +103021,7 @@ pub mod constants {
     #[test]
     fn text_uri_list_parse() {
         assert_eq!(crate::Mime::parse("text/uri-list"), Ok(TEXT_URI_LIST));
-        assert_eq!(crate::Mime::parse("texT/uRI-LisT"), Ok(TEXT_URI_LIST));
+        assert_eq!(crate::Mime::parse("TeXt/uri-List"), Ok(TEXT_URI_LIST));
     }
 
     /// `text/vcard`
@@ -103013,7 +103035,7 @@ pub mod constants {
     #[test]
     fn text_vcard_parse() {
         assert_eq!(crate::Mime::parse("text/vcard"), Ok(TEXT_VCARD));
-        assert_eq!(crate::Mime::parse("TExT/vcarD"), Ok(TEXT_VCARD));
+        assert_eq!(crate::Mime::parse("text/vCARD"), Ok(TEXT_VCARD));
     }
 
     /// `text/vnd.a`
@@ -103027,7 +103049,7 @@ pub mod constants {
     #[test]
     fn text_vnd_a_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.a"), Ok(TEXT_VND_A));
-        assert_eq!(crate::Mime::parse("Text/vnd.a"), Ok(TEXT_VND_A));
+        assert_eq!(crate::Mime::parse("texT/vnd.a"), Ok(TEXT_VND_A));
     }
 
     /// `text/vnd.abc`
@@ -103041,7 +103063,7 @@ pub mod constants {
     #[test]
     fn text_vnd_abc_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.abc"), Ok(TEXT_VND_ABC));
-        assert_eq!(crate::Mime::parse("TEXT/vnD.abc"), Ok(TEXT_VND_ABC));
+        assert_eq!(crate::Mime::parse("TExt/vNd.aBc"), Ok(TEXT_VND_ABC));
     }
 
     /// `text/vnd.ascii-art`
@@ -103059,7 +103081,7 @@ pub mod constants {
             Ok(TEXT_VND_ASCII_ART)
         );
         assert_eq!(
-            crate::Mime::parse("teXT/vnd.aScIi-aRT"),
+            crate::Mime::parse("teXT/vNd.AsCii-Art"),
             Ok(TEXT_VND_ASCII_ART)
         );
     }
@@ -103075,7 +103097,7 @@ pub mod constants {
     #[test]
     fn text_vnd_curl_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.curl"), Ok(TEXT_VND_CURL));
-        assert_eq!(crate::Mime::parse("teXt/VnD.cuRl"), Ok(TEXT_VND_CURL));
+        assert_eq!(crate::Mime::parse("tExT/vnd.CurL"), Ok(TEXT_VND_CURL));
     }
 
     /// `text/vnd.debian.copyright`
@@ -103095,7 +103117,7 @@ pub mod constants {
             Ok(TEXT_VND_DEBIAN_COPYRIGHT)
         );
         assert_eq!(
-            crate::Mime::parse("teXt/vnd.DEbiAN.coPYrIghT"),
+            crate::Mime::parse("TExt/VnD.dEBiAn.cOpyRIgHt"),
             Ok(TEXT_VND_DEBIAN_COPYRIGHT)
         );
     }
@@ -103117,7 +103139,7 @@ pub mod constants {
             Ok(TEXT_VND_DM_CLIENT_SCRIPT)
         );
         assert_eq!(
-            crate::Mime::parse("TeXt/vNd.DMcLiENTsCript"),
+            crate::Mime::parse("TEXt/vnd.dmcLiENtSCripT"),
             Ok(TEXT_VND_DM_CLIENT_SCRIPT)
         );
     }
@@ -103137,7 +103159,7 @@ pub mod constants {
             Ok(TEXT_VND_DVB_SUBTITLE)
         );
         assert_eq!(
-            crate::Mime::parse("texT/VNd.Dvb.SUbTItLE"),
+            crate::Mime::parse("TeXT/VNd.Dvb.sUBtitlE"),
             Ok(TEXT_VND_DVB_SUBTITLE)
         );
     }
@@ -103159,7 +103181,7 @@ pub mod constants {
             Ok(TEXT_VND_ESMERTEC_THEME_DESCRIPTOR)
         );
         assert_eq!(
-            crate::Mime::parse("tEXt/vnD.esmeRTEC.tHemE-DEsCRIPTOr"),
+            crate::Mime::parse("TEXt/Vnd.eSMeRTEC.TheME-DeSCrIpTOR"),
             Ok(TEXT_VND_ESMERTEC_THEME_DESCRIPTOR)
         );
     }
@@ -103181,7 +103203,7 @@ pub mod constants {
             Ok(TEXT_VND_FAMILYSEARCH_GEDCOM)
         );
         assert_eq!(
-            crate::Mime::parse("tEXT/vND.FaMILYSearcH.gEdcOM"),
+            crate::Mime::parse("TExt/vNd.FamILySearcH.GEdCOm"),
             Ok(TEXT_VND_FAMILYSEARCH_GEDCOM)
         );
     }
@@ -103201,7 +103223,7 @@ pub mod constants {
             Ok(TEXT_VND_FICLAB_FLT)
         );
         assert_eq!(
-            crate::Mime::parse("tExt/vNd.FiCLab.Flt"),
+            crate::Mime::parse("tEXt/VnD.FicLAB.FlT"),
             Ok(TEXT_VND_FICLAB_FLT)
         );
     }
@@ -103217,7 +103239,7 @@ pub mod constants {
     #[test]
     fn text_vnd_fly_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.fly"), Ok(TEXT_VND_FLY));
-        assert_eq!(crate::Mime::parse("TeXT/vnD.FLY"), Ok(TEXT_VND_FLY));
+        assert_eq!(crate::Mime::parse("TExt/vnD.fLy"), Ok(TEXT_VND_FLY));
     }
 
     /// `text/vnd.fmi.flexstor`
@@ -103235,7 +103257,7 @@ pub mod constants {
             Ok(TEXT_VND_FMI_FLEXSTOR)
         );
         assert_eq!(
-            crate::Mime::parse("tEXT/vnd.Fmi.fLexStOr"),
+            crate::Mime::parse("TexT/Vnd.fMi.FlExStoR"),
             Ok(TEXT_VND_FMI_FLEXSTOR)
         );
     }
@@ -103251,7 +103273,7 @@ pub mod constants {
     #[test]
     fn text_vnd_gml_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.gml"), Ok(TEXT_VND_GML));
-        assert_eq!(crate::Mime::parse("texT/VNd.gMl"), Ok(TEXT_VND_GML));
+        assert_eq!(crate::Mime::parse("TExt/vnD.gMl"), Ok(TEXT_VND_GML));
     }
 
     /// `text/vnd.graphviz`
@@ -103269,7 +103291,7 @@ pub mod constants {
             Ok(TEXT_VND_GRAPHVIZ)
         );
         assert_eq!(
-            crate::Mime::parse("tEXT/vnd.GraPhVIz"),
+            crate::Mime::parse("TExT/vND.GrApHViz"),
             Ok(TEXT_VND_GRAPHVIZ)
         );
     }
@@ -103285,7 +103307,7 @@ pub mod constants {
     #[test]
     fn text_vnd_hans_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.hans"), Ok(TEXT_VND_HANS));
-        assert_eq!(crate::Mime::parse("TExT/vNd.hANs"), Ok(TEXT_VND_HANS));
+        assert_eq!(crate::Mime::parse("TeXT/vND.HaNs"), Ok(TEXT_VND_HANS));
     }
 
     /// `text/vnd.hgl`
@@ -103299,7 +103321,7 @@ pub mod constants {
     #[test]
     fn text_vnd_hgl_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.hgl"), Ok(TEXT_VND_HGL));
-        assert_eq!(crate::Mime::parse("tExT/vnD.hGl"), Ok(TEXT_VND_HGL));
+        assert_eq!(crate::Mime::parse("TExT/VNd.hgL"), Ok(TEXT_VND_HGL));
     }
 
     /// `text/vnd.in3d.3dml`
@@ -103317,7 +103339,7 @@ pub mod constants {
             Ok(TEXT_VND_IN3D_3DML)
         );
         assert_eq!(
-            crate::Mime::parse("TeXT/VND.iN3d.3dml"),
+            crate::Mime::parse("Text/vND.in3D.3Dml"),
             Ok(TEXT_VND_IN3D_3DML)
         );
     }
@@ -103337,7 +103359,7 @@ pub mod constants {
             Ok(TEXT_VND_IN3D_SPOT)
         );
         assert_eq!(
-            crate::Mime::parse("TeXT/vnd.In3d.spOT"),
+            crate::Mime::parse("teXT/vnD.IN3d.sPoT"),
             Ok(TEXT_VND_IN3D_SPOT)
         );
     }
@@ -103357,7 +103379,7 @@ pub mod constants {
             Ok(TEXT_VND_IPTC_NEWS_ML)
         );
         assert_eq!(
-            crate::Mime::parse("TexT/VND.ipTc.NEwSML"),
+            crate::Mime::parse("TExT/Vnd.iPTC.nEwsMl"),
             Ok(TEXT_VND_IPTC_NEWS_ML)
         );
     }
@@ -103377,7 +103399,7 @@ pub mod constants {
             Ok(TEXT_VND_IPTC_NITF)
         );
         assert_eq!(
-            crate::Mime::parse("teXt/VNd.IptC.niTF"),
+            crate::Mime::parse("teXT/vND.IPTc.niTF"),
             Ok(TEXT_VND_IPTC_NITF)
         );
     }
@@ -103393,7 +103415,7 @@ pub mod constants {
     #[test]
     fn text_vnd_latex_z_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.latex-z"), Ok(TEXT_VND_LATEX_Z));
-        assert_eq!(crate::Mime::parse("teXT/VND.LatEX-z"), Ok(TEXT_VND_LATEX_Z));
+        assert_eq!(crate::Mime::parse("text/VnD.LATEx-z"), Ok(TEXT_VND_LATEX_Z));
     }
 
     /// `text/vnd.motorola.reflex`
@@ -103413,7 +103435,7 @@ pub mod constants {
             Ok(TEXT_VND_MOTOROLA_REFLEX)
         );
         assert_eq!(
-            crate::Mime::parse("texT/VND.MOtorOLA.refLeX"),
+            crate::Mime::parse("TEXt/vnD.MOtorOla.rEfLeX"),
             Ok(TEXT_VND_MOTOROLA_REFLEX)
         );
     }
@@ -103435,7 +103457,7 @@ pub mod constants {
             Ok(TEXT_VND_MS_MEDIAPACKAGE)
         );
         assert_eq!(
-            crate::Mime::parse("Text/vnD.Ms-mEDiApAcKage"),
+            crate::Mime::parse("TeXt/vNd.mS-mEDIapAcKaGe"),
             Ok(TEXT_VND_MS_MEDIAPACKAGE)
         );
     }
@@ -103457,7 +103479,7 @@ pub mod constants {
             Ok(TEXT_VND_NET2PHONE_COMMCENTER_COMMAND)
         );
         assert_eq!(
-            crate::Mime::parse("TExT/Vnd.nEt2phone.coMmcENteR.cOMMAnd"),
+            crate::Mime::parse("text/vnD.nET2pHOnE.COmmcENTer.CommAnD"),
             Ok(TEXT_VND_NET2PHONE_COMMCENTER_COMMAND)
         );
     }
@@ -103479,7 +103501,7 @@ pub mod constants {
             Ok(TEXT_VND_RADISYS_MSML_BASIC_LAYOUT)
         );
         assert_eq!(
-            crate::Mime::parse("tEXT/vND.raDiSYs.Msml-BASIC-lAyOuT"),
+            crate::Mime::parse("TeXT/vnD.RADIsyS.MsML-bASiC-Layout"),
             Ok(TEXT_VND_RADISYS_MSML_BASIC_LAYOUT)
         );
     }
@@ -103501,7 +103523,7 @@ pub mod constants {
             Ok(TEXT_VND_SENX_WARPSCRIPT)
         );
         assert_eq!(
-            crate::Mime::parse("TexT/vNd.senx.WArPScRIPT"),
+            crate::Mime::parse("TExT/vND.SeNx.wARPsCriPT"),
             Ok(TEXT_VND_SENX_WARPSCRIPT)
         );
     }
@@ -103517,7 +103539,7 @@ pub mod constants {
     #[test]
     fn text_vnd_sosi_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.sosi"), Ok(TEXT_VND_SOSI));
-        assert_eq!(crate::Mime::parse("tExt/VND.SosI"), Ok(TEXT_VND_SOSI));
+        assert_eq!(crate::Mime::parse("TEXT/vNd.SosI"), Ok(TEXT_VND_SOSI));
     }
 
     /// `text/vnd.sun.j2me.app-descriptor`
@@ -103537,7 +103559,7 @@ pub mod constants {
             Ok(TEXT_VND_SUN_J2ME_APP_DESCRIPTOR)
         );
         assert_eq!(
-            crate::Mime::parse("TEXT/VnD.sUn.J2Me.aPp-dEScRiPTOr"),
+            crate::Mime::parse("TExt/VnD.SUn.j2ME.APp-DesCRipTor"),
             Ok(TEXT_VND_SUN_J2ME_APP_DESCRIPTOR)
         );
     }
@@ -103559,7 +103581,7 @@ pub mod constants {
             Ok(TEXT_VND_TROLLTECH_LINGUIST)
         );
         assert_eq!(
-            crate::Mime::parse("TExt/vnD.trOllTecH.LINGUIsT"),
+            crate::Mime::parse("TexT/VND.TRoLLTEch.LInguisT"),
             Ok(TEXT_VND_TROLLTECH_LINGUIST)
         );
     }
@@ -103575,7 +103597,7 @@ pub mod constants {
     #[test]
     fn text_vnd_wap_si_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.wap.si"), Ok(TEXT_VND_WAP_SI));
-        assert_eq!(crate::Mime::parse("TEXt/VND.wap.Si"), Ok(TEXT_VND_WAP_SI));
+        assert_eq!(crate::Mime::parse("teXt/VNd.WAp.si"), Ok(TEXT_VND_WAP_SI));
     }
 
     /// `text/vnd.wap.sl`
@@ -103589,7 +103611,7 @@ pub mod constants {
     #[test]
     fn text_vnd_wap_sl_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.wap.sl"), Ok(TEXT_VND_WAP_SL));
-        assert_eq!(crate::Mime::parse("tExT/VnD.Wap.sl"), Ok(TEXT_VND_WAP_SL));
+        assert_eq!(crate::Mime::parse("teXt/VND.waP.sl"), Ok(TEXT_VND_WAP_SL));
     }
 
     /// `text/vnd.wap.wml`
@@ -103603,7 +103625,7 @@ pub mod constants {
     #[test]
     fn text_vnd_wap_wml_parse() {
         assert_eq!(crate::Mime::parse("text/vnd.wap.wml"), Ok(TEXT_VND_WAP_WML));
-        assert_eq!(crate::Mime::parse("tExT/VND.wAp.wml"), Ok(TEXT_VND_WAP_WML));
+        assert_eq!(crate::Mime::parse("texT/vnD.wap.wML"), Ok(TEXT_VND_WAP_WML));
     }
 
     /// `text/vnd.wap.wmlscript`
@@ -103621,7 +103643,7 @@ pub mod constants {
             Ok(TEXT_VND_WAP_WMLSCRIPT)
         );
         assert_eq!(
-            crate::Mime::parse("tExt/Vnd.wap.WMlsCRIpt"),
+            crate::Mime::parse("TexT/Vnd.Wap.wmLsCrIPT"),
             Ok(TEXT_VND_WAP_WMLSCRIPT)
         );
     }
@@ -103637,7 +103659,7 @@ pub mod constants {
     #[test]
     fn text_vtt_parse() {
         assert_eq!(crate::Mime::parse("text/vtt"), Ok(TEXT_VTT));
-        assert_eq!(crate::Mime::parse("TExt/vtT"), Ok(TEXT_VTT));
+        assert_eq!(crate::Mime::parse("TexT/VTT"), Ok(TEXT_VTT));
     }
 
     /// `text/x-bibtex`
@@ -103651,7 +103673,7 @@ pub mod constants {
     #[test]
     fn text_x_bibtex_parse() {
         assert_eq!(crate::Mime::parse("text/x-bibtex"), Ok(TEXT_X_BIBTEX));
-        assert_eq!(crate::Mime::parse("tExT/X-biBTEX"), Ok(TEXT_X_BIBTEX));
+        assert_eq!(crate::Mime::parse("text/X-BIBTEX"), Ok(TEXT_X_BIBTEX));
     }
 
     /// `text/x-boo`
@@ -103665,7 +103687,7 @@ pub mod constants {
     #[test]
     fn text_x_boo_parse() {
         assert_eq!(crate::Mime::parse("text/x-boo"), Ok(TEXT_X_BOO));
-        assert_eq!(crate::Mime::parse("Text/x-BOO"), Ok(TEXT_X_BOO));
+        assert_eq!(crate::Mime::parse("tExt/x-boO"), Ok(TEXT_X_BOO));
     }
 
     /// `text/x-chdr`
@@ -103679,7 +103701,7 @@ pub mod constants {
     #[test]
     fn text_x_chdr_parse() {
         assert_eq!(crate::Mime::parse("text/x-chdr"), Ok(TEXT_X_CHDR));
-        assert_eq!(crate::Mime::parse("TEXT/X-cHdr"), Ok(TEXT_X_CHDR));
+        assert_eq!(crate::Mime::parse("tEXT/X-CHDR"), Ok(TEXT_X_CHDR));
     }
 
     /// `text/x-component`
@@ -103693,7 +103715,7 @@ pub mod constants {
     #[test]
     fn text_x_component_parse() {
         assert_eq!(crate::Mime::parse("text/x-component"), Ok(TEXT_X_COMPONENT));
-        assert_eq!(crate::Mime::parse("teXt/X-COMPONEnt"), Ok(TEXT_X_COMPONENT));
+        assert_eq!(crate::Mime::parse("text/X-CoMPonEnt"), Ok(TEXT_X_COMPONENT));
     }
 
     /// `text/x-csh`
@@ -103707,7 +103729,7 @@ pub mod constants {
     #[test]
     fn text_x_csh_parse() {
         assert_eq!(crate::Mime::parse("text/x-csh"), Ok(TEXT_X_CSH));
-        assert_eq!(crate::Mime::parse("texT/X-CSh"), Ok(TEXT_X_CSH));
+        assert_eq!(crate::Mime::parse("text/x-Csh"), Ok(TEXT_X_CSH));
     }
 
     /// `text/x-csrc`
@@ -103721,7 +103743,7 @@ pub mod constants {
     #[test]
     fn text_x_csrc_parse() {
         assert_eq!(crate::Mime::parse("text/x-csrc"), Ok(TEXT_X_CSRC));
-        assert_eq!(crate::Mime::parse("tExt/x-csrC"), Ok(TEXT_X_CSRC));
+        assert_eq!(crate::Mime::parse("texT/X-CSrC"), Ok(TEXT_X_CSRC));
     }
 
     /// `text/x-diff`
@@ -103735,7 +103757,7 @@ pub mod constants {
     #[test]
     fn text_x_diff_parse() {
         assert_eq!(crate::Mime::parse("text/x-diff"), Ok(TEXT_X_DIFF));
-        assert_eq!(crate::Mime::parse("Text/x-dIFF"), Ok(TEXT_X_DIFF));
+        assert_eq!(crate::Mime::parse("TexT/X-diFF"), Ok(TEXT_X_DIFF));
     }
 
     /// `text/x-dsrc`
@@ -103749,7 +103771,7 @@ pub mod constants {
     #[test]
     fn text_x_dsrc_parse() {
         assert_eq!(crate::Mime::parse("text/x-dsrc"), Ok(TEXT_X_DSRC));
-        assert_eq!(crate::Mime::parse("TeXT/x-DSrc"), Ok(TEXT_X_DSRC));
+        assert_eq!(crate::Mime::parse("TEXT/X-dSrc"), Ok(TEXT_X_DSRC));
     }
 
     /// `text/x-haskell`
@@ -103763,7 +103785,7 @@ pub mod constants {
     #[test]
     fn text_x_haskell_parse() {
         assert_eq!(crate::Mime::parse("text/x-haskell"), Ok(TEXT_X_HASKELL));
-        assert_eq!(crate::Mime::parse("tEXT/X-hAskEll"), Ok(TEXT_X_HASKELL));
+        assert_eq!(crate::Mime::parse("TExT/X-HASKeLL"), Ok(TEXT_X_HASKELL));
     }
 
     /// `text/x-java`
@@ -103777,7 +103799,7 @@ pub mod constants {
     #[test]
     fn text_x_java_parse() {
         assert_eq!(crate::Mime::parse("text/x-java"), Ok(TEXT_X_JAVA));
-        assert_eq!(crate::Mime::parse("TExT/X-JAVA"), Ok(TEXT_X_JAVA));
+        assert_eq!(crate::Mime::parse("TExt/x-Java"), Ok(TEXT_X_JAVA));
     }
 
     /// `text/x-lilypond`
@@ -103791,7 +103813,7 @@ pub mod constants {
     #[test]
     fn text_x_lilypond_parse() {
         assert_eq!(crate::Mime::parse("text/x-lilypond"), Ok(TEXT_X_LILYPOND));
-        assert_eq!(crate::Mime::parse("tEXT/x-lilYpond"), Ok(TEXT_X_LILYPOND));
+        assert_eq!(crate::Mime::parse("teXt/x-lilyPond"), Ok(TEXT_X_LILYPOND));
     }
 
     /// `text/x-literate-haskell`
@@ -103811,7 +103833,7 @@ pub mod constants {
             Ok(TEXT_X_LITERATE_HASKELL)
         );
         assert_eq!(
-            crate::Mime::parse("tExT/x-litErate-HAskEll"),
+            crate::Mime::parse("tEXT/x-liTERAte-HaSkEll"),
             Ok(TEXT_X_LITERATE_HASKELL)
         );
     }
@@ -103827,7 +103849,7 @@ pub mod constants {
     #[test]
     fn text_x_moc_parse() {
         assert_eq!(crate::Mime::parse("text/x-moc"), Ok(TEXT_X_MOC));
-        assert_eq!(crate::Mime::parse("TEXT/x-MoC"), Ok(TEXT_X_MOC));
+        assert_eq!(crate::Mime::parse("TExT/x-mOc"), Ok(TEXT_X_MOC));
     }
 
     /// `text/x-pascal`
@@ -103841,7 +103863,7 @@ pub mod constants {
     #[test]
     fn text_x_pascal_parse() {
         assert_eq!(crate::Mime::parse("text/x-pascal"), Ok(TEXT_X_PASCAL));
-        assert_eq!(crate::Mime::parse("tExt/X-PasCaL"), Ok(TEXT_X_PASCAL));
+        assert_eq!(crate::Mime::parse("TExt/x-PAsCaL"), Ok(TEXT_X_PASCAL));
     }
 
     /// `text/x-pcs-gcd`
@@ -103855,7 +103877,7 @@ pub mod constants {
     #[test]
     fn text_x_pcs_gcd_parse() {
         assert_eq!(crate::Mime::parse("text/x-pcs-gcd"), Ok(TEXT_X_PCS_GCD));
-        assert_eq!(crate::Mime::parse("tEXt/X-pCS-GcD"), Ok(TEXT_X_PCS_GCD));
+        assert_eq!(crate::Mime::parse("tEXT/x-PCs-GCD"), Ok(TEXT_X_PCS_GCD));
     }
 
     /// `text/x-perl`
@@ -103869,7 +103891,7 @@ pub mod constants {
     #[test]
     fn text_x_perl_parse() {
         assert_eq!(crate::Mime::parse("text/x-perl"), Ok(TEXT_X_PERL));
-        assert_eq!(crate::Mime::parse("tEXT/x-PErl"), Ok(TEXT_X_PERL));
+        assert_eq!(crate::Mime::parse("TeXt/X-peRl"), Ok(TEXT_X_PERL));
     }
 
     /// `text/x-python`
@@ -103883,7 +103905,7 @@ pub mod constants {
     #[test]
     fn text_x_python_parse() {
         assert_eq!(crate::Mime::parse("text/x-python"), Ok(TEXT_X_PYTHON));
-        assert_eq!(crate::Mime::parse("TEXT/X-PYThoN"), Ok(TEXT_X_PYTHON));
+        assert_eq!(crate::Mime::parse("TexT/X-PYtHon"), Ok(TEXT_X_PYTHON));
     }
 
     /// `text/x-scala`
@@ -103897,7 +103919,7 @@ pub mod constants {
     #[test]
     fn text_x_scala_parse() {
         assert_eq!(crate::Mime::parse("text/x-scala"), Ok(TEXT_X_SCALA));
-        assert_eq!(crate::Mime::parse("tExt/X-SCAlA"), Ok(TEXT_X_SCALA));
+        assert_eq!(crate::Mime::parse("text/x-SCala"), Ok(TEXT_X_SCALA));
     }
 
     /// `text/x-setext`
@@ -103911,7 +103933,7 @@ pub mod constants {
     #[test]
     fn text_x_setext_parse() {
         assert_eq!(crate::Mime::parse("text/x-setext"), Ok(TEXT_X_SETEXT));
-        assert_eq!(crate::Mime::parse("text/x-sETExt"), Ok(TEXT_X_SETEXT));
+        assert_eq!(crate::Mime::parse("teXT/x-sEteXT"), Ok(TEXT_X_SETEXT));
     }
 
     /// `text/x-sfv`
@@ -103925,7 +103947,7 @@ pub mod constants {
     #[test]
     fn text_x_sfv_parse() {
         assert_eq!(crate::Mime::parse("text/x-sfv"), Ok(TEXT_X_SFV));
-        assert_eq!(crate::Mime::parse("texT/X-SfV"), Ok(TEXT_X_SFV));
+        assert_eq!(crate::Mime::parse("TExt/X-sFv"), Ok(TEXT_X_SFV));
     }
 
     /// `text/x-sh`
@@ -103939,7 +103961,7 @@ pub mod constants {
     #[test]
     fn text_x_sh_parse() {
         assert_eq!(crate::Mime::parse("text/x-sh"), Ok(TEXT_X_SH));
-        assert_eq!(crate::Mime::parse("teXT/X-sh"), Ok(TEXT_X_SH));
+        assert_eq!(crate::Mime::parse("TEXt/x-Sh"), Ok(TEXT_X_SH));
     }
 
     /// `text/x-tcl`
@@ -103953,7 +103975,7 @@ pub mod constants {
     #[test]
     fn text_x_tcl_parse() {
         assert_eq!(crate::Mime::parse("text/x-tcl"), Ok(TEXT_X_TCL));
-        assert_eq!(crate::Mime::parse("TExT/X-TcL"), Ok(TEXT_X_TCL));
+        assert_eq!(crate::Mime::parse("TeXt/x-Tcl"), Ok(TEXT_X_TCL));
     }
 
     /// `text/x-tex`
@@ -103967,7 +103989,7 @@ pub mod constants {
     #[test]
     fn text_x_tex_parse() {
         assert_eq!(crate::Mime::parse("text/x-tex"), Ok(TEXT_X_TEX));
-        assert_eq!(crate::Mime::parse("tEXt/x-tEx"), Ok(TEXT_X_TEX));
+        assert_eq!(crate::Mime::parse("tExt/X-TEX"), Ok(TEXT_X_TEX));
     }
 
     /// `text/x-vcalendar`
@@ -103981,7 +104003,7 @@ pub mod constants {
     #[test]
     fn text_x_vcalendar_parse() {
         assert_eq!(crate::Mime::parse("text/x-vcalendar"), Ok(TEXT_X_VCALENDAR));
-        assert_eq!(crate::Mime::parse("tExt/X-vcALENDAr"), Ok(TEXT_X_VCALENDAR));
+        assert_eq!(crate::Mime::parse("TexT/x-vCalenDar"), Ok(TEXT_X_VCALENDAR));
     }
 
     /// `text/xml`
@@ -103995,7 +104017,7 @@ pub mod constants {
     #[test]
     fn text_xml_parse() {
         assert_eq!(crate::Mime::parse("text/xml"), Ok(TEXT_XML));
-        assert_eq!(crate::Mime::parse("tExt/xMl"), Ok(TEXT_XML));
+        assert_eq!(crate::Mime::parse("texT/xmL"), Ok(TEXT_XML));
     }
 
     /// `text/xml-dtd`
@@ -104009,7 +104031,7 @@ pub mod constants {
     #[test]
     fn text_xml_dtd_parse() {
         assert_eq!(crate::Mime::parse("text/xml-dtd"), Ok(TEXT_XML_DTD));
-        assert_eq!(crate::Mime::parse("texT/xml-DTd"), Ok(TEXT_XML_DTD));
+        assert_eq!(crate::Mime::parse("teXt/xMl-DtD"), Ok(TEXT_XML_DTD));
     }
 
     /// `text/xml-external-parsed-entity`
@@ -104029,7 +104051,7 @@ pub mod constants {
             Ok(TEXT_XML_EXTERNAL_PARSED_ENTITY)
         );
         assert_eq!(
-            crate::Mime::parse("tExt/xMl-eXTeRNAL-pArSED-EnTITy"),
+            crate::Mime::parse("TEXt/XmL-ExTeRNAl-pARsEd-EnTITy"),
             Ok(TEXT_XML_EXTERNAL_PARSED_ENTITY)
         );
     }
@@ -104045,7 +104067,7 @@ pub mod constants {
     #[test]
     fn video_annodex_parse() {
         assert_eq!(crate::Mime::parse("video/annodex"), Ok(VIDEO_ANNODEX));
-        assert_eq!(crate::Mime::parse("ViDEo/anNoDEX"), Ok(VIDEO_ANNODEX));
+        assert_eq!(crate::Mime::parse("vidEO/aNnOdeX"), Ok(VIDEO_ANNODEX));
     }
 
     /// `video/AV1`
@@ -104059,7 +104081,7 @@ pub mod constants {
     #[test]
     fn video_av1_parse() {
         assert_eq!(crate::Mime::parse("video/AV1"), Ok(VIDEO_AV1));
-        assert_eq!(crate::Mime::parse("videO/av1"), Ok(VIDEO_AV1));
+        assert_eq!(crate::Mime::parse("VIDeo/av1"), Ok(VIDEO_AV1));
     }
 
     /// `video/BMPEG`
@@ -104073,7 +104095,7 @@ pub mod constants {
     #[test]
     fn video_bmpeg_parse() {
         assert_eq!(crate::Mime::parse("video/BMPEG"), Ok(VIDEO_BMPEG));
-        assert_eq!(crate::Mime::parse("vIdeO/BMpeG"), Ok(VIDEO_BMPEG));
+        assert_eq!(crate::Mime::parse("VIDeO/BMPeG"), Ok(VIDEO_BMPEG));
     }
 
     /// `video/BT656`
@@ -104087,7 +104109,7 @@ pub mod constants {
     #[test]
     fn video_bt656_parse() {
         assert_eq!(crate::Mime::parse("video/BT656"), Ok(VIDEO_BT656));
-        assert_eq!(crate::Mime::parse("vidEO/bT656"), Ok(VIDEO_BT656));
+        assert_eq!(crate::Mime::parse("vidEO/BT656"), Ok(VIDEO_BT656));
     }
 
     /// `video/CelB`
@@ -104101,7 +104123,7 @@ pub mod constants {
     #[test]
     fn video_cel_b_parse() {
         assert_eq!(crate::Mime::parse("video/CelB"), Ok(VIDEO_CEL_B));
-        assert_eq!(crate::Mime::parse("ViDeo/CElB"), Ok(VIDEO_CEL_B));
+        assert_eq!(crate::Mime::parse("VIdeo/cElb"), Ok(VIDEO_CEL_B));
     }
 
     /// `video/dl`
@@ -104115,7 +104137,7 @@ pub mod constants {
     #[test]
     fn video_dl_parse() {
         assert_eq!(crate::Mime::parse("video/dl"), Ok(VIDEO_DL));
-        assert_eq!(crate::Mime::parse("VideO/dl"), Ok(VIDEO_DL));
+        assert_eq!(crate::Mime::parse("VIDEO/Dl"), Ok(VIDEO_DL));
     }
 
     /// `video/DV`
@@ -104129,7 +104151,7 @@ pub mod constants {
     #[test]
     fn video_dv_parse() {
         assert_eq!(crate::Mime::parse("video/DV"), Ok(VIDEO_DV));
-        assert_eq!(crate::Mime::parse("vidEo/DV"), Ok(VIDEO_DV));
+        assert_eq!(crate::Mime::parse("viDeo/DV"), Ok(VIDEO_DV));
     }
 
     /// `video/encaprtp`
@@ -104143,7 +104165,7 @@ pub mod constants {
     #[test]
     fn video_encaprtp_parse() {
         assert_eq!(crate::Mime::parse("video/encaprtp"), Ok(VIDEO_ENCAPRTP));
-        assert_eq!(crate::Mime::parse("VIDeO/enCapRTP"), Ok(VIDEO_ENCAPRTP));
+        assert_eq!(crate::Mime::parse("VidEo/ENcAPrtP"), Ok(VIDEO_ENCAPRTP));
     }
 
     /// `video/example`
@@ -104157,7 +104179,7 @@ pub mod constants {
     #[test]
     fn video_example_parse() {
         assert_eq!(crate::Mime::parse("video/example"), Ok(VIDEO_EXAMPLE));
-        assert_eq!(crate::Mime::parse("VidEo/EXaMPle"), Ok(VIDEO_EXAMPLE));
+        assert_eq!(crate::Mime::parse("Video/ExampLe"), Ok(VIDEO_EXAMPLE));
     }
 
     /// `video/FFV1`
@@ -104171,7 +104193,7 @@ pub mod constants {
     #[test]
     fn video_ffv1_parse() {
         assert_eq!(crate::Mime::parse("video/FFV1"), Ok(VIDEO_FFV1));
-        assert_eq!(crate::Mime::parse("VIdeo/FFv1"), Ok(VIDEO_FFV1));
+        assert_eq!(crate::Mime::parse("VidEo/FfV1"), Ok(VIDEO_FFV1));
     }
 
     /// `video/flexfec`
@@ -104185,7 +104207,7 @@ pub mod constants {
     #[test]
     fn video_flexfec_parse() {
         assert_eq!(crate::Mime::parse("video/flexfec"), Ok(VIDEO_FLEXFEC));
-        assert_eq!(crate::Mime::parse("viDeO/fLeXFeC"), Ok(VIDEO_FLEXFEC));
+        assert_eq!(crate::Mime::parse("VIDeo/fLEXfeC"), Ok(VIDEO_FLEXFEC));
     }
 
     /// `video/fli`
@@ -104199,7 +104221,7 @@ pub mod constants {
     #[test]
     fn video_fli_parse() {
         assert_eq!(crate::Mime::parse("video/fli"), Ok(VIDEO_FLI));
-        assert_eq!(crate::Mime::parse("VIDEo/FlI"), Ok(VIDEO_FLI));
+        assert_eq!(crate::Mime::parse("VIdEo/Fli"), Ok(VIDEO_FLI));
     }
 
     /// `video/gl`
@@ -104213,7 +104235,7 @@ pub mod constants {
     #[test]
     fn video_gl_parse() {
         assert_eq!(crate::Mime::parse("video/gl"), Ok(VIDEO_GL));
-        assert_eq!(crate::Mime::parse("VIdeO/Gl"), Ok(VIDEO_GL));
+        assert_eq!(crate::Mime::parse("vIDeO/gl"), Ok(VIDEO_GL));
     }
 
     /// `video/H261`
@@ -104227,7 +104249,7 @@ pub mod constants {
     #[test]
     fn video_h261_parse() {
         assert_eq!(crate::Mime::parse("video/H261"), Ok(VIDEO_H261));
-        assert_eq!(crate::Mime::parse("ViDEo/h261"), Ok(VIDEO_H261));
+        assert_eq!(crate::Mime::parse("VideO/H261"), Ok(VIDEO_H261));
     }
 
     /// `video/H263`
@@ -104241,7 +104263,7 @@ pub mod constants {
     #[test]
     fn video_h263_parse() {
         assert_eq!(crate::Mime::parse("video/H263"), Ok(VIDEO_H263));
-        assert_eq!(crate::Mime::parse("VideO/h263"), Ok(VIDEO_H263));
+        assert_eq!(crate::Mime::parse("vidEo/H263"), Ok(VIDEO_H263));
     }
 
     /// `video/H263-1998`
@@ -104255,7 +104277,7 @@ pub mod constants {
     #[test]
     fn video_h263_1998_parse() {
         assert_eq!(crate::Mime::parse("video/H263-1998"), Ok(VIDEO_H263_1998));
-        assert_eq!(crate::Mime::parse("VIdeo/h263-1998"), Ok(VIDEO_H263_1998));
+        assert_eq!(crate::Mime::parse("VidEo/H263-1998"), Ok(VIDEO_H263_1998));
     }
 
     /// `video/H263-2000`
@@ -104269,7 +104291,7 @@ pub mod constants {
     #[test]
     fn video_h263_2000_parse() {
         assert_eq!(crate::Mime::parse("video/H263-2000"), Ok(VIDEO_H263_2000));
-        assert_eq!(crate::Mime::parse("viDeo/H263-2000"), Ok(VIDEO_H263_2000));
+        assert_eq!(crate::Mime::parse("VidEO/H263-2000"), Ok(VIDEO_H263_2000));
     }
 
     /// `video/H264`
@@ -104283,7 +104305,7 @@ pub mod constants {
     #[test]
     fn video_h264_parse() {
         assert_eq!(crate::Mime::parse("video/H264"), Ok(VIDEO_H264));
-        assert_eq!(crate::Mime::parse("viDEO/h264"), Ok(VIDEO_H264));
+        assert_eq!(crate::Mime::parse("VidEO/h264"), Ok(VIDEO_H264));
     }
 
     /// `video/H264-RCDO`
@@ -104297,7 +104319,7 @@ pub mod constants {
     #[test]
     fn video_h264_rcdo_parse() {
         assert_eq!(crate::Mime::parse("video/H264-RCDO"), Ok(VIDEO_H264_RCDO));
-        assert_eq!(crate::Mime::parse("vIdeO/h264-RcDo"), Ok(VIDEO_H264_RCDO));
+        assert_eq!(crate::Mime::parse("vIDeo/H264-RCDO"), Ok(VIDEO_H264_RCDO));
     }
 
     /// `video/H264-SVC`
@@ -104311,7 +104333,7 @@ pub mod constants {
     #[test]
     fn video_h264_svc_parse() {
         assert_eq!(crate::Mime::parse("video/H264-SVC"), Ok(VIDEO_H264_SVC));
-        assert_eq!(crate::Mime::parse("VIdeO/H264-SVC"), Ok(VIDEO_H264_SVC));
+        assert_eq!(crate::Mime::parse("viDeo/h264-svc"), Ok(VIDEO_H264_SVC));
     }
 
     /// `video/H265`
@@ -104325,7 +104347,7 @@ pub mod constants {
     #[test]
     fn video_h265_parse() {
         assert_eq!(crate::Mime::parse("video/H265"), Ok(VIDEO_H265));
-        assert_eq!(crate::Mime::parse("viDeo/h265"), Ok(VIDEO_H265));
+        assert_eq!(crate::Mime::parse("VidEo/H265"), Ok(VIDEO_H265));
     }
 
     /// `video/iso.segment`
@@ -104343,7 +104365,7 @@ pub mod constants {
             Ok(VIDEO_ISO_SEGMENT)
         );
         assert_eq!(
-            crate::Mime::parse("VideO/iSo.SEgMeNT"),
+            crate::Mime::parse("vIDeO/ISO.SEGMENt"),
             Ok(VIDEO_ISO_SEGMENT)
         );
     }
@@ -104359,7 +104381,7 @@ pub mod constants {
     #[test]
     fn video_jpeg_parse() {
         assert_eq!(crate::Mime::parse("video/JPEG"), Ok(VIDEO_JPEG));
-        assert_eq!(crate::Mime::parse("vIdEO/jPEG"), Ok(VIDEO_JPEG));
+        assert_eq!(crate::Mime::parse("video/jpEG"), Ok(VIDEO_JPEG));
     }
 
     /// `video/jpeg2000`
@@ -104373,7 +104395,7 @@ pub mod constants {
     #[test]
     fn video_jpeg2000_parse() {
         assert_eq!(crate::Mime::parse("video/jpeg2000"), Ok(VIDEO_JPEG2000));
-        assert_eq!(crate::Mime::parse("VIDeo/jpeG2000"), Ok(VIDEO_JPEG2000));
+        assert_eq!(crate::Mime::parse("videO/JpEg2000"), Ok(VIDEO_JPEG2000));
     }
 
     /// `video/jxsv`
@@ -104387,7 +104409,7 @@ pub mod constants {
     #[test]
     fn video_jxsv_parse() {
         assert_eq!(crate::Mime::parse("video/jxsv"), Ok(VIDEO_JXSV));
-        assert_eq!(crate::Mime::parse("videO/JxSv"), Ok(VIDEO_JXSV));
+        assert_eq!(crate::Mime::parse("VIDeO/jXSV"), Ok(VIDEO_JXSV));
     }
 
     /// `video/mj2`
@@ -104401,7 +104423,7 @@ pub mod constants {
     #[test]
     fn video_mj2_parse() {
         assert_eq!(crate::Mime::parse("video/mj2"), Ok(VIDEO_MJ2));
-        assert_eq!(crate::Mime::parse("VideO/Mj2"), Ok(VIDEO_MJ2));
+        assert_eq!(crate::Mime::parse("vIDeo/mJ2"), Ok(VIDEO_MJ2));
     }
 
     /// `video/MP1S`
@@ -104415,7 +104437,7 @@ pub mod constants {
     #[test]
     fn video_mp1s_parse() {
         assert_eq!(crate::Mime::parse("video/MP1S"), Ok(VIDEO_MP1S));
-        assert_eq!(crate::Mime::parse("ViDEO/MP1s"), Ok(VIDEO_MP1S));
+        assert_eq!(crate::Mime::parse("VIDeO/mp1S"), Ok(VIDEO_MP1S));
     }
 
     /// `video/MP2P`
@@ -104429,7 +104451,7 @@ pub mod constants {
     #[test]
     fn video_mp2p_parse() {
         assert_eq!(crate::Mime::parse("video/MP2P"), Ok(VIDEO_MP2P));
-        assert_eq!(crate::Mime::parse("ViDeO/Mp2P"), Ok(VIDEO_MP2P));
+        assert_eq!(crate::Mime::parse("vIdeo/mP2P"), Ok(VIDEO_MP2P));
     }
 
     /// `video/MP2T`
@@ -104443,7 +104465,7 @@ pub mod constants {
     #[test]
     fn video_mp2t_parse() {
         assert_eq!(crate::Mime::parse("video/MP2T"), Ok(VIDEO_MP2T));
-        assert_eq!(crate::Mime::parse("viDEo/mp2T"), Ok(VIDEO_MP2T));
+        assert_eq!(crate::Mime::parse("viDEO/MP2T"), Ok(VIDEO_MP2T));
     }
 
     /// `video/mp4`
@@ -104457,7 +104479,7 @@ pub mod constants {
     #[test]
     fn video_mp4_parse() {
         assert_eq!(crate::Mime::parse("video/mp4"), Ok(VIDEO_MP4));
-        assert_eq!(crate::Mime::parse("vIdEo/MP4"), Ok(VIDEO_MP4));
+        assert_eq!(crate::Mime::parse("vidEO/MP4"), Ok(VIDEO_MP4));
     }
 
     /// `video/MP4V-ES`
@@ -104471,7 +104493,7 @@ pub mod constants {
     #[test]
     fn video_mp4v_es_parse() {
         assert_eq!(crate::Mime::parse("video/MP4V-ES"), Ok(VIDEO_MP4V_ES));
-        assert_eq!(crate::Mime::parse("vIDEO/mp4V-ES"), Ok(VIDEO_MP4V_ES));
+        assert_eq!(crate::Mime::parse("ViDEo/mp4V-eS"), Ok(VIDEO_MP4V_ES));
     }
 
     /// `video/mpeg`
@@ -104485,7 +104507,7 @@ pub mod constants {
     #[test]
     fn video_mpeg_parse() {
         assert_eq!(crate::Mime::parse("video/mpeg"), Ok(VIDEO_MPEG));
-        assert_eq!(crate::Mime::parse("vIdEO/mpeg"), Ok(VIDEO_MPEG));
+        assert_eq!(crate::Mime::parse("viDEo/Mpeg"), Ok(VIDEO_MPEG));
     }
 
     /// `video/mpeg4-generic`
@@ -104503,7 +104525,7 @@ pub mod constants {
             Ok(VIDEO_MPEG4_GENERIC)
         );
         assert_eq!(
-            crate::Mime::parse("VidEo/MPeG4-genEriC"),
+            crate::Mime::parse("vIdeO/MpeG4-geNERIC"),
             Ok(VIDEO_MPEG4_GENERIC)
         );
     }
@@ -104519,7 +104541,7 @@ pub mod constants {
     #[test]
     fn video_mpv_parse() {
         assert_eq!(crate::Mime::parse("video/MPV"), Ok(VIDEO_MPV));
-        assert_eq!(crate::Mime::parse("VIdeO/mpv"), Ok(VIDEO_MPV));
+        assert_eq!(crate::Mime::parse("viDEO/MPV"), Ok(VIDEO_MPV));
     }
 
     /// `video/nv`
@@ -104533,7 +104555,7 @@ pub mod constants {
     #[test]
     fn video_nv_parse() {
         assert_eq!(crate::Mime::parse("video/nv"), Ok(VIDEO_NV));
-        assert_eq!(crate::Mime::parse("VIDEO/nV"), Ok(VIDEO_NV));
+        assert_eq!(crate::Mime::parse("videO/NV"), Ok(VIDEO_NV));
     }
 
     /// `video/ogg`
@@ -104547,7 +104569,7 @@ pub mod constants {
     #[test]
     fn video_ogg_parse() {
         assert_eq!(crate::Mime::parse("video/ogg"), Ok(VIDEO_OGG));
-        assert_eq!(crate::Mime::parse("VIdEO/ogg"), Ok(VIDEO_OGG));
+        assert_eq!(crate::Mime::parse("ViDeo/oGG"), Ok(VIDEO_OGG));
     }
 
     /// `video/parityfec`
@@ -104561,7 +104583,7 @@ pub mod constants {
     #[test]
     fn video_parityfec_parse() {
         assert_eq!(crate::Mime::parse("video/parityfec"), Ok(VIDEO_PARITYFEC));
-        assert_eq!(crate::Mime::parse("vIDEO/pAriTyFEC"), Ok(VIDEO_PARITYFEC));
+        assert_eq!(crate::Mime::parse("VIdEo/pArItyFec"), Ok(VIDEO_PARITYFEC));
     }
 
     /// `video/pointer`
@@ -104575,7 +104597,7 @@ pub mod constants {
     #[test]
     fn video_pointer_parse() {
         assert_eq!(crate::Mime::parse("video/pointer"), Ok(VIDEO_POINTER));
-        assert_eq!(crate::Mime::parse("ViDeO/PoIntEr"), Ok(VIDEO_POINTER));
+        assert_eq!(crate::Mime::parse("vIdEo/pOINTEr"), Ok(VIDEO_POINTER));
     }
 
     /// `video/quicktime`
@@ -104589,7 +104611,7 @@ pub mod constants {
     #[test]
     fn video_quicktime_parse() {
         assert_eq!(crate::Mime::parse("video/quicktime"), Ok(VIDEO_QUICKTIME));
-        assert_eq!(crate::Mime::parse("viDeO/QuICKTImE"), Ok(VIDEO_QUICKTIME));
+        assert_eq!(crate::Mime::parse("VideO/qUiCktimE"), Ok(VIDEO_QUICKTIME));
     }
 
     /// `video/raptorfec`
@@ -104603,7 +104625,7 @@ pub mod constants {
     #[test]
     fn video_raptorfec_parse() {
         assert_eq!(crate::Mime::parse("video/raptorfec"), Ok(VIDEO_RAPTORFEC));
-        assert_eq!(crate::Mime::parse("vidEO/RaPtorfEC"), Ok(VIDEO_RAPTORFEC));
+        assert_eq!(crate::Mime::parse("VideO/rApTORfEc"), Ok(VIDEO_RAPTORFEC));
     }
 
     /// `video/raw`
@@ -104617,7 +104639,7 @@ pub mod constants {
     #[test]
     fn video_raw_parse() {
         assert_eq!(crate::Mime::parse("video/raw"), Ok(VIDEO_RAW));
-        assert_eq!(crate::Mime::parse("vidEO/RaW"), Ok(VIDEO_RAW));
+        assert_eq!(crate::Mime::parse("videO/rAW"), Ok(VIDEO_RAW));
     }
 
     /// `video/rtp-enc-aescm128`
@@ -104635,7 +104657,7 @@ pub mod constants {
             Ok(VIDEO_RTP_ENC_AESCM128)
         );
         assert_eq!(
-            crate::Mime::parse("VIdEo/rtp-EnC-aESCm128"),
+            crate::Mime::parse("vIDEo/RTP-ENC-AescM128"),
             Ok(VIDEO_RTP_ENC_AESCM128)
         );
     }
@@ -104655,7 +104677,7 @@ pub mod constants {
             Ok(VIDEO_RTPLOOPBACK)
         );
         assert_eq!(
-            crate::Mime::parse("ViDEO/RtplOopbAck"),
+            crate::Mime::parse("VidEO/RtplOopBaCk"),
             Ok(VIDEO_RTPLOOPBACK)
         );
     }
@@ -104671,7 +104693,7 @@ pub mod constants {
     #[test]
     fn video_rtx_parse() {
         assert_eq!(crate::Mime::parse("video/rtx"), Ok(VIDEO_RTX));
-        assert_eq!(crate::Mime::parse("VIDEo/rTx"), Ok(VIDEO_RTX));
+        assert_eq!(crate::Mime::parse("vIdEo/rtx"), Ok(VIDEO_RTX));
     }
 
     /// `video/scip`
@@ -104685,7 +104707,7 @@ pub mod constants {
     #[test]
     fn video_scip_parse() {
         assert_eq!(crate::Mime::parse("video/scip"), Ok(VIDEO_SCIP));
-        assert_eq!(crate::Mime::parse("vIdEo/ScIp"), Ok(VIDEO_SCIP));
+        assert_eq!(crate::Mime::parse("vIdeO/ScIp"), Ok(VIDEO_SCIP));
     }
 
     /// `video/smpte291`
@@ -104699,7 +104721,7 @@ pub mod constants {
     #[test]
     fn video_smpte291_parse() {
         assert_eq!(crate::Mime::parse("video/smpte291"), Ok(VIDEO_SMPTE291));
-        assert_eq!(crate::Mime::parse("video/smPtE291"), Ok(VIDEO_SMPTE291));
+        assert_eq!(crate::Mime::parse("VIdEO/SmPtE291"), Ok(VIDEO_SMPTE291));
     }
 
     /// `video/SMPTE292M`
@@ -104713,7 +104735,7 @@ pub mod constants {
     #[test]
     fn video_smpte292m_parse() {
         assert_eq!(crate::Mime::parse("video/SMPTE292M"), Ok(VIDEO_SMPTE292M));
-        assert_eq!(crate::Mime::parse("VIdEO/SmPtE292M"), Ok(VIDEO_SMPTE292M));
+        assert_eq!(crate::Mime::parse("VideO/SMPtE292M"), Ok(VIDEO_SMPTE292M));
     }
 
     /// `video/ulpfec`
@@ -104727,7 +104749,7 @@ pub mod constants {
     #[test]
     fn video_ulpfec_parse() {
         assert_eq!(crate::Mime::parse("video/ulpfec"), Ok(VIDEO_ULPFEC));
-        assert_eq!(crate::Mime::parse("vidEO/ULpFeC"), Ok(VIDEO_ULPFEC));
+        assert_eq!(crate::Mime::parse("viDEo/ULPFEC"), Ok(VIDEO_ULPFEC));
     }
 
     /// `video/vc1`
@@ -104741,7 +104763,7 @@ pub mod constants {
     #[test]
     fn video_vc1_parse() {
         assert_eq!(crate::Mime::parse("video/vc1"), Ok(VIDEO_VC1));
-        assert_eq!(crate::Mime::parse("vIdeO/vc1"), Ok(VIDEO_VC1));
+        assert_eq!(crate::Mime::parse("VIdEo/vc1"), Ok(VIDEO_VC1));
     }
 
     /// `video/vc2`
@@ -104755,7 +104777,7 @@ pub mod constants {
     #[test]
     fn video_vc2_parse() {
         assert_eq!(crate::Mime::parse("video/vc2"), Ok(VIDEO_VC2));
-        assert_eq!(crate::Mime::parse("VIDEO/Vc2"), Ok(VIDEO_VC2));
+        assert_eq!(crate::Mime::parse("VIDEO/VC2"), Ok(VIDEO_VC2));
     }
 
     /// `video/vnd.CCTV`
@@ -104769,7 +104791,7 @@ pub mod constants {
     #[test]
     fn video_vnd_cctv_parse() {
         assert_eq!(crate::Mime::parse("video/vnd.CCTV"), Ok(VIDEO_VND_CCTV));
-        assert_eq!(crate::Mime::parse("vIdeo/VND.CCTv"), Ok(VIDEO_VND_CCTV));
+        assert_eq!(crate::Mime::parse("VidEO/vnD.ccTV"), Ok(VIDEO_VND_CCTV));
     }
 
     /// `video/vnd.dece.hd`
@@ -104787,7 +104809,7 @@ pub mod constants {
             Ok(VIDEO_VND_DECE_HD)
         );
         assert_eq!(
-            crate::Mime::parse("VidEO/vnD.deCE.hd"),
+            crate::Mime::parse("videO/vND.dECe.hd"),
             Ok(VIDEO_VND_DECE_HD)
         );
     }
@@ -104807,7 +104829,7 @@ pub mod constants {
             Ok(VIDEO_VND_DECE_MOBILE)
         );
         assert_eq!(
-            crate::Mime::parse("vIDeO/vnD.dece.MObIlE"),
+            crate::Mime::parse("vIDeO/VnD.deCe.mOBIlE"),
             Ok(VIDEO_VND_DECE_MOBILE)
         );
     }
@@ -104827,7 +104849,7 @@ pub mod constants {
             Ok(VIDEO_VND_DECE_MP4)
         );
         assert_eq!(
-            crate::Mime::parse("vIdeo/vnd.DEcE.MP4"),
+            crate::Mime::parse("VIDeo/VnD.dEce.mP4"),
             Ok(VIDEO_VND_DECE_MP4)
         );
     }
@@ -104847,7 +104869,7 @@ pub mod constants {
             Ok(VIDEO_VND_DECE_PD)
         );
         assert_eq!(
-            crate::Mime::parse("vIDeO/vNd.DeCE.Pd"),
+            crate::Mime::parse("vIdeO/vND.DeCE.Pd"),
             Ok(VIDEO_VND_DECE_PD)
         );
     }
@@ -104867,7 +104889,7 @@ pub mod constants {
             Ok(VIDEO_VND_DECE_SD)
         );
         assert_eq!(
-            crate::Mime::parse("vIdeO/VNd.DeCe.sD"),
+            crate::Mime::parse("ViDeo/vND.DecE.sd"),
             Ok(VIDEO_VND_DECE_SD)
         );
     }
@@ -104887,7 +104909,7 @@ pub mod constants {
             Ok(VIDEO_VND_DECE_VIDEO)
         );
         assert_eq!(
-            crate::Mime::parse("viDeO/VNd.Dece.VIDEO"),
+            crate::Mime::parse("vIDEO/VNd.dece.ViDEO"),
             Ok(VIDEO_VND_DECE_VIDEO)
         );
     }
@@ -104907,7 +104929,7 @@ pub mod constants {
             Ok(VIDEO_VND_DIRECTV_MPEG)
         );
         assert_eq!(
-            crate::Mime::parse("VIdeo/vnd.dIREctv.mPeG"),
+            crate::Mime::parse("vidEo/vND.direcTV.MpEG"),
             Ok(VIDEO_VND_DIRECTV_MPEG)
         );
     }
@@ -104929,7 +104951,7 @@ pub mod constants {
             Ok(VIDEO_VND_DIRECTV_MPEG_TTS)
         );
         assert_eq!(
-            crate::Mime::parse("Video/vND.DiRECtv.MpeG-TTs"),
+            crate::Mime::parse("VidEO/vND.DiREcTV.mpEg-tts"),
             Ok(VIDEO_VND_DIRECTV_MPEG_TTS)
         );
     }
@@ -104949,7 +104971,7 @@ pub mod constants {
             Ok(VIDEO_VND_DLNA_MPEG_TTS)
         );
         assert_eq!(
-            crate::Mime::parse("VIdEO/vnD.Dlna.mpEg-TTS"),
+            crate::Mime::parse("vidEo/VND.dlna.mPeg-tts"),
             Ok(VIDEO_VND_DLNA_MPEG_TTS)
         );
     }
@@ -104969,7 +104991,7 @@ pub mod constants {
             Ok(VIDEO_VND_DVB_FILE)
         );
         assert_eq!(
-            crate::Mime::parse("Video/vNd.dvb.FilE"),
+            crate::Mime::parse("VidEo/vnD.dvb.fiLE"),
             Ok(VIDEO_VND_DVB_FILE)
         );
     }
@@ -104985,7 +105007,7 @@ pub mod constants {
     #[test]
     fn video_vnd_fvt_parse() {
         assert_eq!(crate::Mime::parse("video/vnd.fvt"), Ok(VIDEO_VND_FVT));
-        assert_eq!(crate::Mime::parse("vIdeO/vnd.fvT"), Ok(VIDEO_VND_FVT));
+        assert_eq!(crate::Mime::parse("VIDEo/Vnd.FVt"), Ok(VIDEO_VND_FVT));
     }
 
     /// `video/vnd.hns.video`
@@ -105003,7 +105025,7 @@ pub mod constants {
             Ok(VIDEO_VND_HNS_VIDEO)
         );
         assert_eq!(
-            crate::Mime::parse("VIDEO/vNd.HNS.viDEo"),
+            crate::Mime::parse("viDEo/Vnd.hnS.vIdEO"),
             Ok(VIDEO_VND_HNS_VIDEO)
         );
     }
@@ -105025,7 +105047,7 @@ pub mod constants {
             Ok(VIDEO_VND_IPTVFORUM_1DPARITYFEC_1010)
         );
         assert_eq!(
-            crate::Mime::parse("VIdeO/vND.IpTVfORum.1dPaRItyFEC-1010"),
+            crate::Mime::parse("vIDeo/vnD.IPtvFORum.1dpArityFeC-1010"),
             Ok(VIDEO_VND_IPTVFORUM_1DPARITYFEC_1010)
         );
     }
@@ -105047,7 +105069,7 @@ pub mod constants {
             Ok(VIDEO_VND_IPTVFORUM_1DPARITYFEC_2005)
         );
         assert_eq!(
-            crate::Mime::parse("vIdeo/VnD.IPtvfORum.1dPARITyfeC-2005"),
+            crate::Mime::parse("vIDeo/vnD.IPTvfoRUm.1dPARITyFeC-2005"),
             Ok(VIDEO_VND_IPTVFORUM_1DPARITYFEC_2005)
         );
     }
@@ -105069,7 +105091,7 @@ pub mod constants {
             Ok(VIDEO_VND_IPTVFORUM_2DPARITYFEC_1010)
         );
         assert_eq!(
-            crate::Mime::parse("VIDEO/VnD.ipTVforuM.2dpaRItyFeC-1010"),
+            crate::Mime::parse("videO/vnd.IPtvFoRUM.2DpAritYfEc-1010"),
             Ok(VIDEO_VND_IPTVFORUM_2DPARITYFEC_1010)
         );
     }
@@ -105091,7 +105113,7 @@ pub mod constants {
             Ok(VIDEO_VND_IPTVFORUM_2DPARITYFEC_2005)
         );
         assert_eq!(
-            crate::Mime::parse("vIdeo/vNd.IptVFoRUM.2dParITyfEC-2005"),
+            crate::Mime::parse("ViDEO/VnD.iPTvfORuM.2DpArItYFEc-2005"),
             Ok(VIDEO_VND_IPTVFORUM_2DPARITYFEC_2005)
         );
     }
@@ -105113,7 +105135,7 @@ pub mod constants {
             Ok(VIDEO_VND_IPTVFORUM_TTSAVC)
         );
         assert_eq!(
-            crate::Mime::parse("vIdEo/VNd.iPtVfORuM.ttsavc"),
+            crate::Mime::parse("vIDeO/vnd.iptvfOruM.TTsAvC"),
             Ok(VIDEO_VND_IPTVFORUM_TTSAVC)
         );
     }
@@ -105135,7 +105157,7 @@ pub mod constants {
             Ok(VIDEO_VND_IPTVFORUM_TTSMPEG2)
         );
         assert_eq!(
-            crate::Mime::parse("vidEo/VND.iPtVfOruM.tTsmpeG2"),
+            crate::Mime::parse("vIdeO/vNd.ipTvforuM.tTsMPEg2"),
             Ok(VIDEO_VND_IPTVFORUM_TTSMPEG2)
         );
     }
@@ -105157,7 +105179,7 @@ pub mod constants {
             Ok(VIDEO_VND_MOTOROLA_VIDEO)
         );
         assert_eq!(
-            crate::Mime::parse("videO/vNd.MOtORoLa.VideO"),
+            crate::Mime::parse("ViDeO/vnd.MOtorola.VIDEO"),
             Ok(VIDEO_VND_MOTOROLA_VIDEO)
         );
     }
@@ -105179,7 +105201,7 @@ pub mod constants {
             Ok(VIDEO_VND_MOTOROLA_VIDEOP)
         );
         assert_eq!(
-            crate::Mime::parse("VIdeo/vnd.MOTORoLa.VIDEop"),
+            crate::Mime::parse("ViDeO/VND.moTOROla.VIDeOP"),
             Ok(VIDEO_VND_MOTOROLA_VIDEOP)
         );
     }
@@ -105199,7 +105221,7 @@ pub mod constants {
             Ok(VIDEO_VND_MPEGURL)
         );
         assert_eq!(
-            crate::Mime::parse("vIDEO/vND.MpEGurl"),
+            crate::Mime::parse("video/VND.MpeGURl"),
             Ok(VIDEO_VND_MPEGURL)
         );
     }
@@ -105221,7 +105243,7 @@ pub mod constants {
             Ok(VIDEO_VND_MS_PLAYREADY_MEDIA_PYV)
         );
         assert_eq!(
-            crate::Mime::parse("viDEO/vNd.MS-pLayreadY.mEdia.PYv"),
+            crate::Mime::parse("Video/vND.Ms-pLAYreadY.mEDia.PYV"),
             Ok(VIDEO_VND_MS_PLAYREADY_MEDIA_PYV)
         );
     }
@@ -105243,7 +105265,7 @@ pub mod constants {
             Ok(VIDEO_VND_NOKIA_INTERLEAVED_MULTIMEDIA)
         );
         assert_eq!(
-            crate::Mime::parse("vidEO/VNd.NOKIA.inTErLeAved-MULTiMEdIa"),
+            crate::Mime::parse("VideO/vNd.nokIA.INtERlEavEd-mUlTimediA"),
             Ok(VIDEO_VND_NOKIA_INTERLEAVED_MULTIMEDIA)
         );
     }
@@ -105263,7 +105285,7 @@ pub mod constants {
             Ok(VIDEO_VND_NOKIA_MP4VR)
         );
         assert_eq!(
-            crate::Mime::parse("vIdeo/vNd.nokIa.MP4VR"),
+            crate::Mime::parse("viDEo/Vnd.noKia.mp4Vr"),
             Ok(VIDEO_VND_NOKIA_MP4VR)
         );
     }
@@ -105285,7 +105307,7 @@ pub mod constants {
             Ok(VIDEO_VND_NOKIA_VIDEOVOIP)
         );
         assert_eq!(
-            crate::Mime::parse("viDeo/vnD.noKia.ViDEOvOiP"),
+            crate::Mime::parse("viDeO/VnD.NOkia.VidEOvOIp"),
             Ok(VIDEO_VND_NOKIA_VIDEOVOIP)
         );
     }
@@ -105305,7 +105327,7 @@ pub mod constants {
             Ok(VIDEO_VND_OBJECTVIDEO)
         );
         assert_eq!(
-            crate::Mime::parse("Video/vnD.oBJeCTVIDEO"),
+            crate::Mime::parse("VIDEO/Vnd.oBjeCTVIDeO"),
             Ok(VIDEO_VND_OBJECTVIDEO)
         );
     }
@@ -105327,7 +105349,7 @@ pub mod constants {
             Ok(VIDEO_VND_RADGAMETTOOLS_BINK)
         );
         assert_eq!(
-            crate::Mime::parse("viDeO/vND.RAdGaMeTtools.BInk"),
+            crate::Mime::parse("vIdEo/vnd.RAdgAMeTTooLs.binK"),
             Ok(VIDEO_VND_RADGAMETTOOLS_BINK)
         );
     }
@@ -105349,7 +105371,7 @@ pub mod constants {
             Ok(VIDEO_VND_RADGAMETTOOLS_SMACKER)
         );
         assert_eq!(
-            crate::Mime::parse("VIdEO/vNd.radGAmeTTOols.SmacKer"),
+            crate::Mime::parse("VidEO/vnd.RadgAmetToolS.SMaCKEr"),
             Ok(VIDEO_VND_RADGAMETTOOLS_SMACKER)
         );
     }
@@ -105369,7 +105391,7 @@ pub mod constants {
             Ok(VIDEO_VND_SEALED_MPEG1)
         );
         assert_eq!(
-            crate::Mime::parse("vIdeo/VND.SEAlEd.MpeG1"),
+            crate::Mime::parse("ViDEo/Vnd.SEALEd.MPeG1"),
             Ok(VIDEO_VND_SEALED_MPEG1)
         );
     }
@@ -105389,7 +105411,7 @@ pub mod constants {
             Ok(VIDEO_VND_SEALED_MPEG4)
         );
         assert_eq!(
-            crate::Mime::parse("viDEO/Vnd.SeALED.mpEg4"),
+            crate::Mime::parse("VIdeo/vnd.SeALed.MpEG4"),
             Ok(VIDEO_VND_SEALED_MPEG4)
         );
     }
@@ -105409,7 +105431,7 @@ pub mod constants {
             Ok(VIDEO_VND_SEALED_SWF)
         );
         assert_eq!(
-            crate::Mime::parse("viDeO/vnd.sEAled.swf"),
+            crate::Mime::parse("video/VNd.SEALeD.SWf"),
             Ok(VIDEO_VND_SEALED_SWF)
         );
     }
@@ -105431,7 +105453,7 @@ pub mod constants {
             Ok(VIDEO_VND_SEALEDMEDIA_SOFTSEAL_MOV)
         );
         assert_eq!(
-            crate::Mime::parse("VIdeO/VNd.SEAleDmedia.soFTSeal.MoV"),
+            crate::Mime::parse("vIdeo/vnd.SEAledmEdIA.soFtSeAL.mOV"),
             Ok(VIDEO_VND_SEALEDMEDIA_SOFTSEAL_MOV)
         );
     }
@@ -105451,7 +105473,7 @@ pub mod constants {
             Ok(VIDEO_VND_UVVU_MP4)
         );
         assert_eq!(
-            crate::Mime::parse("VideO/VnD.uvVU.Mp4"),
+            crate::Mime::parse("VIdEO/vND.UvvU.mp4"),
             Ok(VIDEO_VND_UVVU_MP4)
         );
     }
@@ -105467,7 +105489,7 @@ pub mod constants {
     #[test]
     fn video_vnd_vivo_parse() {
         assert_eq!(crate::Mime::parse("video/vnd.vivo"), Ok(VIDEO_VND_VIVO));
-        assert_eq!(crate::Mime::parse("VidEO/Vnd.Vivo"), Ok(VIDEO_VND_VIVO));
+        assert_eq!(crate::Mime::parse("vIdeo/VNd.viVo"), Ok(VIDEO_VND_VIVO));
     }
 
     /// `video/vnd.youtube.yt`
@@ -105485,7 +105507,7 @@ pub mod constants {
             Ok(VIDEO_VND_YOUTUBE_YT)
         );
         assert_eq!(
-            crate::Mime::parse("vIdeo/VNd.yoUtuBe.YT"),
+            crate::Mime::parse("vIdeO/VND.YOuTubE.YT"),
             Ok(VIDEO_VND_YOUTUBE_YT)
         );
     }
@@ -105501,7 +105523,7 @@ pub mod constants {
     #[test]
     fn video_vp8_parse() {
         assert_eq!(crate::Mime::parse("video/VP8"), Ok(VIDEO_VP8));
-        assert_eq!(crate::Mime::parse("VIDeO/vP8"), Ok(VIDEO_VP8));
+        assert_eq!(crate::Mime::parse("ViDeo/vP8"), Ok(VIDEO_VP8));
     }
 
     /// `video/VP9`
@@ -105515,7 +105537,7 @@ pub mod constants {
     #[test]
     fn video_vp9_parse() {
         assert_eq!(crate::Mime::parse("video/VP9"), Ok(VIDEO_VP9));
-        assert_eq!(crate::Mime::parse("vIDEO/vP9"), Ok(VIDEO_VP9));
+        assert_eq!(crate::Mime::parse("VIdeo/vP9"), Ok(VIDEO_VP9));
     }
 
     /// `video/webm`
@@ -105529,7 +105551,7 @@ pub mod constants {
     #[test]
     fn video_webm_parse() {
         assert_eq!(crate::Mime::parse("video/webm"), Ok(VIDEO_WEBM));
-        assert_eq!(crate::Mime::parse("vIdEo/Webm"), Ok(VIDEO_WEBM));
+        assert_eq!(crate::Mime::parse("videO/webM"), Ok(VIDEO_WEBM));
     }
 
     /// `video/x-flv`
@@ -105543,7 +105565,7 @@ pub mod constants {
     #[test]
     fn video_x_flv_parse() {
         assert_eq!(crate::Mime::parse("video/x-flv"), Ok(VIDEO_X_FLV));
-        assert_eq!(crate::Mime::parse("ViDEo/x-Flv"), Ok(VIDEO_X_FLV));
+        assert_eq!(crate::Mime::parse("vIDeO/x-fLV"), Ok(VIDEO_X_FLV));
     }
 
     /// `video/x-la-asf`
@@ -105557,7 +105579,7 @@ pub mod constants {
     #[test]
     fn video_x_la_asf_parse() {
         assert_eq!(crate::Mime::parse("video/x-la-asf"), Ok(VIDEO_X_LA_ASF));
-        assert_eq!(crate::Mime::parse("viDeO/x-la-aSF"), Ok(VIDEO_X_LA_ASF));
+        assert_eq!(crate::Mime::parse("VIDeO/X-lA-AsF"), Ok(VIDEO_X_LA_ASF));
     }
 
     /// `video/x-matroska`
@@ -105571,7 +105593,7 @@ pub mod constants {
     #[test]
     fn video_x_matroska_parse() {
         assert_eq!(crate::Mime::parse("video/x-matroska"), Ok(VIDEO_X_MATROSKA));
-        assert_eq!(crate::Mime::parse("VIDeO/X-mATRoSka"), Ok(VIDEO_X_MATROSKA));
+        assert_eq!(crate::Mime::parse("viDeo/X-MAtrOSKa"), Ok(VIDEO_X_MATROSKA));
     }
 
     /// `video/x-mng`
@@ -105585,7 +105607,7 @@ pub mod constants {
     #[test]
     fn video_x_mng_parse() {
         assert_eq!(crate::Mime::parse("video/x-mng"), Ok(VIDEO_X_MNG));
-        assert_eq!(crate::Mime::parse("VidEO/X-mnG"), Ok(VIDEO_X_MNG));
+        assert_eq!(crate::Mime::parse("VIdeo/x-mNg"), Ok(VIDEO_X_MNG));
     }
 
     /// `video/x-ms-wm`
@@ -105599,7 +105621,7 @@ pub mod constants {
     #[test]
     fn video_x_ms_wm_parse() {
         assert_eq!(crate::Mime::parse("video/x-ms-wm"), Ok(VIDEO_X_MS_WM));
-        assert_eq!(crate::Mime::parse("VIdEO/x-Ms-wM"), Ok(VIDEO_X_MS_WM));
+        assert_eq!(crate::Mime::parse("vIDEo/x-mS-wm"), Ok(VIDEO_X_MS_WM));
     }
 
     /// `video/x-ms-wmv`
@@ -105613,7 +105635,7 @@ pub mod constants {
     #[test]
     fn video_x_ms_wmv_parse() {
         assert_eq!(crate::Mime::parse("video/x-ms-wmv"), Ok(VIDEO_X_MS_WMV));
-        assert_eq!(crate::Mime::parse("viDEO/X-ms-Wmv"), Ok(VIDEO_X_MS_WMV));
+        assert_eq!(crate::Mime::parse("viDEO/x-mS-WMV"), Ok(VIDEO_X_MS_WMV));
     }
 
     /// `video/x-ms-wmx`
@@ -105627,7 +105649,7 @@ pub mod constants {
     #[test]
     fn video_x_ms_wmx_parse() {
         assert_eq!(crate::Mime::parse("video/x-ms-wmx"), Ok(VIDEO_X_MS_WMX));
-        assert_eq!(crate::Mime::parse("viDEO/x-mS-WMX"), Ok(VIDEO_X_MS_WMX));
+        assert_eq!(crate::Mime::parse("viDeO/X-Ms-WmX"), Ok(VIDEO_X_MS_WMX));
     }
 
     /// `video/x-ms-wvx`
@@ -105641,7 +105663,7 @@ pub mod constants {
     #[test]
     fn video_x_ms_wvx_parse() {
         assert_eq!(crate::Mime::parse("video/x-ms-wvx"), Ok(VIDEO_X_MS_WVX));
-        assert_eq!(crate::Mime::parse("viDeO/X-Ms-WvX"), Ok(VIDEO_X_MS_WVX));
+        assert_eq!(crate::Mime::parse("VIdEo/X-Ms-wVx"), Ok(VIDEO_X_MS_WVX));
     }
 
     /// `video/x-msvideo`
@@ -105655,7 +105677,7 @@ pub mod constants {
     #[test]
     fn video_x_msvideo_parse() {
         assert_eq!(crate::Mime::parse("video/x-msvideo"), Ok(VIDEO_X_MSVIDEO));
-        assert_eq!(crate::Mime::parse("VIdEo/X-MsviDeO"), Ok(VIDEO_X_MSVIDEO));
+        assert_eq!(crate::Mime::parse("VIdeO/x-mSvidEO"), Ok(VIDEO_X_MSVIDEO));
     }
 
     /// `video/x-sgi-movie`
@@ -105673,7 +105695,7 @@ pub mod constants {
             Ok(VIDEO_X_SGI_MOVIE)
         );
         assert_eq!(
-            crate::Mime::parse("VidEO/x-Sgi-MOVIE"),
+            crate::Mime::parse("VIDeO/X-sgi-mOvIE"),
             Ok(VIDEO_X_SGI_MOVIE)
         );
     }
@@ -120807,11 +120829,27 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("bm"), 1893),
+            ],
+            Some(&[constants::IMAGE_WEBP]),
+            0,
+            1,
+        ),
+        intern_str::Node::new(
+            &[
+                (intern_str::CaseInsensitive("m"), 1893),
+                (intern_str::CaseInsensitive("p"), 1894),
             ],
             None,
             0,
-            2,
+            1,
+        ),
+        intern_str::Node::new(
+            &[
+                (intern_str::CaseInsensitive("b"), 1895),
+            ],
+            None,
+            0,
+            1,
         ),
         intern_str::Node::new(
             &[
@@ -120822,7 +120860,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("t"), 1895),
+                (intern_str::CaseInsensitive("t"), 1897),
             ],
             Some(&[constants::APPLICATION_VND_PMI_WIDGET]),
             0,
@@ -120844,8 +120882,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("f"), 1897),
-                (intern_str::CaseInsensitive("n"), 1898),
+                (intern_str::CaseInsensitive("f"), 1899),
+                (intern_str::CaseInsensitive("n"), 1900),
             ],
             None,
             0,
@@ -120881,10 +120919,10 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("1"), 1900),
-                (intern_str::CaseInsensitive("3"), 1901),
-                (intern_str::CaseInsensitive("4"), 1902),
-                (intern_str::CaseInsensitive("s"), 1903),
+                (intern_str::CaseInsensitive("1"), 1902),
+                (intern_str::CaseInsensitive("3"), 1903),
+                (intern_str::CaseInsensitive("4"), 1904),
+                (intern_str::CaseInsensitive("s"), 1905),
             ],
             Some(&[constants::APPLICATION_X_123]),
             0,
@@ -120899,7 +120937,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("nk"), 1905),
+                (intern_str::CaseInsensitive("nk"), 1907),
             ],
             None,
             0,
@@ -120949,7 +120987,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("c"), 1912),
+                (intern_str::CaseInsensitive("c"), 1914),
             ],
             Some(&[constants::TEXT_VND_WAP_WMLSCRIPT]),
             0,
@@ -120957,8 +120995,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("c"), 1911),
-                (intern_str::CaseInsensitive("s"), 1913),
+                (intern_str::CaseInsensitive("c"), 1913),
+                (intern_str::CaseInsensitive("s"), 1915),
             ],
             Some(&[constants::TEXT_VND_WAP_WML]),
             0,
@@ -120987,14 +121025,14 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("a"), 1907),
-                (intern_str::CaseInsensitive("c"), 1908),
-                (intern_str::CaseInsensitive("d"), 1909),
-                (intern_str::CaseInsensitive("f"), 1910),
-                (intern_str::CaseInsensitive("l"), 1914),
-                (intern_str::CaseInsensitive("v"), 1915),
-                (intern_str::CaseInsensitive("x"), 1916),
-                (intern_str::CaseInsensitive("z"), 1917),
+                (intern_str::CaseInsensitive("a"), 1909),
+                (intern_str::CaseInsensitive("c"), 1910),
+                (intern_str::CaseInsensitive("d"), 1911),
+                (intern_str::CaseInsensitive("f"), 1912),
+                (intern_str::CaseInsensitive("l"), 1916),
+                (intern_str::CaseInsensitive("v"), 1917),
+                (intern_str::CaseInsensitive("x"), 1918),
+                (intern_str::CaseInsensitive("z"), 1919),
             ],
             Some(&[constants::VIDEO_X_MS_WM]),
             0,
@@ -121009,7 +121047,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("2"), 1919),
+                (intern_str::CaseInsensitive("2"), 1921),
             ],
             Some(&[constants::FONT_WOFF]),
             0,
@@ -121017,7 +121055,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("ff"), 1920),
+                (intern_str::CaseInsensitive("ff"), 1922),
             ],
             None,
             0,
@@ -121053,10 +121091,10 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("5"), 1922),
-                (intern_str::CaseInsensitive("d"), 1923),
-                (intern_str::CaseInsensitive("l"), 1924),
-                (intern_str::CaseInsensitive("s"), 1925),
+                (intern_str::CaseInsensitive("5"), 1924),
+                (intern_str::CaseInsensitive("d"), 1925),
+                (intern_str::CaseInsensitive("l"), 1926),
+                (intern_str::CaseInsensitive("s"), 1927),
             ],
             None,
             0,
@@ -121071,7 +121109,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("d"), 1927),
+                (intern_str::CaseInsensitive("d"), 1929),
             ],
             None,
             0,
@@ -121086,7 +121124,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("l"), 1929),
+                (intern_str::CaseInsensitive("l"), 1931),
             ],
             None,
             0,
@@ -121108,7 +121146,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("l"), 1932),
+                (intern_str::CaseInsensitive("l"), 1934),
             ],
             None,
             0,
@@ -121123,7 +121161,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("olicy"), 1934),
+                (intern_str::CaseInsensitive("olicy"), 1936),
             ],
             None,
             0,
@@ -121131,9 +121169,9 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("c"), 1931),
-                (intern_str::CaseInsensitive("d"), 1933),
-                (intern_str::CaseInsensitive("p"), 1935),
+                (intern_str::CaseInsensitive("c"), 1933),
+                (intern_str::CaseInsensitive("d"), 1935),
+                (intern_str::CaseInsensitive("p"), 1937),
             ],
             None,
             0,
@@ -121148,7 +121186,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("b"), 1937),
+                (intern_str::CaseInsensitive("b"), 1939),
             ],
             None,
             0,
@@ -121163,7 +121201,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("x"), 1939),
+                (intern_str::CaseInsensitive("x"), 1941),
             ],
             Some(&[constants::APPLICATION_VND_WV_CSP_WBXML]),
             0,
@@ -121182,20 +121220,20 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
                 (intern_str::CaseInsensitive("b"), 1887),
                 (intern_str::CaseInsensitive("c"), 1889),
                 (intern_str::CaseInsensitive("d"), 1891),
-                (intern_str::CaseInsensitive("e"), 1894),
-                (intern_str::CaseInsensitive("g"), 1896),
-                (intern_str::CaseInsensitive("i"), 1899),
-                (intern_str::CaseInsensitive("k"), 1904),
-                (intern_str::CaseInsensitive("l"), 1906),
-                (intern_str::CaseInsensitive("m"), 1918),
-                (intern_str::CaseInsensitive("o"), 1921),
-                (intern_str::CaseInsensitive("p"), 1926),
-                (intern_str::CaseInsensitive("q"), 1928),
-                (intern_str::CaseInsensitive("r"), 1930),
-                (intern_str::CaseInsensitive("s"), 1936),
-                (intern_str::CaseInsensitive("t"), 1938),
-                (intern_str::CaseInsensitive("v"), 1940),
-                (intern_str::CaseInsensitive("z"), 1941),
+                (intern_str::CaseInsensitive("e"), 1896),
+                (intern_str::CaseInsensitive("g"), 1898),
+                (intern_str::CaseInsensitive("i"), 1901),
+                (intern_str::CaseInsensitive("k"), 1906),
+                (intern_str::CaseInsensitive("l"), 1908),
+                (intern_str::CaseInsensitive("m"), 1920),
+                (intern_str::CaseInsensitive("o"), 1923),
+                (intern_str::CaseInsensitive("p"), 1928),
+                (intern_str::CaseInsensitive("q"), 1930),
+                (intern_str::CaseInsensitive("r"), 1932),
+                (intern_str::CaseInsensitive("s"), 1938),
+                (intern_str::CaseInsensitive("t"), 1940),
+                (intern_str::CaseInsensitive("v"), 1942),
+                (intern_str::CaseInsensitive("z"), 1943),
             ],
             None,
             0,
@@ -121217,7 +121255,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("z"), 1944),
+                (intern_str::CaseInsensitive("z"), 1946),
             ],
             Some(&[constants::MODEL_X3D_VRML]),
             0,
@@ -121232,9 +121270,9 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("b"), 1943),
-                (intern_str::CaseInsensitive("v"), 1945),
-                (intern_str::CaseInsensitive("z"), 1946),
+                (intern_str::CaseInsensitive("b"), 1945),
+                (intern_str::CaseInsensitive("v"), 1947),
+                (intern_str::CaseInsensitive("z"), 1948),
             ],
             Some(&[constants::MODEL_X3D_XML]),
             0,
@@ -121242,7 +121280,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("d"), 1947),
+                (intern_str::CaseInsensitive("d"), 1949),
             ],
             None,
             0,
@@ -121264,8 +121302,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("b"), 1949),
-                (intern_str::CaseInsensitive("t"), 1950),
+                (intern_str::CaseInsensitive("b"), 1951),
+                (intern_str::CaseInsensitive("t"), 1952),
             ],
             None,
             0,
@@ -121287,8 +121325,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("r"), 1952),
-                (intern_str::CaseInsensitive("v"), 1953),
+                (intern_str::CaseInsensitive("r"), 1954),
+                (intern_str::CaseInsensitive("v"), 1955),
             ],
             None,
             0,
@@ -121310,8 +121348,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("d"), 1955),
-                (intern_str::CaseInsensitive("m"), 1956),
+                (intern_str::CaseInsensitive("d"), 1957),
+                (intern_str::CaseInsensitive("m"), 1958),
             ],
             None,
             0,
@@ -121340,7 +121378,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("s"), 1960),
+                (intern_str::CaseInsensitive("s"), 1962),
             ],
             None,
             0,
@@ -121362,11 +121400,11 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("a"), 1958),
-                (intern_str::CaseInsensitive("f"), 1959),
-                (intern_str::CaseInsensitive("o"), 1961),
-                (intern_str::CaseInsensitive("s"), 1962),
-                (intern_str::CaseInsensitive("t"), 1963),
+                (intern_str::CaseInsensitive("a"), 1960),
+                (intern_str::CaseInsensitive("f"), 1961),
+                (intern_str::CaseInsensitive("o"), 1963),
+                (intern_str::CaseInsensitive("s"), 1964),
+                (intern_str::CaseInsensitive("t"), 1965),
             ],
             None,
             0,
@@ -121409,7 +121447,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("sc"), 1969),
+                (intern_str::CaseInsensitive("sc"), 1971),
             ],
             None,
             0,
@@ -121424,12 +121462,12 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("d"), 1965),
-                (intern_str::CaseInsensitive("f"), 1966),
-                (intern_str::CaseInsensitive("m"), 1967),
-                (intern_str::CaseInsensitive("p"), 1968),
-                (intern_str::CaseInsensitive("s"), 1970),
-                (intern_str::CaseInsensitive("w"), 1971),
+                (intern_str::CaseInsensitive("d"), 1967),
+                (intern_str::CaseInsensitive("f"), 1968),
+                (intern_str::CaseInsensitive("m"), 1969),
+                (intern_str::CaseInsensitive("p"), 1970),
+                (intern_str::CaseInsensitive("s"), 1972),
+                (intern_str::CaseInsensitive("w"), 1973),
             ],
             None,
             0,
@@ -121451,8 +121489,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("l"), 1973),
-                (intern_str::CaseInsensitive("r"), 1974),
+                (intern_str::CaseInsensitive("l"), 1975),
+                (intern_str::CaseInsensitive("r"), 1976),
             ],
             None,
             0,
@@ -121474,8 +121512,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("f"), 1976),
-                (intern_str::CaseInsensitive("l"), 1977),
+                (intern_str::CaseInsensitive("f"), 1978),
+                (intern_str::CaseInsensitive("l"), 1979),
             ],
             Some(&[constants::APPLICATION_VND_XFDL]),
             0,
@@ -121483,7 +121521,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("d"), 1978),
+                (intern_str::CaseInsensitive("d"), 1980),
             ],
             None,
             0,
@@ -121505,7 +121543,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("l"), 1981),
+                (intern_str::CaseInsensitive("l"), 1983),
             ],
             Some(&[constants::APPLICATION_XHTML_XML]),
             0,
@@ -121513,7 +121551,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("m"), 1982),
+                (intern_str::CaseInsensitive("m"), 1984),
             ],
             Some(&[constants::APPLICATION_XHTML_XML]),
             0,
@@ -121528,7 +121566,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("ml"), 1984),
+                (intern_str::CaseInsensitive("ml"), 1986),
             ],
             None,
             0,
@@ -121536,9 +121574,9 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("e"), 1980),
-                (intern_str::CaseInsensitive("t"), 1983),
-                (intern_str::CaseInsensitive("v"), 1985),
+                (intern_str::CaseInsensitive("e"), 1982),
+                (intern_str::CaseInsensitive("t"), 1985),
+                (intern_str::CaseInsensitive("v"), 1987),
             ],
             None,
             0,
@@ -121553,7 +121591,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("f"), 1987),
+                (intern_str::CaseInsensitive("f"), 1989),
             ],
             None,
             0,
@@ -121568,7 +121606,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("m"), 1989),
+                (intern_str::CaseInsensitive("m"), 1991),
             ],
             Some(&[constants::APPLICATION_VND_MS_EXCEL]),
             0,
@@ -121597,7 +121635,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("m"), 1993),
+                (intern_str::CaseInsensitive("m"), 1995),
             ],
             None,
             0,
@@ -121633,9 +121671,9 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("b"), 1996),
-                (intern_str::CaseInsensitive("m"), 1997),
-                (intern_str::CaseInsensitive("x"), 1998),
+                (intern_str::CaseInsensitive("b"), 1998),
+                (intern_str::CaseInsensitive("m"), 1999),
+                (intern_str::CaseInsensitive("x"), 2000),
             ],
             Some(&[constants::APPLICATION_VND_MS_EXCEL]),
             0,
@@ -121657,8 +121695,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("m"), 2000),
-                (intern_str::CaseInsensitive("x"), 2001),
+                (intern_str::CaseInsensitive("m"), 2002),
+                (intern_str::CaseInsensitive("x"), 2003),
             ],
             Some(&[constants::APPLICATION_VND_MS_EXCEL]),
             0,
@@ -121673,14 +121711,14 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("a"), 1990),
-                (intern_str::CaseInsensitive("c"), 1991),
-                (intern_str::CaseInsensitive("f"), 1992),
-                (intern_str::CaseInsensitive("i"), 1994),
-                (intern_str::CaseInsensitive("m"), 1995),
-                (intern_str::CaseInsensitive("s"), 1999),
-                (intern_str::CaseInsensitive("t"), 2002),
-                (intern_str::CaseInsensitive("w"), 2003),
+                (intern_str::CaseInsensitive("a"), 1992),
+                (intern_str::CaseInsensitive("c"), 1993),
+                (intern_str::CaseInsensitive("f"), 1994),
+                (intern_str::CaseInsensitive("i"), 1996),
+                (intern_str::CaseInsensitive("m"), 1997),
+                (intern_str::CaseInsensitive("s"), 2001),
+                (intern_str::CaseInsensitive("t"), 2004),
+                (intern_str::CaseInsensitive("w"), 2005),
             ],
             None,
             0,
@@ -121695,7 +121733,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("s"), 2005),
+                (intern_str::CaseInsensitive("s"), 2007),
             ],
             Some(&[constants::APPLICATION_XML]),
             0,
@@ -121717,8 +121755,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("bin"), 2007),
-                (intern_str::CaseInsensitive("txt"), 2008),
+                (intern_str::CaseInsensitive("bin"), 2009),
+                (intern_str::CaseInsensitive("txt"), 2010),
             ],
             None,
             0,
@@ -121726,7 +121764,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("_"), 2009),
+                (intern_str::CaseInsensitive("_"), 2011),
             ],
             None,
             0,
@@ -121734,8 +121772,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("l"), 2006),
-                (intern_str::CaseInsensitive("t"), 2010),
+                (intern_str::CaseInsensitive("l"), 2008),
+                (intern_str::CaseInsensitive("t"), 2012),
             ],
             None,
             0,
@@ -121750,7 +121788,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("s"), 2012),
+                (intern_str::CaseInsensitive("s"), 2014),
             ],
             None,
             0,
@@ -121779,9 +121817,9 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("p"), 2014),
-                (intern_str::CaseInsensitive("s"), 2015),
-                (intern_str::CaseInsensitive("t"), 2016),
+                (intern_str::CaseInsensitive("p"), 2016),
+                (intern_str::CaseInsensitive("s"), 2017),
+                (intern_str::CaseInsensitive("t"), 2018),
             ],
             None,
             0,
@@ -121817,9 +121855,9 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("p"), 2019),
-                (intern_str::CaseInsensitive("s"), 2020),
-                (intern_str::CaseInsensitive("t"), 2021),
+                (intern_str::CaseInsensitive("p"), 2021),
+                (intern_str::CaseInsensitive("s"), 2022),
+                (intern_str::CaseInsensitive("t"), 2023),
             ],
             None,
             0,
@@ -121827,9 +121865,9 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("d"), 2017),
-                (intern_str::CaseInsensitive("p"), 2018),
-                (intern_str::CaseInsensitive("t"), 2022),
+                (intern_str::CaseInsensitive("d"), 2019),
+                (intern_str::CaseInsensitive("p"), 2020),
+                (intern_str::CaseInsensitive("t"), 2024),
             ],
             Some(&[constants::APPLICATION_VND_OLPC_SUGAR]),
             0,
@@ -121879,12 +121917,12 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("i"), 2024),
-                (intern_str::CaseInsensitive("m"), 2025),
-                (intern_str::CaseInsensitive("r"), 2026),
-                (intern_str::CaseInsensitive("s"), 2027),
-                (intern_str::CaseInsensitive("w"), 2028),
-                (intern_str::CaseInsensitive("x"), 2029),
+                (intern_str::CaseInsensitive("i"), 2026),
+                (intern_str::CaseInsensitive("m"), 2027),
+                (intern_str::CaseInsensitive("r"), 2028),
+                (intern_str::CaseInsensitive("s"), 2029),
+                (intern_str::CaseInsensitive("w"), 2030),
+                (intern_str::CaseInsensitive("x"), 2031),
             ],
             None,
             0,
@@ -121906,7 +121944,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("t"), 2032),
+                (intern_str::CaseInsensitive("t"), 2034),
             ],
             Some(&[constants::APPLICATION_XSLT_XML]),
             0,
@@ -121928,7 +121966,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("f"), 2035),
+                (intern_str::CaseInsensitive("f"), 2037),
             ],
             None,
             0,
@@ -121936,10 +121974,10 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("f"), 2031),
-                (intern_str::CaseInsensitive("l"), 2033),
-                (intern_str::CaseInsensitive("m"), 2034),
-                (intern_str::CaseInsensitive("p"), 2036),
+                (intern_str::CaseInsensitive("f"), 2033),
+                (intern_str::CaseInsensitive("l"), 2035),
+                (intern_str::CaseInsensitive("m"), 2036),
+                (intern_str::CaseInsensitive("p"), 2038),
             ],
             None,
             0,
@@ -121954,7 +121992,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("el"), 2038),
+                (intern_str::CaseInsensitive("el"), 2040),
             ],
             None,
             0,
@@ -121969,7 +122007,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("l"), 2040),
+                (intern_str::CaseInsensitive("l"), 2042),
             ],
             None,
             0,
@@ -121984,7 +122022,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("l"), 2042),
+                (intern_str::CaseInsensitive("l"), 2044),
             ],
             Some(&[constants::APPLICATION_XV_XML]),
             0,
@@ -121992,7 +122030,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("m"), 2043),
+                (intern_str::CaseInsensitive("m"), 2045),
             ],
             None,
             0,
@@ -122007,7 +122045,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("d"), 2045),
+                (intern_str::CaseInsensitive("d"), 2047),
             ],
             None,
             0,
@@ -122022,7 +122060,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("e"), 2047),
+                (intern_str::CaseInsensitive("e"), 2049),
             ],
             Some(&[constants::CHEMICAL_X_XYZ]),
             0,
@@ -122030,7 +122068,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("z"), 2048),
+                (intern_str::CaseInsensitive("z"), 2050),
             ],
             None,
             0,
@@ -122045,28 +122083,28 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("3"), 1948),
-                (intern_str::CaseInsensitive("_"), 1951),
-                (intern_str::CaseInsensitive("a"), 1954),
-                (intern_str::CaseInsensitive("b"), 1957),
-                (intern_str::CaseInsensitive("c"), 1964),
-                (intern_str::CaseInsensitive("d"), 1972),
-                (intern_str::CaseInsensitive("e"), 1975),
-                (intern_str::CaseInsensitive("f"), 1979),
-                (intern_str::CaseInsensitive("h"), 1986),
-                (intern_str::CaseInsensitive("i"), 1988),
-                (intern_str::CaseInsensitive("l"), 2004),
-                (intern_str::CaseInsensitive("m"), 2011),
-                (intern_str::CaseInsensitive("n"), 2013),
-                (intern_str::CaseInsensitive("o"), 2023),
-                (intern_str::CaseInsensitive("p"), 2030),
-                (intern_str::CaseInsensitive("s"), 2037),
-                (intern_str::CaseInsensitive("t"), 2039),
-                (intern_str::CaseInsensitive("u"), 2041),
-                (intern_str::CaseInsensitive("v"), 2044),
-                (intern_str::CaseInsensitive("w"), 2046),
-                (intern_str::CaseInsensitive("y"), 2049),
-                (intern_str::CaseInsensitive("z"), 2050),
+                (intern_str::CaseInsensitive("3"), 1950),
+                (intern_str::CaseInsensitive("_"), 1953),
+                (intern_str::CaseInsensitive("a"), 1956),
+                (intern_str::CaseInsensitive("b"), 1959),
+                (intern_str::CaseInsensitive("c"), 1966),
+                (intern_str::CaseInsensitive("d"), 1974),
+                (intern_str::CaseInsensitive("e"), 1977),
+                (intern_str::CaseInsensitive("f"), 1981),
+                (intern_str::CaseInsensitive("h"), 1988),
+                (intern_str::CaseInsensitive("i"), 1990),
+                (intern_str::CaseInsensitive("l"), 2006),
+                (intern_str::CaseInsensitive("m"), 2013),
+                (intern_str::CaseInsensitive("n"), 2015),
+                (intern_str::CaseInsensitive("o"), 2025),
+                (intern_str::CaseInsensitive("p"), 2032),
+                (intern_str::CaseInsensitive("s"), 2039),
+                (intern_str::CaseInsensitive("t"), 2041),
+                (intern_str::CaseInsensitive("u"), 2043),
+                (intern_str::CaseInsensitive("v"), 2046),
+                (intern_str::CaseInsensitive("w"), 2048),
+                (intern_str::CaseInsensitive("y"), 2051),
+                (intern_str::CaseInsensitive("z"), 2052),
             ],
             None,
             0,
@@ -122081,7 +122119,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("ng"), 2052),
+                (intern_str::CaseInsensitive("ng"), 2054),
             ],
             None,
             0,
@@ -122096,7 +122134,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("n"), 2054),
+                (intern_str::CaseInsensitive("n"), 2056),
             ],
             None,
             0,
@@ -122111,7 +122149,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("e"), 2056),
+                (intern_str::CaseInsensitive("e"), 2058),
             ],
             None,
             0,
@@ -122126,10 +122164,10 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("a"), 2053),
-                (intern_str::CaseInsensitive("i"), 2055),
-                (intern_str::CaseInsensitive("m"), 2057),
-                (intern_str::CaseInsensitive("t"), 2058),
+                (intern_str::CaseInsensitive("a"), 2055),
+                (intern_str::CaseInsensitive("i"), 2057),
+                (intern_str::CaseInsensitive("m"), 2059),
+                (intern_str::CaseInsensitive("t"), 2060),
             ],
             None,
             0,
@@ -122144,7 +122182,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("z"), 2060),
+                (intern_str::CaseInsensitive("z"), 2062),
             ],
             None,
             0,
@@ -122166,8 +122204,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("c"), 2062),
-                (intern_str::CaseInsensitive("o"), 2063),
+                (intern_str::CaseInsensitive("c"), 2064),
+                (intern_str::CaseInsensitive("o"), 2065),
             ],
             None,
             0,
@@ -122189,7 +122227,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("z"), 2066),
+                (intern_str::CaseInsensitive("z"), 2068),
             ],
             Some(&[constants::APPLICATION_VND_ZUL]),
             0,
@@ -122197,8 +122235,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("p"), 2065),
-                (intern_str::CaseInsensitive("r"), 2067),
+                (intern_str::CaseInsensitive("p"), 2067),
+                (intern_str::CaseInsensitive("r"), 2069),
             ],
             None,
             0,
@@ -122220,8 +122258,8 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("m"), 2069),
-                (intern_str::CaseInsensitive("t"), 2070),
+                (intern_str::CaseInsensitive("m"), 2071),
+                (intern_str::CaseInsensitive("t"), 2072),
             ],
             None,
             0,
@@ -122236,7 +122274,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("ne"), 2072),
+                (intern_str::CaseInsensitive("ne"), 2074),
             ],
             None,
             0,
@@ -122251,7 +122289,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("t"), 2074),
+                (intern_str::CaseInsensitive("t"), 2076),
             ],
             None,
             0,
@@ -122259,12 +122297,12 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
         ),
         intern_str::Node::new(
             &[
-                (intern_str::CaseInsensitive("a"), 2061),
-                (intern_str::CaseInsensitive("f"), 2064),
-                (intern_str::CaseInsensitive("i"), 2068),
-                (intern_str::CaseInsensitive("m"), 2071),
-                (intern_str::CaseInsensitive("o"), 2073),
-                (intern_str::CaseInsensitive("s"), 2075),
+                (intern_str::CaseInsensitive("a"), 2063),
+                (intern_str::CaseInsensitive("f"), 2066),
+                (intern_str::CaseInsensitive("i"), 2070),
+                (intern_str::CaseInsensitive("m"), 2073),
+                (intern_str::CaseInsensitive("o"), 2075),
+                (intern_str::CaseInsensitive("s"), 2077),
             ],
             None,
             0,
@@ -122306,11 +122344,11 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
                 (intern_str::CaseInsensitive("t"), 1754),
                 (intern_str::CaseInsensitive("u"), 1820),
                 (intern_str::CaseInsensitive("v"), 1874),
-                (intern_str::CaseInsensitive("w"), 1942),
-                (intern_str::CaseInsensitive("x"), 2051),
-                (intern_str::CaseInsensitive("y"), 2059),
-                (intern_str::CaseInsensitive("z"), 2076),
-                (intern_str::CaseInsensitive("~"), 2077),
+                (intern_str::CaseInsensitive("w"), 1944),
+                (intern_str::CaseInsensitive("x"), 2053),
+                (intern_str::CaseInsensitive("y"), 2061),
+                (intern_str::CaseInsensitive("z"), 2078),
+                (intern_str::CaseInsensitive("~"), 2079),
             ],
             None,
             0,
@@ -122322,7 +122360,7 @@ pub(super) fn guess_mime_type(ext: &str) -> Option<&'static [crate::Mime<'static
             'static,
             intern_str::CaseInsensitive<&'static str>,
             Option<&'static [crate::Mime<'static>]>,
-        > = intern_str::Graph::new(NODES, 2078);
+        > = intern_str::Graph::new(NODES, 2080);
         GRAPH
     };
     GRAPH
